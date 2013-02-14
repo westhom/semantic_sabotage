@@ -1,6 +1,7 @@
 eyeo_semanticsabotage
 =====================
 
+# Backend #
 
 ## Getting started ##
 
@@ -61,7 +62,7 @@ lock
 
 
 
-### Development arguments ###
+### Loading text file arguments ###
 
 Do not use any arguments if you want live cc streaming from OF app.  An
 example of arguments is `index.html?docName=2008_2.txt&delay=100`
@@ -132,3 +133,5 @@ Sent to all clients, every n seconds
 
 
 
+
+# Frontend #
