@@ -1,6 +1,7 @@
 
 var socket;
 
+// URI parsing helper functions.
 function parseUri (str) {
 	var	o   = parseUri.options,
 		m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
@@ -17,6 +18,7 @@ function parseUri (str) {
 	return uri;
 };
 
+
 parseUri.options = {
 	strictMode: false,
 	key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
@@ -31,35 +33,47 @@ parseUri.options = {
 };
 
 
+function init() {
+	
+	var args = parseUri(document.URL).queryKey;
+  var d = args.delay ? parseFloat(args.delay) : 10;
+  if (args.docName) {
+  	connect(args.docName, d);
+  }
+  
+	var json = $.getJSON("http://sosolimited.com/eyeo_messages/_d0");
+  var obj = JSON && JSON.parse(json) || $.parseJSON(json);
+  console.log(obj.count);
+  
+}
 
+
+
+// Connect via engine.io, send loadDoc message if docName is specified in URL args.
 function connect() {
 	console.log('connected');
 	
 	socket = new eio.Socket({ host: location.hostname, port: 8081 });
-	var args = parseUri(document.URL).queryKey;
-  var d = args.delay ? parseFloat(args.delay) : 0;
-  if (args.docName) {
-		// Send up options.
-		socket.send(JSON.stringify({
-		  event: "loadDoc",
-		
-		  data: {
-		    // Pass up the document name if it's set.
-		    docName: args.docName,
-		
-		    // TODO What is this?
-		    delay: d
-		  }
-		}));
-	}
+
+	// Send up options.
+	socket.send(JSON.stringify({
+	  event: "loadDoc",
+	
+	  data: {
+	    // Pass up the document name if it's set.
+	    docName: args.docName,
+	
+	    // delay between each char chunk
+	    delay: d
+	  }
+	}));
+	
   socket.on("message", function(msg) {
   	message(msg);
 	});
 }
 
-    
-
-    
+// Handle incoming messages and distribute to appropriate functions.
 function message(data) {
 
 	data = JSON.parse(data);
@@ -83,14 +97,18 @@ function message(data) {
 }
 
 
+// Handle incoming word message.
 function handleWord(msg) {
 	console.log('word');
+	$('#words').append(msg.word);
 }
 
+// Handle incoming sentenceEnd message.
 function handleSentenceEnd(msg) {
 	console.log('sentenceEnd');	
 }
 
+// Handle incoming stats message.
 function handleStats(msg) {
 	console.log('stats');
 }
