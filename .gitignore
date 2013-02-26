@@ -1,4 +1,5 @@
-node_modules/*
+backend/node_modules/*
+backend/mongo_dump/*
 config.json
 sentistrength/*
 LIWC_dictionary_Firebrand.xml
