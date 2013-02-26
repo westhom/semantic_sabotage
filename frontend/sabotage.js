@@ -1,5 +1,6 @@
 
 var socket;
+var messages = messagePlayer();
 
 // URI parsing helper functions.
 function parseUri (str) {
@@ -17,6 +18,7 @@ function parseUri (str) {
 
 	return uri;
 };
+
 
 
 parseUri.options = {
@@ -40,11 +42,14 @@ function init() {
   if (args.docName) {
   	connect(args.docName, d);
   }
+
+	var obj = JSON && JSON.parse(messagesJSON) || $.parseJSON(messagesJSON);
+	console.log(obj['messages'].length);
   
-	var json = $.getJSON("http://sosolimited.com/eyeo_messages/_d0");
-  var obj = JSON && JSON.parse(json) || $.parseJSON(json);
-  console.log(obj.count);
-  
+	messages.loadMessages();
+	
+	console.log(obj);
+
 }
 
 
@@ -69,27 +74,27 @@ function connect() {
 	}));
 	
   socket.on("message", function(msg) {
-  	message(msg);
+  	handleMessage(msg);
 	});
 }
 
 // Handle incoming messages and distribute to appropriate functions.
-function message(data) {
+function handleMessage(msg) {
 
-	data = JSON.parse(data);
+	msg = JSON.parse(msg);
 	
-	switch(data.type) {
+	switch(msg.type) {
 		case 'live':
 			console.log('live');
 			break;
 		case 'word':
-			handleWord(data);
+			handleWord(msg);
 			break;
 		case 'sentenceEnd':
-			handleSentenceEnd(data);
+			handleSentenceEnd(msg);
 			break;
 		case 'stats':
-			handleStats(data);
+			handleStats(msg);
 			break;
 		default:
 			break;
