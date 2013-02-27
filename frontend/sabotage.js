@@ -42,14 +42,8 @@ function init() {
   if (args.docName) {
   	connect(args.docName, d);
   }
-
-	var obj = JSON && JSON.parse(messagesJSON) || $.parseJSON(messagesJSON);
-	console.log(obj['messages'].length);
-  
 	messages.loadMessages();
-	
-	console.log(obj);
-
+	messages.playbackMessages(0);
 }
 
 
