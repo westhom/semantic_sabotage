@@ -1,6 +1,6 @@
 
 var socket;
-var messages = messagePlayer();
+var messages = messagePlayer(this);
 
 // URI parsing helper functions.
 function parseUri (str) {
@@ -74,8 +74,6 @@ function connect() {
 
 // Handle incoming messages and distribute to appropriate functions.
 function handleMessage(msg) {
-
-	msg = JSON.parse(msg);
 	
 	switch(msg.type) {
 		case 'live':
@@ -93,21 +91,4 @@ function handleMessage(msg) {
 		default:
 			break;
 	}
-}
-
-
-// Handle incoming word message.
-function handleWord(msg) {
-	console.log('word');
-	$('#words').append(msg.word);
-}
-
-// Handle incoming sentenceEnd message.
-function handleSentenceEnd(msg) {
-	console.log('sentenceEnd');	
-}
-
-// Handle incoming stats message.
-function handleStats(msg) {
-	console.log('stats');
 }
