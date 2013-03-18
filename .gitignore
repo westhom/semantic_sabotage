@@ -1,6 +1,5 @@
-backend/node_modules/*
-backend/mongo_dump/*
-config.json
-sentistrength/*
-LIWC_dictionary_Firebrand.xml
+webapp/backend/node_modules/*
+webapp/backend/mongo_dump/*
+webapp/backend/config.json
+webapp/sentistrength/*
 .DS_Store
