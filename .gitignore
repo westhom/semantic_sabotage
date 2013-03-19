@@ -3,3 +3,4 @@ webapp/backend/mongo_dump/*
 webapp/backend/config.json
 webapp/sentistrength/*
 .DS_Store
+youtube/config.js
