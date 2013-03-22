@@ -68,16 +68,6 @@ function handleMessage(msg) {
 	}
 }
 
-function auth(client_id) {
-  var config = {
-		'client_id': client_id,
-    'scope': 'https://www.googleapis.com/auth/urlshortener'
-  };
-  gapi.auth.authorize(config, function() {
-    console.log('login complete');
-    console.log(gapi.auth.getToken());
-  });
-}
 
 function appendResults(text) {
   var results = document.getElementById('results');
@@ -86,24 +76,23 @@ function appendResults(text) {
 }
 
 function makeRequest() {
-  var request = gapi.client.urlshortener.url.get({
-    'shortUrl': 'http://youtu.be/NLqAF9hrVbY'
-  });
-  request.execute(function(response) {
-    appendResults(response.longUrl);
-  });
+ 
+ 	src="http://gdata.youtube.com/feeds/api/videos/videoid?v=2&callback=display";
+
 }
+
+function display(data) {
+ console.log(data);
+} 
 
 function load() {
 
 	console.log("load");
 	var config = JSON && JSON.parse(configJSON) || $.parseJSON(configJSON);
 	console.log(config);
-
-	auth(config.youtube.client_id);
-
-  gapi.client.setApiKey(config.youtube.api_key);
-  gapi.client.load('urlshortener', 'v1', makeRequest);
+	makeRequest();
+  //gapi.client.setApiKey(config.youtube.api_key);
+ // gapi.client.load('urlshortener', 'v1', makeRequest);
 }
 
 
