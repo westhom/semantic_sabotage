@@ -1,9 +1,9 @@
-var Parser = function() {	
+var Parser = function(messages) {	
 
 
 	return {
-		parsePost: function(text, speaker, time, print) {
-		
+	
+		parseLine: function(line) {
 		
 			var spaceRegEx = new RegExp(/\S{1,}/g);
 			var leadPunctRegEx = new RegExp(/^[\"|\'|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
@@ -14,18 +14,24 @@ var Parser = function() {
 			var urlRegEx = new RegExp(/(http:\/\/|www)\S{1,}/);
 		
 		
-			if (print) console.log("parsing t:"+text+" s:"+speaker+" t:"+time);
+			//if (print) console.log("parsing t:"+text+" s:"+speaker+" t:"+time);
 			
 			// create new post model
 			//var post = new Post("k", "HI", time);
-			var post = new Post({speaker: speaker, time: time, text: text});
+			//var post = new Post({speaker: speaker, time: time, text: text});
 			
 			
+			// grab parts from xml
+			var text = line.childNodes[0].nodeValue;
+			var start = 1000*line.getAttribute("start");
+			var dur = 1000*line.getAttribute("dur");
+		
 			
 			// add words to sentence
 			//split input string with RegExo
 			var tokens = text.match(spaceRegEx);
-			var substrL = 0;
+			var numWords = tokens.length;
+			var wordDur = dur/numWords;
 			
 		
 			for (i in tokens) //JRO - hack to only process one token at a time
@@ -35,8 +41,6 @@ var Parser = function() {
 				{
 					var tok = tokens[i];
 					//if (print) console.log(tok);
-		
-					substrL += tokens[i].length+1;
 					
 					var word = null;
 					var leadPunct = null;
@@ -90,36 +94,34 @@ var Parser = function() {
 						
 					}
 					
-					if (leadPunct) post.addWord(leadPunct, ["punct", "leadPunct"]);
-					//if (urlText) post.addWord(word.toString(), ["url"]);
-					//else -- No longer adding URLs to the posts
-					if (word) post.addWord(word.toString(), this.getCats(word.toString(), post));
-					if (endPunct) post.addWord(endPunct, ["punct", "endPunct"]);
+					// timing
+					var msgTime = start + i*wordDur;
 					
-					if (leadPunct && print) console.log("Lead Punct: " + leadPunct);
-					if (print && word) console.log("Word:  " + word);
-					if (endPunct && print) console.log("Punct: " + endPunct);
+					
+					// add message
+					if (leadPunct) {
+						msgTime -= 5;
+						messages.push({time:msgTime, word:endPunct, cats:["punct", "leadPunct"]});
+					}
+					if (word) {
+						//messages.push({time:msgTime, word:word.toString(), cats:this.getCats(word.toString())});
+					}
+					if (endPunct) {
+						msgTime += 5;		
+						messages.push({time:msgTime, word:endPunct, cats:["punct", "endPunct"]});
+					}
+					
+					
+					// debugging
+					if (leadPunct && print) console.log("Lead Punct: " + leadPunct+" Time: "+msgTime);
+					if (print && word) console.log("Word:  " + word+" Time: "+msgTime);
+					if (endPunct && print) console.log("Punct: " + endPunct+" Time: "+msgTime);
 					
 				}
 			}
-			
-			//Jro - check for words
-			//console.log(post.get("words").length);
-			if (post.get("words").length > 0)
-			{
-				var user = this.users.where({name:speaker}); 
-				if (user.length > 0) { // if user found, add post to this collection
-					user[0].addPost(post);
-				} else {
-					var newUser = new FBUser({name:speaker});
-					this.users.add(newUser);
-					newUser.addPost(post);
-				}
-			}
-					
-		},
+		}
 		
-		getCats: function(w, p) {
+		/*getCats: function(w, p) {
 			var cats = [];
 			
 			// check for regular match
@@ -194,9 +196,9 @@ var Parser = function() {
 			console.log("RETURNING DATA");
 			console.log(data);
 			return data;
-		}
-		}	
-});
+		}*/
+	}
+};
 
 
 
