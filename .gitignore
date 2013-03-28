@@ -4,4 +4,5 @@ webapp/backend/config.json
 webapp/sentistrength/*
 .DS_Store
 youtube/config.js
-LIWC/*
+youtube/LIWC/*
+youtube/localStorageDB/*

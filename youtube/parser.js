@@ -1,5 +1,23 @@
 var Parser = function(messages) {	
 
+	//init db
+	var db = new localStorageDB("db", localStorage);
+
+  if (!db.tableExists("LIWC_words")) 
+  	db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
+  db.truncate("LIWC_words");
+  
+  $.getJSON("LIWC/LIWC.json", function(json) {
+  	for (var i=0; i<json.length; i++) {
+  		if (json[i]['word'])
+		  	db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+  	}
+  	console.log("loaded "+json.length);
+  	db.commit();
+  });
+  
+
+
 
 	return {
 	
@@ -70,7 +88,7 @@ var Parser = function(messages) {
 						var numWord = tok.match(numberRegEx);
 						if (numWord) {
 							//console.log('number');
-							word = numWord;
+							word = numWord[0];
 						}
 						//console.log("tok2:"+tok);
 			
@@ -78,14 +96,14 @@ var Parser = function(messages) {
 						var abbrevWord = tok.match(abbrevRegEx);
 						if (abbrevWord && !word) {
 							//console.log('abbrev');
-							word = abbrevWord;
+							word = abbrevWord[0];
 						}
 						//console.log("tok3:"+tok);
 			
 						// pull out word
 						var plainWord = tok.match(wordRegEx);
 						if (plainWord && !word) {
-							word = plainWord;
+							word = plainWord[0];
 						} 
 						//console.log("tok4:"+tok);
 						
@@ -104,7 +122,9 @@ var Parser = function(messages) {
 						messages.push({time:msgTime, word:endPunct, cats:["punct", "leadPunct"]});
 					}
 					if (word) {
-						//messages.push({time:msgTime, word:word.toString(), cats:this.getCats(word.toString())});
+						var cats = this.getCats(word.toString());
+						messages.push({time:msgTime, word:word.toString(), cats:this.getCats(word.toString())});
+						console.log(cats);
 					}
 					if (endPunct) {
 						msgTime += 5;		
@@ -114,24 +134,24 @@ var Parser = function(messages) {
 					
 					// debugging
 					if (leadPunct && print) console.log("Lead Punct: " + leadPunct+" Time: "+msgTime);
-					if (print && word) console.log("Word:  " + word+" Time: "+msgTime);
+					if (print && word) console.log("Word: " + word+" Time: ");
 					if (endPunct && print) console.log("Punct: " + endPunct+" Time: "+msgTime);
 					
 				}
 			}
-		}
+		},
 		
-		/*getCats: function(w, p) {
+		getCats: function(w) {
 			var cats = [];
 			
 			// check for regular match
-			var res = this.where({word:w.toLowerCase(), wildcard:false});  
+			var res = db.query("LIWC_words", {word: w.toLowerCase()}); 
 			if (res.length > 0) {
-				cats = res[0].attributes.cat;
+				cats = res[0]['cats'];
 			}
 			
 			// check for wildcards
-			else {
+			/*else {
 				var res = this.filter(function(data) { 
 					return (data.get('wildcard') && w.toLowerCase().indexOf(data.get('word')) == 0);
 				}); 
@@ -139,11 +159,13 @@ var Parser = function(messages) {
 					//console.log("found wild "+w);
 					cats = res[0].attributes.cat;
 				}
-			}
+			}*/
 			
 						 
 			return cats;
-		},
+		}
+		
+		/*
 		
 		// this returns the final package, called after parsing every post
 		returnData: function() {
