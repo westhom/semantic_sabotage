@@ -19,14 +19,15 @@ var Player = function(app) {
 			  console.log(url);
 			  
 			  
+			  setTimeout(function() {
 			  $.get(url, function(ccStr) {
 					var lines=ccStr.getElementsByTagName("text");
 					
-					for (var i=0; i<lines.length; i++) {
+					for (var i=0; i<5; i++) {//lines.length; i++) {
 						parser.parseLine(lines[i]);
 					}
 					
-			  }, 'xml');
+			  }, 'xml')}, 5000);
 			  
 			});
 			

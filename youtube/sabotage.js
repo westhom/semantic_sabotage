@@ -50,7 +50,7 @@ function init() {
 	
 	player.loadMessages();
 	
-	setTimeout(player.playbackMessages, 3000); //pend temp
+	//setTimeout(player.playbackMessages, 3000); //pend temp
 
 }
 
