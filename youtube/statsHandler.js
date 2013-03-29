@@ -39,6 +39,7 @@ var StatsHandler = function(messages, db) {
 	
 		logWordInstance: function(word, cats) {
 			db.insert("word_instances", {word: word, cats: cats});
+			//console.log("w:"+word+" c:"+cats);
 		},
 	
 		doStats: function(time) {
@@ -88,9 +89,6 @@ var StatsHandler = function(messages, db) {
 				
 				//console.log(traitModifier+" "+traitName+" "+catEndIndex+" "+catName+" "+remainder);
 			
-				// if we've already looked up this val within this function call, don't do it again
-				// TODO: this should be looked up each time correct?
-				
 				
 				if (msg[traitName]) {
 				
@@ -98,8 +96,11 @@ var StatsHandler = function(messages, db) {
 					
 				} else {
 			
+					// pend: it may be faster to have one entry per word instead of one per instance
+					// and keep track of instanceno, this would change in logWordInstance method and here
 					var res = db.query("word_instances", function(row) {
-						return true;
+						//console.log("traitname:"+traitName+" cats:"+row.cats+" val"+$.inArray(traitName, row.cats));
+						return ($.inArray(catName, row.cats));
 					});
 					
 					this.addVal(msg, traitModifier, traitName, res.length, remainder)
@@ -118,9 +119,10 @@ var StatsHandler = function(messages, db) {
 				msg[name] = (msg['total'] == 0) ? 0 : msg['tempVal']/msg['total'];
 				msg['tempVal'] = 0;
 				msg['calcs'].shift();
+				
+				//console.log(val+" "+name+"="+msg[name]+" total:"+msg['total']+" "+msg['tempVal']);
 			}
 			else {
-				//console.log(curVal+" "+val+" "+msg['total']+" "+traitName+"="+msg[traitName]);
 				msg['calcs'][0][1] = remainder;
 			}				
 			this.calcCats(msg);
