@@ -1,45 +1,51 @@
-var Parser = function(messages, db) {	
+var Parser = function(messages) {	
 
-	
-	//init db
-	var db = new localStorageDB("db", localStorage);
+	var db = new localStorageDB("db", localStorage);;
+	var messages = messages;
 
-	// making two tables for LIWC because it's faster
-	// load non-wild table
-  if (!db.tableExists("LIWC_words")) 
-  	db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
-  db.truncate("LIWC_words");
-  
-  $.getJSON("LIWC/LIWC.json", function(json) {
-  	for (var i=0; i<json.length; i++) {
-  		if (json[i]['word'])
-		  	db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
-  	}
-  	console.log("loaded nonwild "+json.length);
-  	db.commit();
-  });
-  
-  // load wild table
-  if (!db.tableExists("LIWC_words_wild")) 
-  	db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
-  db.truncate("LIWC_words_wild");
-  
-  $.getJSON("LIWC/LIWC_wildcards.json", function(json) {
-  	for (var i=0; i<json.length; i++) {
-  		if (json[i]['word'])
-		  	db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
-  	}
-  	console.log("loaded wild "+json.length);
-  	db.commit();
-  });
-  
-	
 	var statsHandler = StatsHandler(messages, db);
 	
 
 	return {
 	
+		initialize: function(callback, args) {
+			// making two tables for LIWC because it's faster
+			
+			// load non-wild table
+		  if (!db.tableExists("LIWC_words")) 
+		  	db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
+		  db.truncate("LIWC_words");
+		  
+		  $.getJSON("LIWC/LIWC.json", function(json) {
+		  	for (var i=0; i<json.length; i++) {
+		  		if (json[i]['word'])
+				  	db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+		  	}
+		  	console.log("loaded nonwild "+json.length);
+		  	
+		  	// then load wild table
+			  if (!db.tableExists("LIWC_words_wild")) 
+			  	db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
+			  db.truncate("LIWC_words_wild");
+			  
+			  $.getJSON("LIWC/LIWC_wildcards.json", function(json) {
+			  	for (var i=0; i<json.length; i++) {
+			  		if (json[i]['word'])
+					  	db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+			  	}
+			  	console.log("loaded wild "+json.length);
+			  	db.commit();
+			  	
+			  	// call callback fxn
+			  	callback(args);
+			  });
+		  	
+		  });
+		 
+		}, 
+	
 		parseLine: function(line) {
+		
 		
 			var spaceRegEx = new RegExp(/\S{1,}/g);
 			var leadPunctRegEx = new RegExp(/^[\"|\'|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
@@ -59,10 +65,16 @@ var Parser = function(messages, db) {
 			
 			// grab parts from xml
 			var text = line.childNodes[0].nodeValue;
+			
+			
+			// TODO: are there more of these that need to be replaced? 
+			text = text.replace("&#39;", "'");
+			
+			
 			var start = 1000*line.getAttribute("start");
 			var dur = 1000*line.getAttribute("dur");
 		
-			console.log("start "+start+" dur "+dur);
+			//console.log("start "+start+" dur "+dur);
 			
 			// add words to sentence
 			//split input string with RegExo
@@ -137,27 +149,26 @@ var Parser = function(messages, db) {
 					// add message
 					if (leadPunct) {
 						msgTime -= 5;
-						var msg = {time:msgTime, word:endPunct, cats:["punct", "leadPunct"]};
+						var msg = {type: "word", time:msgTime, word:endPunct, cats:["punct", "leadPunct"]};
 						messages.push(msg);
+						//console.log(msg);
 					}
 					if (word) {
 						word = word.toString();
 						var cats = this.getCats(word.toString());
 						statsHandler.logWordInstance(word, cats);
-						var msg = {time:msgTime, word:word, cats:this.getCats(word)};
+						var msg = {type: "word", time:msgTime, word:word, cats:this.getCats(word)};
 						messages.push(msg);
-						console.log(msg);
+						//console.log(msg);
 					}
 					if (endPunct) {
 						msgTime += 5;		
-						var msg = {time:msgTime, word:endPunct, cats:["punct", "endPunct"]};
+						var msg = {type: "word", time:msgTime, word:endPunct, cats:["punct", "endPunct"]};
 						messages.push(msg);
+						console.log(msg);
+						// also send sentenceEnd msg? PEND: necessary or can we check for cat endPunct?
+						messages.push({type: "sentenceEnd", time:msgTime});
 					}
-										
-					// debugging
-					//if (leadPunct && print) console.log("Lead Punct: " + leadPunct+" Time: "+msgTime);
-					//if (print && word) console.log("Word: " + word+" Time: "+msgTime);
-					//if (endPunct && print) console.log("Punct: " + endPunct+" Time: "+msgTime);
 					
 				}
 			}
@@ -192,61 +203,6 @@ var Parser = function(messages, db) {
 						 
 			return cats;
 		}
-		
-		/*
-		
-		// this returns the final package, called after parsing every post
-		returnData: function() {
-			
-			var data = [];
-			
-			//EG 
-			data['user_name'] = this.name;
-			
-			// get user posts
-			var filteredPosts = this.users.where({name:this.name})[0].get('posts').models;  
-			var userPosts = [];
-			for (var i=0; i<filteredPosts.length; i++) { // PEND FILTER FOR USER
-				userPosts.push(filteredPosts[i].makeArray());
-			}
-			data['user_posts'] = userPosts;
-			
-			
-			// get top 5 friends posts
-			var friends = this.users.getTop5Friends(this.name);
-	
-			var friendPosts = [];
-			for (var i=0; i<Math.min(5, friends.length); i++) {
-				filteredPosts = friends[i].get("posts").models;
-			
-				var fp = [];
-				fp['name'] = friends[i].get("name");
-				fp['posts'] = [];
-				friendPosts.push(fp);
-				
-				for (var j=0; j<filteredPosts.length; j++) {
-					fp['posts'].push(filteredPosts[j].makeArray());
-				}
-			} 
-			data['friend_posts'] = friendPosts;
-			
-			// get user scores
-			data['scores'] = this.users.getScores(this.name);
-			
-			// get user ego ('I') posts
-			filteredPosts = this.users.where({name:this.name})[0].get('posts').where({ego:true, speaker:this.name});
-			var egoPosts = [];
-			for (var i=0; i<filteredPosts.length; i++) {
-				egoPosts.push(filteredPosts[i].makeArray());
-			}
-			data['ego_posts'] = egoPosts;
-			
-			
-			
-			console.log("RETURNING DATA");
-			console.log(data);
-			return data;
-		}*/
 	}
 };
 

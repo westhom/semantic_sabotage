@@ -1,6 +1,6 @@
 // Handle incoming word message.
 function handleWord(msg) {
-	console.log('word '+msg.word);
+	//console.log('word '+msg.word);
 	appendWordInContext(msg);
 }
 
@@ -11,7 +11,7 @@ function handleSentenceEnd(msg) {
 
 // Handle incoming stats message.
 function handleStats(msg) {
-	console.log('stats');
+	console.log(msg);
 }
 
 function appendWordInContext(msg) {

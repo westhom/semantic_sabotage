@@ -9,8 +9,24 @@
 	
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.1.0.min.js"></script>
+  <script src="http://malsup.github.com/jquery.form.js"></script> 
+  
+  <script> 
+      // wait for the DOM to be loaded 
+      $(document).ready(function() { 
+          // bind 'myForm' and provide a simple callback function 
+          $('#youtube_load').ajaxForm({ 
+		        // dataType identifies the expected content type of the server response 
+		        dataType:  'json', 
+		 
+		        // success identifies the function to invoke when the server response 
+		        // has been received 
+		        success:   load 
+          }); 
+      }); 
+  </script> 
 		
-	<script src="./localStorageDB/localstoragedb.js"></script>
+	<script src="./localStorageDB/localstoragedb.min.js"></script>
 	<script src="./config.js"></script>
 	<script src="./statsHandler.js"></script>
 	<script src="./parser.js"></script>
@@ -25,9 +41,22 @@
 	
 	<body onLoad="init()">
 	
+		enter a youtube url for a video with captions. for example: http://www.youtube.com/watch?v=8n5O9tz30So
+		
+    <div id="loading" style="display:none">LOADING...</div>
+    
+    
+    <form id="youtube_load" action="youtube_load.php"  method="post">
+			URL: <input type="text" name="url">
+			<input type="submit" value="Submit">
+		</form>
+    
+    <button id="playButton" style="display:none" onclick="playback();">PLAYBACK</button>
+    <button id="stopButton" style="display:none" onclick="stopPlayback();">STOP</button>
+    
+    
 		<div id="words"></div>
     <div id="results"></div>
-    <button onclick="auth();">Authorize</button>
 	
 	</body>
 	

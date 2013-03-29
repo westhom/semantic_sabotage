@@ -2,16 +2,19 @@ var Player = function(app) {
 	
 	var setTimeoutEvents = [];
 	var messages = [];
-	
-	
-
 	var parser = Parser(messages);
 	
 	return {
-		loadMessages: function() {
-			console.log("load msgs");
+		initialize: function(url) {
+			// parser gets created, loads LIWC stuff, then calls createMessages
+			parser.initialize(this.createMessages, url);
+		},
 	
-			$.get("http://www.youtube.com/watch?v=rDiGYuQicpA", function(data) {
+		createMessages: function(url) {
+			console.log("load msgs");
+			//"http://www.youtube.com/watch?v=rDiGYuQicpA"
+			
+			$.get(url, function(data) {
 			  //$('#results').html(data);
 			  //console.log(data);
 			  var startInd = data.indexOf("ttsurl") + 10;
@@ -21,25 +24,23 @@ var Player = function(app) {
 			  
 			  console.log(url);
 			  
-			  
-			  setTimeout(function() {
 			  $.get(url, function(ccStr) {
 					var lines=ccStr.getElementsByTagName("text");
 					
-					for (var i=0; i<5; i++) {//lines.length; i++) {
+					for (var i=0; i<lines.length; i++) {
 						parser.parseLine(lines[i]);
 					}
 					
-			  }, 'xml')}, 5000);
-			  
-			});
-			
-			
+					// once all messages created, start!
+					app.start();
+					
+			  }, 'xml');
+			});			
 		},
 		
 		printMessages: function() {
 			for (var i=0; i<messages.length; i++) {
-				console.log(i+" "+messages[i].time+" "+messages[i].word);
+				console.log(i+" "+messages[i]);
 			}
 		},
 		
@@ -78,11 +79,18 @@ var Player = function(app) {
             runMessage(i+1);
           } else console.log("end of msgs");
         }, diff, this));
-  			console.log("settimeout "+msg.word+" "+diff);
+  			//console.log("settimeout "+msg.word+" "+diff);
 	  		
       }
 
       runMessage(0);
+    },
+    
+    stopPlaybackMessages: function() {
+    	console.log("stop playback");
+	    for (var i=0; i<setTimeoutEvents.length; i++) {
+		    clearTimeout(setTimeoutEvents[i]);
+	    }
     }
 	};
 
