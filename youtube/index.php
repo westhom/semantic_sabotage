@@ -12,6 +12,7 @@
 		
 	<script src="./localStorageDB/localstoragedb.js"></script>
 	<script src="./config.js"></script>
+	<script src="./statsHandler.js"></script>
 	<script src="./parser.js"></script>
 	<script src="./fill.js"></script>
 	<script src="./player.js"></script>
