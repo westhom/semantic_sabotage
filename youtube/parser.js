@@ -1,8 +1,11 @@
-var Parser = function(messages) {	
+var Parser = function(messages, db) {	
 
+	
 	//init db
 	var db = new localStorageDB("db", localStorage);
 
+	// making two tables for LIWC because it's faster
+	// load non-wild table
   if (!db.tableExists("LIWC_words")) 
   	db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
   db.truncate("LIWC_words");
@@ -12,12 +15,27 @@ var Parser = function(messages) {
   		if (json[i]['word'])
 		  	db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
   	}
-  	console.log("loaded "+json.length);
+  	console.log("loaded nonwild "+json.length);
   	db.commit();
   });
   
-
-
+  // load wild table
+  if (!db.tableExists("LIWC_words_wild")) 
+  	db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
+  db.truncate("LIWC_words_wild");
+  
+  $.getJSON("LIWC/LIWC_wildcards.json", function(json) {
+  	for (var i=0; i<json.length; i++) {
+  		if (json[i]['word'])
+		  	db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+  	}
+  	console.log("loaded wild "+json.length);
+  	db.commit();
+  });
+  
+	
+	var statsHandler = StatsHandler(messages, db);
+	
 
 	return {
 	
@@ -44,6 +62,7 @@ var Parser = function(messages) {
 			var start = 1000*line.getAttribute("start");
 			var dur = 1000*line.getAttribute("dur");
 		
+			console.log("start "+start+" dur "+dur);
 			
 			// add words to sentence
 			//split input string with RegExo
@@ -113,32 +132,38 @@ var Parser = function(messages) {
 					}
 					
 					// timing
-					var msgTime = start + i*wordDur;
-					
+					var msgTime = start + Math.round(i*wordDur);
 					
 					// add message
 					if (leadPunct) {
 						msgTime -= 5;
-						messages.push({time:msgTime, word:endPunct, cats:["punct", "leadPunct"]});
+						var msg = {time:msgTime, word:endPunct, cats:["punct", "leadPunct"]};
+						messages.push(msg);
 					}
 					if (word) {
+						word = word.toString();
 						var cats = this.getCats(word.toString());
-						messages.push({time:msgTime, word:word.toString(), cats:this.getCats(word.toString())});
-						console.log(cats);
+						statsHandler.logWordInstance(word, cats);
+						var msg = {time:msgTime, word:word, cats:this.getCats(word)};
+						messages.push(msg);
+						console.log(msg);
 					}
 					if (endPunct) {
 						msgTime += 5;		
-						messages.push({time:msgTime, word:endPunct, cats:["punct", "endPunct"]});
+						var msg = {time:msgTime, word:endPunct, cats:["punct", "endPunct"]};
+						messages.push(msg);
 					}
-					
-					
+										
 					// debugging
-					if (leadPunct && print) console.log("Lead Punct: " + leadPunct+" Time: "+msgTime);
-					if (print && word) console.log("Word: " + word+" Time: ");
-					if (endPunct && print) console.log("Punct: " + endPunct+" Time: "+msgTime);
+					//if (leadPunct && print) console.log("Lead Punct: " + leadPunct+" Time: "+msgTime);
+					//if (print && word) console.log("Word: " + word+" Time: "+msgTime);
+					//if (endPunct && print) console.log("Punct: " + endPunct+" Time: "+msgTime);
 					
 				}
 			}
+			
+			// calculate stats for the line
+			statsHandler.doStats(start+dur);
 		},
 		
 		getCats: function(w) {
@@ -147,20 +172,23 @@ var Parser = function(messages) {
 			// check for regular match
 			var res = db.query("LIWC_words", {word: w.toLowerCase()}); 
 			if (res.length > 0) {
-				cats = res[0]['cats'];
+				cats = res[0].cats;
 			}
 			
 			// check for wildcards
-			/*else {
-				var res = this.filter(function(data) { 
-					return (data.get('wildcard') && w.toLowerCase().indexOf(data.get('word')) == 0);
-				}); 
-				if (res.length > 0) {
-					//console.log("found wild "+w);
-					cats = res[0].attributes.cat;
-				}
-			}*/
-			
+			else {
+			// select all books by Torday and Sparrow
+				res = db.query("LIWC_words_wild", function(row) {
+			    if(w.toLowerCase().indexOf(row.word) == 0) {
+			        return true;
+			    } else {
+			        return false;
+			    }
+			  });
+			  if (res.length > 0) {
+				  cats = res[0].cats;
+			  }
+			}
 						 
 			return cats;
 		}

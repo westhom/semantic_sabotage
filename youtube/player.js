@@ -2,6 +2,9 @@ var Player = function(app) {
 	
 	var setTimeoutEvents = [];
 	var messages = [];
+	
+	
+
 	var parser = Parser(messages);
 	
 	return {
