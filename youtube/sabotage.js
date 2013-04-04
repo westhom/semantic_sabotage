@@ -1,4 +1,5 @@
 var player = Player(this);
+var embedUrl;
 
 function init() {
 	
@@ -14,8 +15,11 @@ function load(resp) {
 	
 	player.initialize(resp.url);
 
+	// show loading
 	$('#loading').show();
-
+	
+	// save embed url
+	embedUrl = resp.url.replace('watch?v=', 'embed/');
 }
 
 function start() {
@@ -23,6 +27,8 @@ function start() {
 	$('#loading').hide();
 	$('#playButton').show();
 	$('#stopButton').show();
+	$('#video').html('<iframe width="560" height="315" src="'+embedUrl+'" frameborder="0" allowfullscreen></iframe>');
+	
 }
 
 function playback() {
