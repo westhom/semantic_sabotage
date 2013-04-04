@@ -1,3 +1,6 @@
+<?php
+header('X-Frame-Options: GOFORIT'); 
+?>
 
 <html>
 	
@@ -41,14 +44,15 @@
 	
 	<body onLoad="init()">
 	
-		enter a youtube url for a video with captions. for example: http://www.youtube.com/watch?v=8n5O9tz30So
+		enter a youtube url for a video with captions.
 		
     <div id="loading" style="display:none">LOADING...</div>
     
+    <div id="video"></div>
     
     <form id="youtube_load" action="youtube_load.php"  method="post">
-			URL: <input type="text" name="url">
-			<input type="submit" value="Submit">
+			URL: <input type="text" value="http://www.youtube.com/watch?v=ci5p1OdVLAc" name="url">
+			<input type="submit"  value="Submit">
 		</form>
     
     <button id="playButton" style="display:none" onclick="playback();">PLAYBACK</button>
