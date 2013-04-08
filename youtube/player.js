@@ -3,6 +3,7 @@ var Player = function(app) {
 	var setTimeoutEvents = [];
 	var messages = [];
 	var parser = Parser(messages);
+	var curMessage = 0;
 	
 	return {
 		initialize: function(url) {
@@ -52,12 +53,12 @@ var Player = function(app) {
 		playbackMessages: function() {
     	
     	console.log("playback messages ");
-    	var n = 0;
-  		var startMsg = messages[0];
+  		var startMsg = messages[curMessage];
 
       function runMessage(i) {
       
       	console.log("runmsg "+i);
+        curMessage = i+1;
       
         var msg = messages[i];
       	app.handleMessage(msg);
@@ -83,11 +84,11 @@ var Player = function(app) {
 	  		
       }
 
-      runMessage(0);
+      runMessage(curMessage);
     },
     
-    stopPlaybackMessages: function() {
-    	console.log("stop playback");
+    pausePlaybackMessages: function() {
+    	console.log("pause playback");
 	    for (var i=0; i<setTimeoutEvents.length; i++) {
 		    clearTimeout(setTimeoutEvents[i]);
 	    }
