@@ -46,6 +46,10 @@ function stopPlayback() {
 	player.stopPlaybackMessages();
 }
 
+function pausePlayback() {
+	pauseVideo();
+	player.pausePlaybackMessages();
+}
 
 // Handle incoming messages and distribute to appropriate functions.
 function handleMessage(msg) {

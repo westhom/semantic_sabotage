@@ -68,7 +68,7 @@ header('X-Frame-Options: GOFORIT');
     <div id="loading" style="display:none">LOADING...</div>
     
     <button id="playButton" style="display:none" onclick="playback();">PLAYBACK</button>
-    <button id="pauseButton" style="display:none" onclick="stopPlayback();">STOP</button>
+    <button id="pauseButton" style="display:none" onclick="pausePlayback();">PAUSE</button>
     <button id="muteButton" style="display:none" onclick="muteVideo();">MUTE</button>
     <button id="unmuteButton" style="display:none" onclick="unMuteVideo();">UNMUTE</button>
     
