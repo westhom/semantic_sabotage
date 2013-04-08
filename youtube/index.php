@@ -29,11 +29,17 @@ header('X-Frame-Options: GOFORIT');
       }); 
   </script> 
 		
+	    <script src="http://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript">
+      google.load("swfobject", "2.1");
+    </script> 	
+		
 	<script src="./localStorageDB/localstoragedb.min.js"></script>
 	<script src="./config.js"></script>
 	<script src="./statsHandler.js"></script>
 	<script src="./parser.js"></script>
 	<script src="./fill.js"></script>
+	<script src="./embed.js"></script>
 	<script src="./player.js"></script>
 	<script src="./sabotage.js"></script>
 
@@ -44,19 +50,27 @@ header('X-Frame-Options: GOFORIT');
 	
 	<body onLoad="init()">
 	
+
+		<div id="videoDiv">Loading...</div>
+    <div id="videoInfo">
+      <p>Player state: <span id="playerState">--</span></p>
+      <p>Current Time: <span id="videoCurrentTime">--:--</span> | Duration: <span id="videoDuration">--:--</span></p>
+      <p>Bytes Total: <span id="bytesTotal">--</span> | Start Bytes: <span id="startBytes">--</span> | Bytes Loaded: <span id="bytesLoaded">--</span></p>
+    </div>
+
 		enter a youtube url for a video with captions.
 		
-    <div id="loading" style="display:none">LOADING...</div>
-    
-    <div id="video"></div>
-    
     <form id="youtube_load" action="youtube_load.php"  method="post">
 			URL: <input type="text" value="http://www.youtube.com/watch?v=ci5p1OdVLAc" name="url">
 			<input type="submit"  value="Submit">
 		</form>
     
+    <div id="loading" style="display:none">LOADING...</div>
+    
     <button id="playButton" style="display:none" onclick="playback();">PLAYBACK</button>
-    <button id="stopButton" style="display:none" onclick="stopPlayback();">STOP</button>
+    <button id="pauseButton" style="display:none" onclick="stopPlayback();">STOP</button>
+    <button id="muteButton" style="display:none" onclick="muteVideo();">MUTE</button>
+    <button id="unmuteButton" style="display:none" onclick="unMuteVideo();">UNMUTE</button>
     
     
 		<div id="words"></div>
