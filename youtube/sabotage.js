@@ -1,5 +1,6 @@
 var player = Player(this);
 var embedUrl;
+var video;
 
 function init() {
 	
@@ -19,23 +20,29 @@ function load(resp) {
 	$('#loading').show();
 	
 	// save embed url
-	embedUrl = resp.url.replace('watch?v=', 'embed/');
+	//embedUrl = resp.url.replace('watch?v=', 'embed/');
 }
+
+
 
 function start() {
 	console.log("READY TO GO!");
 	$('#loading').hide();
-	$('#playButton').show();
-	$('#stopButton').show();
-	$('#video').html('<iframe width="560" height="315" src="'+embedUrl+'" frameborder="0" allowfullscreen></iframe>');
+	$('#playButton').show(); 
+	$('#muteButton').show();
+	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
+	ytplayer.cueVideoById("ci5p1OdVLAc");
 	
 }
 
+
 function playback() {
+	playVideo();
 	player.playbackMessages();
 }
 
 function stopPlayback() {
+	pauseVideo();
 	player.stopPlaybackMessages();
 }
 
