@@ -23,7 +23,7 @@ var Player = function(app) {
 			  var url = data.substring(startInd, endInd);
 			  url = url.replace(/\\u0026/g, "&").replace(/\\\//g, "/") + "&type=track&lang=en&name&kind=asr&fmt=1";
 			  
-			  console.log(url);
+			  console.log("url = "+url);
 			  
 			  $.get(url, function(ccStr) {
 					var lines=ccStr.getElementsByTagName("text");

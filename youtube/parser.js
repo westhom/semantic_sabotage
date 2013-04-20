@@ -46,7 +46,7 @@ var Parser = function(messages) {
 	
 		parseLine: function(line) {
 		
-		
+		console.log(line);
 			var spaceRegEx = new RegExp(/\S{1,}/g);
 			var leadPunctRegEx = new RegExp(/^[\"|\'|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
 			var numberRegEx = new RegExp(/\d{1,}.{1,}\d{1,}/);
@@ -56,25 +56,16 @@ var Parser = function(messages) {
 			var urlRegEx = new RegExp(/(http:\/\/|www)\S{1,}/);
 		
 		
-			//if (print) console.log("parsing t:"+text+" s:"+speaker+" t:"+time);
-			
-			// create new post model
-			//var post = new Post("k", "HI", time);
-			//var post = new Post({speaker: speaker, time: time, text: text});
-			
-			
 			// grab parts from xml
-			var text = line.childNodes[0].nodeValue;
-			
-			
+			var text = line[0];
+			console.log(text);
 			// TODO: are there more of these that need to be replaced? 
 			text = text.replace("&#39;", "'");
 			
-			
-			var start = 1000*line.getAttribute("start");
-			var dur = 1000*line.getAttribute("dur");
-		
-			//console.log("start "+start+" dur "+dur);
+			//console.log(line.text['@attributes']);
+			var start = 1000*parseFloat(line['@attributes']['start']);
+			var dur = 1000*parseFloat(line['@attributes']['dur']);
+			console.log("start "+start+" dur "+dur);
 			
 			// add words to sentence
 			//split input string with RegExo
