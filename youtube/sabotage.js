@@ -7,14 +7,12 @@ function init() {
 }
 
 function load(resp) {
+	console.log("load");
 
   console.log(resp.url);
-  
-	console.log("load");
-	var config = JSON && JSON.parse(configJSON) || $.parseJSON(configJSON);
-	//console.log(config);
+  console.log(resp.cc);
 	
-	player.initialize(resp.url);
+	player.initialize(resp.cc);
 
 	// show loading
 	$('#loading').show();

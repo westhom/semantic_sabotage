@@ -6,37 +6,20 @@ var Player = function(app) {
 	var curMessage = 0;
 	
 	return {
-		initialize: function(url) {
+		initialize: function(cc) {
 			// parser gets created, loads LIWC stuff, then calls createMessages
-			parser.initialize(this.createMessages, url);
+			parser.initialize(this.createMessages, cc);
 		},
 	
-		createMessages: function(url) {
-			console.log("load msgs");
-			//"http://www.youtube.com/watch?v=rDiGYuQicpA"
+		createMessages: function(cc) {
+			console.log("load msgs "+cc);
 			
-			$.get(url, function(data) {
-			  //$('#results').html(data);
-			  //console.log(data);
-			  var startInd = data.indexOf("ttsurl") + 10;
-			  var endInd = data.indexOf('"', startInd);
-			  var url = data.substring(startInd, endInd);
-			  url = url.replace(/\\u0026/g, "&").replace(/\\\//g, "/") + "&type=track&lang=en&name&kind=asr&fmt=1";
-			  
-			  console.log(url);
-			  
-			  $.get(url, function(ccStr) {
-					var lines=ccStr.getElementsByTagName("text");
-					
-					for (var i=0; i<lines.length; i++) {
-						parser.parseLine(lines[i]);
-					}
-					
-					// once all messages created, start!
-					app.start();
-					
-			  }, 'xml');
-			});			
+			for (var i=0; i<cc.length; i++) {
+				parser.parseLine(cc[i]);
+			}
+			
+			// once all messages created, start!
+			app.start();
 		},
 		
 		printMessages: function() {

@@ -35,7 +35,6 @@ header('X-Frame-Options: GOFORIT');
     </script> 	
 		
 	<script src="./localStorageDB/localstoragedb.min.js"></script>
-	<script src="./config.js"></script>
 	<script src="./statsHandler.js"></script>
 	<script src="./parser.js"></script>
 	<script src="./fill.js"></script>
