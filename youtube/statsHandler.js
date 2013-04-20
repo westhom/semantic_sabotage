@@ -100,7 +100,7 @@ var StatsHandler = function(messages, db) {
 					// and keep track of instanceno, this would change in logWordInstance method and here
 					var res = db.query("word_instances", function(row) {
 						//console.log("traitname:"+traitName+" cats:"+row.cats+" val"+$.inArray(traitName, row.cats));
-						return ($.inArray(catName, row.cats));
+						return ($.inArray(catName, row.cats) != -1);
 					});
 					
 					this.addVal(msg, traitModifier, traitName, res.length, remainder)
