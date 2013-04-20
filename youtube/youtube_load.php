@@ -11,7 +11,7 @@
 		return $data;
 	}
 	
-	/*$urlData = get_data($_GET["url"], false);
+	$urlData = get_data($_POST["url"], false);
 	
 	$startInd = strpos($urlData, "ttsurl") + 10;
 	
@@ -19,11 +19,6 @@
 	$ccUrl = substr($urlData, $startInd, $endInd-$startInd);
 	$ccUrl = str_replace("\u0026", "&", $ccUrl);
 	$ccUrl = str_replace("\/", "/", $ccUrl)."&type=track&lang=en&name&kind=asr&fmt=1";
-	
-	$ccData = get_data($ccUrl, true);
-*/
-
-	$ccUrl = "http://www.youtube.com/api/timedtext?expire=1366511278&v=ci5p1OdVLAc&sparams=asr_langs%2Ccaps%2Cv%2Cexpire&signature=51853BAE2375664462BDF6D6EF61D57FBCFBBCB9.5C234759C13D7E43191D2FDE6157C78254F8AB39&hl=en_US&key=yttt1&asr_langs=fr%2Cpt%2Ces%2Cit%2Cen%2Cja%2Cnl%2Cru%2Cde%2Cko&caps=asr&type=track&lang=en&name&kind=asr&fmt=1";
 	
 	$xml = simplexml_load_file($ccUrl);
 
