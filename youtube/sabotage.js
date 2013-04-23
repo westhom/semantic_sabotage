@@ -2,9 +2,6 @@ var player = Player(this);
 var embedUrl;
 var video;
 
-function init() {
-	
-}
 
 function load(resp) {
 	console.log("load");

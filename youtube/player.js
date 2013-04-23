@@ -28,10 +28,6 @@ var Player = function(app) {
 			}
 		},
 		
-		sendMessage: function(msg) {
-			console.log("send msg");
-		},
-		
 		
 		playbackMessages: function() {
     	
