@@ -8,7 +8,15 @@ function load(resp) {
 
   console.log(resp.url);
   console.log(resp.cc);
-	
+
+  for (var i=0; i<resp.fills.length; i++) {
+		console.log(resp.fills[i]);  
+	  $.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
+	   //console.log(data); //data returned
+	   console.log(textStatus + ' ' + jqxhr.status); //200
+		});
+		
+  }
 	player.initialize(resp.cc);
 
 	// show loading

@@ -12,7 +12,9 @@
 		return $data;
 	}
 	
+	
 	$urlData = get_data($_POST["url"], false);
+	//$urlData = get_data("http://www.youtube.com/watch?v=ci5p1OdVLAc", false);
 	
 	$startInd = strpos($urlData, "ttsurl") + 10;
 	
@@ -31,11 +33,12 @@
 
   // handle remix listing
 
-	if ($handle = opendir('/fills')) {
+	if ($handle = opendir('fills')) {
 		$fills =  array();
     /* This is the correct way to loop over the directory. */
     while (false !== ($entry = readdir($handle))) {
-      $fills[] = $entry;
+    	if (strlen($entry) > 2)
+	      $fills[] = $entry;
     }
 
 	  closedir($handle);
