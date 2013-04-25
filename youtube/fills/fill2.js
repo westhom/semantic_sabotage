@@ -2,7 +2,7 @@ var mode = function() {
 
 	return {
 	
-		name: "hi",
+		name: "fill2",
 		
 		// Handle incoming word message.
 		handleWord: function(msg) {
@@ -26,7 +26,7 @@ var mode = function() {
 		 	if (!msg.sentenceStartFlag && !msg.punctuationFlag)
 		 		$('#words').append(' ');
 		 		
-		 	$('#words').append(msg.word);
+		 	$('#words').append(msg.word+"fill2yalls");
 		}
 	}
 };
