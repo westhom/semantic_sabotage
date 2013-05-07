@@ -44,7 +44,7 @@ function start() {
 	$('#playButton').show(); 
 	$('#muteButton').show();
 	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
-	ytplayer.cueVideoById("ci5p1OdVLAc");
+	ytplayer.cueVideoById("mox4InKEwgU");
 	
 }
 
