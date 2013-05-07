@@ -2,13 +2,31 @@ var player = Player(this);
 var embedUrl;
 var video;
 
+var modes = [];
+var curMode = 0;
 
 function load(resp) {
 	console.log("load");
 
   console.log(resp.url);
   console.log(resp.cc);
-	
+  
+  $('#modeButtons').empty();
+  
+  var j = 0;
+  
+  for (var i=0; i<resp.fills.length; i++) {
+		console.log(resp.fills[i]);  
+	  $.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
+	   //console.log(data); //data returned
+	   console.log(textStatus + ' ' + jqxhr.status); //200
+	   var m = new mode();
+	   modes.push(m);
+	   $('#modeButtons').append('<button id=mode'+j+' onclick=goToMode('+j+'); >'+m.name+'</button>');
+	   j++;
+		});
+		
+  }
 	player.initialize(resp.cc);
 
 	// show loading
@@ -30,6 +48,12 @@ function start() {
 	
 }
 
+function goToMode(m) {
+	console.log("go to mode "+m);
+	if (m >= 0 && m < modes.length) {
+		curMode = m;
+	}
+}
 
 function playback() {
 	playVideo();
@@ -54,13 +78,13 @@ function handleMessage(msg) {
 			console.log('live');
 			break;
 		case 'word':
-			handleWord(msg);
+			modes[curMode].handleWord(msg);
 			break;
 		case 'sentenceEnd':
-			handleSentenceEnd(msg);
+			 modes[curMode].handleSentenceEnd(msg);
 			break;
 		case 'stats':
-			handleStats(msg);
+			modes[curMode].handleStats(msg);
 			break;
 		default:
 			break;

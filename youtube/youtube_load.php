@@ -1,5 +1,6 @@
 <?php  
 	
+	// handle youtube cc scraping
 	function get_data($url) {
 		$ch = curl_init();
 		$timeout = 30;
@@ -11,7 +12,9 @@
 		return $data;
 	}
 	
+	
 	$urlData = get_data($_POST["url"], false);
+	//$urlData = get_data("http://www.youtube.com/watch?v=ci5p1OdVLAc", false);
 	
 	$startInd = strpos($urlData, "ttsurl") + 10;
 	
@@ -27,9 +30,22 @@
   foreach ($xml->children() as $text){ 
 		$cc[] = $text;
   }
-	
+
+  // handle remix listing
+
+	if ($handle = opendir('fills')) {
+		$fills =  array();
+    /* This is the correct way to loop over the directory. */
+    while (false !== ($entry = readdir($handle))) {
+    	if (strlen($entry) > 2)
+	      $fills[] = $entry;
+    }
+
+	  closedir($handle);
+	}
+		
 	//echo '{ "cc": "' . json_encode($cc) . '", "url": "' . $ccUrl . '" }';  
-	$response = array("url" => $ccUrl,  "cc" => $cc);
+	$response = array("url" => $ccUrl,  "cc" => $cc, "fills" => $fills);
 	
 	
 	echo json_encode($response); 
