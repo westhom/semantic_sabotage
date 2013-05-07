@@ -46,7 +46,7 @@ var Parser = function(messages) {
 	
 		parseLine: function(line) {
 		
-		console.log(line);
+			console.log(line);
 			var spaceRegEx = new RegExp(/\S{1,}/g);
 			var leadPunctRegEx = new RegExp(/^[\"|\'|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
 			var numberRegEx = new RegExp(/\d{1,}.{1,}\d{1,}/);
@@ -60,8 +60,12 @@ var Parser = function(messages) {
 			var text = line[0];
 			console.log(text);
 			// TODO: are there more of these that need to be replaced? 
-			text = text.replace("&#39;", "'");
-			
+			// MANOR : quicky crash fix here to quit the fn if there's a blank line
+			if (text)
+				text = text.replace("&#39;", "'");
+			else
+				return;
+
 			//console.log(line.text['@attributes']);
 			var start = 1000*parseFloat(line['@attributes']['start']);
 			var dur = 1000*parseFloat(line['@attributes']['dur']);
