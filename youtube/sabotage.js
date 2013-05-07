@@ -16,16 +16,15 @@ function load(resp) {
   var j = 0;
   
   for (var i=0; i<resp.fills.length; i++) {
-		console.log(resp.fills[i]);  
-	  $.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
+	console.log(resp.fills[i]);  
+	$.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
 	   //console.log(data); //data returned
 	   console.log(textStatus + ' ' + jqxhr.status); //200
 	   var m = new mode();
 	   modes.push(m);
 	   $('#modeButtons').append('<button id=mode'+j+' onclick=goToMode('+j+'); >'+m.name+'</button>');
 	   j++;
-		});
-		
+	});		
   }
 	player.initialize(resp.cc);
 
