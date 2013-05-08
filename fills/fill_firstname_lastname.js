@@ -2,11 +2,12 @@ var mode = function() {
 
 	return {
 	
-		name: "hi",
+		name: "firstname_lastname",
 		
 		// Handle incoming word message.
 		handleWord: function(msg) {
 			//console.log('word '+msg.word);
+						
 			this.appendWordInContext(msg);
 		},
 		
