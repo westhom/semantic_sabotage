@@ -1,4 +1,4 @@
-<?php  
+<?php
 	
 	// handle youtube cc scraping
 	function get_data($url) {
@@ -12,7 +12,9 @@
 		return $data;
 	}
 	
-	
+	//grab the video ID from the URL
+	parse_str( parse_url( $_POST["url"], PHP_URL_QUERY ), $url_fragments);
+
 	$urlData = get_data($_POST["url"], false);
 	//$urlData = get_data("http://www.youtube.com/watch?v=0vVCSUafFVI", false);
 	
@@ -29,29 +31,27 @@
 
 	//for justin's reference
 	//http://www.youtube.com/api/timedtext?key=yttt1&caps=asr&asr_langs=it%2Ces%2Cnl%2Cfr%2Cde%2Cru%2Cja%2Cko%2Cen%2Cpt&expire=1367978504&v=0vVCSUafFVI&signature=3B123907EF56BD47870A09AC3F2AA4EB673EA16E.8AADF8712FF6D5B02F1D3A0B99D7FF42C9D28EA6&sparams=asr_langs%2Ccaps%2Cv%2Cexpire&hl=en_US&type=track&lang=en&name&kind=asr&fmt=1
-
 	
 	$cc =  array();
-  foreach ($xml->children() as $text){ 
+	foreach ($xml->children() as $text){ 
 		$cc[] = $text;
-  }
+	}
 
-  // handle remix listing
+	// handle remix listing
 
 	if ($handle = opendir('fills')) {
 		$fills =  array();
-    /* This is the correct way to loop over the directory. */
-    while (false !== ($entry = readdir($handle))) {
-    	if (strlen($entry) > 2)
-	      $fills[] = $entry;
-    }
+		/* This is the correct way to loop over the directory. */
+		while (false !== ($entry = readdir($handle))) {
+			if (strlen($entry) > 2)
+			$fills[] = $entry;
+		}
 
-	  closedir($handle);
+		closedir($handle);
 	}
 		
 	//echo '{ "cc": "' . json_encode($cc) . '", "url": "' . $ccUrl . '" }';  
-	$response = array("url" => $ccUrl,  "cc" => $cc, "fills" => $fills);
-	
+	$response = array("youtube_id" => $url_fragments['v'], "url" => $ccUrl,  "cc" => $cc, "fills" => $fills);
 	
 	echo json_encode($response); 
 	
