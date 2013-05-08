@@ -68,8 +68,7 @@ function playback() {
 
 function stopPlayback() {
 	pauseVideo();
-	//player.stopPlaybackMessages();	// Doesn't exist yet.
-	//player.pausePlaybackMessages();
+	//player.stopPlaybackMessages();	// Doesn't exist yet, but anyway, handled by yT state change callback.
 }
 
 function pausePlayback() {
