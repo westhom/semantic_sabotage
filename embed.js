@@ -2,6 +2,10 @@
        * Chromeless player has no controls.
        */
       
+      // Object with official youTube states. 
+      var ytStates = {'unstarted':-1, 'ended':0, 'playing':1, 'paused':2, 'buffering':3, 'videocued':5};
+      var ytCurState = -2;
+
       // Update a particular HTML element with a new value
       function updateHTML(elmId, value) {
         document.getElementById(elmId).innerHTML = value;
@@ -13,10 +17,15 @@
       }
       
       // This function is called when the player changes state
+      // We have to trigger our message playback based on these state changes,
+      // since there are always slight buffering delays when changing yT state.
       function onPlayerStateChange(newState) {
-        updateHTML("playerState", newState);
+        
+        handleYtPlayerStateChange(newState);
+        
       }
-      
+
+          
       // Display information about the current state of the player
       function updatePlayerInfo() {
         // Also check that at least one function exists since when IE unloads the

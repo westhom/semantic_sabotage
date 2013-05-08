@@ -7,6 +7,7 @@ var mode = function() {
 		// Handle incoming word message.
 		handleWord: function(msg) {
 			//console.log('word '+msg.word);
+						
 			this.appendWordInContext(msg);
 		},
 		

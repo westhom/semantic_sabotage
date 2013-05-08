@@ -16,16 +16,15 @@ function load(resp) {
   var j = 0;
   
   for (var i=0; i<resp.fills.length; i++) {
-		console.log(resp.fills[i]);  
-	  $.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
+	console.log(resp.fills[i]);  
+	$.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
 	   //console.log(data); //data returned
 	   console.log(textStatus + ' ' + jqxhr.status); //200
 	   var m = new mode();
 	   modes.push(m);
 	   $('#modeButtons').append('<button id=mode'+j+' onclick=goToMode('+j+'); >'+m.name+'</button>');
 	   j++;
-		});
-		
+	});		
   }
 	player.initialize(resp.cc);
 
@@ -46,7 +45,8 @@ function start() {
 	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
 
 	//JRO - This should match the default video for each sketch 
-	ytplayer.cueVideoById("ci5p1OdVLAc");
+	ytplayer.cueVideoById("mox4InKEwgU");
+
 	
 }
 
@@ -59,17 +59,18 @@ function goToMode(m) {
 
 function playback() {
 	playVideo();
-	player.playbackMessages();
+	//player.playbackMessages();	// Now handled by yT state change callback.
 }
 
 function stopPlayback() {
 	pauseVideo();
-	player.stopPlaybackMessages();
+	//player.stopPlaybackMessages();	// Doesn't exist yet.
+	//player.pausePlaybackMessages();
 }
 
 function pausePlayback() {
 	pauseVideo();
-	player.pausePlaybackMessages();
+	//player.pausePlaybackMessages();  // Now handled by yT state change callback.
 }
 
 // Handle incoming messages and distribute to appropriate functions.
@@ -93,8 +94,37 @@ function handleMessage(msg) {
 	}
 }
 
+// Handles state change messages from the yt player.
+function handleYtPlayerStateChange(newState) {
 
+    switch(newState) {
+      case -1:
+        // Unstarted
+        break;
+      case 0:
+        // Ended
+        break;
+      case 1:
+        // Playing
+        player.playbackMessages();        
+        break;
+      case 2:
+        // Paused
+        player.pausePlaybackMessages();
+        break;
+      case 3:
+        // Buffering
+        break;
+      case 5:
+        // Video cued
+        break;    
 
+      // Keep track of yT state for everyone to reference.
+      ytCurState = newState;
+
+      $('#playerState').html(newState);
+    }
+}
 
 
 

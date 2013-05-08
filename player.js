@@ -45,7 +45,7 @@ var Player = function(app) {
         var lastMsg = (i == 0) ? startMsg : messages[i-1];
 
         //console.log("last msg "+lastMsg+" msg "+msg);
-  			diff = Math.max(0, msg.time - lastMsg.time);
+  		diff = Math.max(0, msg.time - lastMsg.time);
   			
       	//console.log("diff "+diff);
         //if (app.modifier) {
@@ -61,9 +61,12 @@ var Player = function(app) {
         }, diff, this));
   			//console.log("settimeout "+msg.word+" "+diff);
 	  		
-      }
+      }	
 
-      runMessage(curMessage);
+      //Wait until time of first message to start messages.
+      //console.log('time of first message is ' + messages[curMessage].time + '............');
+      setTimeout(runMessage, messages[curMessage].time, curMessage);
+      //runMessage(curMessage);
     },
     
     pausePlaybackMessages: function() {
