@@ -43,7 +43,10 @@ function start() {
 	$('#playButton').show(); 
 	$('#muteButton').show();
 	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
+
+	//JRO - This should match the default video for each sketch 
 	ytplayer.cueVideoById("mox4InKEwgU");
+
 	
 }
 
