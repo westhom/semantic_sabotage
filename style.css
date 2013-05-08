@@ -1,3 +1,19 @@
+
+
+
+body {
+	background-color: rgb(0, 149, 194);
+
+}
+
+.titleText {
+	font-size: 64px;
+	font-family: Helvetica;
+	font-weight: bold;	
+	color: white;
+}
+
+
 .guntherBigText{
 	font-size: 120px;
 	font-family: Helvetica;
