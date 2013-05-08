@@ -71,3 +71,64 @@ legend{
 	font-family: Helvetica;
 	font-weight: bold;	
 }
+
+/* WADE AARON WHATNOT */
+
+.aaron {
+	position: relative;
+	color: black;
+	font-family: Helvetica;
+	font-weight: normal;
+}
+
+.funct {
+	color: red;
+	animation: funct 5s;
+	animation-iteration-count:infinite;
+	animation-timing-function:ease-in-out;
+	-webkit-animation: funct 5s; /* Safari and Chrome */
+	-webkit-animation-iteration-count:infinite; /*Safari and Chrome*/
+	-webkit-animation-timing-function:ease-in-out; /* Safari and Chrome */
+}
+
+@keyframes funct
+{
+0%   {color: red; top:0px;}
+25%  {color: yellow; top:200px;}
+75%  {color: yellow; top:-50px;}
+100% {color: red; top:0px;}
+}
+
+@-webkit-keyframes funct /* Safari and Chrome */
+{
+0%   {color: red; top:0px;}
+25%  {color: yellow; top:200px;}
+75%  {color: yellow; top:-50px;}
+100% {color: red; top:0px;}
+}
+
+.verb {
+	color: blue;
+	animation: verb 5s;
+	animation-iteration-count:infinite;
+	animation-timing-function:ease-in-out;
+	-webkit-animation: verb 5s; /* Safari and Chrome */
+	-webkit-animation-iteration-count:infinite; /*Safari and Chrome*/
+	-webkit-animation-timing-function:ease-in-out; /* Safari and Chrome */
+}
+
+@keyframes verb
+{
+0%   {color: blue; top:0px;}
+25%  {color: green; top:-200px;}
+75%  {color: green; top:10px;}
+100% {color: blue; top:0px;}
+}
+
+@-webkit-keyframes verb /* Safari and Chrome */
+{
+0%   {color: blue; top:0px;}
+25%  {color: green; top:-200px;}
+75%  {color: green; top:10px;}
+100% {color: blue; top:0px;}
+}

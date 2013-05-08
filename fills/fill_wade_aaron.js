@@ -23,22 +23,28 @@ var mode = function() {
 		
 		appendWordInContext: function(msg) {
 		
-		 	// update curSentence
-		 	//if (!msg.sentenceStartFlag && !msg.punctuationFlag)
-		 	//	$('#words').append(' ');
-		 		
-		 	//$('#words').append(msg.word);
+			// update curSentence
+			//if (!msg.sentenceStartFlag && !msg.punctuationFlag)
+			//	$('#words').append(' ');
+				
+			//$('#words').append(msg.word);
 
-		 	// update curSentence
-		 	if (!msg.sentenceStartFlag && !msg.punctuationFlag)
-		 		$('#words').append(' ');
-		 		
-		 	var s = document.createElement('span');
-		 	s.innerHTML = msg.word;
+			// update curSentence
+			if (!msg.sentenceStartFlag && !msg.punctuationFlag)
+				$('#words').append(' ');
+				
+			var s = document.createElement('span');
+			s.innerHTML = msg.word;
 
-		 	if ($.inArray('funct', msg.cats) >= 0) $(s).addClass('funct');
+			$(s).addClass('aaron');
+			$('#words').append(s);
 
-		 	$('#words').append(s);
+			if (msg.cats.length > 0) {
+				$(s).addClass('test')
+				if ($.inArray('funct', msg.cats) >= 0) $(s).addClass('funct');
+				if ($.inArray('verb', msg.cats) >= 0) $(s).addClass('verb');
+				$('#words').append(s);
+			}
 		}
 	}
 };
