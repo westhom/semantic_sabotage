@@ -36,11 +36,11 @@
 		$cc[] = $text;
   }
 
-  // handle remix listing
-
+/*	// This is now done in fill_load.php
+  	// handle remix listing
 	if ($handle = opendir('fills')) {
 		$fills =  array();
-    /* This is the correct way to loop over the directory. */
+    // This is the correct way to loop over the directory. 
     while (false !== ($entry = readdir($handle))) {
     	if (strlen($entry) > 2)
 	      $fills[] = $entry;
@@ -49,9 +49,11 @@
 	  closedir($handle);
 	}
 		
+*/
 	//echo '{ "cc": "' . json_encode($cc) . '", "url": "' . $ccUrl . '" }';  
-	$response = array("url" => $ccUrl,  "cc" => $cc, "fills" => $fills);
-	
+	//$response = array("url" => $ccUrl,  "cc" => $cc, "fills" => $fills);
+	$response = array("url" => $ccUrl,  "cc" => $cc);
+
 	
 	echo json_encode($response); 
 	

@@ -5,28 +5,48 @@ var video;
 var modes = [];
 var curMode = 0;
 
-function load(resp) {
-	console.log("load");
 
-  console.log(resp.url);
-  console.log(resp.cc);
-  
-  $('#modeButtons').empty();
-  
-  var j = 0;
-  
-  for (var i=0; i<resp.fills.length; i++) {
-	console.log(resp.fills[i]);  
-	$.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
-	   //console.log(data); //data returned
-	   console.log(textStatus + ' ' + jqxhr.status); //200
-	   var m = new mode();
-	   modes.push(m);
-	   $('#modeButtons').append('<button id=mode'+j+' onclick=goToMode('+j+'); >'+m.name+'</button>');
-	   j++;
-	});		
-  }
-	player.initialize(resp.cc);
+
+function loadFills() {
+
+	$.ajax({
+		type: 'post',
+		dataType: 'json',
+   		url: "fills_load.php",
+   		success: function(resp){
+     		
+     		var j = 0;
+     		for (var i=0; i<resp.fills.length; i++) {
+				console.log(resp.fills[i]);  
+				$.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
+				   //console.log(data); //data returned
+				   console.log(textStatus + ' ' + jqxhr.status); //200
+				   var m = new mode();
+				   modes.push(m);
+				   // Add entry to menu.
+				   $('#modeButtons').append('<div class="modeName darkGray" href="#" id=mode'+j+' onclick=goToMode('+j+'); >'+m.name.toUpperCase()+'</div>');
+				   // Create associated div for mode.
+				   m.el = $('<div class="modeContainer" id="'+m.name+'"></div>');			
+				   m.el.hide();
+				   // Append to DOM.
+				   $('#modes').append(m.el);				   
+				   
+				   j++;
+				});		
+			}
+
+		}
+ 	});
+}
+
+
+function load(resp) {
+
+	console.log("load");
+  	console.log(resp.url);
+  	console.log(resp.cc);
+    
+  	player.initialize(resp.cc);
 
 	// show loading
 	$('#loading').show();
@@ -42,6 +62,7 @@ function start() {
 	$('#loading').hide();
 	$('#playButton').show(); 
 	$('#muteButton').show();
+	$('#backButton').show();
 	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
 
 	//JRO - This should match the default video for each sketch 
@@ -51,10 +72,23 @@ function start() {
 }
 
 function goToMode(m) {
+	$('#menu').hide();
+	$('#modes').show();
+
 	console.log("go to mode "+m);
 	if (m >= 0 && m < modes.length) {
 		curMode = m;
 	}
+	// Hide all but the current mode's element.
+	for(var i=0; i < modes.length; i++){
+		if(i==curMode) modes[i].el.show();
+		else modes[i].el.hide();
+	}
+}
+
+function showMenu() {
+	$('#menu').show();
+	$('#modes').hide();	
 }
 
 function playback() {
