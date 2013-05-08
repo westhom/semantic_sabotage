@@ -66,6 +66,7 @@ legend{
 
 /* END YUI CSS reset */
 
+
 .guntherBigText{
 	font-size: 120px;
 	font-family: Helvetica;
@@ -81,34 +82,36 @@ legend{
 	font-weight: normal;
 }
 
-.funct {
+.aaron .funct {
+	position: absolute;
 	color: red;
+	z-index: 1;
 	animation: funct 5s;
-	animation-iteration-count:infinite;
-	animation-timing-function:ease-in-out;
+	animation-iteration-count:1;
+	animation-timing-function:ease-in;
 	-webkit-animation: funct 5s; /* Safari and Chrome */
-	-webkit-animation-iteration-count:infinite; /*Safari and Chrome*/
-	-webkit-animation-timing-function:ease-in-out; /* Safari and Chrome */
+	-webkit-animation-iteration-count:1; /*Safari and Chrome*/
+	-webkit-animation-timing-function:ease-in; /* Safari and Chrome */
 }
 
 @keyframes funct
 {
 0%   {color: red; top:0px;}
-25%  {color: yellow; top:200px;}
-75%  {color: yellow; top:-50px;}
-100% {color: red; top:0px;}
+500%  {color: yellow; top:200px;}
+100%   {color: red; top:0px;}
 }
 
 @-webkit-keyframes funct /* Safari and Chrome */
 {
 0%   {color: red; top:0px;}
-25%  {color: yellow; top:200px;}
-75%  {color: yellow; top:-50px;}
-100% {color: red; top:0px;}
+500%  {color: yellow; top:200px;}
+100%   {color: red; top:0px;}
 }
 
-.verb {
+.aaron .verb {
+	position: absolute;
 	color: blue;
+	z-index: 1;
 	animation: verb 5s;
 	animation-iteration-count:infinite;
 	animation-timing-function:ease-in-out;
@@ -132,3 +135,18 @@ legend{
 75%  {color: green; top:10px;}
 100% {color: blue; top:0px;}
 }
+
+/* END WADE AARON */
+
+body {
+	background-color: rgb(0, 149, 194);
+
+}
+
+.titleText {
+	font-size: 64px;
+	font-family: Helvetica;
+	font-weight: bold;	
+	color: white;
+}
+

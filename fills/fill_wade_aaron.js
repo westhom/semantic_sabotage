@@ -35,15 +35,16 @@ var mode = function() {
 				
 			var s = document.createElement('span');
 			s.innerHTML = msg.word;
-
 			$(s).addClass('aaron');
 			$('#words').append(s);
 
-			if (msg.cats.length > 0) {
-				$(s).addClass('test')
-				if ($.inArray('funct', msg.cats) >= 0) $(s).addClass('funct');
-				if ($.inArray('verb', msg.cats) >= 0) $(s).addClass('verb');
-				$('#words').append(s);
+			if (msg.cats.length > 0) { 
+				var t = document.createElement('span');
+				t.innerHTML = msg.word;
+				$(s).addClass('aaron');
+				if ($.inArray('funct', msg.cats) >= 0) $(t).addClass('funct');
+				if ($.inArray('verb', msg.cats) >= 0) $(t).addClass('verb');
+				$('#words').append(t);
 			}
 		}
 	}
