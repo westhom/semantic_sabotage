@@ -1,6 +1,5 @@
-webapp/backend/node_modules/*
+experiments/webapp/backend/node_modules/*
 webapp/backend/mongo_dump/*
-webapp/backend/config.json
-webapp/sentistrength/*
+experiments/webapp/backend/config.json
+experiments/webapp/sentistrength/*
 .DS_Store
-youtube/config.js
