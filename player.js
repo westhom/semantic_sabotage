@@ -61,7 +61,7 @@ var Player = function(app) {
         }, diff, this));
   			//console.log("settimeout "+msg.word+" "+diff);
 	  		
-      }
+      }	
 
       //Wait until time of first message to start messages.
       //console.log('time of first message is ' + messages[curMessage].time + '............');

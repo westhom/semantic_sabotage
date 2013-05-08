@@ -56,17 +56,18 @@ function goToMode(m) {
 
 function playback() {
 	playVideo();
-	player.playbackMessages();
+	//player.playbackMessages();	// Now handled by yT state change callback.
 }
 
 function stopPlayback() {
 	pauseVideo();
-	player.stopPlaybackMessages();
+	//player.stopPlaybackMessages();	// Doesn't exist yet.
+	//player.pausePlaybackMessages();
 }
 
 function pausePlayback() {
 	pauseVideo();
-	player.pausePlaybackMessages();
+	//player.pausePlaybackMessages();  // Now handled by yT state change callback.
 }
 
 // Handle incoming messages and distribute to appropriate functions.
@@ -90,8 +91,37 @@ function handleMessage(msg) {
 	}
 }
 
+// Handles state change messages from the yt player.
+function handleYtPlayerStateChange(newState) {
 
+    switch(newState) {
+      case -1:
+        // Unstarted
+        break;
+      case 0:
+        // Ended
+        break;
+      case 1:
+        // Playing
+        player.playbackMessages();        
+        break;
+      case 2:
+        // Paused
+        player.pausePlaybackMessages();
+        break;
+      case 3:
+        // Buffering
+        break;
+      case 5:
+        // Video cued
+        break;    
 
+      // Keep track of yT state for everyone to reference.
+      ytCurState = newState;
+
+      $('#playerState').html(newState);
+    }
+}
 
 
 
