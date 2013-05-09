@@ -65,7 +65,7 @@ function load(resp) {
 	player.initialize(resp.cc);
 
 	// show loading
-	$('#loading').show();
+	//$('#loading').show();
 	
 	// save embed url
 	//embedUrl = resp.url.replace('watch?v=', 'embed/');
@@ -75,7 +75,7 @@ function load(resp) {
 
 function start() {
 	console.log("READY TO GO!");
-	$('#loading').hide();
+	//$('#loading').hide();
 	$('#playButton').show(); 
 	$('#muteButton').show();
 	$('#backButton').show();
