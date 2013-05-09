@@ -75,7 +75,7 @@ legend{
 
 	width: 100%;
 	background-color: black;
-	padding: 12px 12px 24px 24px;
+	padding: 12px 12px 18px 24px;
 }
 
 .navText{
@@ -87,7 +87,7 @@ legend{
 	font-family: Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 2.5em;
-	color: rgb(110,110,110);
+	color: rgb(120,120,120);
 
 	margin: 0;
 }
@@ -170,3 +170,66 @@ body {
 	font-weight: bold;	
 	color: white;
 }
+
+/* Typography */
+
+.museo-slab-300
+{
+	font-family: "museo-slab",serif;
+	font-style: normal;
+	font-weight: 300;
+}
+
+.museo-slab-300-italic
+{
+	font-family: "museo-slab",serif;
+	font-style: italic;
+	font-weight: 300;
+}
+
+.museo-slab-500
+{
+	font-family: "museo-slab",serif;
+	font-style: normal;
+	font-weight: 500;
+}
+
+.museo-slab-500-italic
+{
+	font-family: "museo-slab",serif;
+	font-style: italic;
+	font-weight: 500;
+}
+
+.museo-slab-700
+{
+	font-family: "museo-slab",serif;
+	font-style: normal;
+	font-weight: 700;
+}
+
+.museo-slab-700-italic
+{
+	font-family: "museo-slab",serif;
+	font-style: italic;
+	font-weight: 700;
+}
+
+.museo-slab-1000
+{
+	font-family: "museo-slab",serif;
+	font-style: normal;
+	font-weight: 1000;
+}
+
+.museo-slab-1000-italic
+{
+	font-family: "museo-slab",serif;
+	font-style: italic;
+	font-weight: 1000;
+}
+
+
+
+
+
