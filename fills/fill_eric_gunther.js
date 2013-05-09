@@ -2,7 +2,7 @@ var mode = function() {
 
 	return {
 	
-		name: "Eric Gunther",
+		name: "One x One",
 		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
 		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 				 
@@ -27,7 +27,7 @@ var mode = function() {
 		
 		 	// update curSentence
 		 	if (!msg.sentenceStartFlag && !msg.punctuationFlag)
-		 		$('#words').append(' ');
+		 		this.el.append(' ');
 		 	
 		 	var c;
 		 	if($.inArray('funct', msg.cats) >= 0) c = 'rgb(255,0,0)';

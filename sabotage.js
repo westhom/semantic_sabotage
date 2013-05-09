@@ -19,6 +19,9 @@ function init() {
 	        $("#ytURLButton").click();
 	    }
 	});
+
+	// Hide URL form.
+	$('#youtube_load').hide();
 }
 
 function loadFills() {
@@ -103,6 +106,10 @@ function goToMode(m) {
 		// Ajax call below wasn't working, so for now just click submit button.
 		$('#ytURLButton').click();
 
+		// Show URL form.
+		$('#youtube_load').show();
+
+
 		/*
 		// Get captions from yT, using defaultURL of mode.
 		$.ajax({
@@ -117,9 +124,18 @@ function goToMode(m) {
 }
 
 function showMenu() {
+
 	$('#menu').show();
 	$('#modes').hide();	
 
+	// Reset progress bar.
+	$('#progressBar').width("0%");
+
+	// Hide URL form.
+	$('#youtube_load').hide();
+
+
+	// Stop video and message playback.
 	pauseVideo();
 	player.pausePlaybackMessages();
 }
