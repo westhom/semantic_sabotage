@@ -90,8 +90,28 @@ body {
 }
 
 #ytURL {
+	background-color:transparent;
+	color:white;
 	width:400px;
+	font-family: Helvetica;
+
 }
+
+#videoInfo {
+	display:none;
+}
+
+#progressBarBox {
+	width:400px;
+	height:6px;
+}
+
+#progressBar {
+	background-color: white;
+	height: 6px;
+	width: 0%;
+}
+
 
 .titleText {
 	font-size: 64px;

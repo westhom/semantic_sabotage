@@ -78,7 +78,7 @@
         // This causes the updatePlayerInfo function to be called every 250ms to
         // get fresh data from the player
         setInterval(updatePlayerInfo, 250);
-        updatePlayerInfo();
+        //updatePlayerInfo();
         ytplayer.addEventListener("onStateChange", "onPlayerStateChange");
         ytplayer.addEventListener("onError", "onPlayerError");
         ytplayer.height= 0;
