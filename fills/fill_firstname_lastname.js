@@ -2,7 +2,9 @@ var mode = function() {
 
 	return {
 	
-		name: "firstname_lastname",
+		name: "Empty Mode",
+		defaultURL: "http://www.youtube.com/watch?v=ci5p1OdVLAc",
+		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		
 		// Handle incoming word message.
 		handleWord: function(msg) {
@@ -25,9 +27,9 @@ var mode = function() {
 		
 		 	// update curSentence
 		 	if (!msg.sentenceStartFlag && !msg.punctuationFlag)
-		 		$('#words').append(' ');
+		 		this.el.append(' ');
 		 		
-		 	$('#words').append(msg.word);
+		 	this.el.append(msg.word);
 		}
 	}
 };

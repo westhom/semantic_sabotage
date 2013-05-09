@@ -6,13 +6,21 @@
 	<link rel="stylesheet" href="./style.css" type="text/css" media="screen, projection">
 	
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>	
 	<script src="http://code.jquery.com/jquery-migrate-1.1.0.min.js"></script>
   	<script src="http://malsup.github.com/jquery.form.js"></script> 
+
+  	<!-- Typekit -->
+  	<script type="text/javascript" src="//use.typekit.net/rim7nin.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   
 	<script> 
     // wait for the DOM to be loaded 
     	$(document).ready(function() { 
-        // bind 'myForm' and provide a simple callback function 
+    		init();
+    		
+
+        	// bind 'myForm' and provide a simple callback function 
         	$('#youtube_load').ajaxForm({ 
 		        // dataType identifies the expected content type of the server response 
 		        dataType:  'json', 
@@ -40,32 +48,43 @@
 	</head>
 	
 	<body>
-		<div class="titleText">SEMANTIC SABOTAGE</div>
-		<div id="videoDiv">Loading...</div>
-			    
-    	<div id="videoInfo">
-	      <p>Player state: <span id="playerState">--</span></p>
-	      <p>Current Time: <span id="videoCurrentTime">--:--</span> | Duration: <span id="videoDuration">--:--</span></p>
-	      <p>Bytes Total: <span id="bytesTotal">--</span> | Start Bytes: <span id="startBytes">--</span> | Bytes Loaded: <span id="bytesLoaded">--</span></p>
-    	</div>
 
-		<!-- enter a youtube url for a video with captions. -->
+		<div class="navBar">			
+			<div class="navText" onclick="showMenu();">SEMANTIC SABOTAGE</div>			
+			<form id="youtube_load" class="navInput" action="youtube_load.php"  method="post">
+				<input id="ytURL" class="navInput" type="text" value="http://www.youtube.com/watch?v=mox4InKEwgU" name="url" size="44">
+				<input id="ytURLButton" class="navButton" type="submit"  value="SUBMIT">
+			</form>
+			<button id="playButton" class="navButton" style="display:none" onclick="playback();">PLAY</button>
+		    <button id="pauseButton" class="navButton" style="display:none" onclick="pausePlayback();">PAUSE</button>
+		    <button id="muteButton" class="navButton" style="display:none" onclick="muteVideo();">MUTE</button>
+		    <button id="unmuteButton" class="navButton" style="display:none" onclick="unMuteVideo();">UNMUTE</button>
+		    <!-- <button id="backButton" style="display:none" onclick="showMenu();">BACK TO MENU</button> -->
+
+			<div id="progressBarBox"> 
+				<div id="progressBar"></div>
+			</div>
+
+		</div>
+
+		<div id="videoDiv">Loading...</div>
+					    
+	    <div id="menu">
+	    	<div id="modeButtons"></div>
+		</div>		
+
+	    <div id="modes">	    	
+	    	<div id="loading" style="display:none">LOADING...</div>	    	
+						
+	    	<div id="videoInfo">
+		      <p>Player state: <span id="playerState">--</span></p>
+		      <p>Current Time: <span id="videoCurrentTime">--:--</span> | Duration: <span id="videoDuration">--:--</span></p>
+		      <p>Bytes Total: <span id="bytesTotal">--</span> | Start Bytes: <span id="startBytes">--</span> | Bytes Loaded: <span id="bytesLoaded">--</span></p>
+	    	</div>
+
+	    </div>
+
 		
-	    <form id="youtube_load" action="youtube_load.php"  method="post">
-				URL: <input type="text" value="http://www.youtube.com/watch?v=ci5p1OdVLAc" name="url">
-				<input type="submit"  value="Submit">
-		</form>
-		
-	    <div id="loading" style="display:none">LOADING...</div>
-	    
-	    <div id="modeButtons"></div>
-	    <button id="playButton" style="display:none" onclick="playback();">PLAYBACK</button>
-	    <button id="pauseButton" style="display:none" onclick="pausePlayback();">PAUSE</button>
-	    <button id="muteButton" style="display:none" onclick="muteVideo();">MUTE</button>
-	    <button id="unmuteButton" style="display:none" onclick="unMuteVideo();">UNMUTE</button>
-	    
-	    
-			<div id="words"></div>
 	    <div id="results"></div>
 	
 	</body>

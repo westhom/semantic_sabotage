@@ -15,7 +15,13 @@ var Player = function(app) {
 			console.log("load msgs "+cc);
 			
 			for (var i=0; i<cc.length; i++) {
-				parser.parseLine(cc[i]);
+				// Gotta use offset setTimeouts, so progress bar reflow can happen.
+				setTimeout(function(data, i){
+					parser.parseLine(data[i]);
+					$('#progressBar').width((i/data.length)*100 + "%");		
+				}, i*40, cc, i);
+
+				//parser.parseLine(cc[i]);
 			}
 			
 			// once all messages created, start!
@@ -34,7 +40,7 @@ var Player = function(app) {
     	console.log("playback messages ");
   		var startMsg = messages[curMessage];
 
-      function runMessage(i) {
+      	function runMessage(i) {
       
       	console.log("runmsg "+i);
         curMessage = i+1;

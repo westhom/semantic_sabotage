@@ -66,23 +66,8 @@
 		$cc[] = $text;
 	}
 
-
-	// handle remix listing
-
-	if ($handle = opendir('fills')) {
-		$fills =  array();
-		/* This is the correct way to loop over the directory. */
-		while (false !== ($entry = readdir($handle))) {
-			if (strlen($entry) > 2)
-			$fills[] = $entry;
-		}
-
-		closedir($handle);
-	}
-		
 	//echo '{ "cc": "' . json_encode($cc) . '", "url": "' . $ccUrl . '" }';  
-
-	$response = array("youtube_id" => $url_fragments['v'], "url" => $ccUrl,  "cc" => $cc, "fills" => $fills, "error" => $error);
+	$response = array("youtube_id" => $url_fragments['v'], "url" => $ccUrl,  "cc" => $cc, "error" => $error);
 	
 	echo json_encode($response); 
 	
