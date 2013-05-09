@@ -3,7 +3,9 @@ var mode = function() {
 	return {
 	
 		name: "Eric Gunther",
-		
+		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
+				 
+
 		// Handle incoming word message.
 		handleWord: function(msg) {
 			//console.log('word '+msg.word);
@@ -33,7 +35,7 @@ var mode = function() {
 		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(255,180,140)';
 		 	else c = 'rgb(40,40,40)';
 
-		 	$('#words').html('<span class= "guntherBigText" style="color:' + c + ';">' + msg.word + '</span>');
+		 	this.el.html('<span class= "guntherBigText" style="color:' + c + ';">' + msg.word + '</span>');
 		}
 	}
 };
