@@ -2,7 +2,7 @@ var mode = function() {
 
 	return {
 	
-		name: "firstname_lastname",
+		name: "Empty Mode",
 		defaultURL: "http://www.youtube.com/watch?v=ci5p1OdVLAc",
 		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		

@@ -2,7 +2,7 @@ var mode = function() {
 
 	return {
 	
-		name: "John Rothenberg",
+		name: "Type Tests",
 		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
 		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		
@@ -35,7 +35,7 @@ var mode = function() {
 		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(255,180,140)';
 		 	else c = 'rgb(40,40,40)';
 
-		 	this.el.html('<span class= "guntherBigText" style="color:' + c + ';">' + msg.word + '</span>');
+		 	this.el.html('<span class= "museo-slab-1000 size-128" style="color:' + c + ';">' + msg.word + '</span>');
 		}
 	}
 };
