@@ -3,7 +3,7 @@ var mode = function() {
 	return {
 	
 		name: "firstname_lastname",
-		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
+		defaultURL: "http://www.youtube.com/watch?v=ci5p1OdVLAc",
 		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		
 		// Handle incoming word message.

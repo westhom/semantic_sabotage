@@ -3,6 +3,7 @@ var mode = function() {
 	return {
 	
 		name: "Eric Gunther",
+		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
 		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 				 
 

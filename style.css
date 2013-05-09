@@ -89,6 +89,10 @@ body {
 	height: 0px;
 }
 
+#ytURL {
+	width:400px;
+}
+
 .titleText {
 	font-size: 64px;
 	font-family: Helvetica;
