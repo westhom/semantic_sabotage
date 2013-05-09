@@ -4,6 +4,7 @@ var video;
 
 var modes = [];
 var curMode = 0;
+var curVideoID = 'ci5p1OdVLAc';
 
 
 
@@ -40,11 +41,13 @@ function loadFills() {
 
 function load(resp) {
 
-	console.log("load");
-  	console.log(resp.url);
-  	console.log(resp.cc);
-    
-  	player.initialize(resp.cc);
+	console.log(resp.youtube_id);
+	curVideoID = resp.youtube_id;
+
+	console.log(resp.url);
+	console.log(resp.cc);
+  
+	player.initialize(resp.cc);
 
 	// show loading
 	$('#loading').show();
@@ -64,7 +67,7 @@ function start() {
 	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
 
 	//JRO - This should match the default video for each sketch 
-	ytplayer.cueVideoById("mox4InKEwgU");
+	ytplayer.cueVideoById(curVideoID);
 
 	
 }
@@ -128,33 +131,33 @@ function handleMessage(msg) {
 // Handles state change messages from the yt player.
 function handleYtPlayerStateChange(newState) {
 
-    switch(newState) {
-      case -1:
-        // Unstarted
-        break;
-      case 0:
-        // Ended
-        break;
-      case 1:
-        // Playing
-        player.playbackMessages();        
-        break;
-      case 2:
-        // Paused
-        player.pausePlaybackMessages();
-        break;
-      case 3:
-        // Buffering
-        break;
-      case 5:
-        // Video cued
-        break;    
+	switch(newState) {
+	  case -1:
+		// Unstarted
+		break;
+	  case 0:
+		// Ended
+		break;
+	  case 1:
+		// Playing
+		player.playbackMessages();        
+		break;
+	  case 2:
+		// Paused
+		player.pausePlaybackMessages();
+		break;
+	  case 3:
+		// Buffering
+		break;
+	  case 5:
+		// Video cued
+		break;    
 
-      // Keep track of yT state for everyone to reference.
-      ytCurState = newState;
+	  // Keep track of yT state for everyone to reference.
+	  ytCurState = newState;
 
-      $('#playerState').html(newState);
-    }
+	  $('#playerState').html(newState);
+	}
 }
 
 
