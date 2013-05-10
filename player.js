@@ -46,7 +46,7 @@ var Player = function(app) {
 
       	function runMessage(i) {
       
-      	console.log("runmsg "+i);
+      	//console.log("runmsg "+i);
         curMessage = i+1;
       
         var msg = messages[i];
