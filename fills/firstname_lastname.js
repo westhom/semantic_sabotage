@@ -1,10 +1,10 @@
-var mode = function() {
+var mode = function(id) {
 
 	return {
 	
 		name: "Empty Mode",
 		defaultURL: "http://www.youtube.com/watch?v=ci5p1OdVLAc",
-		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
+		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
 		// Handle incoming word message.
 		handleWord: function(msg) {

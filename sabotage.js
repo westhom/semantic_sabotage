@@ -26,6 +26,7 @@ function init() {
 
 function loadFills() {
 
+	// Hit fills_load PHP script.
 	$.ajax({
 		type: 'post',
 		dataType: 'json',
@@ -33,21 +34,38 @@ function loadFills() {
    		success: function(resp){
      		
      		var j = 0;
+     		// For each fill, load javascript.
      		for (var i=0; i<resp.fills.length; i++) {
 				console.log(resp.fills[i]);  
-				$.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
-				   //console.log(data); //data returned
-				   console.log(textStatus + ' ' + jqxhr.status); //200
-				   var m = new mode();
-				   modes.push(m);
-				   // Add entry to menu.
-				   $('#modeButtons').append('<div class="modeName darkGray" href="#" id=mode'+j+' onclick=goToMode('+j+'); >'+m.name.toUpperCase()+'</div>');
-				   // Append to mode's element to DOM.
-				   m.el.hide();
-				   $('#modes').append(m.el);				   
+				
+				// Use function and pass in name because .getScript is asynchronous.
+				(function(name) {	
+					$.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
+					   //console.log(data); //data returned
+					   //console.log(textStatus + ' ' + jqxhr.status); //200
+					   
+					   // Strip off .js and pass name to mode for element id.
+					   var m = new mode(name.substr(0, name.lastIndexOf('.')));
+					   modes.push(m);
+					   // Add entry to menu.
+					   $('#modeButtons').append('<div class="modeName darkGray" href="#" id=mode'+j+' onclick=goToMode('+j+'); >'+m.name.toUpperCase()+'</div>');
+					   // Append to mode's element to DOM.
+					   m.el.hide();				   
+					   $('#modes').append(m.el);				   
 
-				   j++;
-				});		
+					   j++;
+					});
+				})(resp.fills[i]);					
+			}
+
+			
+			// Load CSS for fills.
+			for (var i=0; i<resp.styles.length; i++) {
+				//console.log(resp.styles[i]);  
+				
+				$('<style type="text/css"></style>')
+    			.html('@import url("fills/css/' + resp.styles[i] + '")')
+    			.appendTo("head");
 			}
 		}
  	});

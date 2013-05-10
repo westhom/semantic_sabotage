@@ -46,7 +46,7 @@ var Parser = function(messages) {
 	
 		parseLine: function(line) {
 		
-			console.log(line);
+			//console.log(line);
 			var spaceRegEx = new RegExp(/\S{1,}/g);
 			var leadPunctRegEx = new RegExp(/^[\"|\'|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
 			var numberRegEx = new RegExp(/\d{1,}.{1,}\d{1,}/);

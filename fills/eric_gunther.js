@@ -1,11 +1,13 @@
-var mode = function() {
+var mode = function(id) {
 
 	return {
 	
-		name: "Type Tests",
+		name: "One x One",
 		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
-		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
-		
+		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
+		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+				 
+
 		// Handle incoming word message.
 		handleWord: function(msg) {
 			//console.log('word '+msg.word);
@@ -35,7 +37,7 @@ var mode = function() {
 		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(255,180,140)';
 		 	else c = 'rgb(40,40,40)';
 
-		 	this.el.html('<span class= "museo-slab-1000 size-128" style="color:' + c + ';">' + msg.word + '</span>');
+		 	this.el.html('<span class= "guntherBigText museo-slab-1000" style="color:' + c + ';">' + msg.word + '</span>');
 		}
 	}
 };
