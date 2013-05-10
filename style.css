@@ -88,8 +88,9 @@ legend{
 	position: relative;
 
 	width: 100%;
+	min-width: 1024px;
 	background-color: black;
-	padding: 12px 12px 12px 24px;
+	padding: 12px 0px 12px 24px;
 }
 
 #navControls {
@@ -105,7 +106,7 @@ legend{
 	font-family: Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 1.5em;
-	
+
 	margin: 0px 0px 0px 12px;
 	color: white;
 }
@@ -172,9 +173,11 @@ input.navInput[type="text"]:focus
 
 .navButton {
 	position: relative;
-	margin-left: 1em;
+	margin-left: 0.5em;
 	top: 0.125em;
 
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
 	font-size: 0.9em;
 
 	border-style: none;
@@ -184,7 +187,23 @@ input.navInput[type="text"]:focus
 }
 
 .navButton:hover {
-	color: yellow;
+	color: white;
+}
+
+#about {
+	position: absolute;
+	right: 0%;	
+	text-align: left;
+	top: 0.125em;
+	padding: 0px;
+	margin: 0px 0px 0px 0px;
+
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 0.9em;
+
+	color: rgb(0, 149, 194);
+	background-color: rgb(255,0,0);
 }
 
 

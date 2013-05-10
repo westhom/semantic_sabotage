@@ -159,6 +159,7 @@ function goToMode(m) {
 		showLoadingMessage();
 		$('#ytURL').val("Enter a different YouTube URL");		
 		// Reset progress bar color to white, for loading.
+		$('#progressBar').width('0%');
 		$('#progressBar').css('background-color', 'white');        
 
 		// Call enter on current mode.
