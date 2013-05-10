@@ -9,9 +9,17 @@ var mode = function(id) {
 				 
 
 		// Anything you want to do to initialize your mode. 
+		// This gets called once after the mode is created.
 		init: function() {
 			this.el.append("<div id='eg' class='container'></div>");
 		},
+
+		// Gets called evertime you go to the mode.
+		enter: function() {
+			console.log(this.name+" enter()");
+			$('#eg').empty();
+		},
+
 
 		// Handle incoming word message.
 		handleWord: function(msg) {

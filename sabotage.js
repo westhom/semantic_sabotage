@@ -132,6 +132,8 @@ function goToMode(m) {
 		// Set up nav menu.
 		showLoading();
 		$('#ytURL').val("Enter a different YouTube URL");		
+
+		modes[curMode].enter();
 	}
 }
 
