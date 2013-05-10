@@ -3,7 +3,7 @@ var mode = function() {
 	return {
 	
 		name: "One x One",
-		defaultURL: "http://www.youtube.com/watch?v=drTyNDRnyxs",
+		defaultURL: "http://www.youtube.com/watch?v=jq42aHX4qk4",
 		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 				 
 
