@@ -186,7 +186,6 @@ input.navInput[type="submit"]:hover
 	color: yellow;
 }
 
-
 /* end NAVIGATION css */
 
 body {
@@ -230,7 +229,6 @@ body {
 	font-weight: bold;	
 	color: white;
 }
-
 
 /* Typography */
 
@@ -360,8 +358,6 @@ body {
 	width:100%;
 	height:100%;
 }
-
-
 
 .size-128{
 	font-size: 128px;
