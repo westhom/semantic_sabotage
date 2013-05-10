@@ -1,11 +1,25 @@
-var mode = function() {
+var mode = function(id) {
 
 	return {
 	
 		name: "One x One",
-		defaultURL: "http://www.youtube.com/watch?v=jq42aHX4qk4",
+
+		defaultURL: "http://www.youtube.com/watch?v=o7PgNXf842Q",
 		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 				 
+
+		// Anything you want to do to initialize your mode. 
+		// This gets called once after the mode is created.
+		init: function() {
+			this.el.append("<div id='eg' class='container'></div>");
+		},
+
+		// Gets called evertime you go to the mode.
+		enter: function() {
+			console.log(this.name+" enter()");
+			$('#eg').empty();
+		},
+
 
 		// Handle incoming word message.
 		handleWord: function(msg) {
@@ -36,7 +50,7 @@ var mode = function() {
 		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(255,180,140)';
 		 	else c = 'rgb(40,40,40)';
 
-		 	this.el.html('<span class= "guntherBigText" style="color:' + c + ';">' + msg.word + '</span>');
+		 	$('#eg').html('<span class= "guntherBigText museo-slab-1000" style="color:' + c + ';">' + msg.word + '</span>');
 		}
 	}
 };

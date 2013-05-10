@@ -46,7 +46,7 @@ var Parser = function(messages) {
 	
 		parseLine: function(line) {
 		
-			console.log(line);
+			//console.log(line);
 			var spaceRegEx = new RegExp(/\S{1,}/g);
 			var leadPunctRegEx = new RegExp(/^[\"|\'|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
 			var numberRegEx = new RegExp(/\d{1,}.{1,}\d{1,}/);
@@ -58,7 +58,7 @@ var Parser = function(messages) {
 		
 			// grab parts from xml
 			var text = line[0];
-			console.log(text);
+			//console.log(text);
 			// TODO: are there more of these that need to be replaced? 
 			// MANOR : quicky crash fix here to quit the fn if there's a blank line
 			if (text)
@@ -69,7 +69,7 @@ var Parser = function(messages) {
 			//console.log(line.text['@attributes']);
 			var start = 1000*parseFloat(line['@attributes']['start']);
 			var dur = 1000*parseFloat(line['@attributes']['dur']);
-			console.log("start "+start+" dur "+dur);
+			//console.log("start "+start+" dur "+dur);
 			
 			// add words to sentence
 			//split input string with RegExo
@@ -146,7 +146,7 @@ var Parser = function(messages) {
 						msgTime -= 5;
 						var msg = {type: "word", time:msgTime, word:endPunct, cats:["punct", "leadPunct"]};
 						messages.push(msg);
-						console.log(msg);
+						//console.log(msg);
 					}
 					if (word) {
 						word = word.toString();
@@ -154,13 +154,13 @@ var Parser = function(messages) {
 						statsHandler.logWordInstance(word, cats);
 						var msg = {type: "word", time:msgTime, word:word, cats:this.getCats(word)};
 						messages.push(msg);
-						console.log(msg);
+						//console.log(msg);
 					}
 					if (endPunct) {
 						msgTime += 5;		
 						var msg = {type: "word", time:msgTime, word:endPunct, cats:["punct", "endPunct"]};
 						messages.push(msg);
-						console.log(msg);
+						//console.log(msg);
 						// also send sentenceEnd msg? PEND: necessary or can we check for cat endPunct?
 						messages.push({type: "sentenceEnd", time:msgTime});
 					}

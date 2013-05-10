@@ -18,14 +18,12 @@ function init() {
 	    if(event.keyCode == 13){
 	        $("#ytURLButton").click();
 	    }
-	});
-
-	// Hide URL form.
-	$('#youtube_load').hide();
+	});	
 }
 
 function loadFills() {
 
+	// Hit fills_load PHP script.
 	$.ajax({
 		type: 'post',
 		dataType: 'json',
@@ -33,21 +31,41 @@ function loadFills() {
    		success: function(resp){
      		
      		var j = 0;
+     		// For each fill, load javascript.
      		for (var i=0; i<resp.fills.length; i++) {
 				console.log(resp.fills[i]);  
-				$.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
-				   //console.log(data); //data returned
-				   console.log(textStatus + ' ' + jqxhr.status); //200
-				   var m = new mode();
-				   modes.push(m);
-				   // Add entry to menu.
-				   $('#modeButtons').append('<div class="modeName darkGray" href="#" id=mode'+j+' onclick=goToMode('+j+'); >'+m.name.toUpperCase()+'</div>');
-				   // Append to mode's element to DOM.
-				   m.el.hide();
-				   $('#modes').append(m.el);				   
+				
+				// Use function and pass in name because .getScript is asynchronous.
+				(function(name) {	
+					$.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
+					   //console.log(data); //data returned
+					   //console.log(textStatus + ' ' + jqxhr.status); //200
 
-				   j++;
-				});		
+					   // Strip off .js and pass name to mode for element id.
+					   var m = new mode(name.substr(0, name.lastIndexOf('.')));
+
+					   modes.push(m);
+					   // Add entry to menu.
+					   $('#modeButtons').append('<div class="modeName darkGray" href="#" id=mode'+j+' onclick=goToMode('+j+'); >'+m.name.toUpperCase()+'</div>');
+					   // Append to mode's element to DOM.
+					   m.el.hide();				   
+					   $('#modes').append(m.el);				   
+					   // Initialize the mode.
+					   m.init();
+
+					   j++;
+					});
+				})(resp.fills[i]);					
+			}
+
+			
+			// Load CSS for fills.
+			for (var i=0; i<resp.styles.length; i++) {
+				//console.log(resp.styles[i]);  
+				
+				$('<style type="text/css"></style>')
+    			.html('@import url("fills/css/' + resp.styles[i] + '")')
+    			.appendTo("head");
 			}
 		}
  	});
@@ -64,8 +82,11 @@ function load(resp) {
   
 	player.initialize(resp.cc);
 
+	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
+	ytplayer.cueVideoById(curVideoID);
+
 	// show loading
-	$('#loading').show();
+	//$('#loading').show();
 	
 	// save embed url
 	//embedUrl = resp.url.replace('watch?v=', 'embed/');
@@ -74,15 +95,10 @@ function load(resp) {
 
 
 function start() {
-	console.log("READY TO GO!");
-	$('#loading').hide();
-	$('#playButton').show(); 
-	$('#muteButton').show();
-	$('#backButton').show();
-	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
-
-	//JRO - This should match the default video for each sketch 
-	ytplayer.cueVideoById(curVideoID);
+	console.log("start()");
+	
+	showControls();
+	playback();	
 }
 
 function goToMode(m) {
@@ -101,25 +117,23 @@ function goToMode(m) {
 		}
 		//console.log("URL = "+modes[curMode].defaultURL);
 
-		// Update value of input with defaultURL of mode.
-		$('#ytURL').val(modes[curMode].defaultURL);
-		// Ajax call below wasn't working, so for now just click submit button.
-		$('#ytURLButton').click();
-
-		// Show URL form.
-		$('#youtube_load').show();
-
-
-		/*
-		// Get captions from yT, using defaultURL of mode.
+		// Get captions from youTube PHP, using defaultURL of mode.
 		$.ajax({
 			type: 'post',
 			dataType: 'json',
 			url: "youtube_load.php",
-			data: modes[curMode].defaultURL,	   		
-	   		success: load
+			data: {"url":modes[curMode].defaultURL},	   
+	   		success: load,
+	   		error: function(data){
+	   			console.log(data);
+	   		}
 	   	});
-		*/
+	
+		// Set up nav menu.
+		showLoading();
+		$('#ytURL').val("Enter a different YouTube URL");		
+
+		modes[curMode].enter();
 	}
 }
 
@@ -131,13 +145,29 @@ function showMenu() {
 	// Reset progress bar.
 	$('#progressBar').width("0%");
 
-	// Hide URL form.
-	$('#youtube_load').hide();
-
+	// Hide all controls.
+	hideControls();
 
 	// Stop video and message playback.
 	pauseVideo();
 	player.pausePlaybackMessages();
+}
+
+function showControls() {
+	$('#navControls').show();
+	hideLoading();
+}
+
+function hideControls() {
+	$('#navControls').hide();
+}
+
+function showLoading() {
+	$('#loading').show();
+}
+
+function hideLoading() {
+	$('#loading').hide();
 }
 
 function playback() {
