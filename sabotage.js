@@ -129,8 +129,8 @@ function goToMode(m) {
 	   		}
 	   	});
 	
-		// Show URL form.
-		//$('#youtube_load').show();
+		// Set up nav menu.
+		showLoading();
 		$('#ytURL').val("Enter a different YouTube URL");		
 	}
 }
@@ -153,10 +153,19 @@ function showMenu() {
 
 function showControls() {
 	$('#navControls').show();
+	hideLoading();
 }
 
 function hideControls() {
 	$('#navControls').hide();
+}
+
+function showLoading() {
+	$('#loading').show();
+}
+
+function hideLoading() {
+	$('#loading').hide();
 }
 
 function playback() {

@@ -10,7 +10,7 @@ var mode = function(id) {
 
 		// Anything you want to do to initialize your mode. 
 		init: function() {
-		
+			this.el.append("<div id='eg' class='container'></div>");
 		},
 
 		// Handle incoming word message.
@@ -42,7 +42,7 @@ var mode = function(id) {
 		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(255,180,140)';
 		 	else c = 'rgb(40,40,40)';
 
-		 	this.el.html('<span class= "guntherBigText museo-slab-1000" style="color:' + c + ';">' + msg.word + '</span>');
+		 	$('#eg').html('<span class= "guntherBigText museo-slab-1000" style="color:' + c + ';">' + msg.word + '</span>');
 		}
 	}
 };
