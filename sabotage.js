@@ -114,7 +114,16 @@ function load(resp) {
 function start() {
 	console.log("start()");
 	
-	showControls();
+	// Set up nav messages and controls.
+	// For a few seconds, show playing message.
+	hideLoadingMessage();
+	showPlayingMessage();
+	// Then show controls.
+	setTimeout(function(){
+		showControls();
+		hidePlayingMessage();
+	}, 10000);
+	
 	playback();	
 }
 
@@ -147,7 +156,7 @@ function goToMode(m) {
 	   	});
 	
 		// Set up nav menu.
-		showLoading();
+		showLoadingMessage();
 		$('#ytURL').val("Enter a different YouTube URL");		
 		// Reset progress bar color to white, for loading.
 		$('#progressBar').css('background-color', 'white');        
@@ -175,20 +184,19 @@ function showMenu() {
 
 function showControls() {
 	$('#navControls').show();
-	hideLoading();
 }
 
 function hideControls() {
 	$('#navControls').hide();
 }
 
-function showLoading() {
-	$('#loading').show();
-}
+function showLoadingMessage() { $('#loading').show(); }
+function hideLoadingMessage() { $('#loading').hide(); }
+function showPlayingMessage() { $('#playing').show(); }
+function hidePlayingMessage() { $('#playing').hide(); }
 
-function hideLoading() {
-	$('#loading').hide();
-}
+
+
 
 function playback() {
 	playVideo();

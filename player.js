@@ -28,7 +28,7 @@ var Player = function(app) {
 			// Once all messages are created, start!
 			setTimeout(function(){
 				app.start();
-			}, cc.length*offset + 2000);
+			}, cc.length*offset + 500);
 			
 		},
 		

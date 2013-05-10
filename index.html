@@ -48,7 +48,8 @@
 
 		<div class="navBar">			
 			<div class="navText" onclick="showMenu();">SEMANTIC SABOTAGE</div>			
-			<div id="loading" class="navText" style="display:none">LOADING...</div>
+			<div id="loading" class="navStatus" style="display:none">LOADING CAPTIONS...</div>
+			<div id="playing" class="navStatus" style="display:none">PLAYING...</div>
 			<div id="navControls" style="display:none">
 				<form id="youtube_load" class="navInput" action="youtube_load.php"  method="post">
 					<input id="ytURL" class="navInput" type="text" value="Enter a YouTube URL." name="url" size="44">
@@ -74,7 +75,6 @@
 		</div>		
 
 	    <div id="modes">	    	
-	    	<div id="loading" style="display:none">LOADING...</div>	    	
 						
 	    	<div id="videoInfo">
 		      <p>Player state: <span id="playerState">--</span></p>
