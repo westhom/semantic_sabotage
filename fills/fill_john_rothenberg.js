@@ -3,7 +3,7 @@ var mode = function() {
 	return {
 	
 		name: "Type Tests",
-		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
+		defaultURL: "http://www.youtube.com/watch?v=DCrDuGyZ6FA",
 		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		
 		// Handle incoming word message.

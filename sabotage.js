@@ -4,7 +4,7 @@ var video;
 
 var modes = [];
 var curMode = 0;
-var curVideoID = 'ci5p1OdVLAc';
+var curVideoID = 'drTyNDRnyxs';
 
 
 
