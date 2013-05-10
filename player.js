@@ -14,18 +14,22 @@ var Player = function(app) {
 		createMessages: function(cc) {
 			console.log("load msgs "+cc);
 			
+			var offset = 40;	// Milliseconds between line parses.			
 			for (var i=0; i<cc.length; i++) {
 				// Gotta use offset setTimeouts, so progress bar reflow can happen.
 				setTimeout(function(data, i){
 					parser.parseLine(data[i]);
 					$('#progressBar').width((i/data.length)*100 + "%");		
-				}, i*40, cc, i);
+				}, i*offset, cc, i);
 
 				//parser.parseLine(cc[i]);
 			}
 			
-			// once all messages created, start!
-			app.start();
+			// Once all messages are created, start!
+			setTimeout(function(){
+				app.start();
+			}, cc.length*offset + 2000);
+			
 		},
 		
 		printMessages: function() {

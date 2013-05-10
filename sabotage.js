@@ -18,10 +18,7 @@ function init() {
 	    if(event.keyCode == 13){
 	        $("#ytURLButton").click();
 	    }
-	});
-
-	// Hide URL form.
-	$('#youtube_load').hide();
+	});	
 }
 
 function loadFills() {
@@ -85,6 +82,9 @@ function load(resp) {
   
 	player.initialize(resp.cc);
 
+	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
+	ytplayer.cueVideoById(curVideoID);
+
 	// show loading
 	//$('#loading').show();
 	
@@ -95,15 +95,10 @@ function load(resp) {
 
 
 function start() {
-	console.log("READY TO GO!");
-	//$('#loading').hide();
-	$('#playButton').show(); 
-	$('#muteButton').show();
-	$('#backButton').show();
-	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
-
-	//JRO - This should match the default video for each sketch 
-	ytplayer.cueVideoById(curVideoID);
+	console.log("start()");
+	
+	showControls();
+	playback();	
 }
 
 function goToMode(m) {
@@ -122,25 +117,21 @@ function goToMode(m) {
 		}
 		//console.log("URL = "+modes[curMode].defaultURL);
 
-		// Update value of input with defaultURL of mode.
-		$('#ytURL').val(modes[curMode].defaultURL);
-		// Ajax call below wasn't working, so for now just click submit button.
-		$('#ytURLButton').click();
-
-		// Show URL form.
-		$('#youtube_load').show();
-
-
-		/*
-		// Get captions from yT, using defaultURL of mode.
+		// Get captions from youTube PHP, using defaultURL of mode.
 		$.ajax({
 			type: 'post',
 			dataType: 'json',
 			url: "youtube_load.php",
-			data: modes[curMode].defaultURL,	   		
-	   		success: load
+			data: {"url":modes[curMode].defaultURL},	   
+	   		success: load,
+	   		error: function(data){
+	   			console.log(data);
+	   		}
 	   	});
-		*/
+	
+		// Show URL form.
+		//$('#youtube_load').show();
+		$('#ytURL').val("Enter a different YouTube URL");		
 	}
 }
 
@@ -152,13 +143,20 @@ function showMenu() {
 	// Reset progress bar.
 	$('#progressBar').width("0%");
 
-	// Hide URL form.
-	$('#youtube_load').hide();
-
+	// Hide all controls.
+	hideControls();
 
 	// Stop video and message playback.
 	pauseVideo();
 	player.pausePlaybackMessages();
+}
+
+function showControls() {
+	$('#navControls').show();
+}
+
+function hideControls() {
+	$('#navControls').hide();
 }
 
 function playback() {
