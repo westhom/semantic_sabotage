@@ -43,15 +43,18 @@ function loadFills() {
 					$.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
 					   //console.log(data); //data returned
 					   //console.log(textStatus + ' ' + jqxhr.status); //200
-					   
+
 					   // Strip off .js and pass name to mode for element id.
 					   var m = new mode(name.substr(0, name.lastIndexOf('.')));
+
 					   modes.push(m);
 					   // Add entry to menu.
 					   $('#modeButtons').append('<div class="modeName darkGray" href="#" id=mode'+j+' onclick=goToMode('+j+'); >'+m.name.toUpperCase()+'</div>');
 					   // Append to mode's element to DOM.
 					   m.el.hide();				   
 					   $('#modes').append(m.el);				   
+					   // Initialize the mode.
+					   m.init();
 
 					   j++;
 					});

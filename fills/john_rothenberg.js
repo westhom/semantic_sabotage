@@ -6,6 +6,11 @@ var mode = function(id) {
 		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
+		// Anything you want to do to initialize your mode. 
+		init: function() {
+
+		},
+
 		// Handle incoming word message.
 		handleWord: function(msg) {
 			//console.log('word '+msg.word);
