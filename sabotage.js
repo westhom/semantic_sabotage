@@ -7,6 +7,23 @@ var curMode = 0;
 var curVideoID = '6LPaCN-_XWg';
 
 
+// Shim layer with setTimeout fallback.
+window.requestAnimFrame = (function(){	
+  	return	window.requestAnimationFrame       || 
+           	window.webkitRequestAnimationFrame || 
+           	window.mozRequestAnimationFrame    || 
+           	window.oRequestAnimationFrame      || 
+           	window.msRequestAnimationFrame     || 
+           	function( callback ){
+	           	window.setTimeout(callback, 1000 / 60);
+	          };
+})(); 
+
+// This is for updating the youTube progress bar. 
+(function progressLoop(){
+  requestAnimFrame(progressLoop);
+  updateYouTubeProgressBar();
+})();
 
 function init() {	
 	
@@ -97,7 +114,16 @@ function load(resp) {
 function start() {
 	console.log("start()");
 	
-	showControls();
+	// Set up nav messages and controls.
+	// For a few seconds, show playing message.
+	hideLoadingMessage();
+	showPlayingMessage();
+	// Then show controls.
+	setTimeout(function(){
+		showControls();
+		hidePlayingMessage();
+	}, 10000);
+	
 	playback();	
 }
 
@@ -130,9 +156,12 @@ function goToMode(m) {
 	   	});
 	
 		// Set up nav menu.
-		showLoading();
+		showLoadingMessage();
 		$('#ytURL').val("Enter a different YouTube URL");		
+		// Reset progress bar color to white, for loading.
+		$('#progressBar').css('background-color', 'white');        
 
+		// Call enter on current mode.
 		modes[curMode].enter();
 	}
 }
@@ -155,20 +184,19 @@ function showMenu() {
 
 function showControls() {
 	$('#navControls').show();
-	hideLoading();
 }
 
 function hideControls() {
 	$('#navControls').hide();
 }
 
-function showLoading() {
-	$('#loading').show();
-}
+function showLoadingMessage() { $('#loading').show(); }
+function hideLoadingMessage() { $('#loading').hide(); }
+function showPlayingMessage() { $('#playing').show(); }
+function hidePlayingMessage() { $('#playing').hide(); }
 
-function hideLoading() {
-	$('#loading').hide();
-}
+
+
 
 function playback() {
 	playVideo();
@@ -218,7 +246,8 @@ function handleYtPlayerStateChange(newState) {
 		break;
 	  case 1:
 		// Playing
-		player.playbackMessages();        
+		player.playbackMessages();
+		$('#progressBar').css('background-color', 'red');        
 		break;
 	  case 2:
 		// Paused
@@ -230,15 +259,22 @@ function handleYtPlayerStateChange(newState) {
 	  case 5:
 		// Video cued
 		break;    
-
-	  // Keep track of yT state for everyone to reference.
-	  ytCurState = newState;
-
-	  $('#playerState').html(newState);
 	}
+		  // Keep track of yT state for everyone to reference.
+	ytCurState = newState;
+	//console.log('ytCurState = '+ytCurState);
+
+	//$('#playerState').html(newState);
 }
 
 
+function updateYouTubeProgressBar() {
+	// If movie is playing, update progress bar
+	if(ytCurState == ytStates.playing){
+		console.log('updateYouTubeProgressBar()');
+		$('#progressBar').width((ytplayer.getCurrentTime()/ytplayer.getDuration())*100 + "%");		
+	}
+}
 
 
 

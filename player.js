@@ -28,7 +28,7 @@ var Player = function(app) {
 			// Once all messages are created, start!
 			setTimeout(function(){
 				app.start();
-			}, cc.length*offset + 2000);
+			}, cc.length*offset + 500);
 			
 		},
 		
@@ -46,7 +46,7 @@ var Player = function(app) {
 
       	function runMessage(i) {
       
-      	console.log("runmsg "+i);
+      	//console.log("runmsg "+i);
         curMessage = i+1;
       
         var msg = messages[i];

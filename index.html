@@ -48,17 +48,9 @@
 
 		<div class="navBar">			
 			<div class="navText" onclick="showMenu();">SEMANTIC SABOTAGE</div>			
-<<<<<<< HEAD
-			<form id="youtube_load" class="navInput" action="youtube_load.php"  method="post">
-				<input id="ytURL" class="navInput" type="text" value="http://www.youtube.com/watch?v=n3Sntwy4Z7g" name="url" size="44">
-				<input id="ytURLButton" class="navButton" type="submit"  value="SUBMIT">
-			</form>
-			<button id="playButton" class="navButton" style="display:none" onclick="playback();">PLAY</button>
-		    <button id="pauseButton" class="navButton" style="display:none" onclick="pausePlayback();">PAUSE</button>
-		    <button id="muteButton" class="navButton" style="display:none" onclick="muteVideo();">MUTE</button>
-		    <button id="unmuteButton" class="navButton" style="display:none" onclick="unMuteVideo();">UNMUTE</button>
-=======
-			<div id="loading" class="navText" style="display:none">LOADING...</div>
+
+			<div id="loading" class="navStatus" style="display:none">LOADING CAPTIONS...</div>
+			<div id="playing" class="navStatus" style="display:none">PLAYING...</div>
 			<div id="navControls" style="display:none">
 				<form id="youtube_load" class="navInput" action="youtube_load.php"  method="post">
 					<input id="ytURL" class="navInput" type="text" value="Enter a YouTube URL." name="url" size="44">
@@ -68,7 +60,6 @@
 			    <button id="pauseButton" class="navButton" onclick="pausePlayback();">PAUSE</button>
 			    <button id="muteButton" class="navButton" onclick="muteVideo();">MUTE</button>
 			    <button id="unmuteButton" class="navButton" style="display:none" onclick="unMuteVideo();">UNMUTE</button>
->>>>>>> a83bca91e552b9e86075d3efdd59fa6b32cd3ef1
 		    <!-- <button id="backButton" style="display:none" onclick="showMenu();">BACK TO MENU</button> -->
 			</div>
 			
@@ -85,7 +76,6 @@
 		</div>		
 
 	    <div id="modes">	    	
-	    	<div id="loading" style="display:none">LOADING...</div>	    	
 						
 	    	<div id="videoInfo">
 		      <p>Player state: <span id="playerState">--</span></p>
