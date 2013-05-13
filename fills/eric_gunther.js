@@ -4,7 +4,7 @@ var mode = function(id) {
 	
 		name: "One x One",
 
-		defaultURL: "http://www.youtube.com/watch?v=8OeeJuPqYT8",
+		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
 		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 				 
 
