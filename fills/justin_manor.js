@@ -2,9 +2,9 @@ var mode = function(id) {
 
 	return {
 	
-		name: "One x One",
+		name: "Lyrics Test",
 
-		defaultURL: "http://www.youtube.com/watch?v=8OeeJuPqYT8",
+		defaultURL: "http://www.youtube.com/watch?v=cpQtyCCJk0c",
 		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 				 
 
