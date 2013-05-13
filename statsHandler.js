@@ -73,7 +73,7 @@ var StatsHandler = function(messages, db) {
 			// if fully calculated, add message to queue
 			if (msg['calcs'].length === 0) {
 				messages.push(msg);
-				console.log(msg);
+				//console.log(msg);
 			}
 			
 			else {

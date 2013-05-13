@@ -76,8 +76,10 @@ legend{
 
 
 #modes {
+	position: relative;
 	width: 100%;
-	margin: 24px 0px 0px 0px;
+	height: 100%;
+	margin: 0px 0px 0px 0px;
 }
 
 /* NAVIGATION css */
@@ -88,6 +90,24 @@ legend{
 	width: 100%;
 	background-color: black;
 	padding: 12px 12px 12px 24px;
+}
+
+#navControls {
+	display: inline;
+	position:relative;
+}
+
+.navStatus {
+	position: relative;
+	display: inline;
+	top: 0.25em;
+
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 1.5em;
+	
+	margin: 0px 0px 0px 12px;
+	color: white;
 }
 
 .navText{
@@ -105,7 +125,7 @@ legend{
 }
 
 .navText:hover {
-	color: rgb(0, 149, 194);
+	color: white;
 }
 
 .navInput {
@@ -124,6 +144,8 @@ legend{
 	
 	height: 22px;
 }
+
+
 
 input.navInput[type="text"]
 {
@@ -147,27 +169,6 @@ input.navInput[type="text"]:focus
 {
 	outline: none;
 }
-
-/*
-input.navInput[type="submit"]
-{
-	position: relative;
-	margin-left: 1em;
-	top: 0.125em;
-
-	font-size: 0.9em;
-
-	border-style: none;
-	padding: 0.25em;
-	background-color: black;
-	color: rgb(0, 149, 194);
-}
-
-input.navInput[type="submit"]:hover
-{
-	color: yellow;
-}
-*/
 
 .navButton {
 	position: relative;
@@ -209,13 +210,13 @@ body {
 #progressBarBox {
 	position:absolute;
 	bottom:0px;
-	width:400px;
+	width:100%;
 	height:6px;
 }
 
 #progressBar {
 	position:absolute;
-	top:6px;
+	/* top:6px; */
 	background-color: white;
 	opacity: 0.8;
 	height: 6px;
@@ -354,7 +355,7 @@ body {
 .modeContainer {
 	position:absolute;
 	left:0px;
-	top:100px;
+	top:0px;
 	width:100%;
 	height:100%;
 }

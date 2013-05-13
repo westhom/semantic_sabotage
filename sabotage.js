@@ -7,6 +7,23 @@ var curMode = 0;
 var curVideoID = 'ci5p1OdVLAc';
 
 
+// Shim layer with setTimeout fallback.
+window.requestAnimFrame = (function(){	
+  	return	window.requestAnimationFrame       || 
+           	window.webkitRequestAnimationFrame || 
+           	window.mozRequestAnimationFrame    || 
+           	window.oRequestAnimationFrame      || 
+           	window.msRequestAnimationFrame     || 
+           	function( callback ){
+	           	window.setTimeout(callback, 1000 / 60);
+	          };
+})(); 
+
+// This is for updating the youTube progress bar. 
+(function progressLoop(){
+  requestAnimFrame(progressLoop);
+  updateYouTubeProgressBar();
+})();
 
 function init() {	
 	
@@ -18,10 +35,7 @@ function init() {
 	    if(event.keyCode == 13){
 	        $("#ytURLButton").click();
 	    }
-	});
-
-	// Hide URL form.
-	$('#youtube_load').hide();
+	});	
 }
 
 function loadFills() {
@@ -85,6 +99,9 @@ function load(resp) {
   
 	player.initialize(resp.cc);
 
+	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
+	ytplayer.cueVideoById(curVideoID);
+
 	// show loading
 	//$('#loading').show();
 	
@@ -95,15 +112,19 @@ function load(resp) {
 
 
 function start() {
-	console.log("READY TO GO!");
-	//$('#loading').hide();
-	$('#playButton').show(); 
-	$('#muteButton').show();
-	$('#backButton').show();
-	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
-
-	//JRO - This should match the default video for each sketch 
-	ytplayer.cueVideoById(curVideoID);
+	console.log("start()");
+	
+	// Set up nav messages and controls.
+	// For a few seconds, show playing message.
+	hideLoadingMessage();
+	showPlayingMessage();
+	// Then show controls.
+	setTimeout(function(){
+		showControls();
+		hidePlayingMessage();
+	}, 10000);
+	
+	playback();	
 }
 
 function goToMode(m) {
@@ -122,25 +143,26 @@ function goToMode(m) {
 		}
 		//console.log("URL = "+modes[curMode].defaultURL);
 
-		// Update value of input with defaultURL of mode.
-		$('#ytURL').val(modes[curMode].defaultURL);
-		// Ajax call below wasn't working, so for now just click submit button.
-		$('#ytURLButton').click();
-
-		// Show URL form.
-		$('#youtube_load').show();
-
-
-		/*
-		// Get captions from yT, using defaultURL of mode.
+		// Get captions from youTube PHP, using defaultURL of mode.
 		$.ajax({
 			type: 'post',
 			dataType: 'json',
 			url: "youtube_load.php",
-			data: modes[curMode].defaultURL,	   		
-	   		success: load
+			data: {"url":modes[curMode].defaultURL},	   
+	   		success: load,
+	   		error: function(data){
+	   			console.log(data);
+	   		}
 	   	});
-		*/
+	
+		// Set up nav menu.
+		showLoadingMessage();
+		$('#ytURL').val("Enter a different YouTube URL");		
+		// Reset progress bar color to white, for loading.
+		$('#progressBar').css('background-color', 'white');        
+
+		// Call enter on current mode.
+		modes[curMode].enter();
 	}
 }
 
@@ -152,14 +174,29 @@ function showMenu() {
 	// Reset progress bar.
 	$('#progressBar').width("0%");
 
-	// Hide URL form.
-	$('#youtube_load').hide();
-
+	// Hide all controls.
+	hideControls();
 
 	// Stop video and message playback.
 	pauseVideo();
 	player.pausePlaybackMessages();
 }
+
+function showControls() {
+	$('#navControls').show();
+}
+
+function hideControls() {
+	$('#navControls').hide();
+}
+
+function showLoadingMessage() { $('#loading').show(); }
+function hideLoadingMessage() { $('#loading').hide(); }
+function showPlayingMessage() { $('#playing').show(); }
+function hidePlayingMessage() { $('#playing').hide(); }
+
+
+
 
 function playback() {
 	playVideo();
@@ -209,7 +246,8 @@ function handleYtPlayerStateChange(newState) {
 		break;
 	  case 1:
 		// Playing
-		player.playbackMessages();        
+		player.playbackMessages();
+		$('#progressBar').css('background-color', 'red');        
 		break;
 	  case 2:
 		// Paused
@@ -221,15 +259,22 @@ function handleYtPlayerStateChange(newState) {
 	  case 5:
 		// Video cued
 		break;    
-
-	  // Keep track of yT state for everyone to reference.
-	  ytCurState = newState;
-
-	  $('#playerState').html(newState);
 	}
+		  // Keep track of yT state for everyone to reference.
+	ytCurState = newState;
+	//console.log('ytCurState = '+ytCurState);
+
+	//$('#playerState').html(newState);
 }
 
 
+function updateYouTubeProgressBar() {
+	// If movie is playing, update progress bar
+	if(ytCurState == ytStates.playing){
+		console.log('updateYouTubeProgressBar()');
+		$('#progressBar').width((ytplayer.getCurrentTime()/ytplayer.getDuration())*100 + "%");		
+	}
+}
 
 
 

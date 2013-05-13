@@ -7,8 +7,14 @@ var mode = function(id) {
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
 		// Anything you want to do to initialize your mode. 
+		// This gets called once after the mode is created.
 		init: function() {
 
+		},
+
+		// Gets called evertime you go to the mode.
+		enter: function() {
+			console.log(this.name+" enter()");
 		},
 
 		// Handle incoming word message.
