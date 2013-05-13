@@ -86,21 +86,24 @@ legend{
 
 .navBar{
 	position: relative;
-
+	height:1.5em;
+	z-index:999;
 	width: 100%;
 	background-color: black;
 	padding: 12px 12px 12px 24px;
 }
 
 #navControls {
-	display: inline;
 	position:relative;
+	display: inline;
+	height:1.5em;
 }
 
 .navStatus {
 	position: relative;
 	display: inline;
-	top: 0.25em;
+	top: 0.20em;
+	height:1.5em;
 
 	font-family: Helvetica, sans-serif;
 	font-weight: bold;
@@ -108,13 +111,16 @@ legend{
 	
 	margin: 0px 0px 0px 12px;
 	color: white;
+
+	height:1.5em;
 }
 
 .navText{
 
 	position: relative;
 	display: inline;
-	top: 0.25em;
+	top: 0.20em;
+	height:1.5em;
 
 	font-family: Helvetica, sans-serif;
 	font-weight: bold;
@@ -133,6 +139,7 @@ legend{
 	position: relative;
 	display: inline;
 	top: 0px;
+	height:1.5em;
 
 	font-family: Helvetica, sans-serif;
 	font-weight: bold;
@@ -142,7 +149,8 @@ legend{
 
 	/*background-color: rgb(128, 128, 128);*/
 	
-	height: 22px;
+/*	height: 22px; */
+
 }
 
 
