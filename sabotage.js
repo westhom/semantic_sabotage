@@ -23,6 +23,7 @@ window.requestAnimFrame = (function(){
 (function progressLoop(){
   requestAnimFrame(progressLoop);
   updateYouTubeProgressBar();
+  player.updateMessagePlayback();
 })();
 
 function init() {	
@@ -247,12 +248,12 @@ function handleYtPlayerStateChange(newState) {
 		break;
 	  case 1:
 		// Playing
-		player.playbackMessages();
+		//player.playbackMessages();
 		$('#progressBar').css('background-color', 'red');        
 		break;
 	  case 2:
 		// Paused
-		player.pausePlaybackMessages();
+		//player.pausePlaybackMessages();
 		break;
 	  case 3:
 		// Buffering
@@ -272,7 +273,6 @@ function handleYtPlayerStateChange(newState) {
 function updateYouTubeProgressBar() {
 	// If movie is playing, update progress bar
 	if(ytCurState == ytStates.playing){
-		console.log('updateYouTubeProgressBar()');
 		$('#progressBar').width((ytplayer.getCurrentTime()/ytplayer.getDuration())*100 + "%");		
 	}
 }
