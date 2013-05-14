@@ -303,19 +303,19 @@ body {
 	font-weight: 900;
 }
 
-/* LEAGUE-GOTHIC */
-.league-gothic
+/* FRANKLIN-GOTHIC */
+.franklin-gothic-condensed
 {
-	font-family: "league-gothic",sans-serif;
+	font-family: "franklin-gothic-urw-cond",sans-serif;
 	font-style: normal;
-	font-weight: 400;
+	font-weight: 700;
 }
 
-.league-gothic-italic
+.franklin-gothic-condensed-italic
 {
-	font-family: "league-gothic",sans-serif;
+	font-family: "franklin-gothic-urw-cond",sans-serif;
 	font-style: italic;
-	font-weight: 400;
+	font-weight: 700;
 }
 
 /* META-SERIF */
@@ -387,10 +387,18 @@ body {
 	height:100%;
 }
 
+.size-512{
+	font-size: 512px;
+}
+
 .size-128{
 	font-size: 128px;
 }
 
 .size-64{
 	font-size: 64px;
+}
+
+.size-32{
+	font-size: 32px;
 }

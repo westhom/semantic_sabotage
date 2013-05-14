@@ -1,4 +1,80 @@
-#john_rothenberg styleName {
+#john_rothenberg .container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width:98%;
+	min-height: 100%;
+	overflow: scroll;
+	padding: 24 24 24 24;
+	/* background-color: rgb(245, 242, 226); */
+}
 
-	
+#john_rothenberg .white
+{
+	color: rgb(245, 242, 226);
+}
+
+#john_rothenberg .green
+{
+	color: rgb(78, 191, 125);
+}
+
+#john_rothenberg .blue
+{
+	color: rgb(45, 203, 237);
+}
+
+#john_rothenberg .orange
+{
+	color: rgb(209, 85, 50);
+}
+
+#john_rothenberg .yellow
+{
+	color: rgb(255, 193, 65);
+}
+
+#john_rothenberg .pink
+{
+	color: rgb(232, 12, 122);
+}
+
+#john_rothenberg .black
+{
+	color: rgb(61, 59, 56);
+}
+
+#john_rothenberg .bg-white
+{
+	background-color: rgb(245, 242, 226);
+}
+
+#john_rothenberg .bg-green
+{
+	background-color: rgb(78, 191, 125);
+}
+
+#john_rothenberg .bg-blue
+{
+	background-color: rgb(45, 203, 237);
+}
+
+#john_rothenberg .bg-orange
+{
+	background-color: rgb(209, 85, 50);
+}
+
+#john_rothenberg .bg-yellow
+{
+	background-color: rgb(255, 193, 65);
+}
+
+#john_rothenberg .bg-pink
+{
+	background-color: rgb(232, 12, 122);
+}
+
+#john_rothenberg .bg-black
+{
+	background-color: rgb(61, 59, 56);
 }
