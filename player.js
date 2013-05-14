@@ -112,16 +112,14 @@ var Player = function(app) {
 	    		if(curMessage > start) this.playMessageBlock(start, curMessage-1);
 	    	}
 	    },
-
 	   
-
     
-    pausePlaybackMessages: function() {
-    	console.log("pause playback");
-	    for (var i=0; i<setTimeoutEvents.length; i++) {
-		    clearTimeout(setTimeoutEvents[i]);
+	    pausePlaybackMessages: function() {
+	    	console.log("pause playback");
+		    for (var i=0; i<setTimeoutEvents.length; i++) {
+			    clearTimeout(setTimeoutEvents[i]);
+		    }
 	    }
-    }
 
 	};
 
