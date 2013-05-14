@@ -1,4 +1,3 @@
-
 eyeo_semanticsabotage
 =====================
 
@@ -52,7 +51,7 @@ Sent every line
   honesty: float[2]
 }
 
-## Good Youtube Vids ##
+## YouTube Links with Good Captions ##
 
 DCrDuGyZ6FA - Does Marcellus Wallace look like a bitch? (if you like horrible captions)
 
@@ -69,3 +68,4 @@ drTyNDRnyxs - how to download CC instructions
 cpQtyCCJk0c - beatles 'oh yeah'
 
 jq42aHX4qk4 - I am the walrus good captions (doesn't work yet, need to debug this)
+
