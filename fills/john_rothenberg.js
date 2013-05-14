@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Type Tests",
-		defaultURL: "http://www.youtube.com/watch?v=ef-v3hMaTaM",
+		defaultURL: "http://www.youtube.com/watch?v=4H5ocEjhkYw",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 				 
@@ -42,9 +42,9 @@ var mode = function(id) {
 			
 			var c;
 		 	if($.inArray('posemo', msg.cats) >= 0) c = '"blue"';
-		 	else if($.inArray('negemo', msg.cats) >= 0) c = '"yellow"';
+		 	else if($.inArray('negemo', msg.cats) >= 0) c = '"orange"';
 		 	else if($.inArray('certain', msg.cats) >= 0) c = '"green"';
-		 	else if($.inArray('tentat', msg.cats) >= 0) c = '"orange"';
+		 	else if($.inArray('tentat', msg.cats) >= 0) c = '"yellow"';
 		 	else c = '"black"';
 		 	
 		 	console.log(c);
