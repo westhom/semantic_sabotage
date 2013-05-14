@@ -57,6 +57,9 @@ var mode = function(id) {
 		 		newWord.css({'color':'rgb(255,255,255)', 'opacity':'0', 'top':'1000px'});
 		 	}, 20);
 
+		 	setTimeout(function() {
+		 		newWord.remove();
+		 	}, 6000);
 		 	//$(newWord).animate({opacity:'0'}, 1000, 'linear', function(){
 		 	//	$(this).remove();
 		 	//});
