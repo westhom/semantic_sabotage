@@ -1,7 +1,12 @@
 #john_rothenberg .container {
-	width:100%;
-	height:100%;
-	padding: 12, 12, 12, 12;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width:98%;
+	min-height: 100%;
+	overflow: scroll;
+	padding: 24 24 24 24;
+	/* background-color: rgb(245, 242, 226); */
 }
 
 #john_rothenberg .white
@@ -11,7 +16,7 @@
 
 #john_rothenberg .green
 {
-	color: rgb(63, 255, 117);
+	color: rgb(78, 191, 125);
 }
 
 #john_rothenberg .blue
@@ -21,7 +26,7 @@
 
 #john_rothenberg .orange
 {
-	color: rgb(232, 94, 55);
+	color: rgb(209, 85, 50);
 }
 
 #john_rothenberg .yellow
@@ -46,7 +51,7 @@
 
 #john_rothenberg .bg-green
 {
-	background-color: rgb(63, 255, 117);
+	background-color: rgb(78, 191, 125);
 }
 
 #john_rothenberg .bg-blue
@@ -56,7 +61,7 @@
 
 #john_rothenberg .bg-orange
 {
-	background-color: rgb(232, 94, 55);
+	background-color: rgb(209, 85, 50);
 }
 
 #john_rothenberg .bg-yellow
