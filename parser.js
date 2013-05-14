@@ -77,6 +77,10 @@ var Parser = function(messages) {
 			var numWords = tokens.length;
 			var wordDur = dur/numWords;
 			
+			// Figure out the average duration of a character. 
+			// Then use this to give a custom duration to each word based on its char length.
+			var charDur = dur/text.length;
+			var curTime = start;
 		
 			for (i in tokens) //JRO - hack to only process one token at a time
 			{
@@ -139,32 +143,38 @@ var Parser = function(messages) {
 					}
 					
 					// timing
-					var msgTime = start + Math.round(i*wordDur);
+					//var msgTime = start + Math.round(i*wordDur);
+					// Now word timing is based on char length of words. 
+					
 					
 					// add message
 					if (leadPunct) {
-						msgTime -= 5;
-						var msg = {type: "word", time:msgTime, word:endPunct, cats:["punct", "leadPunct"]};
-						messages.push(msg);
-						//console.log(msg);
+						//msgTime -= 5;
+						var msg = {type: "word", time:curTime, word:endPunct, cats:["punct", "leadPunct"]};
+						messages.push(msg);												
+						curTime += (2*charDur);
+						console.log("leadPunct = "+msg.word);
 					}
 					if (word) {
 						word = word.toString();
 						var cats = this.getCats(word.toString());
 						statsHandler.logWordInstance(word, cats);
-						var msg = {type: "word", time:msgTime, word:word, cats:this.getCats(word)};
+						var msg = {type: "word", time:curTime, word:word, cats:this.getCats(word)};
 						messages.push(msg);
-						//console.log(msg);
+						curTime += (charDur*(word.length+1));
+						console.log("word="+msg.word+", t="+msg.time);
 					}
 					if (endPunct) {
-						msgTime += 5;		
-						var msg = {type: "word", time:msgTime, word:endPunct, cats:["punct", "endPunct"]};
+						//msgTime += 5;		
+						var msg = {type: "word", time:curTime, word:endPunct, cats:["punct", "endPunct"]};
 						messages.push(msg);
-						//console.log(msg);
+						console.log("endPunct="+msg.word+", t="+msg.time);
 						// also send sentenceEnd msg? PEND: necessary or can we check for cat endPunct?
-						messages.push({type: "sentenceEnd", time:msgTime});
+						messages.push({type: "sentenceEnd", time:curTime});
+						curTime += (2*charDur);
 					}
 					
+
 				}
 			}
 			
