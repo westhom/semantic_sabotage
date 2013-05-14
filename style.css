@@ -284,19 +284,19 @@ body {
 	font-weight: 900;
 }
 
-/* LEAGUE-GOTHIC */
-.league-gothic
+/* FRANKLIN-GOTHIC */
+.franklin-gothic-condensed
 {
-	font-family: "league-gothic",sans-serif;
+	font-family: "franklin-gothic-urw-cond",sans-serif;
 	font-style: normal;
-	font-weight: 400;
+	font-weight: 700;
 }
 
-.league-gothic-italic
+.franklin-gothic-condensed-italic
 {
-	font-family: "league-gothic",sans-serif;
+	font-family: "franklin-gothic-urw-cond",sans-serif;
 	font-style: italic;
-	font-weight: 400;
+	font-weight: 700;
 }
 
 /* META-SERIF */
