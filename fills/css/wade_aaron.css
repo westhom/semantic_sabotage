@@ -1,0 +1,38 @@
+#wade_aaron {
+	background-color: white;
+}
+
+#wade_aaron .funct {
+	position: relative;
+	z-index: 1;
+	-webkit-animation: funct 5s; /* Safari and Chrome */
+	-webkit-animation-iteration-count:infinite; /*Safari and Chrome*/
+	-webkit-animation-timing-function:ease-in-out; /* Safari and Chrome */
+}
+
+
+@-webkit-keyframes funct /* Safari and Chrome */
+{
+0%		{color: black; top: 0px;}
+10%		{color: red;}
+50%		{color: yellow; top:-100px;}
+90%		{color: red;}
+100%	{color: black; top: 0px;}
+}
+
+#wade_aaron .verb {
+	position: relative;
+	z-index: 1;
+	-webkit-animation: verb 5s; /* Safari and Chrome */
+	-webkit-animation-iteration-count:infinite; /*Safari and Chrome*/
+	-webkit-animation-timing-function:ease-in-out; /* Safari and Chrome */
+}
+
+@-webkit-keyframes verb /* Safari and Chrome */
+{
+0%		{color: black; top: 0px;}
+10%		{color: green;}
+50%		{color: blue; top:100px;}
+90%		{color: green;}
+100%	{color: black; top: 0px;}
+}
