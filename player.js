@@ -101,7 +101,7 @@ var Player = function(app) {
 	    updateMessagePlayback : function() {
 	    	if(ytCurState == ytStates.playing) {	    		
 	    		var t = messages[curMessage].time;
-	    		console.log(ytPlayer.getCurrentTime()+", curMessage= "+curMessage+", t = "+t);
+	    		//console.log(ytPlayer.getCurrentTime()+", curMessage= "+curMessage+", t = "+t);
 
 	    		var start = curMessage;
 	    		while(t <= ytPlayer.getCurrentTime()*1000 && curMessage < (messages.length-1)) {
@@ -122,7 +122,7 @@ var Player = function(app) {
 		    clearTimeout(setTimeoutEvents[i]);
 	    }
     }
-    
+
 	};
 
 };
