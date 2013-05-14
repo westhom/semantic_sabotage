@@ -387,6 +387,10 @@ body {
 	height:100%;
 }
 
+.size-512{
+	font-size: 512px;
+}
+
 .size-128{
 	font-size: 128px;
 }
