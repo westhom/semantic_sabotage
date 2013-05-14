@@ -153,7 +153,7 @@ var Parser = function(messages) {
 						var msg = {type: "word", time:curTime, word:endPunct, cats:["punct", "leadPunct"]};
 						messages.push(msg);												
 						curTime += (2*charDur);
-						console.log("leadPunct = "+msg.word);
+						//console.log("leadPunct = "+msg.word);
 					}
 					if (word) {
 						word = word.toString();
@@ -162,16 +162,16 @@ var Parser = function(messages) {
 						var msg = {type: "word", time:curTime, word:word, cats:this.getCats(word)};
 						messages.push(msg);
 						curTime += (charDur*(word.length+1));
-						console.log("word="+msg.word+", t="+msg.time);
+						//console.log("word="+msg.word+", t="+msg.time);
 					}
 					if (endPunct) {
 						//msgTime += 5;		
 						var msg = {type: "word", time:curTime, word:endPunct, cats:["punct", "endPunct"]};
 						messages.push(msg);
-						console.log("endPunct="+msg.word+", t="+msg.time);
 						// also send sentenceEnd msg? PEND: necessary or can we check for cat endPunct?
 						messages.push({type: "sentenceEnd", time:curTime});
 						curTime += (2*charDur);
+						//console.log("endPunct="+msg.word+", t="+msg.time);
 					}
 					
 
