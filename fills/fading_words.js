@@ -54,7 +54,7 @@ var mode = function(id) {
 		 	var newWord = $('<span class= "bigText museo-slab-300" style="color:' + c + ';">' + msg.word + '</span>');
 		 	
 		 	setTimeout(function() { 
-		 		newWord.css({'color':'rgb(255,255,255)', 'opacity':'0'});
+		 		newWord.css({'color':'rgb(255,255,255)', 'opacity':'0', 'top':'1000px'});
 		 	}, 20);
 
 		 	//$(newWord).animate({opacity:'0'}, 1000, 'linear', function(){
