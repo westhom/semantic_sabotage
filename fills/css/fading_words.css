@@ -1,0 +1,23 @@
+#fading_words .container {
+	width:2560px;
+	height:200%;
+	/* background-color: rgb(200,200,200); */
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.1, rgb(60,60,60)),
+		color-stop(0.9, rgb(180,180,180))
+	);
+}
+
+#fading_words .bigText{
+	position:absolute;
+	top:0px;
+	left:0px;
+	font-size: 260px;
+
+	transition: color 1s ease-out, opacity 3s linear, top 6s ease-in 1s;
+	-webkit-transition: color 1s ease-out, opacity 3s linear, top 6s ease-in 1s;
+}	

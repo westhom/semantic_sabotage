@@ -1,0 +1,31 @@
+#justin_manor .container {
+	width:100%;
+	height:200%;
+	background-color: yellow;
+}
+
+#justin_manor funct{
+	color: rgb(255,0,0);
+	-webkit-animation: funct 1s; /* Safari and Chrome */
+	-webkit-animation-iteration-count:1; /*Safari and Chrome*/
+	-webkit-animation-timing-function:ease-in-out; /* Safari and Chrome */
+}	
+
+@-webkit-keyframes funct /* Safari and Chrome */
+{
+0%		{color: red; }
+100%	{color: black;}
+}
+
+#justin_manor verb{
+	color: rgb(0,0,255);
+	-webkit-animation: verb 1s; /* Safari and Chrome */
+	-webkit-animation-iteration-count:1; /*Safari and Chrome*/
+	-webkit-animation-timing-function:ease-in-out; /* Safari and Chrome */
+}	
+
+@-webkit-keyframes verb /* Safari and Chrome */
+{
+0%		{color: blue; }
+100%	{color: black;}
+}
