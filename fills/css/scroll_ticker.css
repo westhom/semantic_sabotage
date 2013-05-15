@@ -16,4 +16,7 @@
 
 #scroll_ticker .scrollword {
 	font-size: 120px;
+
+	transition:color 1.0s linear;
+	-webkit-transition:color 1.0s linear;
 }
