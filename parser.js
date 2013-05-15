@@ -59,10 +59,17 @@ var Parser = function(messages) {
 			// grab parts from xml
 			var text = line[0];
 			//console.log(text);
+			
 			// TODO: are there more of these that need to be replaced? 
-			// MANOR : quicky crash fix here to quit the fn if there's a blank line
+			// MANOR: quicky crash fix here to quit the fn if there's a blank line
+			// JRO: cleaning up the text, replacing HTML entities 
 			if (text)
-				text = text.replace("&#39;", "'");
+			{
+				//text = text.replace("&#39;", "'");
+				//text = this.html_entity_decode(text);
+				text = $('<textarea />').html(text).val();
+				//console.log(text);
+			}
 			else
 				return;
 
@@ -150,7 +157,8 @@ var Parser = function(messages) {
 					// add message
 					if (leadPunct) {
 						//msgTime -= 5;
-						var msg = {type: "word", time:curTime, word:endPunct, cats:["punct", "leadPunct"]};
+						var msg = {type: "word", time:curTime, word:leadPunct, cats:["punct", "leadPunct"]};
+						//console.log(msg);
 						messages.push(msg);												
 						curTime += (2*charDur);
 						//console.log("leadPunct = "+msg.word);
