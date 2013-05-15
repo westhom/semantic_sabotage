@@ -2,30 +2,81 @@
 	background-color: pink;
 }
 
-#collider {
+#COS_container {
 	position: absolute;
 	width: 100%;
+	height: 100%;
 	text-align: center;
 }
 
-#marquee {
+#COS_center {
 	position: absolute;
-	left: 0px;
-	top: 0px;
-	font-size: 50px;
-	-webkit-transform: translate(400px, 100px);
+	left: 50%;
+	top: 50%;
+	height: 1px;
+	width: 1px;
+	overflow: visible;
+	text-align: center;
+	-webkit-animation: COS_center linear 90s infinite;
 }
 
-#collider .morter {
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	font-size: 50px;
-	-webkit-animation: morter 10s;
-	-webkit-animation-fill-mode: forwards;
+@-webkit-keyframes COS_center {
+	0% {-webkit-transform: rotateZ(0deg);}
+	100% {-webkit-transform: rotateZ(360deg);}
 }
 
-@-webkit-keyframes morter {
-	0%		{-webkit-transform: translate(400px, 100px); opacity: 1.0;}
-	100%	{-webkit-transform: translate(400px, 800px); opacity: 0.1;}
+#COS_marqueeContainer {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 1px;
+	height: 1px;
+	overflow: visible;
+}
+
+
+.COS_marquee {
+	position: absolute;
+	left: 0px;
+	top: -50px;
+	opacity: 1;
+	color: white;
+	font-size: 100px;
+	overflow: visible;
+	text-align: center;
+	-webkit-transition: opacity 1s, color 1s;
+	-webkit-transform-origin: 0% 50%;
+	-webkit-animation: COS_marquee linear 30s infinite;
+}
+
+@-webkit-keyframes COS_marquee {
+	0% {-webkit-transform: rotate(0deg);}
+	100% {-webkit-transform: rotate(-360deg);}
+}
+
+.COS_particle {
+	position: absolute;
+	z-index: 1;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+	font-size: 20px;
+	overflow: visible;
+	-webkit-transition: -webkit-transform 6s, opacity 2s, z-index 1s;
+}
+
+.pronoun {
+	color: red;
+}
+
+.article {
+	color: blue;
+}
+
+.verb {
+	color: yellow;
+}
+
+.adverb {
+	color: green;
 }

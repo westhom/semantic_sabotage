@@ -4,7 +4,8 @@ var mode = function(id) {
 	
 		name: "One x One",
 
-		defaultURL: "http://www.youtube.com/watch?v=usfRtJpyJDk",
+		defaultURL: "http://www.youtube.com/watch?v=6ucfgdFrlho",
+		//usfRtJpyJDk = how to behave in court
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 				 
 
@@ -19,7 +20,6 @@ var mode = function(id) {
 			console.log(this.name+" enter()");
 			$('#eg').empty();
 		},
-
 
 		// Handle incoming word message.
 		handleWord: function(msg) {
