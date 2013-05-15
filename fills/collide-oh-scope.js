@@ -2,13 +2,16 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Wade Aaron",
-		defaultURL: "http://www.youtube.com/watch?v=UDOV8AYyyA8",
+		name: "Collide-Oh-Scope",
+		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
+			this.el.append('<div id="collider"></div>');
+			$('#collider').append('<div id="marquee"></div>');
+			$('#marquee').addClass('proxima-nova-400');
 		},
 
 		// Gets called evertime you go to the mode.
@@ -34,25 +37,13 @@ var mode = function(id) {
 		
 		 	// update curSentence
 
-		 	if (!msg.sentenceStartFlag && !msg.punctuationFlag)
-				this.el.append(' ');
+			$('#marquee').empty();
+			$('#marquee').append(msg.word);
 
-			var s = document.createElement('span');
-			s.innerHTML = msg.word;
-
-			if (msg.cats.length > 0) { 
-				$(s).addClass('aaron proxima-nova-400');
-				if ($.inArray('funct', msg.cats) >= 0) {
-					$(s).removeClass('proxima-nova-400');
-					$(s).addClass('funct proxima-nova-700');
-				}
-				if ($.inArray('verb', msg.cats) >= 0)  {
-					$(s).removeClass('proxima-nova-400');
-					$(s).addClass('verb proxima-nova-700');
-				}
-			}
-
-			this.el.append(s);
+			var s = document.createElement('div');
+			$(s).append(msg.word);
+			$(s).addClass('morter proxima-nova-400');
+			$('#collider').append(s);
 
 		}
 	}

@@ -64,7 +64,7 @@ function loadFills() {
 
 					   modes.push(m);
 					   // Add entry to menu.
-					   $('#modeButtons').append('<div class="modeName darkGray" href="#" id=mode'+j+' onclick=goToMode('+j+'); >'+m.name.toUpperCase()+'</div>');
+					   $('#modeButtons').append('<div class="modeName" href="#" id=mode'+j+' onclick=goToMode('+j+'); >'+m.name.toUpperCase()+'</div>');
 					   // Append to mode's element to DOM.
 					   m.el.hide();				   
 					   $('#modes').append(m.el);				   

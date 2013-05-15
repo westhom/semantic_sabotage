@@ -4,14 +4,14 @@ var mode = function(id) {
 	
 		name: "One x One",
 
-		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
-		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
+		defaultURL: "http://www.youtube.com/watch?v=usfRtJpyJDk",
+		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 				 
 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div id='eg' class='container'></div>");
+			this.el.append("<div class='topContainer'><div id='eg' class='centerContainer'></div></div>");
 		},
 
 		// Gets called evertime you go to the mode.
@@ -50,7 +50,8 @@ var mode = function(id) {
 		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(255,180,140)';
 		 	else c = 'rgb(40,40,40)';
 
-		 	$('#eg').html('<span class= "guntherBigText museo-slab-1000" style="color:' + c + ';">' + msg.word + '</span>');
+		 	var w = $('<div class= "museo-slab-1000-italic" style="font-size:'+200+'px; color:' + c + ';">' + msg.word + '</div>');
+		 	$('#eg').html(w);
 		}
 	}
 };

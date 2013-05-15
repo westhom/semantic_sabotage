@@ -51,7 +51,7 @@ var mode = function(id) {
 
 		 	//c = 'rgb(10,10,10)';
 
-		 	var newWord = $('<span class= "bigText museo-slab-300" style="color:' + c + ';">' + msg.word + '</span>');
+		 	var newWord = $('<span class= "bigText franklin-gothic-condensed" style="color:' + c + ';">' + msg.word + '</span>');
 		 	
 		 	setTimeout(function() { 
 		 		newWord.css({'color':'rgb(255,255,255)', 'opacity':'0', 'top':'1000px'});
