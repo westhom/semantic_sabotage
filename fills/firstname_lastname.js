@@ -4,7 +4,7 @@ var mode = function(id) {
 	
 		name: "Empty Mode",
 		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
-		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
+		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.

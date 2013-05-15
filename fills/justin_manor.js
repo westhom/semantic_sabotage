@@ -5,7 +5,7 @@ var mode = function(id) {
 		name: "Lyrics Test",
 
 		defaultURL: "http://www.youtube.com/watch?v=cpQtyCCJk0c",
-		el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
+		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 				 
 
 		// Anything you want to do to initialize your mode. 
