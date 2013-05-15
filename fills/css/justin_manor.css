@@ -1,0 +1,48 @@
+#justin_manor .container {
+	width:50px;
+	height:100%;
+	background-color: rgba(200,200,200,.15); 
+    display: inline-block;
+}
+
+#justin_manor .container2 {
+	width:100px;
+	height:100%;
+	background-color: rgba(220,220,220,0.15 ); 
+    display: inline-block;
+}
+
+#justin_manor .container3 {
+	width:150px;
+	height:100%;
+	background-color: rgba(200,200,200,0.15); 
+    display: inline-block;
+}
+
+#justin_manor .container4 {
+	width:200px;
+	height:100%;
+	background-color: rgba(220,220,220,0.15); 
+    display: inline-block;
+}
+
+#justin_manor .container5 {
+	width:250px;
+	height:100%;
+	background-color: rgba(200,200,200,0.15); 
+    display: inline-block;
+}
+#justin_manor .container6 {
+	width:300px;
+	height:100%;
+	background-color: rgba(220,220,220,0.15); 
+    display: inline-block;
+}
+#justin_manor .bigText{
+	position:absolute;
+	top:0px;
+	font-size: 60px;
+
+	transition: color 1s ease-out, opacity 3s linear, top 6s ease-in 1s;
+	-webkit-transition: color 1s ease-out, opacity 3s linear, top 6s ease-in 1s;
+}	
