@@ -191,7 +191,7 @@ input.navInput[type="text"]:focus
 	border-style: none;
 	padding: 0.25em;
 	background-color: black;
-	color: rgb(0, 149, 194);
+	color: rgb(110,110,110);
 }
 
 .navButton:hover {
