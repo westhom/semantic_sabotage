@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Big Words",
-		defaultURL: "http://www.youtube.com/watch?v=drTyNDRnyxs",
+		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 				 
@@ -60,6 +60,9 @@ var mode = function(id) {
 			 		//console.log("i="+i+", t="+t);
 			 		$(this).css("top", t);
 		 		});
+		 		//console.log($('#bigwords > .bigText').length*this.lineHeight+"px");
+
+		 		$('#bigwords').css('height', $('#bigwords > .bigText').length*this.lineHeight+"px");
 		 	}		 	
 		},
 
