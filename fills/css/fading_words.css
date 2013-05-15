@@ -16,6 +16,7 @@
 	position:absolute;
 	top:0px;
 	left:0px;
+	width: 6000px;
 	font-size: 260px;
 
 	transition: color 1s ease-out, opacity 3s linear, top 6s ease-in 1s;
