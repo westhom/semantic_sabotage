@@ -2,6 +2,7 @@
 	width:5000px;	
 	min-height:100%;
 	background-color: rgb(20,20,20);
+	overflow:auto;
 }
 
 #big_words .bigText {
