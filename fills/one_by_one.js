@@ -50,7 +50,7 @@ var mode = function(id) {
 		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(255,180,140)';
 		 	else c = 'rgb(40,40,40)';
 
-		 	var w = $('<div class= "museo-slab-1000-italic" style="font-size:'+120+'px; color:' + c + ';">' + msg.word + '</div>');
+		 	var w = $('<div class= "museo-slab-1000-italic" style="font-size:'+200+'px; color:' + c + ';">' + msg.word + '</div>');
 		 	$('#eg').html(w);
 		}
 	}
