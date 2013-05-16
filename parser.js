@@ -48,7 +48,8 @@ var Parser = function(messages) {
 		
 			//console.log(line);
 			var spaceRegEx = new RegExp(/\S{1,}/g);
-			var leadPunctRegEx = new RegExp(/^[\"|\'|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
+			//var leadPunctRegEx = new RegExp(/^[\"|\'|“|‘|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
+			var leadPunctRegEx = new RegExp(/^\W{1,}/);
 			var numberRegEx = new RegExp(/\d{1,}.{1,}\d{1,}/);
 			var abbrevRegEx = new RegExp(/\w{1,}[\'|\-]\w{1,}/); //JRO edit
 			//var wordRegEx = new RegExp(/\w{1,}/);
@@ -86,8 +87,14 @@ var Parser = function(messages) {
 			
 			// Figure out the average duration of a character. 
 			// Then use this to give a custom duration to each word based on its char length.
-			var charDur = dur/text.length;
+			var charDur = dur/(text.length+2);
 			var curTime = start;
+
+			var totalDur = curTime + charDur*text.length;
+
+			console.log(text + " length: " + text.length + " curTime: " + curTime + " charDur: " + charDur + " next: " + totalDur);
+
+
 		
 			for (i in tokens) //JRO - hack to only process one token at a time
 			{
@@ -153,33 +160,33 @@ var Parser = function(messages) {
 					//var msgTime = start + Math.round(i*wordDur);
 					// Now word timing is based on char length of words. 
 					
-					
+					//console.log(leadPunct + "___" + word + "___" +endPunct);
+
 					// add message
 					if (leadPunct) {
 						//msgTime -= 5;
 						var msg = {type: "word", time:curTime, word:leadPunct, cats:["punct", "leadPunct"]};
 						//console.log(msg);
 						messages.push(msg);												
-						curTime += (2*charDur);
-						//console.log("leadPunct = "+msg.word);
+						curTime += (charDur*(leadPunct.length));
 					}
 					if (word) {
 						word = word.toString();
 						var cats = this.getCats(word.toString());
 						statsHandler.logWordInstance(word, cats);
 						var msg = {type: "word", time:curTime, word:word, cats:this.getCats(word)};
+						//console.log(msg);
 						messages.push(msg);
 						curTime += (charDur*(word.length+1));
-						//console.log("word="+msg.word+", t="+msg.time);
 					}
 					if (endPunct) {
 						//msgTime += 5;		
 						var msg = {type: "word", time:curTime, word:endPunct, cats:["punct", "endPunct"]};
+						//console.log(msg);
 						messages.push(msg);
 						// also send sentenceEnd msg? PEND: necessary or can we check for cat endPunct?
 						messages.push({type: "sentenceEnd", time:curTime});
-						curTime += (2*charDur);
-						//console.log("endPunct="+msg.word+", t="+msg.time);
+						curTime += (charDur*(endPunct.length));
 					}
 					
 
