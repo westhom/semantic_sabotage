@@ -1,6 +1,6 @@
-var Parser = function(messages) {	
+var Parser = function(db, messages) {	
 
-	var db = new localStorageDB("db", localStorage);;
+	var db = db;
 	var messages = messages;
 
 	var statsHandler = StatsHandler(messages, db);
@@ -11,37 +11,45 @@ var Parser = function(messages) {
 		initialize: function(callback, args) {
 			// making two tables for LIWC because it's faster
 			
-			// load non-wild table
-		  if (!db.tableExists("LIWC_words")) 
+			// create cached_messages table if nec
+			if (!db.tableExists("cached_messages")) {
+		  	db.createTable("cached_messages", ["ytID", "messages"]);
+				db.commit();
+			}
+
+			// load non-wild table if needed
+		  if (!db.tableExists("LIWC_words")) {
 		  	db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
-		  db.truncate("LIWC_words");
+		  	//db.truncate("LIWC_words");
 		  
-		  $.getJSON("LIWC/LIWC.json", function(json) {
-		  	for (var i=0; i<json.length; i++) {
-		  		if (json[i]['word'])
-				  	db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
-		  	}
-		  	console.log("loaded nonwild "+json.length);
-		  	
-		  	// then load wild table
-			  if (!db.tableExists("LIWC_words_wild")) 
-			  	db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
-			  db.truncate("LIWC_words_wild");
-			  
-			  $.getJSON("LIWC/LIWC_wildcards.json", function(json) {
+			  $.getJSON("LIWC/LIWC.json", function(json) {
 			  	for (var i=0; i<json.length; i++) {
 			  		if (json[i]['word'])
-					  	db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+					  	db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
 			  	}
-			  	console.log("loaded wild "+json.length);
+			  	console.log("loaded nonwild "+json.length);
 			  	db.commit();
-			  	
-			  	// call callback fxn
-			  	callback(args);
+
+			  	// then load wild table
+				  if (!db.tableExists("LIWC_words_wild")) {
+				  	db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
+				  	//db.truncate("LIWC_words_wild");
+					  
+					  $.getJSON("LIWC/LIWC_wildcards.json", function(json) {
+					  	for (var i=0; i<json.length; i++) {
+					  		if (json[i]['word'])
+							  	db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+					  	}
+					  	console.log("loaded wild "+json.length);
+					  	db.commit();
+					  	
+					  	// call callback fxn
+					  	callback(args);
+					  });
+					} else callback(args);
+		
 			  });
-		  	
-		  });
-		 
+		 } else callback(args);
 		}, 
 	
 		parseLine: function(line) {
@@ -220,6 +228,12 @@ var Parser = function(messages) {
 			}
 						 
 			return cats;
+		},
+
+		cacheMessages: function(ytID) {
+			db.insertOrUpdate("cached_messages", {ytID: ytID}, {ytID: ytID, messages: messages});
+			db.commit();
+			console.log("cached messages "+ytID);
 		}
 	}
 };

@@ -98,7 +98,7 @@ function load(resp) {
 	console.log(resp.url);
 	console.log(resp.cc);
   
-	player.initialize(resp.cc);
+	player.initialize(resp);
 
 	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
 	ytplayer.cueVideoById(curVideoID);
