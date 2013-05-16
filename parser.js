@@ -87,14 +87,12 @@ var Parser = function(messages) {
 			
 			// Figure out the average duration of a character. 
 			// Then use this to give a custom duration to each word based on its char length.
+			//JRO: if text starts to get jumbled, it has to do with the timing, add more to length to allow for wiggle room
 			var charDur = dur/(text.length+2);
 			var curTime = start;
-
-			var totalDur = curTime + charDur*text.length;
-
-			console.log(text + " length: " + text.length + " curTime: " + curTime + " charDur: " + charDur + " next: " + totalDur);
-
-
+			
+			//var totalDur = curTime + charDur*text.length;
+			//console.log(text + " length: " + text.length + " curTime: " + curTime + " charDur: " + charDur + " next: " + totalDur);
 		
 			for (i in tokens) //JRO - hack to only process one token at a time
 			{
