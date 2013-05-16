@@ -190,6 +190,7 @@ function showMenu() {
 	// Stop video and message playback.
 	pauseVideo();
 	player.pausePlaybackMessages();
+	player.resetMessages();
 }
 
 function showControls() {

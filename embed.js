@@ -5,6 +5,7 @@
       // Object with official youTube states. 
       var ytStates = {'unstarted':-1, 'ended':0, 'playing':1, 'paused':2, 'buffering':3, 'videocued':5};
       var ytCurState = -2;
+      var startCall = false;
 
       // Update a particular HTML element with a new value
       function updateHTML(elmId, value) {
@@ -44,7 +45,7 @@
           ytplayer.playVideo();
           $('#pauseButton').show();
           $('#playButton').hide();
-        }
+        } else startCall = true;
       }
       
       function pauseVideo() {
@@ -83,6 +84,8 @@
         ytplayer.addEventListener("onError", "onPlayerError");
         ytplayer.height= 0;
         ytplayer.width= 0;
+        ready = true;
+        if (startCall) playVideo();
       }
       
       // The "main method" of this sample. Called when someone clicks "Run".

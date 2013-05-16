@@ -24,9 +24,7 @@ var Player = function(app) {
 			if (res && res.length > 0) {
 				console.log("cached messages found");
 				messages = res[0]['messages'];
-				setTimeout(function(){
-					app.start();
-				}, 2000); //PEND THIS SHOULD WAIT FOR YTREADY
+				app.start();
 			} else {
 				console.log("creating messages");
 				var offset = 40;	// Milliseconds between line parses.			
@@ -136,6 +134,10 @@ var Player = function(app) {
 		    for (var i=0; i<setTimeoutEvents.length; i++) {
 			    clearTimeout(setTimeoutEvents[i]);
 		    }
+	    },
+
+	    resetPlaybackMessages: function() {
+	    	curMessage = 0;
 	    }
 
 	};
