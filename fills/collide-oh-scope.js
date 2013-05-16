@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Collide-Oh-Scope (re-unbusted)",
-		defaultURL: "http://www.youtube.com/watch?v=d1sRvT2xFL0",
+		defaultURL: "http://www.youtube.com/watch?v=E4mx2P3kLv4",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
 		// Anything you want to do to initialize your mode. 
