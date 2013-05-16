@@ -10,9 +10,8 @@
 	<script src="http://code.jquery.com/jquery-migrate-1.1.0.min.js"></script>
   	<!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
   	<script src="libs/jquery.form.js"></script>
-
   	<!-- Typekit -->
-  <script type="text/javascript" src="//use.typekit.net/rim7nin.js"></script>
+  	<script type="text/javascript" src="http://use.typekit.net/rim7nin.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 								
 	<script> 
@@ -47,7 +46,7 @@
 	<!--<script src="https://apis.google.com/js/client.js?onload=load"></script>-->
 	</head>
 							
-	<body>
+	<body onclick="bodyClick();">
 
 		<div class="navBar">			
 			<div class="navText" onclick="showMenu();">SEMANTIC SABOTAGE</div>			
@@ -64,7 +63,6 @@
 			    <button id="muteButton" class="navButton" style="display:none" onclick="muteVideo();">MUTE</button>
 			    <button id="unmuteButton" class="navButton" style="display:none" onclick="unMuteVideo();">UNMUTE</button>		    
 			</div>
-			<!-- <span id="about">ABOUT</span> -->
 			<a href="http://sosolimited.com" target="_blank"><img id="logo" src="img/sosoLogoSmall.png"/></a>
 			
 			<div id="progressBarBox"> 
@@ -73,9 +71,13 @@
 
 		</div>
 
-		<div id="videoDiv">Loading...</div>
-					    
-	    <div id="menu">
+		<div id="videoDiv"></div>
+		
+		<div id="aboutCover" onclick="hideAbout();"></div>
+		<div id="about"></div>
+		<div id="aboutText">Semantic Sabotage is a collection of live typographic YouTube caption remixes. Each mode starts with a YouTube video and analyzes its transcript in real time.</br></br>You can enter any YouTube URL and watch as the words go by. More information about Semantic Sabotage and about Sosolimited and about EyeO and about web technologies and shit like that.</br></br>And some more shit about Sosolimited and thanks to God and my mom, and James Pennebaker, without whom which this project would not be possible.</div>
+
+	  <div id="menu">
 	    	<div id="modeButtons"></div>
 		</div>		
 

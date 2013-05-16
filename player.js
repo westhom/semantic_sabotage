@@ -2,33 +2,50 @@ var Player = function(app) {
 	
 	var setTimeoutEvents = [];
 	var messages = [];
-	var parser = Parser(messages);
+	var db = new localStorageDB("db", localStorage);;
+	var parser = Parser(db, messages);
 	var curMessage = 0;
 	
 	return {
-		initialize: function(cc) {
+		initialize: function(data) {
 			// parser gets created, loads LIWC stuff, then calls createMessages
-			parser.initialize(this.createMessages, cc);
+			parser.initialize(this.createMessages, data);
 		},
 	
-		createMessages: function(cc) {
+		createMessages: function(data) {
+			var ytID = data.youtube_id;
+			var cc = data.cc;
+
 			console.log("load msgs "+cc);
 			
-			var offset = 40;	// Milliseconds between line parses.			
-			for (var i=0; i<cc.length; i++) {
-				// Gotta use offset setTimeouts, so progress bar reflow can happen.
-				setTimeout(function(data, i){
-					parser.parseLine(data[i]);
-					$('#progressBar').width((i/data.length)*100 + "%");		
-				}, i*offset, cc, i);
+			// check if messages exist in cache
+			var res = db.query("cached_messages", {ytID: ytID});
+			console.log(res);
+			if (res && res.length > 0) {
+				console.log("cached messages found");
+				messages = res[0]['messages'];
+				setTimeout(function(){
+					app.start();
+				}, 2000); //PEND THIS SHOULD WAIT FOR YTREADY
+			} else {
+				console.log("creating messages");
+				var offset = 40;	// Milliseconds between line parses.			
+				for (var i=0; i<cc.length; i++) {
+					// Gotta use offset setTimeouts, so progress bar reflow can happen.
+					setTimeout(function(data, i){
+						parser.parseLine(data[i]);
+						$('#progressBar').width((i/data.length)*100 + "%");		
+					}, i*offset, cc, i);
+				}
+				
+				// Once all messages are created, start!
+				setTimeout(function(){
+					parser.cacheMessages(data.youtube_id);
+					app.start();
+				}, cc.length*offset + 500);
 
-				//parser.parseLine(cc[i]);
 			}
 			
-			// Once all messages are created, start!
-			setTimeout(function(){
-				app.start();
-			}, cc.length*offset + 500);
 			
 		},
 		

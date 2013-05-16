@@ -31,12 +31,20 @@ function init() {
 	// Load fills and insert them into DOM.
     loadFills();
 
-    // Set up automatic button press on input box return key.
+  // Set up automatic button press on input box return key.
 	$("#ytURL").keyup(function(event){
 	    if(event.keyCode == 13){
 	        $("#ytURLButton").click();
 	    }
 	});	
+
+  // Set up aboutText div to hide after transitioning.
+	$("#aboutText").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
+		function() {
+	 		//if($(this).css('opacity') == 0) $(this).hide();	 		
+	 		// Stupid hack to get it offscreen.
+			if($(this).css('opacity') == 0)	$('#aboutText').css('left', '-600px');
+		});
 }
 
 function loadFills() {
@@ -98,7 +106,7 @@ function load(resp) {
 	console.log(resp.url);
 	console.log(resp.cc);
   
-	player.initialize(resp.cc);
+	player.initialize(resp);
 
 	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
 	ytplayer.cueVideoById(curVideoID);
@@ -136,6 +144,8 @@ function goToMode(m) {
 		// Hide menu and show modes container.
 		$('#menu').hide();
 		$('#modes').show();
+
+		hideAbout();
 
 		// Hide all but the current mode's element.
 		for(var i=0; i < modes.length; i++){
@@ -179,8 +189,12 @@ function goToMode(m) {
 function showMenu() {
 
 	// If menu is already visible, show information.
-	if($('#menu').is(':visible')) {
-		console.log('menu is shown already');
+	if($('#about').position().left > -1800) {
+		hideAbout();
+	}
+	else if($('#menu').is(':visible')) {
+		//console.log('menu is shown already');
+		showAbout();
 	}
 
 	$('#menu').show();
@@ -200,6 +214,21 @@ function showMenu() {
 
 }
 
+function showAbout() {
+	//console.log('showAbout()');
+	$('#about').css({'left':'-1350px', 'top':'-1350px'});
+	$('#aboutText').css('left', '24px');
+	$('#aboutText').css('opacity','1');
+	$('#aboutCover').show();
+}
+
+function hideAbout() {
+	//console.log('hideAbout()');
+	$('#about').css({'left':'-1800px', 'top':'-1800px'});	
+	$('#aboutText').css('opacity','0');
+	$('#aboutCover').hide();	
+}
+
 function showControls() {
 	$('#navControls').show();
 	$('#pauseButton').show();
@@ -215,6 +244,10 @@ function hideLoadingMessage() { $('#loading').hide(); }
 function showPlayingMessage() { $('#playing').show(); }
 function hidePlayingMessage() { $('#playing').hide(); }
 
+
+function bodyClick() {
+	console.log('bodyClick()');
+}
 
 
 
