@@ -189,11 +189,12 @@ function goToMode(m) {
 
 function showMenu() {
 
+	console.log('showMenu');
+
 	// If menu is already visible, show information.
 	if($('#about').position().left > -1800) {
 		hideAbout();
-	}
-	else if($('#menu').is(':visible')) {
+	}else if($('#menu').is(':visible')) {
 		//console.log('menu is shown already');
 		showAbout();
 	}
@@ -204,17 +205,21 @@ function showMenu() {
 	// Reset progress bar.
 	$('#progressBar').width("0%");
 
-	// Hide all controls.
-	hideControls();
+	
 
 	// Stop video and message playback.
-	if(ytCurState == ytStates.playing) {
+	//if(ytCurState == ytStates.playing) {
 		pauseVideo();
 		player.pausePlaybackMessages();
-	}
+	//}
 
+	// Hide all controls.
+	hideControls();
+	hidePlayingMessage();
+	hideLoadingMessage();
 	// Stop any transitions timers.
 	stopAllTimers();
+
 }
 
 function showAbout() {
@@ -257,7 +262,9 @@ function bodyClick() {
 function stopAllTimers() {
 	for (var i=0; i<globalTimers.length; i++) {
 	  clearTimeout(globalTimers[i]);
+	  console.log('clear timer'+globalTimers[i]);
 	}
+	globalTimers = [];
 }
 
 
