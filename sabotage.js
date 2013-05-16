@@ -145,6 +145,7 @@ function goToMode(m) {
 		//console.log("URL = "+modes[curMode].defaultURL);
 
 		// Get captions from youTube PHP, using defaultURL of mode.
+		/*
 		$.ajax({
 			type: 'post',
 			dataType: 'json',
@@ -155,7 +156,14 @@ function goToMode(m) {
 	   			console.log(data);
 	   		}
 	   	});
-	
+		*/
+
+		// Get captions from youTube PHP, using form.
+		// Update value of input with defaultURL of mode.
+		$('#ytURL').val(modes[curMode].defaultURL);
+		// Ajax call below wasn't working, so for now just click submit button.
+		$('#ytURLButton').click();
+
 		// Set up nav menu.
 		showLoadingMessage();
 		$('#ytURL').val("Enter a different YouTube URL");		
