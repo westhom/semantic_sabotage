@@ -27,6 +27,7 @@ var Player = function(app) {
 				app.start();
 			} else {
 				console.log("creating messages");
+		  	db.truncate("cached_messages");
 				var offset = 40;	// Milliseconds between line parses.			
 				for (var i=0; i<cc.length; i++) {
 					// Gotta use offset setTimeouts, so progress bar reflow can happen.
