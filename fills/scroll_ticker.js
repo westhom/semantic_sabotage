@@ -58,11 +58,15 @@ var mode = function(id) {
 		 	$('#scrollticker > .scroller').append(w); 	
 
 		 	$('#scrollticker > .scroller').css('left', -parseInt($('#scrollticker > .scroller span:last-child').position().left)+'px');	
-			console.log(-parseInt($('#scrollticker > .scroller span:nth-last-child(4)').position().left)+'px');	
+			//console.log(-parseInt($('#scrollticker > .scroller span:nth-last-child(4)').position().left)+'px');	
 
 			setTimeout(function(e){
 				e.css('color', 'rgb(100,100,100)');
 			}, 20, w);
+
+			//while($('#scrollticker > .scroller').children().length > 20){
+			//	$('#scrollticker > .scroller span:first-child').remove();
+			//}
 		}
 	}
 };
