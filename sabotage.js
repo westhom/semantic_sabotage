@@ -5,6 +5,7 @@ var video;
 var modes = [];
 var curMode = 0;
 var curVideoID = '6LPaCN-_XWg';
+var globalTimers = [];	// For keeping track of setTimeout events.
 
 
 // Shim layer with setTimeout fallback.
@@ -128,10 +129,10 @@ function start() {
 	hideLoadingMessage();
 	showPlayingMessage();
 	// Then show controls.
-	setTimeout(function(){
+	globalTimers.push(setTimeout(function(){
 		showControls();
 		hidePlayingMessage();
-	}, 10000);
+	}, 10000));
 	
 	playback();	
 }
@@ -212,6 +213,8 @@ function showMenu() {
 		player.pausePlaybackMessages();
 	}
 
+	// Stop any transitions timers.
+	stopAllTimers();
 }
 
 function showAbout() {
@@ -249,6 +252,13 @@ function bodyClick() {
 	console.log('bodyClick()');
 }
 
+
+
+function stopAllTimers() {
+	for (var i=0; i<globalTimers.length; i++) {
+	  clearTimeout(globalTimers[i]);
+	}
+}
 
 
 function playback() {

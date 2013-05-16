@@ -225,7 +225,7 @@ input.navInput[type="text"]:focus
 #aboutText {
 	position:absolute;
 	top: 72px;
-	left: 24px;
+	left: -600px;
 	/* margin: 24px 0px 0px 24px; */
 	width: 400px;
 	height: 800px;
