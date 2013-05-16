@@ -8,8 +8,8 @@ var mode = function(id) {
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),		
 				 		
 								
-		lineHeight: 240,
-									
+		lineHeight: 210,
+																
 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
