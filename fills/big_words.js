@@ -5,11 +5,11 @@ var mode = function(id) {
 		name: "Big Words",
 		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),
-				 
-		
+		el: $('<div class="modeContainer" id="'+id+'"></div>'),		
+				 		
+								
 		lineHeight: 240,
-		
+									
 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
