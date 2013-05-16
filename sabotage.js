@@ -178,6 +178,11 @@ function goToMode(m) {
 
 function showMenu() {
 
+	// If menu is already visible, show information.
+	if($('#menu').is(':visible')) {
+		console.log('menu is shown already');
+	}
+
 	$('#menu').show();
 	$('#modes').hide();	
 
@@ -188,12 +193,17 @@ function showMenu() {
 	hideControls();
 
 	// Stop video and message playback.
-	pauseVideo();
-	player.pausePlaybackMessages();
+	if(ytCurState == ytStates.playing) {
+		pauseVideo();
+		player.pausePlaybackMessages();
+	}
+
 }
 
 function showControls() {
 	$('#navControls').show();
+	$('#pauseButton').show();
+	$('#muteButton').show();
 }
 
 function hideControls() {
@@ -209,18 +219,20 @@ function hidePlayingMessage() { $('#playing').hide(); }
 
 
 function playback() {
+	console.log('playback()');
 	playVideo();
-	//player.playbackMessages();	// Now handled by yT state change callback.
+	// Note: Message playback is handled by yT state change callback.
 }
 
 function stopPlayback() {
 	pauseVideo();
-	//player.stopPlaybackMessages();	// Doesn't exist yet, but anyway, handled by yT state change callback.
+	// Note: Message playback is handled by yT state change callback.
 }
 
 function pausePlayback() {
+	console.log('pausePlayback()');
 	pauseVideo();
-	//player.pausePlaybackMessages();  // Now handled by yT state change callback.
+	// Note: Message playback is handled by yT state change callback.
 }
 
 // Handle incoming messages and distribute to appropriate functions.
