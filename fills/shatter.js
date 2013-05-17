@@ -2,14 +2,25 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Shatter (------------progress)",
+		name: "Shatter",
 		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
-		
+
+		tFall: 1,
+		tFade: 5,
+		tColor: 1,
+		radius: (Math.max($(window).width(),$(window).height()))*0.50,
+		viewScalar: 1,
+		widthScalar: 20,
+		fontHeight: 100,
+		fallStart: 500,
+		fallEnd: -1000,
+
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
 			this.el.append('<div id="shatContainer"></div>');
+			$('#shatContainer').css('-webkit-transform','perspective(' + $(window).width() + 'px)');
 		},
 
 		// Gets called evertime you go to the mode.
@@ -40,23 +51,57 @@ var mode = function(id) {
 		 	// update curSentence
 //		if (!msg.sentenceStartFlag && !msg.punctuationFlag) $('#shatContainer').append(' ');
 			
+			$('#shatContainer').css('-webkit-transform','perspective(' + $(window).width() + 'px)'); /* ADD VIEWSCALAR */
+
 			var m = document.createElement('div');
 			$(m).addClass('morter proxima-nova-400');
 
+			var p = [];
+			var w = 0;
+			var width = $(window).width() / this.widthScalar;
+
+			
 			for (var i = 0; i < msg.word.length; i++) {
-				var a = document.createElement('span');
-				console.log(a);
-				$(a).append(msg.word[i]);
-				$(m).append(a);
+				var ph = document.createElement('span');
+				$(ph).addClass('particleHolder');
+				
+				p[i] = document.createElement('span');
+				$(p[i]).addClass('particle');
+				$(p[i]).css('width', width);
+				$(p[i]).css('-webkit-transform','translateX(' + w + 'px)')
+				$(p[i]).append(msg.word[i]);
+
+				$(ph).append(p[i]);
+				
+				$(m).append(ph);
+
+				w = w + width;
+
 			};
 
-
+			$(m).css('-webkit-transform','translate3d(' + (-w/2) + 'px,' + (-this.fontHeight/2) + 'px,' + this.fallStart + 'px)');
 		 	$('#shatContainer').append(m);
 			
 			window.getComputedStyle(m).WebkitTransform;
 
-			$(m).css('-webkit-transform', 'translateZ(0px) scale(0.05)');
+			$(m).css('-webkit-transition','-webkit-transform ' + this.tFall + 's ease-in, color ' + this.tColor + 's linear');
+			$(m).css('-webkit-transform','translate3d(' + (-w/2) + 'px,' + (-this.fontHeight/2) + 'px,' + this.fallEnd + 'px)');
 			$(m).css('color', 'black');
+
+			for (var i = 0; i < msg.word.length; i++) {
+				$(p[i]).css('-webkit-transition', '-webkit-transform ' + this.tFade + 's ease-out, opacity ' + this.tFade + 's ease-in');
+				var beta = Math.random()*360;
+				var dist = Math.random()*this.radius;
+				$(p[i]).css('-webkit-transition-delay',this.tFall + 's')
+				$(p[i]).css('-webkit-transform', 'translate3d(' + dist*Math.cos(beta) + 'px,' + dist*Math.sin(beta) + 'px,0px)');
+				$(p[i]).css('opacity', '0');
+			};
+
+			var death = (this.tFall + this.tFade)*1000;
+			$(m).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd',
+				function() { 
+					setTimeout(function(){$(m).remove()},death);
+				});
 
 		}
 	}
