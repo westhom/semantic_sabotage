@@ -17,6 +17,7 @@ var mode = function(id) {
 		// Gets called evertime you go to the mode.
 		enter: function() {			
 			$('#scrollticker > .scroller').empty();
+			$('#scrollticker > .scroller').css('left', '0px');
 		},
 
 		// Handle incoming word message.
