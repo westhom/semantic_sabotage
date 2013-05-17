@@ -24,11 +24,19 @@ var Player = function(app) {
 			if (res && res.length > 0) {
 				console.log("cached messages found");
 				messages = res[0]['messages'];
+				//app.start();
+				// Give youTube movie time to cue before playing.
+				// PEND Using a setTimeout is hackey. Do this right.	 	
 				setTimeout(function(){
 					app.start();
-				}, 2000); //PEND THIS SHOULD WAIT FOR YTREADY
+				}, 100);
 			} else {
 				console.log("creating messages");
+				// Delete previously cached messages.
+		  	db.truncate("cached_messages");
+		  	// Clear the message array. 
+		  	messages.length = 0;
+
 				var offset = 40;	// Milliseconds between line parses.			
 				for (var i=0; i<cc.length; i++) {
 					// Gotta use offset setTimeouts, so progress bar reflow can happen.
@@ -45,8 +53,7 @@ var Player = function(app) {
 				}, cc.length*offset + 500);
 
 			}
-			
-			
+						
 		},
 		
 		printMessages: function() {
@@ -136,6 +143,10 @@ var Player = function(app) {
 		    for (var i=0; i<setTimeoutEvents.length; i++) {
 			    clearTimeout(setTimeoutEvents[i]);
 		    }
+	    },
+
+	    resetPlaybackMessages: function() {
+	    	curMessage = 0;
 	    }
 
 	};

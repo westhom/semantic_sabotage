@@ -5,6 +5,7 @@ var video;
 var modes = [];
 var curMode = 0;
 var curVideoID = '6LPaCN-_XWg';
+var globalTimers = [];	// For keeping track of setTimeout events.
 
 
 // Shim layer with setTimeout fallback.
@@ -31,12 +32,20 @@ function init() {
 	// Load fills and insert them into DOM.
     loadFills();
 
-    // Set up automatic button press on input box return key.
+  // Set up automatic button press on input box return key.
 	$("#ytURL").keyup(function(event){
 	    if(event.keyCode == 13){
 	        $("#ytURLButton").click();
 	    }
 	});	
+
+  // Set up aboutText div to hide after transitioning.
+	$("#aboutText").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
+		function() {
+	 		//if($(this).css('opacity') == 0) $(this).hide();	 		
+	 		// Stupid hack to get it offscreen.
+			if($(this).css('opacity') == 0)	$('#aboutText').css('left', '-600px');
+		});
 }
 
 function loadFills() {
@@ -100,7 +109,8 @@ function load(resp) {
   
 	player.initialize(resp);
 
-	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
+	//$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
+	console.log("cueVideoById( "+curVideoID+" )");
 	ytplayer.cueVideoById(curVideoID);
 
 	// show loading
@@ -120,10 +130,10 @@ function start() {
 	hideLoadingMessage();
 	showPlayingMessage();
 	// Then show controls.
-	setTimeout(function(){
+	globalTimers.push(setTimeout(function(){
 		showControls();
 		hidePlayingMessage();
-	}, 10000);
+	}, 10000));
 	
 	playback();	
 }
@@ -136,6 +146,8 @@ function goToMode(m) {
 		// Hide menu and show modes container.
 		$('#menu').hide();
 		$('#modes').show();
+
+		hideAbout();
 
 		// Hide all but the current mode's element.
 		for(var i=0; i < modes.length; i++){
@@ -178,22 +190,58 @@ function goToMode(m) {
 
 function showMenu() {
 
+	console.log('showMenu');
+
+	// If menu is already visible, show information.
+	if($('#about').position().left > -1800) {
+		hideAbout();
+	}else if($('#menu').is(':visible')) {
+		//console.log('menu is shown already');
+		showAbout();
+	}
+
 	$('#menu').show();
 	$('#modes').hide();	
 
 	// Reset progress bar.
 	$('#progressBar').width("0%");
 
-	// Hide all controls.
-	hideControls();
+	
 
 	// Stop video and message playback.
-	pauseVideo();
-	player.pausePlaybackMessages();
+	//if(ytCurState == ytStates.playing) {
+		pauseVideo();
+		player.pausePlaybackMessages();
+		player.resetPlaybackMessages();
+	//}
+
+	// Hide all controls.
+	hideControls();
+	hidePlayingMessage();
+	hideLoadingMessage();
+	// Stop any transitions timers.
+	stopAllTimers();
+}
+
+function showAbout() {
+	//console.log('showAbout()');
+	$('#about').css({'left':'-1350px', 'top':'-1350px'});
+	$('#aboutText').css('left', '24px');
+	$('#aboutText').css('opacity','1');
+	$('#aboutCover').show();
+}
+
+function hideAbout() {
+	//console.log('hideAbout()');
+	$('#about').css({'left':'-1800px', 'top':'-1800px'});	
+	$('#aboutText').css('opacity','0');
+	$('#aboutCover').hide();	
 }
 
 function showControls() {
 	$('#navControls').show();
+	$('#pauseButton').show();
+	$('#muteButton').show();
 }
 
 function hideControls() {
@@ -206,21 +254,36 @@ function showPlayingMessage() { $('#playing').show(); }
 function hidePlayingMessage() { $('#playing').hide(); }
 
 
+function bodyClick() {
+	console.log('bodyClick()');
+}
+
+
+
+function stopAllTimers() {
+	for (var i=0; i<globalTimers.length; i++) {
+	  clearTimeout(globalTimers[i]);
+	  console.log('clear timer'+globalTimers[i]);
+	}
+	globalTimers = [];
+}
 
 
 function playback() {
+	console.log('playback()');
 	playVideo();
-	//player.playbackMessages();	// Now handled by yT state change callback.
+	// Note: Message playback is handled by yT state change callback.
 }
 
 function stopPlayback() {
 	pauseVideo();
-	//player.stopPlaybackMessages();	// Doesn't exist yet, but anyway, handled by yT state change callback.
+	// Note: Message playback is handled by yT state change callback.
 }
 
 function pausePlayback() {
+	console.log('pausePlayback()');
 	pauseVideo();
-	//player.pausePlaybackMessages();  // Now handled by yT state change callback.
+	// Note: Message playback is handled by yT state change callback.
 }
 
 // Handle incoming messages and distribute to appropriate functions.
@@ -249,26 +312,28 @@ function handleYtPlayerStateChange(newState) {
 
 	switch(newState) {
 	  case -1:
-		// Unstarted
-		break;
+			// Unstarted
+			console.log('ytPlayer stage change: unstarted');
+			break;
 	  case 0:
-		// Ended
-		break;
+			// Ended
+			break;
 	  case 1:
-		// Playing
-		//player.playbackMessages();
-		$('#progressBar').css('background-color', 'red');        
-		break;
+			// Playing		
+			console.log('ytPlayer stage change: playing');
+			$('#progressBar').css('background-color', 'red');        
+			break;
 	  case 2:
-		// Paused
-		//player.pausePlaybackMessages();
-		break;
+			// Paused
+			console.log('ytPlayer stage change: paused');
+			break;
 	  case 3:
-		// Buffering
-		break;
+			// Buffering
+			console.log('ytPlayer stage change: buffering');
+			break;
 	  case 5:
-		// Video cued
-		break;    
+			// Video cued
+			break;    
 	}
 		  // Keep track of yT state for everyone to reference.
 	ytCurState = newState;
