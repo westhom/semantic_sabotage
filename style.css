@@ -133,6 +133,7 @@ legend{
 
 .navText:hover {
 	color: white;
+	cursor: hand;
 }
 
 .navInput {
@@ -192,6 +193,8 @@ input.navInput[type="text"]:focus
 	padding: 0.25em;
 	background-color: black;
 	color: rgb(110,110,110);
+
+	cursor: hand;
 }
 
 .navButton:hover {
@@ -411,7 +414,7 @@ body {
 }
 
 .modeName:hover {
-	color: rgb(255, 255, 0);
+	color: rgb(0,0,0);
 	cursor: hand;
 }
 
