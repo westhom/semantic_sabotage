@@ -24,7 +24,12 @@ var Player = function(app) {
 			if (res && res.length > 0) {
 				console.log("cached messages found");
 				messages = res[0]['messages'];
-				app.start();
+				//app.start();
+				// Give youTube movie time to cue before playing.
+				// PEND Using a setTimeout is hackey. Do this right.
+				setTimeout(function(){
+					app.start();
+				}, 100);
 			} else {
 				console.log("creating messages");
 		  	db.truncate("cached_messages");

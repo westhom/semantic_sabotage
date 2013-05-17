@@ -109,7 +109,8 @@ function load(resp) {
   
 	player.initialize(resp);
 
-	$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
+	//$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
+	console.log("cueVideoById( "+curVideoID+" )");
 	ytplayer.cueVideoById(curVideoID);
 
 	// show loading
@@ -211,7 +212,7 @@ function showMenu() {
 	//if(ytCurState == ytStates.playing) {
 		pauseVideo();
 		player.pausePlaybackMessages();
-		//player.resetPlaybackMessages();
+		player.resetPlaybackMessages();
 	//}
 
 	// Hide all controls.
