@@ -211,7 +211,7 @@ function showMenu() {
 	//if(ytCurState == ytStates.playing) {
 		pauseVideo();
 		player.pausePlaybackMessages();
-		player.resetMessages();
+		player.resetPlaybackMessages();
 	//}
 
 	// Hide all controls.
