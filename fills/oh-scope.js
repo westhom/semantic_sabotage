@@ -2,7 +2,7 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Collide-Oh-Scope (re-unbusted)",
+		name: "Oh-Scope",
 		defaultURL: "http://www.youtube.com/watch?v=d1sRvT2xFL0",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),	
 	
@@ -45,6 +45,8 @@ var mode = function(id) {
 			article
 			verb
 			adverb
+
+			MAYBE SET 'quadrant' based on category
 			*/
 
 			var cats = ' ';

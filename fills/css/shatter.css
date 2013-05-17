@@ -1,0 +1,43 @@
+
+#shatter {
+
+}
+
+#shatContainer {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	top: 50%;
+	left: 50%;
+	overflow: visible;
+	-webkit-transform-style: preserve-3d;
+}
+
+#shatContainer .morter {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	top: 0px;
+	left: 0px;
+	overflow: visible;
+	color: white;
+	font-size: 100px;
+	-webkit-transform-style: preserve-3d;
+}
+
+#shatContainer .particleHolder {
+	position: relative;
+	width: 1px;
+	height: 1px;
+	top: 0px;
+	left: 0px;
+	overflow: visible;
+	-webkit-transform-style: preserve-3d;
+}
+
+#shatContainer .particle {
+	position: absolute;
+	text-align: center;
+	opacity: 1;
+	-webkit-transform-style: preserve-3d;
+}

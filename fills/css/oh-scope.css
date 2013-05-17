@@ -65,18 +65,18 @@
 	-webkit-transition: -webkit-transform 6s, opacity 2s, z-index 1s;
 }
 
-.pronoun {
+#collide-oh-scope .pronoun {
 	color: red;
 }
 
-.article {
+#collide-oh-scope .article {
 	color: blue;
 }
 
-.verb {
+#collide-oh-scope .verb {
 	color: yellow;
 }
 
-.adverb {
+#collide-oh-scope .adverb {
 	color: green;
 }
