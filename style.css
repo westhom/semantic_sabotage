@@ -412,6 +412,7 @@ body {
 
 .modeName:hover {
 	color: rgb(255, 255, 0);
+	cursor: hand;
 }
 
 .darkGray {
