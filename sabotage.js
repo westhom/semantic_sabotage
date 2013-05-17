@@ -211,7 +211,8 @@ function showMenu() {
 	//if(ytCurState == ytStates.playing) {
 		pauseVideo();
 		player.pausePlaybackMessages();
-		player.resetMessages();
+		//player.resetMessages();
+		player.resetPlaybackMessages();
 	//}
 
 	// Hide all controls.
@@ -311,26 +312,28 @@ function handleYtPlayerStateChange(newState) {
 
 	switch(newState) {
 	  case -1:
-		// Unstarted
-		break;
+			// Unstarted
+			console.log('ytPlayer stage change: unstarted');
+			break;
 	  case 0:
-		// Ended
-		break;
+			// Ended
+			break;
 	  case 1:
-		// Playing
-		//player.playbackMessages();
-		$('#progressBar').css('background-color', 'red');        
-		break;
+			// Playing		
+			console.log('ytPlayer stage change: playing');
+			$('#progressBar').css('background-color', 'red');        
+			break;
 	  case 2:
-		// Paused
-		//player.pausePlaybackMessages();
-		break;
+			// Paused
+			console.log('ytPlayer stage change: paused');
+			break;
 	  case 3:
-		// Buffering
-		break;
+			// Buffering
+			console.log('ytPlayer stage change: buffering');
+			break;
 	  case 5:
-		// Video cued
-		break;    
+			// Video cued
+			break;    
 	}
 		  // Keep track of yT state for everyone to reference.
 	ytCurState = newState;
