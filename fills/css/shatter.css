@@ -7,10 +7,18 @@
 	position: absolute;
 	width: 1px;
 	height: 1px;
-	top: 50%;
+	top: 45%;
 	left: 50%;
 	overflow: visible;
 	-webkit-transform-style: preserve-3d;
+}
+
+#shatShell {
+	position: relative;
+	top:-1000px;
+	left:-1000px;
+	overflow: visible;
+	font-size: 100px;
 }
 
 #shatContainer .morter {
@@ -37,7 +45,6 @@
 
 #shatContainer .particle {
 	position: absolute;
-	text-align: center;
 	opacity: 1;
 	-webkit-transform-style: preserve-3d;
 }
