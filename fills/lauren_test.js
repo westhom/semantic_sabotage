@@ -2,24 +2,25 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Collide-Oh-Scope",
-		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
+		name: "Lauren Test",
+		defaultURL: "http://www.youtube.com/watch?v=ci5p1OdVLAc",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append('<div id="collider"></div>');
-			$('#collider').append('<div id="marquee"></div>');
-			$('#marquee').addClass('proxima-nova-400');
+
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
+			console.log(this.name+" enter()");
 		},
 
 		// Handle incoming word message.
 		handleWord: function(msg) {
+			//console.log('word '+msg.word);
+						
 			this.appendWordInContext(msg);
 		},
 		
@@ -36,15 +37,10 @@ var mode = function(id) {
 		appendWordInContext: function(msg) {
 		
 		 	// update curSentence
-
-			$('#marquee').empty();
-			$('#marquee').append(msg.word);
-
-			var s = document.createElement('div');
-			$(s).append(msg.word);
-			$(s).addClass('morter proxima-nova-400');
-			$('#collider').append(s);
-
+		 	if (!msg.sentenceStartFlag && !msg.punctuationFlag)
+		 		this.el.append(' ');
+		 		
+		 	this.el.append(msg.word);
 		}
 	}
 };

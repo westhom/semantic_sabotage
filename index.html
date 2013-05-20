@@ -8,12 +8,14 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>	
 	<script src="http://code.jquery.com/jquery-migrate-1.1.0.min.js"></script>
-  	<script src="http://malsup.github.com/jquery.form.js"></script> 
 
-  	<!-- Typekit -->
-  	<script type="text/javascript" src="//use.typekit.net/rim7nin.js"></script>
+  <!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
+  <script src="libs/jquery.form.js"></script>
+
+  <!-- Typekit -->
+  <script type="text/javascript" src="//use.typekit.net/rim7nin.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-  
+								
 	<script> 
     // Wait for the DOM to be loaded.
     	$(document).ready(function() { 
@@ -28,7 +30,7 @@
           	}); 
       	}); 
 	</script> 
-		
+
 	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
     <script type="text/javascript">
       google.load("swfobject", "2.1");
@@ -45,8 +47,8 @@
 	<meta name="google" content="notranslate" />
 	<!--<script src="https://apis.google.com/js/client.js?onload=load"></script>-->
 	</head>
-	
-	<body>
+							
+	<body onclick="bodyClick();">
 
 		<div class="navBar">			
 			<div class="navText" onclick="showMenu();">SEMANTIC SABOTAGE</div>			
@@ -59,12 +61,11 @@
 					<input id="ytURLButton" class="navButton" type="submit"  value="SUBMIT">
 				</form>
 				<button id="playButton" class="navButton" style="display:none" onclick="playback();">PLAY</button>
-			    <button id="pauseButton" class="navButton" onclick="pausePlayback();">PAUSE</button>
-			    <button id="muteButton" class="navButton" onclick="muteVideo();">MUTE</button>
-			    <button id="unmuteButton" class="navButton" style="display:none" onclick="unMuteVideo();">UNMUTE</button>
-		    <!-- <button id="backButton" style="display:none" onclick="showMenu();">BACK TO MENU</button> -->
+			    <button id="pauseButton" class="navButton" style="display:none" onclick="pausePlayback();">PAUSE</button>
+			    <button id="muteButton" class="navButton" style="display:none" onclick="muteVideo();">MUTE</button>
+			    <button id="unmuteButton" class="navButton" style="display:none" onclick="unMuteVideo();">UNMUTE</button>		    
 			</div>
-			<!-- <span id="about">ABOUT</span> -->
+			<a href="http://sosolimited.com" target="_blank"><img id="logo" src="img/sosoLogoSmall.png"/></a>
 			
 			<div id="progressBarBox"> 
 				<div id="progressBar"></div>
@@ -72,9 +73,13 @@
 
 		</div>
 
-		<div id="videoDiv">Loading...</div>
-					    
-	    <div id="menu">
+		<div id="videoDiv"></div>
+		
+		<div id="aboutCover" onclick="hideAbout();"></div>
+		<div id="about"></div>
+		<div id="aboutText">Semantic Sabotage is a collection of live typographic YouTube caption remixes. Each mode starts with a YouTube video and analyzes its transcript in real time.</br></br>You can enter any YouTube URL and watch as the words go by. More information about Semantic Sabotage and about Sosolimited and about EyeO and about web technologies and shit like that.</br></br>And some more shit about Sosolimited and thanks to God and my mom, and James Pennebaker, without whom which this project would not be possible.</div>
+
+	  <div id="menu">
 	    	<div id="modeButtons"></div>
 		</div>		
 

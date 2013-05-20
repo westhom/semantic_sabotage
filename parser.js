@@ -1,6 +1,6 @@
-var Parser = function(messages) {	
+var Parser = function(db, messages) {	
 
-	var db = new localStorageDB("db", localStorage);;
+	var db = db;
 	var messages = messages;
 
 	var statsHandler = StatsHandler(messages, db);
@@ -11,44 +11,53 @@ var Parser = function(messages) {
 		initialize: function(callback, args) {
 			// making two tables for LIWC because it's faster
 			
-			// load non-wild table
-		  if (!db.tableExists("LIWC_words")) 
+			// create cached_messages table if nec
+			if (!db.tableExists("cached_messages")) {
+		  	db.createTable("cached_messages", ["ytID", "messages"]);
+				db.commit();
+			}
+
+			// load non-wild table if needed
+		  if (!db.tableExists("LIWC_words")) {
 		  	db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
-		  db.truncate("LIWC_words");
+		  	//db.truncate("LIWC_words");
 		  
-		  $.getJSON("LIWC/LIWC.json", function(json) {
-		  	for (var i=0; i<json.length; i++) {
-		  		if (json[i]['word'])
-				  	db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
-		  	}
-		  	console.log("loaded nonwild "+json.length);
-		  	
-		  	// then load wild table
-			  if (!db.tableExists("LIWC_words_wild")) 
-			  	db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
-			  db.truncate("LIWC_words_wild");
-			  
-			  $.getJSON("LIWC/LIWC_wildcards.json", function(json) {
+			  $.getJSON("LIWC/LIWC.json", function(json) {
 			  	for (var i=0; i<json.length; i++) {
 			  		if (json[i]['word'])
-					  	db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+					  	db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
 			  	}
-			  	console.log("loaded wild "+json.length);
+			  	console.log("loaded nonwild "+json.length);
 			  	db.commit();
-			  	
-			  	// call callback fxn
-			  	callback(args);
+
+			  	// then load wild table
+				  if (!db.tableExists("LIWC_words_wild")) {
+				  	db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
+				  	//db.truncate("LIWC_words_wild");
+					  
+					  $.getJSON("LIWC/LIWC_wildcards.json", function(json) {
+					  	for (var i=0; i<json.length; i++) {
+					  		if (json[i]['word'])
+							  	db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+					  	}
+					  	console.log("loaded wild "+json.length);
+					  	db.commit();
+					  	
+					  	// call callback fxn
+					  	callback(args);
+					  });
+					} else callback(args);
+		
 			  });
-		  	
-		  });
-		 
+		 } else callback(args);
 		}, 
 	
 		parseLine: function(line) {
 		
 			//console.log(line);
 			var spaceRegEx = new RegExp(/\S{1,}/g);
-			var leadPunctRegEx = new RegExp(/^[\"|\'|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
+			//var leadPunctRegEx = new RegExp(/^[\"|\'|“|‘|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
+			var leadPunctRegEx = new RegExp(/^\W{1,}/);
 			var numberRegEx = new RegExp(/\d{1,}.{1,}\d{1,}/);
 			var abbrevRegEx = new RegExp(/\w{1,}[\'|\-]\w{1,}/); //JRO edit
 			//var wordRegEx = new RegExp(/\w{1,}/);
@@ -59,10 +68,17 @@ var Parser = function(messages) {
 			// grab parts from xml
 			var text = line[0];
 			//console.log(text);
+			
 			// TODO: are there more of these that need to be replaced? 
-			// MANOR : quicky crash fix here to quit the fn if there's a blank line
+			// MANOR: quicky crash fix here to quit the fn if there's a blank line
+			// JRO: cleaning up the text, replacing HTML entities 
 			if (text)
-				text = text.replace("&#39;", "'");
+			{
+				//text = text.replace("&#39;", "'");
+				//text = this.html_entity_decode(text);
+				text = $('<textarea />').html(text).val();
+				//console.log(text);
+			}
 			else
 				return;
 
@@ -79,8 +95,12 @@ var Parser = function(messages) {
 			
 			// Figure out the average duration of a character. 
 			// Then use this to give a custom duration to each word based on its char length.
-			var charDur = dur/text.length;
+			//JRO: if text starts to get jumbled, it has to do with the timing, add more to length to allow for wiggle room
+			var charDur = dur/(text.length+2);
 			var curTime = start;
+			
+			//var totalDur = curTime + charDur*text.length;
+			//console.log(text + " length: " + text.length + " curTime: " + curTime + " charDur: " + charDur + " next: " + totalDur);
 		
 			for (i in tokens) //JRO - hack to only process one token at a time
 			{
@@ -146,32 +166,33 @@ var Parser = function(messages) {
 					//var msgTime = start + Math.round(i*wordDur);
 					// Now word timing is based on char length of words. 
 					
-					
+					//console.log(leadPunct + "___" + word + "___" +endPunct);
+
 					// add message
 					if (leadPunct) {
 						//msgTime -= 5;
-						var msg = {type: "word", time:curTime, word:endPunct, cats:["punct", "leadPunct"]};
+						var msg = {type: "word", time:curTime, word:leadPunct, cats:["punct", "leadPunct"]};
+						//console.log(msg);
 						messages.push(msg);												
-						curTime += (2*charDur);
-						//console.log("leadPunct = "+msg.word);
+						curTime += (charDur*(leadPunct.length));
 					}
 					if (word) {
 						word = word.toString();
 						var cats = this.getCats(word.toString());
 						statsHandler.logWordInstance(word, cats);
 						var msg = {type: "word", time:curTime, word:word, cats:this.getCats(word)};
+						//console.log(msg);
 						messages.push(msg);
 						curTime += (charDur*(word.length+1));
-						//console.log("word="+msg.word+", t="+msg.time);
 					}
 					if (endPunct) {
 						//msgTime += 5;		
 						var msg = {type: "word", time:curTime, word:endPunct, cats:["punct", "endPunct"]};
+						//console.log(msg);
 						messages.push(msg);
 						// also send sentenceEnd msg? PEND: necessary or can we check for cat endPunct?
 						messages.push({type: "sentenceEnd", time:curTime});
-						curTime += (2*charDur);
-						//console.log("endPunct="+msg.word+", t="+msg.time);
+						curTime += (charDur*(endPunct.length));
 					}
 					
 
@@ -207,6 +228,12 @@ var Parser = function(messages) {
 			}
 						 
 			return cats;
+		},
+
+		cacheMessages: function(ytID) {
+			db.insertOrUpdate("cached_messages", {ytID: ytID}, {ytID: ytID, messages: messages});
+			db.commit();
+			console.log("cached messages "+ytID);
 		}
 	}
 };
