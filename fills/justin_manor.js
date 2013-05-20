@@ -70,8 +70,6 @@ var mode = function(id) {
 			 	$('#one').prepend(newWord);
 			} else if (msg.word.length === 2) {
 			 	$('#two').prepend(newWord);
-
-			 	
 			} else if (msg.word.length === 3)
 			 	$('#three').prepend(newWord);
 			else if (msg.word.length === 4)

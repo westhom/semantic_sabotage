@@ -67,5 +67,7 @@ drTyNDRnyxs - how to download CC instructions
 
 cpQtyCCJk0c - beatles 'oh yeah'
 
+KaOC9danxNo - Astronaut singing "Ground Control to Major Tom" - good cc
+
 jq42aHX4qk4 - I am the walrus good captions (doesn't work yet, need to debug this)
 
