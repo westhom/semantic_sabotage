@@ -60,7 +60,7 @@ function loadFills() {
      		var j = 0;
      		// For each fill, load javascript.
      		for (var i=0; i<resp.fills.length; i++) {
-				console.log(resp.fills[i]);  
+				//console.log(resp.fills[i]);  
 				
 				// Use function and pass in name because .getScript is asynchronous.
 				(function(name) {	

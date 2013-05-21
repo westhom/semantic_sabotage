@@ -92,7 +92,7 @@ function onYouTubePlayerReady(playerId) {
 
 // The "main method" of this sample. Called when someone clicks "Run".
 function loadPlayer() {
-  console.log("LOAD PLAYER");
+  //console.log("LOAD PLAYER");
   // Lets Flash from another domain call JavaScript
   var params = { allowScriptAccess: "always" };
   // The element id of the Flash embed
