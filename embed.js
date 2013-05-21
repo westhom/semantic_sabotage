@@ -1,3 +1,4 @@
+google.load("swfobject", "2.1");
 /*
  * Chromeless player has no controls.
  */
@@ -76,7 +77,7 @@ function unMuteVideo() {
 // This function is automatically called by the player once it loads
 function onYouTubePlayerReady(playerId) {
   console.log("ytplayer READY");
-  ytplayer = document.getElementById("ytPlayer");
+  ytplayer = document.getElementById("ytplayer");
   // This causes the updatePlayerInfo function to be called every 250ms to
   // get fresh data from the player
   setInterval(updatePlayerInfo, 250);
@@ -95,10 +96,10 @@ function loadPlayer() {
   // Lets Flash from another domain call JavaScript
   var params = { allowScriptAccess: "always" };
   // The element id of the Flash embed
-  var atts = { id: "ytPlayer" };
+  var atts = { id: "ytplayer" };
   // All of the magic handled by SWFObject (http://code.google.com/p/swfobject/)
   swfobject.embedSWF("http://www.youtube.com/apiplayer?" +
-                     "version=3&enablejsapi=1&playerapiid=player1", 
+                     "version=3&enablejsapi=1&playerapiid=ytplayer", 
                      "videoDiv", "480", "295", "9", null, null, params, atts);
 }
 function _run() {
