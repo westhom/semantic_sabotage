@@ -233,7 +233,7 @@ var Parser = function(db, messages) {
 		cacheMessages: function(ytID) {
 			db.insertOrUpdate("cached_messages", {ytID: ytID}, {ytID: ytID, messages: messages});
 			db.commit();
-			console.log("cached messages "+ytID);
+			console.log("cached messages for "+ytID);
 		}
 	}
 };

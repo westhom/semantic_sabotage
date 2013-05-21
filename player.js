@@ -17,7 +17,7 @@ var Player = function(app) {
 			var ytID = data.youtube_id;
 			var cc = data.cc;
 
-			console.log("load msgs "+cc);
+			//console.log("load msgs "+cc);
 			
 			// check if messages exist in cache
 			var res = db.query("cached_messages", {ytID: ytID});

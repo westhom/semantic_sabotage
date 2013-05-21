@@ -101,11 +101,11 @@ function loadFills() {
 
 function load(resp) {
 
-	console.log(resp.youtube_id);
+	console.log('load()');
 	curVideoID = resp.youtube_id;
 
-	console.log(resp.url);
-	console.log(resp.cc);
+	//console.log(resp.url);
+	//console.log(resp.cc);
   
 	player.initialize(resp);
 
@@ -180,7 +180,7 @@ function goToMode(m) {
 		// Set up nav menu.
 		hideControls();
 		hidePlayingMessage();
-		showLoadingMessage();
+		showLoadingMessage();	
 		$('#ytURL').val("Enter a different YouTube URL");		
 		// Reset progress bar color to white, for loading.
 		$('#progressBar').width('0%');
@@ -278,9 +278,7 @@ function showPlayingMessage() { $('#playing').show(); }
 function hidePlayingMessage() { $('#playing').hide(); }
 
 
-function bodyClick() {
-	console.log('bodyClick()');
-}
+function bodyClick() {}
 
 
 
