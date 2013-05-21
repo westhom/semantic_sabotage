@@ -263,9 +263,26 @@ body {
 
 }
 
-#ytPlayer {
+/*
+#videoDiv {
+	position:absolute;
+	margin: 0px 0px 0px 0px;
+	padding: 0 0 0 0;
 	width: 0px;
 	height: 0px;
+	top:0px;
+	left:0px;
+}
+*/
+
+#ytplayer {
+	position:absolute;
+	width:0px;
+	height:0px;
+	margin:0px 0px 0px 0px;
+	padding: 0 0 0 0;
+	top:0px;
+	left:0px;
 }
 
 #ytURL {

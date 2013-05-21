@@ -60,7 +60,7 @@ function loadFills() {
      		var j = 0;
      		// For each fill, load javascript.
      		for (var i=0; i<resp.fills.length; i++) {
-				console.log(resp.fills[i]);  
+				//console.log(resp.fills[i]);  
 				
 				// Use function and pass in name because .getScript is asynchronous.
 				(function(name) {	
@@ -157,7 +157,7 @@ function goToMode(m) {
 		//console.log("URL = "+modes[curMode].defaultURL);
 
 		// Get captions from youTube PHP, using defaultURL of mode.
-		/*
+		
 		$.ajax({
 			type: 'post',
 			dataType: 'json',
@@ -168,15 +168,18 @@ function goToMode(m) {
 	   			console.log(data);
 	   		}
 	   	});
-		*/
-
+		
+		/*
 		// Get captions from youTube PHP, using form.
 		// Update value of input with defaultURL of mode.
 		$('#ytURL').val(modes[curMode].defaultURL);
 		// Ajax call below wasn't working, so for now just click submit button.
 		$('#ytURLButton').click();
+		*/
 
 		// Set up nav menu.
+		hideControls();
+		hidePlayingMessage();
 		showLoadingMessage();
 		$('#ytURL').val("Enter a different YouTube URL");		
 		// Reset progress bar color to white, for loading.
@@ -186,6 +189,26 @@ function goToMode(m) {
 		// Call enter on current mode.
 		modes[curMode].enter();
 	}
+}
+
+// When you submit a new URL when already inside of a mode, this does the setup.
+function submitURL() {
+
+		// Set up nav menu.
+		
+		hidePlayingMessage();
+		showLoadingMessage();
+		$('#ytURL').val("Enter a different YouTube URL");		
+		// Reset progress bar color to white, for loading.
+		$('#progressBar').width('0%');
+		$('#progressBar').css('background-color', 'white');        
+
+		pauseVideo();
+		player.pausePlaybackMessages();
+		player.resetPlaybackMessages();
+
+		// Call enter on current mode.
+		modes[curMode].enter();
 }
 
 function showMenu() {
