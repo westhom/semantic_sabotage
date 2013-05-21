@@ -53,7 +53,7 @@ var mode = function(id) {
 			var orange = 'rgb(209, 85, 50)';
 			var black = 'rgb(61, 59, 56)';
 
-			var c = 'none';
+			var c = 'blank';
 		 	if($.inArray('posemo', msg.cats) >= 0) c = 'posemo';
 		 	else if($.inArray('negemo', msg.cats) >= 0) c = 'negemo';
 		 	else if($.inArray('certain', msg.cats) >= 0) c = 'certain';
@@ -88,20 +88,20 @@ var mode = function(id) {
 			// words get a preceeding space, unless they follow lead punct
 		 	else {	
 
-		 		var e;
-		 		if (!this.lastLeadPunct) e = $('<span class="' + c + '">' + ' ' + word + '</span>');
-		 		else e = $('<span class="' + c + '">' + word + '</span>');
+		 		
+		 		if (!this.lastLeadPunct) e = $('#transcript').append('<span class="space"> </span>');
+		 		var e = $('<span class="' + c + '">' + word + '</span>');
 
 		 		$('#transcript').append(e);
 
-		 		if (c != 'none') {
+		 		if (c != 'blank') {
 		 			e.addClass('marked');
-		 			e.addClass('color-tween');
+		 			e.addClass('bgcolor-tween');
 		 			
-		 			if (c == 'posemo') e.css("color", blue);
-		 			else if (c == 'negemo') e.css("color", yellow);
-		 			else if (c == 'certain') e.css("color", green);
-		 			else e.css("color", orange);
+		 			if (c == 'posemo') e.css("background-color", blue);
+		 			else if (c == 'negemo') e.css("background-color", yellow);
+		 			else if (c == 'certain') e.css("background-color", green);
+		 			else e.css("background-color", orange);
 		 		}
 
 		 		this.lastLeadPunct = 0;
@@ -109,38 +109,45 @@ var mode = function(id) {
 		 	}
 
 		 	//animating words
-		 	if (c != 'none')
+		 	if (c != 'blank')
 		 	{
 		 		//console.log("Colored");
 	 			$('.marked').each(function(i) {
 	 				
-	 				var delay = 1000;
+	 				var delay = 3000;
+
+	 				//PEND: clear existing timeouts
+	 				// see - pausePlaybackMessages() in player.js
 	 				
 	 				if (!$(this).hasClass(c)) {
-	 					//console.log("Found class " + c);
-	 					$(this).css("color", black);
+	 					$(this).css("background-color", "transparent");
 	 					$(this).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function() { 
 	 						
-							setTimeout( function(element) { 
-								if (element.hasClass('posemo')) element.css("color", blue);
-								else if (element.hasClass('negemo')) element.css("color", yellow);
-								else if (element.hasClass('certain')) element.css("color", green);
-								else element.css("color", orange);
-							}, delay, $(this));
+							setTimeout( function(element) {
+								if (element.hasClass('posemo')) element.css("background-color", blue);
+								else if (element.hasClass('negemo')) element.css("background-color", yellow);
+								else if (element.hasClass('certain')) element.css("background-color", green);
+								else element.css("background-color", orange);
+							}, delay + i*250, $(this));
 						});
 						
 	 				}
-	 				/*
-	 				else {
-	 					if (c == 'posemo') $(this).css("color", blue);
-			 			else if (c == 'negemo') $(this).css("color", yellow);
-						else if (c == 'certain') $(this).css("color", green);
-						else $(this).css("color", orange);
-	 				}
-	 				*/
-	 				
+	
 	 			});
 
+	 			//fade up the words from the category
+	 			
+	 			$('.' + c).each(function(i) {
+
+ 					if ($(this).hasClass('posemo')) $(this).css("background-color", blue);
+					else if ($(this).hasClass('negemo')) $(this).css("background-color", yellow);
+					else if ($(this).hasClass('certain')) $(this).css("background-color", green);
+					else $(this).css("background-color", orange);
+
+				});
+
+				
+				
 		 	}
 
 		 	

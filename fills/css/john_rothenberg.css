@@ -15,6 +15,12 @@
 	-webkit-transition:color 0.5s linear;
 }
 
+#john_rothenberg .bgcolor-tween
+{
+	transition:background-color 0.5s linear;
+	-webkit-transition:background-color 0.5s linear;
+}
+
 #john_rothenberg .white
 {
 	color: rgb(245, 242, 226);
