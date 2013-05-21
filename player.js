@@ -128,7 +128,8 @@ var Player = function(app) {
 	    		//console.log(ytPlayer.getCurrentTime()+", curMessage= "+curMessage+", t = "+t);
 
 	    		var start = curMessage;
-	    		while(t <= ytPlayer.getCurrentTime()*1000 && curMessage < (messages.length-1)) {
+	    		
+	    		while(t <= document.getElementById("ytplayer").getCurrentTime()*1000 && curMessage < (messages.length-1)) {
 	    			//app.handleMessage(messages[curMessage]);
 	    			t = messages[curMessage].time;
 	    			curMessage++; 

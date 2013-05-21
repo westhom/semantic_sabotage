@@ -71,3 +71,22 @@ cpQtyCCJk0c - beatles 'oh yeah'
 
 jq42aHX4qk4 - I am the walrus good captions (doesn't work yet, need to debug this)
 
+http://www.youtube.com/user/blankonblank?feature=watch - PBS blank on blank series
+
+http://www.youtube.com/watch?v=iBVtRPmMZXY - Andrew Soloman on hope
+
+http://www.youtube.com/watch?v=YLO7tCdBVrA - Bob Ross remixed
+
+http://www.youtube.com/watch?v=weNO9k1TXS0 - Glenn Danzig on books
+
+http://www.youtube.com/watch?v=EOCcFcgRcTg - "America" by Allen Ginsberg
+
+http://www.youtube.com/watch?v=l26Uq3PX-fk - Maya Angelou Presidential Medal of Freedom recipiant
+
+http://www.youtube.com/watch?v=Ia7N1l7zrlk - Stalinst propoganda with English subtitles
+
+http://www.youtube.com/watch?v=cImIlPSuyR8 - Introduction to the 1944 census
+
+http://www.youtube.com/watch?v=u02nZW0QiSE - Kenndey v. Nixon
+
+https://www.youtube.com/watch?v=6JDM4MY71G4 - Muhammad Ali refusing to go to Vietnam
