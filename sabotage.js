@@ -236,6 +236,7 @@ function showMenu() {
 		pauseVideo();
 		player.pausePlaybackMessages();
 		player.resetPlaybackMessages();
+		player.clearParseTimers();
 	//}
 
 	// Hide all controls.
