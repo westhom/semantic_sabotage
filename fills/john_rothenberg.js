@@ -8,6 +8,7 @@ var mode = function(id) {
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,
 		lastEndPunct: 0,
+		setTimeoutEvents: [],
 				 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
@@ -44,6 +45,13 @@ var mode = function(id) {
   			//then grab the encoded contents back out.  The div never exists on the page.
   			return $('<div/>').text(value).html();
 		},
+
+		clearTimeoutMessages: function() {
+    	console.log("clear timeouts");
+	    for (var i=0; i<setTimeoutEvents.length; i++) {
+		    clearTimeout(setTimeoutEvents[i]);
+	    }
+    },
 		
 		appendWordInContext: function(msg) {
 
@@ -111,14 +119,17 @@ var mode = function(id) {
 		 	//animating words
 		 	if (c != 'blank')
 		 	{
+
+				//PEND: clear existing timeouts
+				// see - pausePlaybackMessages() in player.js
+				//clearTimeoutMessages();
+
+
 		 		//console.log("Colored");
 	 			$('.marked').each(function(i) {
 	 				
 	 				var delay = 3000;
 
-	 				//PEND: clear existing timeouts
-	 				// see - pausePlaybackMessages() in player.js
-	 				
 	 				if (!$(this).hasClass(c)) {
 	 					$(this).css("background-color", "transparent");
 	 					$(this).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function() { 
@@ -129,6 +140,7 @@ var mode = function(id) {
 								else if (element.hasClass('certain')) element.css("background-color", green);
 								else element.css("background-color", orange);
 							}, delay + i*250, $(this));
+
 						});
 						
 	 				}
