@@ -1,6 +1,7 @@
 var Player = function(app) {
 	
-	var setTimeoutEvents = [];
+	var playbackTimeoutEvents = [];	 		// Used for playing back blocks of messages.
+	var parseTimeoutEvents = [];				// Used for tracking message parsing with progress bar.
 	var messages = [];
 	var db = new localStorageDB("db", localStorage);;
 	var parser = Parser(db, messages);
@@ -16,7 +17,7 @@ var Player = function(app) {
 			var ytID = data.youtube_id;
 			var cc = data.cc;
 
-			console.log("load msgs "+cc);
+			//console.log("load msgs "+cc);
 			
 			// check if messages exist in cache
 			var res = db.query("cached_messages", {ytID: ytID});
@@ -40,20 +41,21 @@ var Player = function(app) {
 				var offset = 40;	// Milliseconds between line parses.			
 				for (var i=0; i<cc.length; i++) {
 					// Gotta use offset setTimeouts, so progress bar reflow can happen.
-					setTimeout(function(data, i){
+					parseTimeoutEvents.push(setTimeout(function(data, i){
 						parser.parseLine(data[i]);
 						$('#progressBar').width((i/data.length)*100 + "%");		
-					}, i*offset, cc, i);
+					}, i*offset, cc, i));
 				}
 				
 				// Once all messages are created, start!
-				setTimeout(function(){
+				parseTimeoutEvents.push(setTimeout(function(){
 					parser.cacheMessages(data.youtube_id);
 					app.start();
-				}, cc.length*offset + 500);
+				}, cc.length*offset + 500));
 
 			}
-						
+			// Reset curMessage index for playback.
+			curMessage = 0;
 		},
 		
 		printMessages: function() {
@@ -87,7 +89,7 @@ var Player = function(app) {
 	        //  diff = diff / app.modifier;
 	        //}
 	        
-	  		setTimeoutEvents.push(setTimeout(function() {
+	  		playbackTimeoutEvents.push(setTimeout(function() {
 	  				// trigger app.trigger("message:" + msg['type'], { msg: msg['attributes'] });
 
 	          if (messages.length > i+1) {
@@ -114,7 +116,7 @@ var Player = function(app) {
 	     	   		end>=0 && end<messages.length){ 	
 		      	
 		        for(var i=start; i<=end; i++){
-		        	setTimeoutEvents.push(setTimeout(app.handleMessage, messages[i].time-messages[start].time, messages[i]));
+		        	playbackTimeoutEvents.push(setTimeout(app.handleMessage, messages[i].time-messages[start].time, messages[i]));
 		        }       
 	      	}
 				        
@@ -128,7 +130,8 @@ var Player = function(app) {
 	    		//console.log(ytPlayer.getCurrentTime()+", curMessage= "+curMessage+", t = "+t);
 
 	    		var start = curMessage;
-	    		while(t <= ytPlayer.getCurrentTime()*1000 && curMessage < (messages.length-1)) {
+	    		
+	    		while(t <= document.getElementById("ytplayer").getCurrentTime()*1000 && curMessage < (messages.length-1)) {
 	    			//app.handleMessage(messages[curMessage]);
 	    			t = messages[curMessage].time;
 	    			curMessage++; 
@@ -140,8 +143,14 @@ var Player = function(app) {
     
 	    pausePlaybackMessages: function() {
 	    	console.log("pause playback");
-		    for (var i=0; i<setTimeoutEvents.length; i++) {
-			    clearTimeout(setTimeoutEvents[i]);
+		    for (var i=0; i<playbackTimeoutEvents.length; i++) {
+			    clearTimeout(playbackTimeoutEvents[i]);
+		    }
+	    },
+
+	    clearParseTimers: function() {
+	    	for (var i=0; i<parseTimeoutEvents.length; i++) {
+			    clearTimeout(parseTimeoutEvents[i]);
 		    }
 	    },
 

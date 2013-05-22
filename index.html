@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 	<head>
 	
 	<title>Eyeo</title>
@@ -11,6 +11,12 @@
 
   <!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
   <script src="libs/jquery.form.js"></script>
+	
+
+  <!-- google yt api stuff -->
+	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+	<script type="text/javascript" src="./embed.js"></script>
+
 
   <!-- Typekit -->
   <script type="text/javascript" src="//use.typekit.net/rim7nin.js"></script>
@@ -31,15 +37,10 @@
       	}); 
 	</script> 
 
-	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
-    <script type="text/javascript">
-      google.load("swfobject", "2.1");
-    </script> 	
 		
 	<script src="./localStorageDB/localstoragedb.min.js"></script>
 	<script src="./statsHandler.js"></script>
 	<script src="./parser.js"></script>
-	<script src="./embed.js"></script>
 	<script src="./player.js"></script>
 	<script src="./sabotage.js"></script>
 
@@ -50,15 +51,17 @@
 							
 	<body onclick="bodyClick();">
 
+	
 		<div class="navBar">			
 			<div class="navText" onclick="showMenu();">SEMANTIC SABOTAGE</div>			
 
 			<div id="loading" class="navStatus" style="display:none">LOADING CAPTIONS...</div>
 			<div id="playing" class="navStatus" style="display:none">PLAYING...</div>
 			<div id="navControls" style="display:none">
-				<form id="youtube_load" class="navInput" action="youtube_load.php"  method="post">
+				<!-- <form id="youtube_load" class="navInput" action="youtube_load.php"  method="post"> -->
+				<form id="youtube_load" class="navInput">
 					<input id="ytURL" class="navInput" type="text" value="Enter a YouTube URL." name="url" size="44">
-					<input id="ytURLButton" class="navButton" type="submit"  value="SUBMIT">
+					<input id="ytURLButton" class="navButton" type="submit"  value="SUBMIT" onclick="submitURL();">
 				</form>
 				<button id="playButton" class="navButton" style="display:none" onclick="playback();">PLAY</button>
 			    <button id="pauseButton" class="navButton" style="display:none" onclick="pausePlayback();">PAUSE</button>
@@ -72,7 +75,7 @@
 			</div>
 
 		</div>
-
+		
 		<div id="videoDiv"></div>
 		
 		<div id="aboutCover" onclick="hideAbout();"></div>

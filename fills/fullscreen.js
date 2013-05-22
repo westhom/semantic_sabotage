@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Fill'r Up",
-		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
+		defaultURL: "http://www.youtube.com/watch?v=iBVtRPmMZXY",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
 		// Anything you want to do to initialize your mode. 
@@ -30,12 +30,12 @@ var mode = function(id) {
 		
 		// Handle incoming sentenceEnd message.
 		handleSentenceEnd: function(msg) {
-			console.log('sentenceEnd');	
+			//console.log('sentenceEnd');	
 		},
 		
 		// Handle incoming stats message.
 		handleStats: function(msg) {
-			console.log(msg);
+			//console.log(msg);
 		},
 		
 		appendWordInContext: function(msg) {

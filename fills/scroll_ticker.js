@@ -17,6 +17,7 @@ var mode = function(id) {
 		// Gets called evertime you go to the mode.
 		enter: function() {			
 			$('#scrollticker > .scroller').empty();
+			$('#scrollticker > .scroller').css('left', '0px');
 		},
 
 		// Handle incoming word message.
@@ -27,12 +28,12 @@ var mode = function(id) {
 		
 		// Handle incoming sentenceEnd message.
 		handleSentenceEnd: function(msg) {
-			console.log('sentenceEnd');	
+			//console.log('sentenceEnd');	
 		},
 		
 		// Handle incoming stats message.
 		handleStats: function(msg) {
-			console.log(msg);
+			//console.log(msg);
 		},
 		
 		appendWordInContext: function(msg) {

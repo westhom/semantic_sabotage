@@ -4,7 +4,7 @@ Copyright 2013 Yahoo! Inc. All rights reserved.
 Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
-
+html, body { height: 100% }
 html{
 	color:#000;
 	background:#FFF}
@@ -263,9 +263,26 @@ body {
 
 }
 
-#ytPlayer {
+/*
+#videoDiv {
+	position:absolute;
+	margin: 0px 0px 0px 0px;
+	padding: 0 0 0 0;
 	width: 0px;
 	height: 0px;
+	top:0px;
+	left:0px;
+}
+*/
+
+#ytplayer {
+	position:absolute;
+	width:1px;
+	height:1px;
+	margin:0px 0px 0px 0px;
+	padding: 0 0 0 0;
+	top:0px;
+	left:0px;
 }
 
 #ytURL {
