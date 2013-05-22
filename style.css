@@ -392,6 +392,13 @@ body {
 	font-weight: 500;
 }
 
+/* MOTOR - monospaced */
+.motor
+{
+	font-family: "motor", sans-serif;
+	font-style: normal;
+}
+
 /* PROXIMA-NOVA */
 .proxima-nova-400
 {

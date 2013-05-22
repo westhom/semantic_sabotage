@@ -1,70 +1,79 @@
 #justin_manor .container {
-	top:0px;
-	width:50px;
+	width:40px;
 	height:100%;
+	color:red;
 	background-color: rgba(0,0,0,.15); 
     display: inline-block;
 }
 
 #justin_manor .container2 {
-	width:100px;
+	width:70px;
 	height:100%;
+	color:orange;
 	background-color: rgba(20,20,20,0.15 ); 
     display: inline-block;
 }
 
 #justin_manor .container3 {
-	width:150px;
+	width:100px;
 	height:100%;
+	color:yellow;
 	background-color: rgba(0,0,0,0.15); 
     display: inline-block;
 }
 
 #justin_manor .container4 {
-	width:200px;
+	width:130px;
 	height:100%;
+	color:lime;
 	background-color: rgba(20,20,20,0.15); 
     display: inline-block;
 }
 
 #justin_manor .container5 {
-	width:250px;
+	width:160px;
 	height:100%;
+	color:aqua;
 	background-color: rgba(0,0,0,0.15); 
     display: inline-block;
 }
 
 #justin_manor .container6 {
-	width:300px;
+	width:190px;
 	height:100%;
+	color:blue;
 	background-color: rgba(20,20,20,0.15); 
     display: inline-block;
 }
 
 #justin_manor .container7 {
-	width:300px;
+	width:220px;
 	height:100%;
+	color:purple;
 	background-color: rgba(0,0,0,0.15); 
     display: inline-block;
 }
 
 #justin_manor .container8 {
-	width:350px;
+	width:250px;
 	height:100%;
+	color:magenta;
 	background-color: rgba(20,20,20,0.15); 
     display: inline-block;
 }
 
 #justin_manor .container9 {
-	width:400px;
+	width:280px;
 	height:100%;
+	color:rgb(238,130,238);
 	background-color: rgba(2,0,0,0.15); 
     display: inline-block;
 }
 
 #justin_manor .container10 {
-	width:450px;
+	width:310px;
 	height:100%;
+	color:white;
 	background-color: rgba(20,20,20,0.15); 
     display: inline-block;
 }
@@ -74,6 +83,6 @@
 	top:0px;
 	font-size: 60px;
 
-	transition: color 15s ease-out, opacity .5s linear, top 0.1s ease-in;
-	-webkit-transition: color 15s ease-out, opacity .5s linear, top 0.1s ease-in;
+	transition: color 25s ease-out, opacity .5s linear, top 0.1s ease-in;
+	-webkit-transition: color 25s ease-out, opacity .5s linear, top 0.1s ease-in;
 }	
