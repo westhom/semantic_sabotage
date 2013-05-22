@@ -32,13 +32,6 @@ function init() {
 	// Load fills and insert them into DOM.
     loadFills();
 
-  // Set up automatic button press on input box return key.
-	$("#ytURL").keyup(function(event){
-	    if(event.keyCode == 13){
-	        $("#ytURLButton").click();
-	    }
-	});	
-
   // Set up aboutText div to hide after transitioning.
 	$("#aboutText").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
 		function() {

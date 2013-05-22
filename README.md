@@ -77,7 +77,7 @@ http://www.youtube.com/user/blankonblank?feature=watch - PBS blank on blank seri
 
 http://www.youtube.com/watch?v=iBVtRPmMZXY - Andrew Soloman on hope
 
-http://www.youtube.com/watch?v=YLO7tCdBVrA - Bob Ross remixed
+http://www.youtube.com/watch?v=YLO7tCdBVrA - Bob Ross remixed **** This crashes the software.
 
 http://www.youtube.com/watch?v=weNO9k1TXS0 - Glenn Danzig on books
 
