@@ -277,8 +277,8 @@ body {
 
 #ytplayer {
 	position:absolute;
-	width:0px;
-	height:0px;
+	width:1px;
+	height:1px;
 	margin:0px 0px 0px 0px;
 	padding: 0 0 0 0;
 	top:0px;

@@ -73,11 +73,11 @@ KaOC9danxNo - Astronaut singing "Ground Control to Major Tom" - good cc
 
 jq42aHX4qk4 - I am the walrus good captions (doesn't work yet, need to debug this)
 
-http://www.youtube.com/user/blankonblank?feature=watch - PBS blank on blank series
+http://www.youtube.com/user/blankonblank?feature=watch - PBS blank on blank series **** Currently crashes app.
 
 http://www.youtube.com/watch?v=iBVtRPmMZXY - Andrew Soloman on hope
 
-http://www.youtube.com/watch?v=YLO7tCdBVrA - Bob Ross remixed
+http://www.youtube.com/watch?v=YLO7tCdBVrA - Bob Ross remixed **** Currently crashes app.
 
 http://www.youtube.com/watch?v=weNO9k1TXS0 - Glenn Danzig on books
 

@@ -32,18 +32,11 @@ function init() {
 	// Load fills and insert them into DOM.
     loadFills();
 
-  // Set up automatic button press on input box return key.
-	$("#ytURL").keyup(function(event){
-	    if(event.keyCode == 13){
-	        $("#ytURLButton").click();
-	    }
-	});	
-
   // Set up aboutText div to hide after transitioning.
 	$("#aboutText").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
 		function() {
 	 		//if($(this).css('opacity') == 0) $(this).hide();	 		
-	 		// Stupid hack to get it offscreen.
+	 		// Stupid hack to get it offscreen, while still rendering.
 			if($(this).css('opacity') == 0)	$('#aboutText').css('left', '-600px');
 		});
 }
@@ -101,11 +94,11 @@ function loadFills() {
 
 function load(resp) {
 
-	console.log(resp.youtube_id);
+	console.log('load()');
 	curVideoID = resp.youtube_id;
 
-	console.log(resp.url);
-	console.log(resp.cc);
+	//console.log(resp.url);
+	//console.log(resp.cc);
   
 	player.initialize(resp);
 
@@ -138,7 +131,7 @@ function start() {
 	playback();	
 }
 
-function goToMode(m) {
+function goToMode(m, post) {
 	console.log("go to mode "+m);
 	if (m >= 0 && m < modes.length) {
 		curMode = m;
@@ -156,32 +149,45 @@ function goToMode(m) {
 		}
 		//console.log("URL = "+modes[curMode].defaultURL);
 
+		// If post arg is not defined, default to true.
+		post = (typeof post == 'undefined')?true:post;
+
+		if(post){
 		// Get captions from youTube PHP, using defaultURL of mode.
+			console.log('gotoMode - ajax post');
+			$.ajax({
+				type: 'post',
+				dataType: 'json',
+				url: "youtube_load.php",
+				data: {"url":modes[curMode].defaultURL},	   
+		   		success: load,
+		   		error: function(data){
+		   			console.log(data);
+		   		}
+		  });
+
+		  /*
+			// Get captions from youTube PHP, using form.
+			// Update value of input with defaultURL of mode.
+			$('#ytURL').val(modes[curMode].defaultURL);
+			// Ajax call below wasn't working, so for now just click submit button.
+			$('#ytURLButton').click();
+			*/
+
+			// Only set submit field if posting. 
+			$('#ytURL').val("Enter a different YouTube URL");		
+
+		}
 		
-		$.ajax({
-			type: 'post',
-			dataType: 'json',
-			url: "youtube_load.php",
-			data: {"url":modes[curMode].defaultURL},	   
-	   		success: load,
-	   		error: function(data){
-	   			console.log(data);
-	   		}
-	   	});
-		
-		/*
-		// Get captions from youTube PHP, using form.
-		// Update value of input with defaultURL of mode.
-		$('#ytURL').val(modes[curMode].defaultURL);
-		// Ajax call below wasn't working, so for now just click submit button.
-		$('#ytURLButton').click();
-		*/
+		pauseVideo();
+		player.pausePlaybackMessages();
+		player.resetPlaybackMessages();
+		player.clearParseTimers();
 
 		// Set up nav menu.
 		hideControls();
 		hidePlayingMessage();
-		showLoadingMessage();
-		$('#ytURL').val("Enter a different YouTube URL");		
+		showLoadingMessage();	
 		// Reset progress bar color to white, for loading.
 		$('#progressBar').width('0%');
 		$('#progressBar').css('background-color', 'white');        
@@ -194,21 +200,23 @@ function goToMode(m) {
 // When you submit a new URL when already inside of a mode, this does the setup.
 function submitURL() {
 
-		// Set up nav menu.
-		
-		hidePlayingMessage();
-		showLoadingMessage();
-		$('#ytURL').val("Enter a different YouTube URL");		
-		// Reset progress bar color to white, for loading.
-		$('#progressBar').width('0%');
-		$('#progressBar').css('background-color', 'white');        
+	console.log('submitURL()');
 
-		pauseVideo();
-		player.pausePlaybackMessages();
-		player.resetPlaybackMessages();
+	goToMode(curMode, false);
 
-		// Call enter on current mode.
-		modes[curMode].enter();
+	// Post to youTube script with submit field value.
+	console.log('About to post'+$('#ytURL').val());
+
+	$.ajax({
+		type: 'post',
+		dataType: 'json',
+		url: "youtube_load.php",
+		data: {"url":$('#ytURL').val()},	   
+   		success: load,
+   		error: function(data){
+   			console.log(data);
+   		}
+  });
 }
 
 function showMenu() {
@@ -236,6 +244,7 @@ function showMenu() {
 		pauseVideo();
 		player.pausePlaybackMessages();
 		player.resetPlaybackMessages();
+		player.clearParseTimers();
 	//}
 
 	// Hide all controls.
@@ -277,9 +286,7 @@ function showPlayingMessage() { $('#playing').show(); }
 function hidePlayingMessage() { $('#playing').hide(); }
 
 
-function bodyClick() {
-	console.log('bodyClick()');
-}
+function bodyClick() {}
 
 
 

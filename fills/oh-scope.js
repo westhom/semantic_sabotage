@@ -23,12 +23,12 @@ var mode = function(id) {
 		
 		// Handle incoming sentenceEnd message.
 		handleSentenceEnd: function(msg) {
-			console.log('sentenceEnd');	
+			//console.log('sentenceEnd');	
 		},
 		
 		// Handle incoming stats message.
 		handleStats: function(msg) {
-			console.log(msg);
+			//console.log(msg);
 		},
 		
 		appendWordInContext: function(msg) {

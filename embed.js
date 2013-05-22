@@ -101,8 +101,8 @@ function loadPlayer() {
   
   swfobject.embedSWF("http://www.youtube.com/apiplayer?" +
                      "version=3&enablejsapi=1&playerapiid=ytplayer", 
-                     //"videoDiv", "480", "295", "9", null, null, params, atts);
-                        "videoDiv", "0", "0", "9", null, null, params, atts);
+                     "videoDiv", "480", "295", "9", null, null, params, atts);
+                     //   "videoDiv", "0", "0", "9", null, null, params, atts);
 }
 function _run() {
   loadPlayer();
