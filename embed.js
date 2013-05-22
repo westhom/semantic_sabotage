@@ -92,15 +92,17 @@ function onYouTubePlayerReady(playerId) {
 
 // The "main method" of this sample. Called when someone clicks "Run".
 function loadPlayer() {
-  console.log("LOAD PLAYER");
+  //console.log("LOAD PLAYER");
   // Lets Flash from another domain call JavaScript
   var params = { allowScriptAccess: "always" };
   // The element id of the Flash embed
   var atts = { id: "ytplayer" };
   // All of the magic handled by SWFObject (http://code.google.com/p/swfobject/)
+  
   swfobject.embedSWF("http://www.youtube.com/apiplayer?" +
                      "version=3&enablejsapi=1&playerapiid=ytplayer", 
                      "videoDiv", "480", "295", "9", null, null, params, atts);
+                     //   "videoDiv", "0", "0", "9", null, null, params, atts);
 }
 function _run() {
   loadPlayer();

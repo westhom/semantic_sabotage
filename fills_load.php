@@ -5,7 +5,7 @@
 		$fills =  array();
     	/* This is the correct way to loop over the directory. */
     	while (false !== ($entry = readdir($handle))) {
-    		if (strlen($entry) > 2)
+    		if (strlen($entry) > 2 && !strpos($entry, "DS_Store"))
 	      		$fills[] = $entry;
     	}
 
@@ -17,7 +17,7 @@
 		$styles =  array();
     	/* This is the correct way to loop over the directory. */
     	while (false !== ($entry = readdir($handle))) {
-    		if (strlen($entry) > 2)
+    		if (strlen($entry) > 2 && !strpos($entry, "DS_Store"))	
 	      		$styles[] = $entry;
     	}
 

@@ -263,9 +263,26 @@ body {
 
 }
 
+/*
+#videoDiv {
+	position:absolute;
+	margin: 0px 0px 0px 0px;
+	padding: 0 0 0 0;
+	width: 0px;
+	height: 0px;
+	top:0px;
+	left:0px;
+}
+*/
+
 #ytplayer {
-	width: 0;
-	height: 0;
+	position:absolute;
+	width:1px;
+	height:1px;
+	margin:0px 0px 0px 0px;
+	padding: 0 0 0 0;
+	top:0px;
+	left:0px;
 }
 
 #ytURL {
@@ -373,6 +390,13 @@ body {
 	font-family: "ff-meta-serif-web-pro",serif;
 	font-style: italic;
 	font-weight: 500;
+}
+
+/* MOTOR - monospaced */
+.motor
+{
+	font-family: "motor", sans-serif;
+	font-style: normal;
 }
 
 /* PROXIMA-NOVA */
