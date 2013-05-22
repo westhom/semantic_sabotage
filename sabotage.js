@@ -36,7 +36,7 @@ function init() {
 	$("#aboutText").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
 		function() {
 	 		//if($(this).css('opacity') == 0) $(this).hide();	 		
-	 		// Stupid hack to get it offscreen.
+	 		// Stupid hack to get it offscreen, while still rendering.
 			if($(this).css('opacity') == 0)	$('#aboutText').css('left', '-600px');
 		});
 }
