@@ -58,9 +58,10 @@
 			<div id="loading" class="navStatus" style="display:none">LOADING CAPTIONS...</div>
 			<div id="playing" class="navStatus" style="display:none">PLAYING...</div>
 			<div id="navControls" style="display:none">
-				<form id="youtube_load" class="navInput" action="youtube_load.php"  method="post">
+				<!-- <form id="youtube_load" class="navInput" action="youtube_load.php"  method="post"> -->
+				<form id="youtube_load" class="navInput">
 					<input id="ytURL" class="navInput" type="text" value="Enter a YouTube URL." name="url" size="44">
-					<input id="ytURLButton" class="navButton" type="submit"  value="SUBMIT">
+					<input id="ytURLButton" class="navButton" type="submit"  value="SUBMIT" onclick="submitURL();">
 				</form>
 				<button id="playButton" class="navButton" style="display:none" onclick="playback();">PLAY</button>
 			    <button id="pauseButton" class="navButton" style="display:none" onclick="pausePlayback();">PAUSE</button>

@@ -54,7 +54,8 @@ var Player = function(app) {
 				}, cc.length*offset + 500));
 
 			}
-						
+			// Reset curMessage index for playback.
+			curMessage = 0;
 		},
 		
 		printMessages: function() {
