@@ -6,6 +6,9 @@ var Player = function(app) {
 	var parser = Parser(db, messages);
 	var curMessage = 0;
 	
+	// NOTE USE THIS TO EMPTY CACHED_MESSAGES
+	//db.truncate("cached_messages");
+
 	return {
 		initialize: function(data) {
 			// parser gets created, loads LIWC stuff, then calls createMessages
@@ -34,6 +37,7 @@ var Player = function(app) {
 				console.log("creating messages");
 				// Delete previously cached messages.
 		  	db.truncate("cached_messages");
+  			db.truncate("word_instances");
 		  	// Clear the message array. 
 		  	messages.length = 0;
 
