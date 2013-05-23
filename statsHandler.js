@@ -38,8 +38,12 @@ var StatsHandler = function(messages, db) {
 	return {
 	
 		logWordInstance: function(word, cats) {
-			db.insert("word_instances", {word: word, cats: cats});
-			//console.log("w:"+word+" c:"+cats);
+			// insert word
+			var ind = db.insert("word_instances", {word: word, cats: cats});
+			// delete all but last 100 words
+			var d = db.deleteRows("word_instances", function(row) { return (row.ID < ind-100); });
+			//console.log('deleted '+d+' at '+ind);
+			//console.log(ind);
 		},
 	
 		doStats: function(time) {
