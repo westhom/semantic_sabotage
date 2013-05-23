@@ -4,7 +4,11 @@ Copyright 2013 Yahoo! Inc. All rights reserved.
 Licensed under the BSD License.
 http://yuilibrary.com/license/
 */
-html, body { height: 100% }
+html, body {
+	height: 100%;
+	min-width: 1024px;
+}
+
 html{
 	color:#000;
 	background:#FFF}
@@ -71,8 +75,6 @@ legend{
 	position: relative;
 	height:1.5em;
 	z-index:999;
-	width: 100%;
-	min-width: 1024px;
 	background-color: black;
 	padding: 1em 1em 1em 1em;
 }
@@ -170,7 +172,7 @@ input.navInput[type="text"]:focus
 #logo_link {
 	position:absolute;
 	top:1em;
-	right:3em;
+	right:1em;
 	width:0em;
 	height:0em;
 	overflow: visible;
