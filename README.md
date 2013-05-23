@@ -100,3 +100,6 @@ http://www.youtube.com/watch?v=Uq1noGpVfEU - Syrian army beating civilian
 
 http://www.youtube.com/watch?v=28BXqQWqYJU - There Will Be Blood Scene (lots of silences)
 
+http://www.youtube.com/watch?v=ALS92big4TY - Pussy Riot Punk Prayer (singing in russian, subtitles in english)
+
+
