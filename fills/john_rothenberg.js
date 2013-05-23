@@ -3,18 +3,19 @@ var mode = function(id) {
 	return {
 	
 		name: "Tagged Transcript",
-		defaultURL: "http://www.youtube.com/watch?v=1yD8PzFFNFU",
+		defaultURL: "http://www.youtube.com/watch?v=4H5ocEjhkYw",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,
 		lastEndPunct: 0,
-		setTimeoutEvents: [],
+		posEvents: [],
+		negEvents: [],
 				 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
 			this.el.append("<div id='jro' class='container bg-white'></div>");
-			$('#jro').append('<div id="transcript" class="color-tween museo-slab-300 size-32"></div>');
+			$('#jro').append('<div id="transcript" class="transcript color-tween museo-slab-300 size-32"></div>');
 		},
 
 		// Gets called evertime you go to the mode.
@@ -46,10 +47,13 @@ var mode = function(id) {
   			return $('<div/>').text(value).html();
 		},
 
-		clearTimeoutMessages: function() {
-    	console.log("clear timeouts");
-	    for (var i=0; i<setTimeoutEvents.length; i++) {
-		    clearTimeout(setTimeoutEvents[i]);
+		clearTimeoutEvents: function(type) {
+	    var events;
+	    if (type == 'posemo') events = this.posEvents;
+	    else events = this.negEvents;
+	    
+	    for (var i=0; i<events.length; i++) {
+		    clearTimeout(events[i]);
 	    }
     },
 		
@@ -64,8 +68,6 @@ var mode = function(id) {
 			var c = 'blank';
 		 	if($.inArray('posemo', msg.cats) >= 0) c = 'posemo';
 		 	else if($.inArray('negemo', msg.cats) >= 0) c = 'negemo';
-		 	else if($.inArray('certain', msg.cats) >= 0) c = 'certain';
-		 	else if($.inArray('tentat', msg.cats) >= 0) c = 'tentat';
 		 	
 		 	//console.log(msg.word);
 		 	var word = this.htmlEncode(msg.word);
@@ -105,62 +107,56 @@ var mode = function(id) {
 		 		if (c != 'blank') {
 		 			e.addClass('marked');
 		 			e.addClass('bgcolor-tween');
+		 			e.addClass('color-tween');
 		 			
 		 			if (c == 'posemo') e.css("background-color", blue);
-		 			else if (c == 'negemo') e.css("background-color", yellow);
-		 			else if (c == 'certain') e.css("background-color", green);
-		 			else e.css("background-color", orange);
+		 			else if (c == 'negemo') e.css("background-color", orange);
 		 		}
 
 		 		this.lastLeadPunct = 0;
 		 		this.lastEndPunct = 0;
 		 	}
 
-		 	//animating words
+		 	//animating words based on categorization
 		 	if (c != 'blank')
 		 	{
+		 		var events; 
+		 		if (c == 'posemo') events = this.posEvents;
+		 		else events = this.negEvents;
 
-				//PEND: clear existing timeouts
-				// see - pausePlaybackMessages() in player.js
-				//clearTimeoutMessages();
-
-
-		 		//console.log("Colored");
-	 			$('.marked').each(function(i) {
-	 				
-	 				var delay = 3000;
-
-	 				if (!$(this).hasClass(c)) {
-	 					$(this).css("background-color", "transparent");
-	 					$(this).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function() { 
-	 						
-							setTimeout( function(element) {
-								if (element.hasClass('posemo')) element.css("background-color", blue);
-								else if (element.hasClass('negemo')) element.css("background-color", yellow);
-								else if (element.hasClass('certain')) element.css("background-color", green);
-								else element.css("background-color", orange);
-							}, delay + i*250, $(this));
-
-						});
-						
-	 				}
+		 		this.clearTimeoutEvents(c);
 	
+		 		var delay = 2500;
+
+	 			$('.marked').each(function(i) {
+	 				//find all the words of the same class
+	 				if ($(this).hasClass(c)) 
+	 				{
+	 					//set their background and color 
+	 					//$(this).removeClass('bgcolor-tween');
+	 					//$(this).removeClass('color-tween');
+	 					
+	 					$(this).css("color", black);
+
+	 					if ($(this).hasClass('posemo')) $(this).css("background-color", blue);
+						else if ($(this).hasClass('negemo')) $(this).css("background-color", orange);
+
+						//and then fade them out after a timeout
+	 					//$(this).addClass('bgcolor-tween');
+	 					//$(this).addClass('color-tween');
+	 					
+	 					events.push(setTimeout( function(element) {
+	 							element.css("background-color", "transparent");
+	 					}, delay, $(this)));
+
+	 					events.push(setTimeout( function(element) {
+	 							if (element.hasClass('posemo')) element.css("color", blue);
+								else if (element.hasClass('negemo')) element.css("color", orange);
+	 					}, delay+500, $(this)));
+
+	 				}
 	 			});
-
-	 			//fade up the words from the category
-	 			
-	 			$('.' + c).each(function(i) {
-
- 					if ($(this).hasClass('posemo')) $(this).css("background-color", blue);
-					else if ($(this).hasClass('negemo')) $(this).css("background-color", yellow);
-					else if ($(this).hasClass('certain')) $(this).css("background-color", green);
-					else $(this).css("background-color", orange);
-
-				});
-
-				
-				
-		 	}
+	 		}
 
 		 	
 		}
