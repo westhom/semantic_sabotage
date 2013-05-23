@@ -228,10 +228,10 @@ input.navInput[type="text"]:focus
 #about {
 	position: absolute;
 	background-color: black;
-	left:-1800;
-	top:-1800;
-	width:2000;
-	height:2000;
+	left:-1800px;
+	top:-1800px;
+	width:2000px;
+	height:2000px;
 	transform:rotate(45deg);
 	-ms-transform:rotate(45deg);
 	-webkit-transform:rotate(45deg); 
@@ -245,10 +245,10 @@ input.navInput[type="text"]:focus
 #aboutText {
 	position:absolute;
 	top: 72px;
-	left: -600;
+	left: -600px;
 	/* margin: 24px 0 0 24px; */
-	width: 400;
-	height: 800;
+	width: 400px;
+	height: 800px;
 	font-size: 14px;
 	line-height: 16px;
 	font-family: Helvetica, sans-serif;

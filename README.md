@@ -92,3 +92,14 @@ http://www.youtube.com/watch?v=cImIlPSuyR8 - Introduction to the 1944 census
 http://www.youtube.com/watch?v=u02nZW0QiSE - Kenndey v. Nixon
 
 https://www.youtube.com/watch?v=6JDM4MY71G4 - Muhammad Ali refusing to go to Vietnam
+
+
+http://www.youtube.com/watch?v=Ik0aS368Kv0 - Sermon on the mount.
+
+http://www.youtube.com/watch?v=Uq1noGpVfEU - Syrian army beating civilian 
+
+http://www.youtube.com/watch?v=28BXqQWqYJU - There Will Be Blood Scene (lots of silences)
+
+http://www.youtube.com/watch?v=ALS92big4TY - Pussy Riot Punk Prayer (singing in russian, subtitles in english)
+
+
