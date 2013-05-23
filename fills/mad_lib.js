@@ -3,35 +3,18 @@ var mode = function(id) {
 	return {
 	
 		name: "Mad Lib",
-		defaultURL: "http://www.youtube.com/watch?v=1yD8PzFFNFU",
+		defaultURL: "http://www.youtube.com/watch?v=weNO9k1TXS0",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,
 		lastEndPunct: 0,
-		posEvents: [],
-		negEvents: [],
+		timeoutEvents: [],
+		nounIndex: 0,
 				 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div id='madlib' class='container bg-white'></div>");
-
-			//parser practice:
-			console.log(">> PARSER >>");
-			console.log("\u2019");
-			var tok = 'I’ll';
-
-			var spaceRegEx = new RegExp(/\S{1,}/g);
-			//var leadPunctRegEx = new RegExp(/^[\"|\'|“|‘|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
-			var leadPunctRegEx = new RegExp(/^\W{1,}/);
-			var numberRegEx = new RegExp(/\d{1,}.{1,}\d{1,}/);
-			var abbrevRegEx = new RegExp(/\w{1,}[\'|\-|’]\w{1,}/); //JRO edit
-			//var wordRegEx = new RegExp(/\w{1,}/);
-			var wordRegEx = new RegExp(/[\w|@|#]{1,}/);
-			var urlRegEx = new RegExp(/(http:\/\/|www)\S{1,}/);
-
-			var abbrevWord = tok.match(abbrevRegEx);
-			console.log(abbrevWord);
+			this.el.append('<div id="madlib" class="container bg-white"></div>');
 
 		},
 
@@ -39,6 +22,19 @@ var mode = function(id) {
 		enter: function() {
 			console.log(this.name+" enter()");
 			$('#madlib').empty();
+			
+			var intro = 'A screaming comes across the sky.';
+			var holder = $('<div class="sentence meta-serif-book size-64"></div>');
+
+			holder.append('<div class="variable pronoun" >IT </div>');
+			holder.append('<div class="fixed">WAS </div>');
+			holder.append('<div class="variable article">THE </div>');
+			holder.append('<div class="variable quant">BEST </div>');
+			holder.append('<div class="variable prep">OF </div>');
+			holder.append('<div class="variable time">TIMES </div>');
+
+			$('#madlib').append(holder);
+
 		},
 
 
@@ -65,17 +61,34 @@ var mode = function(id) {
 		},
 
 		clearTimeoutEvents: function(type) {
-	    var events;
-	    if (type == 'posemo') events = this.posEvents;
-	    else events = this.negEvents;
-	    
-	    for (var i=0; i<events.length; i++) {
-		    clearTimeout(events[i]);
-	    }
+	    for (var i=0; i<this.timeoutEvents.length; i++) {
+		    clearTimeout(this.timeoutEvents[i]);
+	    };
     },
 		
 		appendWordInContext: function(msg) {
 
+			var categories = ['pronoun', 'past', 'present', 'future', 'article', 'quant', 'prep', 'time'];
+			var found = false;
+
+			//ignore any punctuation
+			if($.inArray('punct', msg.cats) < 0)
+			{
+
+				for (i in categories)
+				{
+					var term = categories[i];
+					var word = msg.word.toUpperCase();			
+					if ($.inArray(term, msg.cats) >= 0)
+					{
+						console.log(term + ' >> ' + msg.word);
+						$('.' + term).html(word + ' ');
+						break;
+					}
+					
+				}
+
+			}
 
 		 	
 		}
