@@ -53,13 +53,13 @@ var Parser = function(db, messages) {
 		}, 
 	
 		parseLine: function(line) {
-		
+
 			//console.log(line);
 			var spaceRegEx = new RegExp(/\S{1,}/g);
-			//var leadPunctRegEx = new RegExp(/^[\"|\'|“|‘|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
-			var leadPunctRegEx = new RegExp(/^\W{1,}/);
+			var leadPunctRegEx = new RegExp(/^[\"|\'|\u201C|\u2018|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
+			//var leadPunctRegEx = new RegExp(/^\W{1,}/);
 			var numberRegEx = new RegExp(/\d{1,}.{1,}\d{1,}/);
-			var abbrevRegEx = new RegExp(/\w{1,}[\'|\-]\w{1,}/); //JRO edit
+			var abbrevRegEx = new RegExp(/\w{1,}[\'|\-|\u2019]\w{1,}/); //JRO edit
 			//var wordRegEx = new RegExp(/\w{1,}/);
 			var wordRegEx = new RegExp(/[\w|@|#]{1,}/);
 			var urlRegEx = new RegExp(/(http:\/\/|www)\S{1,}/);
@@ -96,7 +96,7 @@ var Parser = function(db, messages) {
 			// Figure out the average duration of a character. 
 			// Then use this to give a custom duration to each word based on its char length.
 			//JRO: if text starts to get jumbled, it has to do with the timing, add more to length to allow for wiggle room
-			var charDur = dur/(text.length+2);
+			var charDur = dur/(text.length+3);
 			var curTime = start;
 			
 			//var totalDur = curTime + charDur*text.length;
@@ -108,7 +108,8 @@ var Parser = function(db, messages) {
 				if (tokens[i] !== "") 
 				{
 					var tok = tokens[i];
-					//if (print) console.log(tok);
+
+					//console.log(tok);
 					
 					var word = null;
 					var leadPunct = null;
@@ -145,7 +146,7 @@ var Parser = function(db, messages) {
 						// pull any abbreviations
 						var abbrevWord = tok.match(abbrevRegEx);
 						if (abbrevWord && !word) {
-							//console.log('abbrev');
+							//console.log('abbrev ' + abbrevWord);
 							word = abbrevWord[0];
 						}
 						//console.log("tok3:"+tok);

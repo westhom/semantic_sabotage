@@ -1,4 +1,4 @@
-#john_rothenberg .container {
+#tagged_transcript .container {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -8,29 +8,29 @@
 	/* background-color: rgb(245, 242, 226); */
 }
 
-#john_rothenberg .transcript 
+#tagged_transcript .transcript 
 {
 	padding: 24px;
 }
 
-#john_rothenberg .color-tween
+#tagged_transcript .color-tween
 {
 	transition:color 1.0s linear;
 	-webkit-transition:color 1.0s linear;
 }
 
-#john_rothenberg .bgcolor-tween
+#tagged_transcript .bgcolor-tween
 {
 	transition:background-color 1.0s linear;
 	-webkit-transition:background-color 1.0s linear;
 }
 
-#john_rothenberg .white
+#tagged_transcript .white
 {
 	color: rgb(245, 242, 226);
 }
 
-#john_rothenberg .bg-white
+#tagged_transcript .bg-white
 {
 	background-color: rgb(245, 242, 226);
 }
