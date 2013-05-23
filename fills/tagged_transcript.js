@@ -14,8 +14,8 @@ var mode = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div id='jro' class='container bg-white'></div>");
-			$('#jro').append('<div id="transcript" class="transcript color-tween museo-slab-300 size-32"></div>');
+			this.el.append("<div id='tagged_container' class='container bg-white'></div>");
+			$('#tagged_container').append('<div id="transcript" class="transcript museo-slab-300 size-32"></div>');
 		},
 
 		// Gets called evertime you go to the mode.
