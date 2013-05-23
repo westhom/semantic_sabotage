@@ -71,7 +71,7 @@ legend{
 	position:relative;
 	width: 100%;
 	height: 100%;
-	margin: 24px 0px 0px 0px;
+	margin: 24px 0 0 0;
 }
 
 
@@ -79,7 +79,7 @@ legend{
 	position: relative;
 	width: 100%;
 	height: 100%;
-	margin: 0px 0px 0px 0px;
+	margin: 0 0 0 0;
 }
 
 /* NAVIGATION css */
@@ -91,7 +91,7 @@ legend{
 	width: 100%;
 	min-width: 1024px;
 	background-color: black;
-	padding: 12px 0px 12px 24px;
+	padding: 12px 0 12px 24px;
 }
 
 #navControls {
@@ -107,10 +107,10 @@ legend{
 	height:1.5em;
 
 	font-family: Helvetica, sans-serif;
-	font-weight: light;
+	font-weight: lighter;
 	font-size: 1.5em;
 
-	margin: 0px 0px 0px 12px;
+	margin: 0 0 0 12px;
 	color: white;
 
 	height:1.5em;
@@ -140,13 +140,13 @@ legend{
 
 	position: relative;
 	display: inline;
-	top: 0px;
+	top: 0;
 	height:1.5em;
 
 	font-family: Helvetica, sans-serif;
 	font-weight: normal;
 
-	padding: 0px 0px 0px 0px;
+	padding: 0 0 0 0;
 	border-style: none;
 
 	/*background-color: rgb(128, 128, 128);*/
@@ -203,18 +203,18 @@ input.navInput[type="text"]:focus
 
 #logo {
 	position:absolute;
-	right:0px;
+	right:0;
 	height:1.5em;
-	margin: 0px 40px 0px 0px;
+	margin: 0 40 0 0;
 }
 
 #about {
 	position: absolute;
 	background-color: black;
-	left:-1800px;
-	top:-1800px;
-	width:2000px;
-	height:2000px;
+	left:-1800;
+	top:-1800;
+	width:2000;
+	height:2000;
 	transform:rotate(45deg);
 	-ms-transform:rotate(45deg);
 	-webkit-transform:rotate(45deg); 
@@ -228,10 +228,10 @@ input.navInput[type="text"]:focus
 #aboutText {
 	position:absolute;
 	top: 72px;
-	left: -600px;
-	/* margin: 24px 0px 0px 24px; */
-	width: 400px;
-	height: 800px;
+	left: -600;
+	/* margin: 24px 0 0 24px; */
+	width: 400;
+	height: 800;
 	font-size: 14px;
 	line-height: 16px;
 	font-family: Helvetica, sans-serif;
@@ -246,8 +246,8 @@ input.navInput[type="text"]:focus
 
 #aboutCover {
 	position:absolute;
-	top:0px;
-	left:0px;
+	top:0;
+	left:0;
 	width:100%;
 	height:100%;
 	display:none;
@@ -295,7 +295,7 @@ body {
 
 #progressBarBox {
 	position:absolute;
-	bottom:0px;
+	bottom:0;
 	width:100%;
 	height:6px;
 }
@@ -306,7 +306,7 @@ body {
 	background-color: white;
 	opacity: 0.8;
 	height: 6px;
-	width: 0%;
+	width: 0;
 }
 
 
@@ -429,7 +429,7 @@ body {
 }
 
 .modeName {
-	margin: 0px 0px 0px 24px;
+	margin: 0 0 0 24px;
 	/* font-size: 2.5em; */
 	font-size: 1.5em;
 	font-family: Helvetica;
@@ -448,8 +448,8 @@ body {
 
 .modeContainer {
 	position:absolute;
-	left:0px;
-	top:0px;
+	left:0;
+	top:0;
 	width:100%;
 	height:100%;
 	overflow-y:auto;
