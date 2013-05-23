@@ -2,9 +2,9 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Lyrics Test",
+		name: "Lyric Stacks",
 
-		defaultURL: "http://www.youtube.com/watch?v=cpQtyCCJk0c",
+		defaultURL: "http://www.youtube.com/watch?v=OQSNhk5ICTI",
 		el: $('<div class="modeContainer" style="background-color:black" id="'+id+'"></div>'),
 				 
 		lineHeight: 72,
@@ -53,14 +53,15 @@ var mode = function(id) {
 		 		this.el.append(' ');
 		 	
 		 	var c;
-		 	if($.inArray('funct', msg.cats) >= 0) c = 'rgb(255,0,0)';		 	
-		 	//else if($.inArray('heshe', msg.cats) >= 0) c = 'rgb(240,0,0)';
-		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(240,240,0)';
-		 	else c = 'rgb(0,0,0)';
+		 	if($.inArray('posemo', msg.cats) >= 0) c = "blue";
+		 	else if($.inArray('negemo', msg.cats) >= 0) c = "orange";
+		 	else if($.inArray('certain', msg.cats) >= 0) c = "green";
+		 	else if($.inArray('tentat', msg.cats) >= 0) c = "yellow";
+		 	else c = "white";
 
 		 	//c = 'rgb(10,10,10)';
 
-		 	var newWord = $('<div class= "bigText titleText" style="color:' + c + ';">' + msg.word + '</div>');
+		 	var newWord = $('<div class= "bigText motor" style="color:' + c + ';">' + msg.word + '</div>');
 		 	
 		 	setTimeout(function() { 
 		 		newWord.css({'color':'rgb(255,255,255)', 'opacity':'0', 'top':'1000px'});
@@ -70,11 +71,11 @@ var mode = function(id) {
 		 		newWord.remove();
 		 	}, 6000);
 
-			var e = $('<div class= "bigText titleText" style="color:red; opacity:0;">' + msg.word.toUpperCase() + '</div>');
+			var e = $('<div class= "bigText motor" opacity:0;">' + msg.word.toUpperCase() + '</div>');
 
 		 	setTimeout(function(element){
 		 		element.css("opacity", "1");	
-		 		element.css("color", "white");			 		
+		 		//element.css("color", "black");			 		
 		 	},20,e);
 
 			var h = this.lineHeight;
@@ -84,7 +85,9 @@ var mode = function(id) {
 			 	$('#one').prepend(e);
 		 		$('#one').children().each(function(i){
 			 		var t = h*i+"px";
+			 		var o = 1.0 - i*0.07;
 			 		$(this).css("top", t);
+			 		$(this).css("opacity", o);
 		 		});
 		 		$('#one').css('height', $('#one > .bigText').length*this.lineHeight+"px");					 	
 			} else if (msg.word.length === 2) {
@@ -92,7 +95,9 @@ var mode = function(id) {
 			 	$('#two').prepend(e);
 		 		$('#two').children().each(function(i){
 			 		var t = h*i+"px";
+			 		var o = 1.0 - i*0.07;
 			 		$(this).css("top", t);
+			 		$(this).css("opacity", o);
 		 		});
 		 		$('#two').css('height', $('#two > .bigText').length*this.lineHeight+"px");		
 
@@ -102,7 +107,9 @@ var mode = function(id) {
 			 	$('#three').prepend(e);
 		 		$('#three').children().each(function(i){
 			 		var t = h*i+"px";
+			 		var o = 1.0 - i*0.07;
 			 		$(this).css("top", t);
+			 		$(this).css("opacity", o);
 		 		});
 		 		$('#three').css('height', $('#three > .bigText').length*this.lineHeight+"px");			 	
 			} else if (msg.word.length === 4) {
@@ -111,7 +118,9 @@ var mode = function(id) {
 			 	$('#four').prepend(e);
 		 		$('#four').children().each(function(i){
 			 		var t = h*i+"px";
+			 		var o = 1.0 - i*0.07;
 			 		$(this).css("top", t);
+			 		$(this).css("opacity", o);
 		 		});
 		 		$('#four').css('height', $('#four > .bigText').length*this.lineHeight+"px");
 
@@ -120,7 +129,9 @@ var mode = function(id) {
 			 	$('#five').prepend(e);
 		 		$('#five').children().each(function(i){
 			 		var t = h*i+"px";
+			 		var o = 1.0 - i*0.07;
 			 		$(this).css("top", t);
+			 		$(this).css("opacity", o);
 		 		});
 		 		$('#five').css('height', $('#five > .bigText').length*this.lineHeight+"px");			
 
@@ -129,7 +140,9 @@ var mode = function(id) {
 			 	$('#six').prepend(e);
 		 		$('#six').children().each(function(i){
 			 		var t = h*i+"px";
+			 		var o = 1.0 - i*0.07;
 			 		$(this).css("top", t);
+			 		$(this).css("opacity", o);
 		 		});
 		 		$('#six').css('height', $('#six > .bigText').length*this.lineHeight+"px");		
 			 } else if (msg.word.length === 7){
@@ -137,7 +150,9 @@ var mode = function(id) {
 			 	$('#seven').prepend(e);
 		 		$('#seven').children().each(function(i){
 			 		var t = h*i+"px";
+			 		var o = 1.0 - i*0.07;
 			 		$(this).css("top", t);
+			 		$(this).css("opacity", o);
 		 		});
 		 		$('#seven').css('height', $('#seven > .bigText').length*this.lineHeight+"px");		
 			 } else if (msg.word.length === 8){
@@ -145,7 +160,9 @@ var mode = function(id) {
 			 	$('#eight').prepend(e);
 		 		$('#eight').children().each(function(i){
 			 		var t = h*i+"px";
+			 		var o = 1.0 - i*0.07;
 			 		$(this).css("top", t);
+			 		$(this).css("opacity", o);
 		 		});
 		 		$('#eight').css('height', $('#eight > .bigText').length*this.lineHeight+"px");		
 			 } else if (msg.word.length === 9){
@@ -153,7 +170,9 @@ var mode = function(id) {
 			 	$('#nine').prepend(e);
 		 		$('#nine').children().each(function(i){
 			 		var t = h*i+"px";
+			 		var o = 1.0 - i*0.07;
 			 		$(this).css("top", t);
+			 		$(this).css("opacity", o);
 		 		});
 		 		$('#nine').css('height', $('#nine > .bigText').length*this.lineHeight+"px");		
 			 } else {
@@ -161,7 +180,9 @@ var mode = function(id) {
 			 	$('#ten').prepend(e);
 		 		$('#ten').children().each(function(i){
 			 		var t = h*i+"px";
+			 		var o = 1.0 - i*0.07;
 			 		$(this).css("top", t);
+			 		$(this).css("opacity", o);
 		 		});
 		 		$('#ten').css('height', $('#ten > .bigText').length*this.lineHeight+"px");		
 			 }

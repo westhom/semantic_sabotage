@@ -1,0 +1,37 @@
+#mad_lib .container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width:100%;
+	min-height: 100%;
+	overflow: scroll;
+	/* background-color: rgb(245, 242, 226); */
+}
+
+#mad_lib .transcript 
+{
+	padding: 24px;
+}
+
+#mad_lib .color-tween
+{
+	transition:color 1.0s linear;
+	-webkit-transition:color 1.0s linear;
+}
+
+#mad_lib .bgcolor-tween
+{
+	transition:background-color 1.0s linear;
+	-webkit-transition:background-color 1.0s linear;
+}
+
+#mad_lib .white
+{
+	color: rgb(245, 242, 226);
+}
+
+#mad_lib .bg-white
+{
+	background-color: rgb(245, 242, 226);
+}
+
