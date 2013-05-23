@@ -77,7 +77,7 @@ legend{
 	min-height:1.5em;
 	z-index:999;
 	background-color: black;
-	padding: 1em 1em 1em 1em;
+	padding: 1em 1em 0.5em 1em;
 }
 
 .navText{
@@ -188,7 +188,7 @@ input.navInput[type="text"]:focus
 
 #progressBarBox {
 	position:relative;
-	background-color: #666;
+	background-color: black;
 	left:0em;
 	bottom:0em;
 	width:100%;
