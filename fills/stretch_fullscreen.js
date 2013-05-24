@@ -2,7 +2,7 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Fill'r Up",
+		name: "Stretch Fullscreen",
 		defaultURL: "http://www.youtube.com/watch?v=iBVtRPmMZXY",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
@@ -47,14 +47,14 @@ var mode = function(id) {
 		 		var s = document.createElement('div');
 		 		$(s).addClass('word');
 		 		$(s).append(msg.word);
-		 		$('#fullscreen .container').append(s);
+		 		$('#stretch_fullscreen .container').append(s);
 		 		var w = $(s).width();
-		 		var ww = $('#fullscreen .container').width();
+		 		var ww = $('#stretch_fullscreen .container').width();
 		 		var h = $(s).height();
-		 		var hh = $('#fullscreen .container').height();
-		 		$(s).css('top','-40%');
+		 		var hh = $('#stretch_fullscreen .container').height();
+		 		$(s).css('top','-38.60%');
 		 		$(s).css('-webkit-transform-origin','0% 0%');
-		 		$(s).css('-webkit-transform','scale(' + ww/w + ',' + hh/h*1.71 + ')');
+		 		$(s).css('-webkit-transform','scale(' + ww/w*1.00 + ',' + hh/h*1.70 + ')');
 		 		window.getComputedStyle(s).WebkitTransform;
 		 		$(s).css('-webkit-transition','opacity 3s ease-out, color 1s ease-in');		 		
 		 		$(s).css('color', 'rgb(' + Math.floor(Math.random()*200) + ',' + Math.floor(Math.random()*200) + ',' + Math.floor(Math.random()*200) + ')');
