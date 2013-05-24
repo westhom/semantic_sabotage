@@ -1,5 +1,5 @@
 
-#fullscreen .container {
+#stretch_fullscreen .container {
 	position: absolute;
 	background-image: -webkit-gradient(
 		linear,
@@ -16,7 +16,7 @@
 	font-size: 100px;
 }
 
-#fullscreen .word {
+#stretch_fullscreen .word {
 	position: absolute;
 	top: 0px;
 	left: 0px;

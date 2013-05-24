@@ -8,9 +8,21 @@
 	/* background-color: rgb(245, 242, 226); */
 }
 
-#mad_lib .transcript 
+#mad_lib .sentence 
 {
-	padding: 24px;
+		position: relative;
+		left: 120px;
+		top: 120px;
+}
+
+#mad_lib .fixed
+{
+	display: inline;
+}
+
+#mad_lib .variable
+{
+	display: inline;
 }
 
 #mad_lib .color-tween

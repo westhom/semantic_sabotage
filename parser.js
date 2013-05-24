@@ -1,34 +1,44 @@
 var Parser = function(db, messages) {	
 
-	var db = db;
-	var messages = messages;
+	// var db = db;
+	// var messages = messages;
 
-	var statsHandler = StatsHandler(messages, db);
+	// var statsHandler = StatsHandler(messages, db);
 	
 
 	return {
+
+		db: null,
+		messages: null,
+		statsHandler: null,
+
+		setup: function(db, messages) {
+			this.db = db;
+			this.messages = messages;
+			this.statsHandler = StatsHandler(this.messages, this.db);
+		},
 	
 		initialize: function(callback, args) {
 			// making two tables for LIWC because it's faster
 			
 			// create cached_messages table if nec
-			if (!db.tableExists("cached_messages")) {
-		  	db.createTable("cached_messages", ["ytID", "messages"]);
-				db.commit();
+			if (!this.db.tableExists("cached_messages")) {
+		  	this.db.createTable("cached_messages", ["ytID", "messages"]);
+				this.db.commit();
 			}
 
 			// load non-wild table if needed
-		  if (!db.tableExists("LIWC_words")) {
-		  	db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
+		  if (!this.db.tableExists("LIWC_words")) {
+		  	this.db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
 		  	//db.truncate("LIWC_words");
 		  
 			  $.getJSON("LIWC/LIWC.json", function(json) {
 			  	for (var i=0; i<json.length; i++) {
 			  		if (json[i]['word'])
-					  	db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+					  	this.db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
 			  	}
 			  	console.log("loaded nonwild "+json.length);
-			  	db.commit();
+			  	this.db.commit();
 
 			  	// then load wild table
 				  if (!db.tableExists("LIWC_words_wild")) {
@@ -38,10 +48,10 @@ var Parser = function(db, messages) {
 					  $.getJSON("LIWC/LIWC_wildcards.json", function(json) {
 					  	for (var i=0; i<json.length; i++) {
 					  		if (json[i]['word'])
-							  	db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+							  	this.db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
 					  	}
 					  	console.log("loaded wild "+json.length);
-					  	db.commit();
+					  	this.db.commit();
 					  	
 					  	// call callback fxn
 					  	callback(args);
@@ -174,25 +184,25 @@ var Parser = function(db, messages) {
 						//msgTime -= 5;
 						var msg = {type: "word", time:curTime, word:leadPunct, cats:["punct", "leadPunct"]};
 						//console.log(msg);
-						messages.push(msg);												
+						this.messages.push(msg);												
 						curTime += (charDur*(leadPunct.length));
 					}
 					if (word) {
 						word = word.toString();
 						var cats = this.getCats(word.toString());
-						statsHandler.logWordInstance(word, cats);
+						this.statsHandler.logWordInstance(word, cats);
 						var msg = {type: "word", time:curTime, word:word, cats:this.getCats(word)};
 						//console.log(msg);
-						messages.push(msg);
+						this.messages.push(msg);
 						curTime += (charDur*(word.length+1));
 					}
 					if (endPunct) {
 						//msgTime += 5;		
 						var msg = {type: "word", time:curTime, word:endPunct, cats:["punct", "endPunct"]};
 						//console.log(msg);
-						messages.push(msg);
+						this.messages.push(msg);
 						// also send sentenceEnd msg? PEND: necessary or can we check for cat endPunct?
-						messages.push({type: "sentenceEnd", time:curTime});
+						this.messages.push({type: "sentenceEnd", time:curTime});
 						curTime += (charDur*(endPunct.length));
 					}
 					
@@ -201,14 +211,14 @@ var Parser = function(db, messages) {
 			}
 			
 			// calculate stats for the line
-			statsHandler.doStats(start+dur);
+			this.statsHandler.doStats(start+dur);
 		},
 		
 		getCats: function(w) {
 			var cats = [];
 			
 			// check for regular match
-			var res = db.query("LIWC_words", {word: w.toLowerCase()}); 
+			var res = this.db.query("LIWC_words", {word: w.toLowerCase()}); 
 			if (res.length > 0) {
 				cats = res[0].cats;
 			}
@@ -216,7 +226,7 @@ var Parser = function(db, messages) {
 			// check for wildcards
 			else {
 			// select all books by Torday and Sparrow
-				res = db.query("LIWC_words_wild", function(row) {
+				res = this.db.query("LIWC_words_wild", function(row) {
 			    if(w.toLowerCase().indexOf(row.word) == 0) {
 			        return true;
 			    } else {
@@ -232,8 +242,8 @@ var Parser = function(db, messages) {
 		},
 
 		cacheMessages: function(ytID) {
-			db.insertOrUpdate("cached_messages", {ytID: ytID}, {ytID: ytID, messages: messages});
-			db.commit();
+			this.db.insertOrUpdate("cached_messages", {ytID: ytID}, {ytID: ytID, messages: this.messages});
+			this.db.commit();
 			console.log("cached messages for "+ytID);
 		}
 	}

@@ -1,81 +1,90 @@
 #justin_manor .container {
-	width:40px;
 	height:100%;
+	width:40px;
+	left:0px;
 	color:red;
 	background-color: rgba(0,0,0,.15); 
-    display: inline-block;
+	position:absolute;
 }
 
 #justin_manor .container2 {
-	width:70px;
 	height:100%;
+	width:70px;
+	left:40px;	
 	color:orange;
 	background-color: rgba(20,20,20,0.15 ); 
-    display: inline-block;
+	position:absolute;	
 }
 
 #justin_manor .container3 {
-	width:100px;
 	height:100%;
+	width:100px;
+	left:110px;	
 	color:yellow;
 	background-color: rgba(0,0,0,0.15); 
-    display: inline-block;
+	position:absolute;	
 }
 
 #justin_manor .container4 {
-	width:130px;
 	height:100%;
+	width:130px;
+	left:210px;			
 	color:lime;
 	background-color: rgba(20,20,20,0.15); 
-    display: inline-block;
+	position:absolute;	
 }
 
 #justin_manor .container5 {
-	width:160px;
 	height:100%;
+	width:160px;
+	left:340px;		
 	color:aqua;
 	background-color: rgba(0,0,0,0.15); 
-    display: inline-block;
+	position:absolute;	
 }
 
 #justin_manor .container6 {
-	width:190px;
 	height:100%;
+	width:190px;
+	left:500px;			
 	color:blue;
 	background-color: rgba(20,20,20,0.15); 
-    display: inline-block;
+	position:absolute;	
 }
 
 #justin_manor .container7 {
-	width:220px;
 	height:100%;
+	width:220px;
+	left:690px;
 	color:purple;
 	background-color: rgba(0,0,0,0.15); 
-    display: inline-block;
+	position:absolute;	
 }
 
 #justin_manor .container8 {
-	width:250px;
 	height:100%;
+	width:250px;
+	left:910px;	
 	color:magenta;
 	background-color: rgba(20,20,20,0.15); 
-    display: inline-block;
+	position:absolute;
 }
 
 #justin_manor .container9 {
-	width:280px;
 	height:100%;
+	width:280px;
+	left:1160px;
 	color:rgb(238,130,238);
 	background-color: rgba(2,0,0,0.15); 
-    display: inline-block;
+	position:absolute;	
 }
 
 #justin_manor .container10 {
-	width:310px;
 	height:100%;
+	width:310px;
+	left:1340px;	
 	color:white;
-	background-color: rgba(20,20,20,0.15); 
-    display: inline-block;
+	position:absolute;
 }
 
 #justin_manor .bigText{
