@@ -1,0 +1,49 @@
+#mad_lib .container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width:100%;
+	min-height: 100%;
+	overflow: scroll;
+	/* background-color: rgb(245, 242, 226); */
+}
+
+#mad_lib .sentence 
+{
+		position: relative;
+		left: 120px;
+		top: 120px;
+}
+
+#mad_lib .fixed
+{
+	display: inline;
+}
+
+#mad_lib .variable
+{
+	display: inline;
+}
+
+#mad_lib .color-tween
+{
+	transition:color 1.0s linear;
+	-webkit-transition:color 1.0s linear;
+}
+
+#mad_lib .bgcolor-tween
+{
+	transition:background-color 1.0s linear;
+	-webkit-transition:background-color 1.0s linear;
+}
+
+#mad_lib .white
+{
+	color: rgb(245, 242, 226);
+}
+
+#mad_lib .bg-white
+{
+	background-color: rgb(245, 242, 226);
+}
+

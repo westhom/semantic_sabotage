@@ -1,0 +1,37 @@
+#tagged_transcript .container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width:100%;
+	min-height: 100%;
+	overflow: scroll;
+	/* background-color: rgb(245, 242, 226); */
+}
+
+#tagged_transcript .transcript 
+{
+	padding: 24px;
+}
+
+#tagged_transcript .color-tween
+{
+	transition:color 1.0s linear;
+	-webkit-transition:color 1.0s linear;
+}
+
+#tagged_transcript .bgcolor-tween
+{
+	transition:background-color 1.0s linear;
+	-webkit-transition:background-color 1.0s linear;
+}
+
+#tagged_transcript .white
+{
+	color: rgb(245, 242, 226);
+}
+
+#tagged_transcript .bg-white
+{
+	background-color: rgb(245, 242, 226);
+}
+

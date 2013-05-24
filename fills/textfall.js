@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Textfall",
-		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
+		defaultURL: "http://www.youtube.com/watch?v=l26Uq3PX-fk",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
 		// Anything you want to do to initialize your mode. 
