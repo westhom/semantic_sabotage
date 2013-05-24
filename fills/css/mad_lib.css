@@ -11,8 +11,10 @@
 #mad_lib .sentence 
 {
 		position: relative;
-		left: 120px;
-		top: 120px;
+		left: 0px;
+		top: 0px;
+		width: 85%;
+		padding: 30% 5% 10% 10%;
 }
 
 #mad_lib .fixed
@@ -23,6 +25,17 @@
 #mad_lib .variable
 {
 	display: inline;
+}
+
+#mad_lib .landing-word
+{
+	display: inline;
+}
+
+#mad_lib .space
+{
+	display: inline;
+	width: 48px;
 }
 
 #mad_lib .color-tween
