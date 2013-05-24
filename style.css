@@ -84,8 +84,8 @@ legend{
 	display: inline;
 	top: 0em;
 	height:1.5em;
-	font-family: Helvetica, sans-serif;
-	font-weight: bold;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: bold;*/
 	font-size: 1.5em;
 	color: rgb(110,110,110);
 	margin: 0;
@@ -101,8 +101,8 @@ legend{
 	display: inline;
 	top: 0em;
 	height:1.5em;
-	font-family: Helvetica, sans-serif;
-	font-weight: lighter;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: lighter;*/
 	font-size: 1.5em;
 	margin-left: 0.5em;
 	color: white;
@@ -119,8 +119,8 @@ legend{
 	display: inline;
 	top: -0.16em;
 	height:1.3em;
-	font-family: Helvetica, sans-serif;
-	font-weight: normal;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: normal;*/
 	padding: 0px;
 	border-style: none;
 }
@@ -247,7 +247,7 @@ input.navInput[type="text"]:focus
 	height: 800px;
 	font-size: 14px;
 	line-height: 16px;
-	font-family: Helvetica, sans-serif;
+	/*font-family: Helvetica, sans-serif;*/
 	color: white;
 	opacity:0;
 

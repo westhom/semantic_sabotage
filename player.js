@@ -14,6 +14,7 @@ var Player = function(app) {
 		initialize: function(data) {
 			// parser gets created, loads LIWC stuff, then calls createMessages
 			parser.initialize(this.createMessages, data);
+
 		},
 	
 		createMessages: function(data) {
