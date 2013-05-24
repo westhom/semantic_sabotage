@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Mad Lib",
-		defaultURL: "http://www.youtube.com/watch?v=weNO9k1TXS0",
+		defaultURL: "http://www.youtube.com/watch?v=l26Uq3PX-fk",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,
@@ -27,7 +27,7 @@ var mode = function(id) {
 			var holder = $('<div class="sentence meta-serif-book size-64"></div>');
 
 			holder.append('<div class="variable pronoun" >IT </div>');
-			holder.append('<div class="fixed">WAS </div>');
+			holder.append('<div class="variable past present future">WAS </div>');
 			holder.append('<div class="variable article">THE </div>');
 			holder.append('<div class="variable quant">BEST </div>');
 			holder.append('<div class="variable prep">OF </div>');
@@ -75,13 +75,16 @@ var mode = function(id) {
 			if($.inArray('punct', msg.cats) < 0)
 			{
 
+				//no categories is a strange mix
+				//if (msg.cats.length < 1) console.log(msg.word);	
+
 				for (i in categories)
 				{
 					var term = categories[i];
 					var word = msg.word.toUpperCase();			
 					if ($.inArray(term, msg.cats) >= 0)
 					{
-						console.log(term + ' >> ' + msg.word);
+						//console.log(term + ' >> ' + msg.word);
 						$('.' + term).html(word + ' ');
 						break;
 					}
