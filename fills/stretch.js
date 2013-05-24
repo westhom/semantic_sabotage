@@ -88,7 +88,7 @@ var mode = function(id) {
 		 		$(s).css('-webkit-transform-origin','0% 0%');
 		 		$(s).css('-webkit-transform','scale(' + ww/w + ',' + hh/h*1.71 + ')');
 		 		window.getComputedStyle(s).WebkitTransform;
-		 		$(s).css('-webkit-transition','opacity 3s ease-out, color 1s ease-in');		 		
+		 		$(s).css('-webkit-transition','opacity 1s ease-out, color 1s ease-in');		 		
 		 		//$(s).css('color', 'rgb(' + Math.floor(Math.random()*200) + ',' + Math.floor(Math.random()*200) + ',' + Math.floor(Math.random()*200) + ')');
 		 		$(s).css('opacity','0');		 		
 
