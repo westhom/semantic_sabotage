@@ -57,6 +57,7 @@ var Player = function(app) {
 					parser.cacheMessages(data.youtube_id);
 					messages = parser.messages; // LM why is this necessary?
 					app.start();
+					console.log(messages);
 				}, cc.length*offset + 500));
 
 			}
