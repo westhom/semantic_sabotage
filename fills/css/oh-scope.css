@@ -2,7 +2,6 @@
 }
 
 #oh-scope .container {
-	background-color: pink;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -10,14 +9,16 @@
 
 #oh-scope .marqueeCenter {
 	position: absolute;
-	background-color: blue;
 	left: 50%;
 	top: 50%;
 	height: 100px;
-	width: 100px;
+/*	width: 500px; */
 	overflow: visible;
+	border-top-style: solid;
+	border-top-width: 2px;
+	border-color: white;
 	-webkit-transform-origin: 0% 0%;
-	-webkit-animation: kf_marqueeCenter linear 10s infinite;
+	-webkit-animation: kf_marqueeCenter linear 30s infinite;
 }
 
 @-webkit-keyframes kf_marqueeCenter {
@@ -26,47 +27,73 @@
 }
 
 #oh-scope .marquee {
+	z-index: -1;
 	position: absolute;
-	width: 1000px;
-	height: 100px;
 	left: 0px;
-	top: -50px;
+	top: -40px;
+	height: 80px;
+	width: 100%;
 	opacity: 1;
 	color: white;
-	font-size: 100px;
+	font-size: 75px;
 	overflow: visible;
+	text-align: right;
 
 	-webkit-transform-origin: 0% 50%;
-	-webkit-animation: kf_marquee linear 10s 1;
+	-webkit-animation: kf_marquee linear 30s 1;
 	-webkit-animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes kf_marquee {
-	0% {-webkit-transform: rotate(0deg); color:white; opacity: 1.0}
-	2% {-webkit-transform: rotate(7.2deg); color:black; opacity: 0.25}
-	100% {-webkit-transform: rotate(360deg); color:black; opacity: 0}
+	0% {-webkit-transform: rotate(0deg); opacity: 0.75}
+	1% {-webkit-transform: rotate(3.6deg); opacity: 0.33}
+	12.5% {-webkit-transform: rotate(45deg); opacity: 0}
+	100% {-webkit-transform: rotate(360deg); opacity: 0}
 }
-
-/*
-
-#oh-scope .particleCenter {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	height: 1px;
-	width: 1px;
-	overflow: visible;
-}
-
 
 #oh-scope .particle {
 	position: absolute;
-	z-index: 1;
-	width: 1px;
-	height: 1px;
-	opacity: 0;
-	font-size: 20px;
+/*	left: 400px; */
+	top: -7px;
+	height: 14px;
+	width: 1000px;
+	opacity: 1;
+	font-size: 14px;
 	overflow: visible;
-	-webkit-transition: -webkit-transform 6s, opacity 2s, z-index 1s;
+
+/*	-webkit-transform-origin: -40% 100%; */
+	-webkit-animation-fill-mode: forwards;
 }
-*/
+
+#oh-scope .tower {
+	-webkit-animation: kf_tower linear 30s infinite;
+}
+
+@-webkit-keyframes kf_tower {
+	0% {-webkit-transform: rotate(0deg); color:rgb(128,255,128);}
+	10% {-webkit-transform: rotate(36deg); color:rgb(0,64,0);}
+	50% {-webkit-transform: rotate(180deg); color:rgb(0,64,0);}
+	100% {-webkit-transform: rotate(360deg); color:rgb(0,64,0);}
+}
+
+#oh-scope .airfrance {
+	-webkit-animation: kf_airfrance linear 30s infinite;
+}
+
+@-webkit-keyframes kf_airfrance {
+	0% {-webkit-transform: rotate(0deg); color:rgb(255,64,64);}
+	10% {-webkit-transform: rotate(36deg); color:rgb(128,0,0);}
+	50% {-webkit-transform: rotate(180deg); color:rgb(128,0,0);}
+	100% {-webkit-transform: rotate(360deg); color:rgb(128,0,0);}
+}
+
+#oh-scope .comair {
+	-webkit-animation: kf_comair linear 30s infinite;
+}
+
+@-webkit-keyframes kf_comair {
+	0% {-webkit-transform: rotate(0deg); color:rgb(64,64,255);}
+	10% {-webkit-transform: rotate(36deg); color:rgb(0,0,128);}
+	50% {-webkit-transform: rotate(180deg); color:rgb(0,0,128);}
+	100% {-webkit-transform: rotate(360deg); color:rgb(0,0,128);}
+}
