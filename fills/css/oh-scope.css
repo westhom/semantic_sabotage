@@ -51,18 +51,42 @@
 	100% {-webkit-transform: rotate(360deg); opacity: 0}
 }
 
+#oh-scope .particleCenter {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	height: 0px;
+	width: 0px;
+	overflow: visible;
+}
+
 #oh-scope .particle {
 	position: absolute;
-/*	left: 400px; */
-	top: -7px;
-	height: 14px;
-	width: 1000px;
+	left: 0px;
+	top: 0px;
+	height: 0px;
+	width: 0px;
 	opacity: 1;
-	font-size: 14px;
+	font-size: 18px;
 	overflow: visible;
+}
 
-/*	-webkit-transform-origin: -40% 100%; */
-	-webkit-animation-fill-mode: forwards;
+#oh-scope .word {
+	position: absolute;
+	left: 6px;
+	top: -20px;
+	height: 0px;
+	width: 100px;
+	overflow: visible;
+}
+
+#oh-scope .dot {
+	position: absolute;
+	left: -1px;
+	top: -14px;
+	height: 0px;
+	width: 0px;
+	overflow: visible;
 }
 
 #oh-scope .tower {
@@ -70,10 +94,10 @@
 }
 
 @-webkit-keyframes kf_tower {
-	0% {-webkit-transform: rotate(0deg); color:rgb(128,255,128);}
-	10% {-webkit-transform: rotate(36deg); color:rgb(0,64,0);}
-	50% {-webkit-transform: rotate(180deg); color:rgb(0,64,0);}
-	100% {-webkit-transform: rotate(360deg); color:rgb(0,64,0);}
+	0% {color:rgb(128,255,128);}
+	10% {color:rgb(0,64,0);}
+	50% {color:rgb(0,64,0);}
+	100% {color:rgb(0,64,0);}
 }
 
 #oh-scope .airfrance {
@@ -81,10 +105,10 @@
 }
 
 @-webkit-keyframes kf_airfrance {
-	0% {-webkit-transform: rotate(0deg); color:rgb(255,64,64);}
-	10% {-webkit-transform: rotate(36deg); color:rgb(128,0,0);}
-	50% {-webkit-transform: rotate(180deg); color:rgb(128,0,0);}
-	100% {-webkit-transform: rotate(360deg); color:rgb(128,0,0);}
+	0% {color:rgb(255,64,64);}
+	10% {color:rgb(128,0,0);}
+	50% {color:rgb(128,0,0);}
+	100% {color:rgb(128,0,0);}
 }
 
 #oh-scope .comair {
@@ -92,8 +116,8 @@
 }
 
 @-webkit-keyframes kf_comair {
-	0% {-webkit-transform: rotate(0deg); color:rgb(64,64,255);}
-	10% {-webkit-transform: rotate(36deg); color:rgb(0,0,128);}
-	50% {-webkit-transform: rotate(180deg); color:rgb(0,0,128);}
-	100% {-webkit-transform: rotate(360deg); color:rgb(0,0,128);}
+	0% {color:rgb(64,64,255);}
+	10% {color:rgb(0,0,128);}
+	50% {color:rgb(0,0,128);}
+	100% {color:rgb(0,0,128);}
 }

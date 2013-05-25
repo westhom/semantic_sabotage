@@ -2,7 +2,7 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Oh-Scope",
+		name: "Oh-Scoper",
 		defaultURL: "http://www.youtube.com/watch?v=WjuCI2yAVD8",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),	
 
@@ -10,24 +10,27 @@ var mode = function(id) {
 		storeClass: 'empty',
 		radius: 500,
 		period: 30,
+		timer: 0,
 	
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
+
+			this.el.empty();
+
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
+
 			this.el.empty();
 
-			var c = document.createElement('div');
-			$(c).addClass('container');
-//			$(c).css('background-color','#666');
-			$(c).css('background-image','-webkit-gradient(radial, center center, ' + (this.radius) + ', center center, ' + (this.radius+10) + ', color-stop(0, #666), color-stop(1, #000))');
-			this.el.append(c);
+			this.el.append('<div class="container"></div>');
 
+			$('#oh-scope .container').css('background-image','-webkit-gradient(radial, center center, ' + (this.radius) + ', center center, ' + (this.radius+10) + ', color-stop(0, #666), color-stop(1, #000))');
 
-			$(c).append('<div class="marqueeCenter"></div>');
+			$('#oh-scope .container').append('<div class="marqueeCenter"></div>');
+			$('#oh-scope .container').append('<div class="particleCenter"></div>');
 
 			$('#oh-scope .marqueeCenter').css('width', this.radius+'px')
 
@@ -49,10 +52,8 @@ var mode = function(id) {
 		},
 		
 		appendWordInContext: function(msg) {
-		
-			// update curSentence
 
-//			console.log('word: '+msg.word);
+			if (msg.time > this.timer) this.timer = msg.time;
 
 			if (this.storeID[0] == '[') {
 				this.storeID = this.storeID + msg.word;
@@ -62,7 +63,6 @@ var mode = function(id) {
 				if (this.storeID.search('Tower') >= 0) this.storeClass = 'tower';
 				if (this.storeID.search('AirFrance') >= 0) this.storeClass = 'airfrance';
 				if (this.storeID.search('Comair') >= 0) this.storeClass = 'comair';
-				console.log('storeID: ' + this.storeID + ' -- storeClass: ' + this.storeClass);
 				this.storeID = 'empty';
 			}
 
@@ -80,21 +80,32 @@ var mode = function(id) {
 					$(m).append(msg.word);
 					$(m).addClass('marquee proxima-nova-700');
 					$('#oh-scope .marqueeCenter').append(m);
-
 					setTimeout( function() { $(m).remove() }, this.period*1000 );
 
-//					var r = 10;
-//					var r = 10 + this.radius-75-10;
-					var r = 10 + Math.round(Math.random()*(this.radius-75-10));
+					var r = 25 + Math.round(Math.random()*(this.radius-75-25));
+					var angle = -2*Math.PI/this.period * this.timer/1000 - 14.25 * Math.PI/180;
+					var dx = Math.round(Math.cos(angle) * r);
+					var dy = Math.round(Math.sin(angle) * r);
+					console.log(dx + ',' + dy);
+
 					var p = document.createElement('div');
-					console.log(msg.word);
-					console.log(msg.cats);
-					console.log(msg.stat)
-					$(p).append(msg.word);
 					$(p).addClass('particle ' + this.storeClass + ' proxima-nova-400');
-					$(p).css('left', r +'px');
-					$(p).css('-webkit-transform-origin', -r/10 + '% 50%');
-					$('#oh-scope .marqueeCenter').append(p);
+					$(p).css('-webkit-transform','translate(' + dx + 'px, ' + dy + 'px)');
+
+					var w = document.createElement('div');
+					$(w).addClass('word');
+					$(w).append(msg.word);
+
+					var d = document.createElement('div');
+					$(d).addClass('dot');
+					$(d).append('.');
+
+					$(p).append(d);
+					$(p).append(w);
+
+					$('#oh-scope .particleCenter').append(p);
+
+
 				}
 				
 			}			
