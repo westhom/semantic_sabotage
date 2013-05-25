@@ -2,7 +2,7 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Oh-Scoper",
+		name: "Oh-Scope",
 		defaultURL: "http://www.youtube.com/watch?v=WjuCI2yAVD8",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),	
 
@@ -24,6 +24,7 @@ var mode = function(id) {
 		enter: function() {
 
 			this.el.empty();
+			this.timer = 0;
 
 			this.el.append('<div class="container"></div>');
 
@@ -105,9 +106,7 @@ var mode = function(id) {
 
 					$('#oh-scope .particleCenter').append(p);
 
-
-				}
-				
+				}				
 			}			
 		}
 	}
