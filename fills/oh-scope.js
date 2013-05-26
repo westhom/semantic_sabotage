@@ -7,10 +7,9 @@ var mode = function(id) {
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),	
 
 		storeID: 'empty',
-		storeClass: 'empty',
+		storeClass: 'tower',
 		radius: 500,
 		period: 30,
-		timer: 0,
 	
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
@@ -28,8 +27,18 @@ var mode = function(id) {
 
 			this.el.append('<div class="container"></div>');
 
-			$('#oh-scope .container').css('background-image','-webkit-gradient(radial, center center, ' + (this.radius) + ', center center, ' + (this.radius+10) + ', color-stop(0, #666), color-stop(1, #000))');
+//			$('#oh-scope .container').css('background-image','-webkit-gradient(radial, center center, ' + (this.radius) + ', center center, ' + (this.radius+10) + ', color-stop(0, #666), color-stop(1, #000))');
 
+			$('#oh-scope .container').append('<div class="ring1" style="left:' +($('#oh-scope .container').width()-(this.radius)*10/5)/2+ 'px; top:' +($('#oh-scope .container').height()-(this.radius)*10/5)/2+ 'px; width:' +(this.radius)*10/5+ 'px; height:' +(this.radius)*10/5+ 'px;"></div>');
+			$('#oh-scope .container').append('<div class="ring2" style="left:' +(($('#oh-scope .container').width()-(this.radius)*10/5)/2+2)+ 'px; top:' +(($('#oh-scope .container').height()-(this.radius)*10/5)/2+2)+ 'px; width:' +((this.radius)*10/5-4)+ 'px; height:' +((this.radius)*10/5-4)+ 'px;"></div>');
+
+			$('#oh-scope .container').append('<div class="ring1" style="left:' +($('#oh-scope .container').width()-(this.radius)*6/5)/2+ 'px; top:' +($('#oh-scope .container').height()-(this.radius)*6/5)/2+ 'px; width:' +(this.radius)*6/5+ 'px; height:' +(this.radius)*6/5+ 'px;"></div>');
+			$('#oh-scope .container').append('<div class="ring2" style="left:' +(($('#oh-scope .container').width()-(this.radius)*6/5)/2+2)+ 'px; top:' +(($('#oh-scope .container').height()-(this.radius)*6/5)/2+2)+ 'px; width:' +((this.radius)*6/5-4)+ 'px; height:' +((this.radius)*6/5-4)+ 'px;"></div>');
+
+			$('#oh-scope .container').append('<div class="ring1" style="left:' +($('#oh-scope .container').width()-(this.radius)*2/5)/2+ 'px; top:' +($('#oh-scope .container').height()-(this.radius)*2/5)/2+ 'px; width:' +(this.radius)*2/5+ 'px; height:' +(this.radius)*2/5+ 'px;"></div>');
+			$('#oh-scope .container').append('<div class="ring2" style="left:' +(($('#oh-scope .container').width()-(this.radius)*2/5)/2+2)+ 'px; top:' +(($('#oh-scope .container').height()-(this.radius)*2/5)/2+2)+ 'px; width:' +((this.radius)*2/5-4)+ 'px; height:' +((this.radius)*2/5-4)+ 'px;"></div>');
+
+			$('#oh-scope .container').append('<div class="timer"></div>');
 			$('#oh-scope .container').append('<div class="marqueeCenter"></div>');
 			$('#oh-scope .container').append('<div class="particleCenter"></div>');
 
@@ -53,8 +62,6 @@ var mode = function(id) {
 		},
 		
 		appendWordInContext: function(msg) {
-
-			if (msg.time > this.timer) this.timer = msg.time;
 
 			if (this.storeID[0] == '[') {
 				this.storeID = this.storeID + msg.word;
@@ -83,8 +90,8 @@ var mode = function(id) {
 					$('#oh-scope .marqueeCenter').append(m);
 					setTimeout( function() { $(m).remove() }, this.period*1000 );
 
-					var r = 25 + Math.round(Math.random()*(this.radius-75-25));
-					var angle = -2*Math.PI/this.period * this.timer/1000 - 14.25 * Math.PI/180;
+					var angle = -$('#oh-scope .timer').width()/10 * Math.PI/180;
+					var r = 100 + Math.round(Math.random()*(this.radius-75-100)) - Math.round(Math.cos(angle) * 50);
 					var dx = Math.round(Math.cos(angle) * r);
 					var dy = Math.round(Math.sin(angle) * r);
 					console.log(dx + ',' + dy);
@@ -105,6 +112,14 @@ var mode = function(id) {
 					$(p).append(w);
 
 					$('#oh-scope .particleCenter').append(p);
+					setTimeout( function() { $(p).remove() }, this.period*1000 );
+					window.getComputedStyle(p).WebkitTransform;
+
+					var deltax = Math.round(25-Math.random()*25*2);
+					var deltay = Math.round(50-Math.random()*50*2);
+
+					$(p).css('left',+ deltax + 'px');
+					$(p).css('top',+ deltay + 'px');
 
 				}				
 			}			

@@ -1,13 +1,67 @@
 #oh-scope {
 }
 
+/*
+
+COLORS
+background: #666666
+field: #444444
+fieldlines: #333333
+radar: #80FF80
+
+tower_glow: #FFFFFF
+tower_light: #BFBFBF
+tower_dark: #808080
+
+airfrance_glow: #FF4040
+airfrance_light: #FF0000
+airfrance_dark: #BF0000
+
+comair_glow: #4040FF
+comair_light: #0000FF
+comair_dark: #0000BF
+
+*/
+
 #oh-scope .container {
+	z-index: 0;
 	position: relative;
+	background-color: #666666;
 	width: 100%;
 	height: 100%;
+	text-transform:lowercase;
 }
 
+#oh-scope .ring1 {
+	z-index: +1;
+	position: absolute;
+	background-color: #333333;
+	border-radius: 50%;
+}
+
+#oh-scope .ring2 {
+	z-index: +1;
+	position: absolute;
+	background-color: #444444;
+	border-radius: 50%;
+}
+
+#oh-scope .timer {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+
+	-webkit-animation: kf_timer linear 30s infinite;
+}
+
+@-webkit-keyframes kf_timer {
+	0% {width: 0px;}
+	100% {width: 3600px;}
+}
+
+
 #oh-scope .marqueeCenter {
+	z-index: +4;
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -15,8 +69,9 @@
 /*	width: 500px; */
 	overflow: visible;
 	border-top-style: solid;
-	border-top-width: 2px;
-	border-color: white;
+	border-top-width: 4px;
+	border-color: #80FF80;
+	color:  #80FF80;
 	-webkit-transform-origin: 0% 0%;
 	-webkit-animation: kf_marqueeCenter linear 30s infinite;
 }
@@ -27,14 +82,13 @@
 }
 
 #oh-scope .marquee {
-	z-index: -1;
+	z-index: +3;
 	position: absolute;
 	left: 0px;
 	top: -40px;
 	height: 80px;
 	width: 100%;
 	opacity: 1;
-	color: white;
 	font-size: 75px;
 	overflow: visible;
 	text-align: right;
@@ -52,6 +106,7 @@
 }
 
 #oh-scope .particleCenter {
+	z-index: +2;
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -61,6 +116,7 @@
 }
 
 #oh-scope .particle {
+	z-index: +2;
 	position: absolute;
 	left: 0px;
 	top: 0px;
@@ -69,9 +125,12 @@
 	opacity: 1;
 	font-size: 18px;
 	overflow: visible;
+
+	-webkit-transition: left 30s linear, top 30s linear;;
 }
 
 #oh-scope .word {
+	z-index: +2;
 	position: absolute;
 	left: 6px;
 	top: -20px;
@@ -81,6 +140,7 @@
 }
 
 #oh-scope .dot {
+	z-index: +2;
 	position: absolute;
 	left: -1px;
 	top: -14px;
@@ -90,34 +150,40 @@
 }
 
 #oh-scope .tower {
-	-webkit-animation: kf_tower linear 30s infinite;
+	-webkit-animation: kf_tower linear 30s 1;
+	-webkit-animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes kf_tower {
-	0% {color:rgb(128,255,128);}
-	10% {color:rgb(0,64,0);}
-	50% {color:rgb(0,64,0);}
-	100% {color:rgb(0,64,0);}
+	0% {color: #FFFFFF; text-shadow: 0px 0px 5px #FFFFFF;}
+	2% {color: #BFBFBF; text-shadow: 0px 0px 0px #BFBFBF;}
+	5% {color: #808080; text-shadow: 0px 0px 0px #808080;}
+	96% {color: #808080; text-shadow: 0px 0px 0px #808080;}
+	100% {color: #444444; text-shadow: 0px 0px 0px #444444;}
 }
 
 #oh-scope .airfrance {
-	-webkit-animation: kf_airfrance linear 30s infinite;
+	-webkit-animation: kf_airfrance linear 30s 1;
+	-webkit-animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes kf_airfrance {
-	0% {color:rgb(255,64,64);}
-	10% {color:rgb(128,0,0);}
-	50% {color:rgb(128,0,0);}
-	100% {color:rgb(128,0,0);}
+	0% {color: #FF4040; text-shadow: 0px 0px 5px #FF4040;}
+	2% {color: #FF0000; text-shadow: 0px 0px 0px #FF0000;}
+	5% {color: #BF0000; text-shadow: 0px 0px 0px #BF0000;}
+	96% {color: #BF0000; text-shadow: 0px 0px 0px #BF0000;}
+	100% {color: #444444; text-shadow: 0px 0px 0px #444444;}
 }
 
 #oh-scope .comair {
-	-webkit-animation: kf_comair linear 30s infinite;
+	-webkit-animation: kf_comair linear 30s 1;
+	-webkit-animation-fill-mode: forwards;
 }
 
 @-webkit-keyframes kf_comair {
-	0% {color:rgb(64,64,255);}
-	10% {color:rgb(0,0,128);}
-	50% {color:rgb(0,0,128);}
-	100% {color:rgb(0,0,128);}
+	0% {color: #4040FF; text-shadow: 0px 0px 5px #4040FF;}
+	2% {color: #0000FF; text-shadow: 0px 0px 0px #0000FF;}
+	5% {color: #0000BF; text-shadow: 0px 0px 0px #0000BF;}
+	96% {color: #0000BF; text-shadow: 0px 0px 0px #0000BF;}
+	100% {color: #444444; text-shadow: 0px 0px 0px #444444;}
 }
