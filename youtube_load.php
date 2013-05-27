@@ -2,14 +2,26 @@
 	
 	// handle youtube cc scraping
 	function get_data($url) {
-		$ch = curl_init();
-		$timeout = 30;
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-		$data = curl_exec($ch);
-		curl_close($ch);
-		return $data;
+		if  (in_array  ('curl', get_loaded_extensions())) {
+			$ch = curl_init();
+			$timeout = 30;
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+			$data = curl_exec($ch);
+			curl_close($ch);
+			return $data;
+		}
+		// Try fopen() if curl doesn't work
+		else {
+			$f = fopen($url, 'r');
+			$data = '';
+			while(!feof($f))
+				$data .= fread($f, 500);
+			fclose($f);
+			return $data;
+			//die("Curl not enabled.");
+		}
 	}
 	
 
