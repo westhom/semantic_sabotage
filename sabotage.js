@@ -5,6 +5,7 @@ var video;
 var modes = [];
 var curMode = 0;
 var curVideoID = '6LPaCN-_XWg';
+var curVideoStartTime = "";
 var globalTimers = [];	// For keeping track of setTimeout events.
 
 
@@ -66,7 +67,7 @@ function loadFills() {
 
 					   modes.push(m);
 					   // Add entry to menu.
-					   $('#modeButtons').append('<div class="modeName" href="#" id=mode'+j+' onclick=goToMode('+j+'); >'+m.name.toUpperCase()+'</div>');
+					   $('#modeButtons').append('<div class="modeName proxima-nova-400" href="#" id=mode'+j+' onclick=goToMode('+j+'); >'+m.name.toUpperCase()+'</div>');
 					   // Append to mode's element to DOM.
 					   m.el.hide();				   
 					   $('#modes').append(m.el);				   
@@ -103,8 +104,15 @@ function load(resp) {
 	player.initialize(resp);
 
 	//$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
+	
 	console.log("cueVideoById( "+curVideoID+" )");
-	ytplayer.cueVideoById(curVideoID);
+	if(typeof modes[curMode]["startTime"] == "undefined")
+		modes[curMode]["startTime"] = 0;
+
+	console.log( "Starting player at: " + modes[curMode]["startTime"] + " seconds");
+
+	ytplayer.cueVideoById(curVideoID, modes[curMode]["startTime"]);
+	//ytplayer.cueVideoById(curVideoID);
 
 	// show loading
 	//$('#loading').show();
@@ -153,7 +161,10 @@ function goToMode(m, post) {
 		post = (typeof post == 'undefined')?true:post;
 
 		if(post){
-		// Get captions from youTube PHP, using defaultURL of mode.
+			// Set start time to mode's default
+			modes[curMode].startTime = getStartTimeFromURL(modes[curMode].defaultURL);
+
+			// Get captions from youTube PHP, using defaultURL of mode.
 			console.log('gotoMode - ajax post');
 			$.ajax({
 				type: 'post',
@@ -204,6 +215,9 @@ function submitURL() {
 
 	goToMode(curMode, false);
 
+	// See if URL has a t=#m#s parameter to set the start time
+	modes[curMode].startTime = getStartTimeFromURL($("#ytURL").val());
+
 	// Post to youTube script with submit field value.
 	console.log('About to post'+$('#ytURL').val());
 
@@ -217,6 +231,19 @@ function submitURL() {
    			console.log(data);
    		}
   });
+}
+
+function getStartTimeFromURL(inputURL) {
+	// See if URL has a t=#m#s parameter to set the start time
+	startTimeRegExp = new RegExp("t=([0-9]+)m([0-9]+)s");
+	startTimeResult = startTimeRegExp.exec(inputURL);
+	if(startTimeResult && startTimeResult.length >= 3) {
+		// Start time = minutes * 60 + seconds from the URL
+		return parseInt(startTimeResult[1]) * 60 + parseInt(startTimeResult[2]);
+	}
+	else {
+		return 0;
+	}
 }
 
 function showMenu() {
@@ -318,7 +345,13 @@ function pausePlayback() {
 
 // Handle incoming messages and distribute to appropriate functions.
 function handleMessage(msg) {
-	
+	// Make sure this message isn't stale (because the user has switched to another tab or something)
+	var stale_message_threshold = 1000;
+	if(document.getElementById("ytplayer").getCurrentTime()*1000 - msg["time"] > stale_message_threshold) {
+		//console.log("STALE MESSAGE");
+		return;
+	}
+
 	switch(msg.type) {
 		case 'live':
 			console.log('live');
@@ -381,7 +414,16 @@ function updateYouTubeProgressBar() {
 }
 
 
-
+function toggleFullscreen() {
+	if(fullScreenApi.isFullScreen()) {
+		fullScreenApi.cancelFullScreen();
+		$("#fullscreenButton").html("FULLSCREEN");
+	}
+	else{
+		fullScreenApi.requestFullScreen(document.getElementsByTagName("body")[0]);
+		$("#fullscreenButton").html("FULLSCREEN");
+	}
+}
 
 
 

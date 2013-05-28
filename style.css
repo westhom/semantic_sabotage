@@ -7,11 +7,15 @@ http://yuilibrary.com/license/
 html, body {
 	height: 100%;
 	min-width: 1024px;
+	width: 100%;
 }
 
 html{
 	color:#000;
 	background:#FFF}
+
+
+
 
 body,div,dl,dt,dd,ul,ol,li,
 h1,h2,h3,h4,h5,h6,pre,code,
@@ -71,22 +75,50 @@ legend{
 
 /* END YUI CSS reset */
 
+
+#fullscreenButton {
+	position:absolute;
+	top:0.25em;
+	right:100px;
+	cursor: pointer;
+}
+
+
+/*
+#fullscreenButton {
+	position:absolute;
+	top:0.25em;
+	right:100px;
+	cursor: pointer;
+	background-image:url("img/fullscreenButtonGray.png");
+	width:42px;
+	height:24px;
+	border:none;
+	border-width:0px;
+}
+#fullscreenButton:hover {
+	background-image:url("img/fullscreenButton.png");
+}
+*/
+
+
 .navBar{
 	position: relative;
-	height: 3.5%;																	/*--------------------------------------------------------------*/
-	min-height:2em;															/*--------------------------------------------------------------*/
+	height: 3.5%;																	
+	min-height:2em;															
 	z-index:999;
 	background-color: black;
-	padding: 0em 1em 0em 1em;										/*--------------------------------------------------------------*/
+	padding: 0em 1em 0em 1em;										
 }
 
 .navText{
 	position: relative;
 	display: inline;
-	top: 0.25em;																		/*--------------------------------------------------------------*/
-	height:1.5em;																/*--------------------------------------------------------------*/
-	font-family: Helvetica, sans-serif;
-	font-weight: bold;
+
+	top: 0.25em;
+	height:1.5em;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: bold;*/
 	font-size: 1.5em;
 	color: rgb(110,110,110);
 	margin: 0em;
@@ -100,10 +132,12 @@ legend{
 .navStatus {
 	position: relative;
 	display: inline;
-	top: 0.25em;																		/*--------------------------------------------------------------*/
-	height:1.5em;																/*--------------------------------------------------------------*/
-	font-family: Helvetica, sans-serif;
-	font-weight: lighter;
+
+	top: 0.25em;
+	height:1.5em;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: lighter;*/
+
 	font-size: 1.5em;
 	margin-left: 0.5em;
 	color: white;
@@ -112,17 +146,17 @@ legend{
 #navControls {
 	position:relative;
 	display: inline;
-	top: 0.05em;																		/*--------------------------------------------------------------*/
+	top: 0.5em;																		
 	height:1.5em;
 }
 
 .navInput {
 	position: relative;
 	display: inline;
-	top: 0em;																		/*--------------------------------------------------------------*/
+	top: 0em;																		
 	height:1.3em;
-	font-family: Helvetica, sans-serif;
-	font-weight: normal;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: normal;*/
 	padding: 0px;
 	border-style: none;
 }
@@ -153,15 +187,16 @@ input.navInput[type="text"]:focus
 
 }
 
+
 .navButton {
 	position: relative;
 	margin-left: 0.5em;
-	top: 0.2em;																		/*--------------------------------------------------------------*/
+	top: 0.2em;																		
 	font-family: Helvetica, sans-serif;
 	font-weight: normal; 
 	font-size: 0.9em;
 	border-style: none;
-	padding: 0em 0.25em 0em 0.25em;								/*--------------------------------------------------------------*/
+	padding: 0em 0.25em 0em 0.25em;								
 	background-color: black;
 	color: rgb(110,110,110);
 	cursor: hand;
@@ -171,10 +206,26 @@ input.navInput[type="text"]:focus
 	color: white;
 }
 
+#fullscreenButton {
+	position:absolute;
+	top:0.25em;
+	right:100px;
+	cursor: pointer;
+	font-family: Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 1.5em;
+	color: rgb(110,110,110);
+	margin: 0em;
+}
+
+#fullscreenButton:hover {
+	color: white;
+}
+
 #logo_link {
 	position:absolute;
-	top:0.45em;										/*--------------------------------------------------------------*/
-	right:1em;										/*--------------------------------------------------------------*/
+	top:0.45em;										
+	right:1em;										
 	width:0em;
 	height:0em;
 	overflow: visible;
@@ -182,19 +233,19 @@ input.navInput[type="text"]:focus
 
 #logo {
 	position:absolute;
-	top:0em;										/*--------------------------------------------------------------*/
+	top:0em;										
 	right:0em;
 	height:1.3em;
 }
 
 #progressBarBox {
 	position:relative;
-	background-color: #333;										/*--------------------------------------------------------------*/
+	background-color: #333;										
 	left:0em;
 	bottom:0em;
 	width:100%;
-	height:0.5%;										/*--------------------------------------------------------------*/
-	min-height:3px;										/*--------------------------------------------------------------*/
+	height:0.5%;										
+	min-height:3px;										
 }
 
 #progressBar {
@@ -251,7 +302,7 @@ input.navInput[type="text"]:focus
 	height: 800px;
 	font-size: 14px;
 	line-height: 16px;
-	font-family: Helvetica, sans-serif;
+	/*font-family: Helvetica, sans-serif;*/
 	color: white;
 	opacity:0;
 
@@ -269,15 +320,22 @@ input.navInput[type="text"]:focus
 	padding: 1em 1.5em 0em 1em;
 }
 
+#modeButtons {
+	position:absolute;
+}
+
 .modeName {
+	position:static;
 	font-size: 1.5em;
-	font-family: Helvetica;
-	font-weight: bold;	
-	color: rgb(255,255,255);
+	color: rgb(0,0,0);
+	background-color: rgb(255,255,255);
+	margin: 0px 0px 3px 0px;
+
 }
 
 .modeName:hover {
-	color: rgb(0,0,0);
+	color: rgb(255,255,255);
+	background-color: rgb(242,0,255);
 	cursor: hand;
 }
 
@@ -305,7 +363,7 @@ input.navInput[type="text"]:focus
 }
 
 body {
-	background-color: rgb(0, 170, 255);
+	background-color: rgb(162, 163, 160);
 	overflow:hidden;
 
 }

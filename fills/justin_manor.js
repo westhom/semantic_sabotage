@@ -32,7 +32,7 @@ var mode = function(id) {
 
 		// Handle incoming word message.
 		handleWord: function(msg) {
-			console.log('word '+msg.word);
+			//console.log('word '+msg.word);
 			this.appendWordInContext(msg);
 		},
 		

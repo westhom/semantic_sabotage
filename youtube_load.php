@@ -2,14 +2,26 @@
 	
 	// handle youtube cc scraping
 	function get_data($url) {
-		$ch = curl_init();
-		$timeout = 30;
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-		$data = curl_exec($ch);
-		curl_close($ch);
-		return $data;
+		if  (in_array  ('curl', get_loaded_extensions())) {
+			$ch = curl_init();
+			$timeout = 30;
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+			$data = curl_exec($ch);
+			curl_close($ch);
+			return $data;
+		}
+		// Try fopen() if curl doesn't work
+		else {
+			$f = fopen($url, 'r');
+			$data = '';
+			while(!feof($f))
+				$data .= fread($f, 500);
+			fclose($f);
+			return $data;
+			//die("Curl not enabled.");
+		}
 	}
 	
 
@@ -27,47 +39,55 @@
 
 	$error = "";
 
-	$ccUrl_good = str_replace("\/", "/", $ccUrl)."&type=track&lang=en&name&fmt=1";
-	//Google's Automatic Speech Recognition : &kind=asr
-	//$ccUrl = str_replace("\/", "/", $ccUrl)."&type=track&lang=en&kind=asr&name&fmt=1";
+	// Get the list of available caption tracks
+	$captions_list_url = str_replace("\/", "/", $ccUrl)."&type=list&asrs=1";	// Will include automatic subs (asr)
+	$captions_list_xml = @simplexml_load_file($captions_list_url);
 
+	if($captions_list_xml) {
 
-	//Justin's probably inefficient check to see if good caption file has elements
-	//good caption file always exists, but can be empty
-	$handle = @fopen($ccUrl_good, 'r');
-	$valid = false;
-	while (($buffer = fgets($handle)) !== false) {
-	    if (strpos($buffer, $_GET['id']) === false) {
-	    	//echo "success ";
-	        $valid = TRUE;
-	        break; // Once you find the string, you should break out the loop.
-	    }      
+		// Find all listed tracks with lang_code="en" (English)
+		$english_caption_tracks = $captions_list_xml->xpath("//track[@lang_code='en']");
+		
+		// Choose the first one that isn't an asr track, if possible
+		$chosenTrack = "";
+
+		foreach($english_caption_tracks as $track) {
+			if(!isset($track['kind']) || $track['kind'] != "asr") { 
+				$chosenTrack = $track;
+				$error .= "Found non-asr track.";
+				break;
+			}			
+		}
+
+		// Choose first track if finding a non-asr track failed
+		if(!isset($chosenTrack['name'])) { 
+			$chosenTrack = $english_caption_tracks[0];
+			$error .= "Couldn't find non-asr track. Using first result.";
+		}
+
+		// Get chosen track xml file
+
+		$captions_track_url = str_replace("\/", "/", $ccUrl)."&type=track&lang=" . $chosenTrack['lang_code'] .
+																		"&name=" . urlencode($chosenTrack['name']) .
+																		"&kind=" . $chosenTrack['kind'] .
+																		"&fmt=1";
+		
+		$captions_track_xml = @simplexml_load_file($captions_track_url);
+		$cc = array();
+		if($captions_track_xml) 
+			foreach($captions_track_xml->text as $text)
+				$cc[] = $text;
+		else
+			$error = "Could not load captions (failed to parse XML)";
 	}
-	fclose($handle);
+	else {
+		$error = "No captions available.";
+		$captions_track_url = "";
+		$cc = "";
 
-	if ($valid !== false) {
-	    //echo "About to try loading captions.";
-	    $error = "GOOD_CAPTIONS";
-		$xml = simplexml_load_file($ccUrl_good);
-
-	} else {
-		//echo "No Manual Captions";
-		$error = "NO_MANUAL_CAPTIONS";
-		$ccUrl_asr = str_replace("\/", "/", $ccUrl)."&type=track&lang=en&kind=asr&name&fmt=1";
-		$xml = simplexml_load_file($ccUrl_asr);
 	}
 
-
-	//for justin's reference
-	//http://www.youtube.com/api/timedtext?key=yttt1&caps=asr&asr_langs=it%2Ces%2Cnl%2Cfr%2Cde%2Cru%2Cja%2Cko%2Cen%2Cpt&expire=1367978504&v=0vVCSUafFVI&signature=3B123907EF56BD47870A09AC3F2AA4EB673EA16E.8AADF8712FF6D5B02F1D3A0B99D7FF42C9D28EA6&sparams=asr_langs%2Ccaps%2Cv%2Cexpire&hl=en_US&type=track&lang=en&name&kind=asr&fmt=1
-	
-	$cc =  array();
-	foreach ($xml->children() as $text){ 
-		$cc[] = $text;
-	}
-
-	//echo '{ "cc": "' . json_encode($cc) . '", "url": "' . $ccUrl . '" }';  
-	$response = array("youtube_id" => $url_fragments['v'], "url" => $ccUrl,  "cc" => $cc, "error" => $error);
+	$response = array("youtube_id" => $url_fragments['v'], "url" => $captions_track_url,  "cc" => $cc, "error" => $error);
 	
 	echo json_encode($response); 
 	
