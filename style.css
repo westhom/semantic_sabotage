@@ -146,7 +146,7 @@ legend{
 #navControls {
 	position:relative;
 	display: inline;
-	top: 0.5em;																		
+	top: 0.07em;																		
 	height:1.5em;
 }
 
@@ -187,11 +187,11 @@ input.navInput[type="text"]:focus
 
 }
 
-
 .navButton {
 	position: relative;
 	margin-left: 0.5em;
-	top: 0.2em;																		
+	top: 0.26em;
+	height: 1em;																		
 	font-family: Helvetica, sans-serif;
 	font-weight: normal; 
 	font-size: 0.9em;
@@ -208,12 +208,13 @@ input.navInput[type="text"]:focus
 
 #fullscreenButton {
 	position:absolute;
-	top:0.25em;
-	right:100px;
+	top: 1em;
+	right: 6.25em;
+	height: 1em;
 	cursor: pointer;
 	font-family: Helvetica, sans-serif;
 	font-weight: normal;
-	font-size: 1.5em;
+	font-size: 0.9em;
 	color: rgb(110,110,110);
 	margin: 0em;
 }
