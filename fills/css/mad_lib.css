@@ -14,28 +14,49 @@
 		left: 0px;
 		top: 0px;
 		width: 85%;
-		padding: 30% 5% 10% 10%;
-}
-
-#mad_lib .fixed
-{
-	display: inline;
-}
-
-#mad_lib .variable
-{
-	display: inline;
+		padding: 20% 5% 10% 10%;
 }
 
 #mad_lib .landing-word
 {
+	position: absolute;
 	display: inline;
+
+	background-color: white;
+
+	padding: 3px;
+
+	font-size: 64px;
+	line-height: 64px;
+
+	transition:left 0.5s linear;
+	-webkit-transition:left 0.5s linear;
+
 }
 
-#mad_lib .space
+#mad_lib .space-word
 {
+	position: absolute;
 	display: inline;
-	width: 48px;
+
+	background-color: white;
+
+	font-size: 64px;
+	line-height: 64px;
+
+	width: 36px;
+}
+
+#mad_lib .top-tween
+{
+	transition:top 0.5s linear;
+	-webkit-transition:top 0.5s linear;
+}
+
+#mad_lib .opacity-tween
+{
+	transition:opacity 0.5s linear;
+	-webkit-transition:opacity 0.5s linear;
 }
 
 #mad_lib .color-tween
