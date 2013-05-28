@@ -4,7 +4,7 @@ var mode = function(id) {
 	
 		name: "Left Scroll",
 
-		defaultURL: "http://www.youtube.com/watch?v=usfRtJpyJDk",
+		defaultURL: "http://www.youtube.com/watch?v=NF3FmHw_N9A",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		template: true,
 				 

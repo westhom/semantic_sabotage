@@ -322,11 +322,18 @@ input.navInput[type="text"]:focus
 	top: 36px;
 }
 
+#modeButtonsRight {
+	position:absolute;
+	left: 600px;
+	top: 36px;
+}
+
 .modeName {
 	position:static;
 	display:inline-block;
 	font-size: 3.0em;
 	margin: 0px 0px 4px 0px;
+	padding: 0 0 0 0.1em;
 	cursor: hand;
 }
 

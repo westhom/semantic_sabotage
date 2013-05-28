@@ -1,0 +1,37 @@
+#template_paragraph .container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width:100%;
+	min-height: 100%;
+	overflow: scroll;
+	/* background-color: rgb(245, 242, 226); */
+}
+
+#template_paragraph .transcript 
+{
+	padding: 24px;
+}
+
+#template_paragraph .color-tween
+{
+	transition:color 1.0s linear;
+	-webkit-transition:color 1.0s linear;
+}
+
+#template_paragraph .bgcolor-tween
+{
+	transition:background-color 1.0s linear;
+	-webkit-transition:background-color 1.0s linear;
+}
+
+#template_paragraph .white
+{
+	color: rgb(245, 242, 226);
+}
+
+#template_paragraph .bg-white
+{
+	background-color: rgb(245, 242, 226);
+}
+
