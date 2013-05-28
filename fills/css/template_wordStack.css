@@ -1,0 +1,19 @@
+#template_wordStack .container {
+	width:5000px;	
+	min-height:100%;
+	background-color: rgb(20,20,20);
+	overflow:auto;
+}
+
+#template_wordStack .bigText {
+	position: absolute;
+	font-size: 220px;
+	line-height: 240px;
+	margin: 0px 0px 0px 0px;
+	padding: 0px;
+	width:5000px;	
+	
+	transition: top 0.5s ease-in, opacity 1s linear;
+	-webkit-transition: top 0.5s ease-in, opacity 1s linear;
+}	
+

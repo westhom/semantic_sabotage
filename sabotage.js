@@ -1,3 +1,9 @@
+var History = window.History;
+// If history state is popped by the user hitting the back or forward button, refresh the page
+window.onpopstate = function(e) {
+	if (e && e.state) location.reload();
+}
+
 var player = Player(this);
 var embedUrl;
 var video;
@@ -11,35 +17,74 @@ var globalTimers = [];	// For keeping track of setTimeout events.
 
 // Shim layer with setTimeout fallback.
 window.requestAnimFrame = (function(){	
-  	return	window.requestAnimationFrame       || 
-           	window.webkitRequestAnimationFrame || 
-           	window.mozRequestAnimationFrame    || 
-           	window.oRequestAnimationFrame      || 
-           	window.msRequestAnimationFrame     || 
-           	function( callback ){
-	           	window.setTimeout(callback, 1000 / 60);
-	          };
+		return	window.requestAnimationFrame       || 
+						window.webkitRequestAnimationFrame || 
+						window.mozRequestAnimationFrame    || 
+						window.oRequestAnimationFrame      || 
+						window.msRequestAnimationFrame     || 
+						function( callback ){
+							window.setTimeout(callback, 1000 / 60);
+						};
 })(); 
 
 // This is for updating the youTube progress bar. 
 (function progressLoop(){
-  requestAnimFrame(progressLoop);
-  updateYouTubeProgressBar();
-  player.updateMessagePlayback();
+	requestAnimFrame(progressLoop);
+	updateYouTubeProgressBar();
+	player.updateMessagePlayback();
 })();
 
 function init() {	
 	
 	// Load fills and insert them into DOM.
-    loadFills();
+		loadFills();
 
-  // Set up aboutText div to hide after transitioning.
+	// Set up aboutText div to hide after transitioning.
 	$("#aboutText").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
 		function() {
-	 		//if($(this).css('opacity') == 0) $(this).hide();	 		
-	 		// Stupid hack to get it offscreen, while still rendering.
+			//if($(this).css('opacity') == 0) $(this).hide();	 		
+			// Stupid hack to get it offscreen, while still rendering.
 			if($(this).css('opacity') == 0)	$('#aboutText').css('left', '-600px');
 		});
+
+
+	// Wait for fills to load before adding the menu links to the DOM
+	$(document).on('loadedFills', function(e, modes) {
+		// Add menu element for each fill
+		drawFills(modes);
+		// Redirect straight to a mode depending on the URL
+		checkURL();
+	});
+}
+
+// Parses URL and redirects to a specific mode if necessary
+function checkURL() {
+	// mode slug
+	var slug = getParameterByName('m');
+	var video = getParameterByName('id');
+	var time = getParameterByName('time');
+	// full youtube URL
+	var url = buildURLFromID(video);
+
+	if (slug != null) {
+		// mode index
+		var mode = modeFromSlug(slug, modes);
+		if (mode >= 0) {
+			if (video != null) {
+				if (time != null) {
+					// If video and time are both defined
+					goToMode(mode, true, url, time)
+				} else {
+					// If just video is defined
+					goToMode(mode, true, url);
+				}
+			} else {
+				// If only a mode is defined and no video
+				goToMode(mode);
+			}
+		}
+	}
+
 }
 
 function loadFills() {
@@ -48,49 +93,73 @@ function loadFills() {
 	$.ajax({
 		type: 'post',
 		dataType: 'json',
-   		url: "fills_load.php",
-   		success: function(resp){
-     		
-     		var j = 0;
-     		// For each fill, load javascript.
-     		for (var i=0; i<resp.fills.length; i++) {
+			url: "fills_load.php",
+			success: function(resp){
+
+				// filter the response so that only .js files are included in the array (no folders)
+				var fills = $.grep(resp.fills, function(f){return f.indexOf(".js") >= 0;});
+		
+				var j = 0;
+				// For each fill, load javascript.
+				for (var i=0; i<fills.length; i++) {
 				//console.log(resp.fills[i]);  
 				
 				// Use function and pass in name because .getScript is asynchronous.
 				(function(name) {	
-					$.getScript("fills/"+resp.fills[i], function(data, textStatus, jqxhr) {
-					   //console.log(data); //data returned
-					   //console.log(textStatus + ' ' + jqxhr.status); //200
 
-					   // Strip off .js and pass name to mode for element id.
-					   var m = new mode(name.substr(0, name.lastIndexOf('.')));
+					$.getScript("fills/"+fills[i], function(data, textStatus, jqxhr) {
 
-					   modes.push(m);
-					   // Add entry to menu.
-					   $('#modeButtons').append('<li><span class="modeName proxima-nova-400" href="#" id="mode'+j+'"" onclick="goToMode('+j+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');
-					   // Append to mode's element to DOM.
-					   m.el.hide();				   
-					   $('#modes').append(m.el);				   
-					   // Initialize the mode.
-					   m.init();
+						//console.log(data); //data returned
+						//console.log(textStatus + ' ' + jqxhr.status); //200
 
-					   j++;
+						// Strip off .js and pass name to mode for element id.
+						var m = new mode(name.substr(0, name.lastIndexOf('.')));
+
+						modes.push(m);
+						j++;
+
+						// When the last fill finishes loading, trigger the event
+						if (j == fills.length) {
+							$(document).trigger('loadedFills',[modes]);
+						}
 					});
-				})(resp.fills[i]);					
+				})(fills[i]);
+
 			}
 
-			
 			// Load CSS for fills.
 			for (var i=0; i<resp.styles.length; i++) {
 				//console.log(resp.styles[i]);  
 				
 				$('<style type="text/css"></style>')
-    			.html('@import url("fills/css/' + resp.styles[i] + '")')
-    			.appendTo("head");
+					.html('@import url("fills/css/' + resp.styles[i] + '")')
+					.appendTo("head");
 			}
 		}
- 	});
+	});
 }
+
+// Insert a DOM element in the menu for each mode
+function drawFills(modes) {
+	modes = modes.sort(function(a,b){
+		if (a.name.toLowerCase() == b.name.toLowerCase()) return 0;
+		return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1:-1;
+	});
+	$.each(modes, function(i,m){
+		// Add entry to menu.
+		if(m.template==true){
+			$('#modeButtonsRight').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');	
+		}else{
+			$('#modeButtons').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');
+		}
+		// Append to mode's element to DOM.
+		m.el.hide();				   
+		$('#modes').append(m.el);				   
+		// Initialize the mode.
+		m.init();
+	});
+}
+
 
 
 function load(resp) {
@@ -100,7 +169,7 @@ function load(resp) {
 
 	//console.log(resp.url);
 	//console.log(resp.cc);
-  
+	
 	player.initialize(resp);
 
 	//$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
@@ -121,8 +190,6 @@ function load(resp) {
 	//embedUrl = resp.url.replace('watch?v=', 'embed/');
 }
 
-
-
 function start() {
 	console.log("start()");
 	
@@ -139,10 +206,23 @@ function start() {
 	playback();	
 }
 
-function goToMode(m, post) {
+// After clicking a menu link, should push new URL state before switching to mode
+function linkToMode(m) {
+	History.pushState(null, null, buildStateFromArguments(m));
+	goToMode(m);
+}
+
+// Jumps to a mode
+// post optional; used only when switching to a different video from the field in the navbar
+// video and time are optional; used only when switching to a mode directly from URL
+function goToMode(m, post, video, time) {
 	console.log("go to mode "+m);
 	if (m >= 0 && m < modes.length) {
 		curMode = m;
+
+		// If post arg is not defined, default to true.
+		post = (typeof post == 'undefined')?true:post;
+		video = (typeof video == 'undefined')? modes[curMode].defaultURL : video;
 
 		// Hide menu and show modes container.
 		$('#menu').hide();
@@ -157,27 +237,28 @@ function goToMode(m, post) {
 		}
 		//console.log("URL = "+modes[curMode].defaultURL);
 
-		// If post arg is not defined, default to true.
-		post = (typeof post == 'undefined')?true:post;
-
 		if(post){
 			// Set start time to mode's default
-			modes[curMode].startTime = getStartTimeFromURL(modes[curMode].defaultURL);
+			if (typeof time == 'undefined') {
+				modes[curMode].startTime = getStartTimeFromURL(video);
+			} else {
+				modes[curMode].startTime = time;
+			}
 
 			// Get captions from youTube PHP, using defaultURL of mode.
-			console.log('gotoMode - ajax post');
+			console.log('gotoMode - ajax post', video);
 			$.ajax({
 				type: 'post',
 				dataType: 'json',
 				url: "youtube_load.php",
-				data: {"url":modes[curMode].defaultURL},	   
-		   		success: load,
-		   		error: function(data){
-		   			console.log(data);
-		   		}
-		  });
+				data: {"url": video},
+					success: load,
+					error: function(data){
+						console.log(data);
+					}
+			});
 
-		  /*
+			/*
 			// Get captions from youTube PHP, using form.
 			// Update value of input with defaultURL of mode.
 			$('#ytURL').val(modes[curMode].defaultURL);
@@ -188,12 +269,12 @@ function goToMode(m, post) {
 			// Only set submit field if posting. 
 			$('#ytURL').val("Enter a different YouTube URL");		
 
+		} else {
+			pauseVideo();
+			player.pausePlaybackMessages();
+			player.resetPlaybackMessages();
+			player.clearParseTimers();
 		}
-		
-		pauseVideo();
-		player.pausePlaybackMessages();
-		player.resetPlaybackMessages();
-		player.clearParseTimers();
 
 		// Set up nav menu.
 		hideControls();
@@ -210,32 +291,41 @@ function goToMode(m, post) {
 
 // When you submit a new URL when already inside of a mode, this does the setup.
 function submitURL() {
+	var url = $('#ytURL').val().trim();
+	var id = getIDFromURL(url);
+	if (id == -1) {
+		$('#ytURL').val('Bad link. Please try again...');
+		return false;
+	}
+	var time = getStartTimeFromURL(url);
 
 	console.log('submitURL()');
 
+	History.pushState(null, null, buildStateFromArguments(curMode, id, time));
 	goToMode(curMode, false);
 
 	// See if URL has a t=#m#s parameter to set the start time
-	modes[curMode].startTime = getStartTimeFromURL($("#ytURL").val());
+	modes[curMode].startTime = time;
 
 	// Post to youTube script with submit field value.
-	console.log('About to post'+$('#ytURL').val());
+	console.log('About to post'+url);
 
 	$.ajax({
 		type: 'post',
 		dataType: 'json',
 		url: "youtube_load.php",
-		data: {"url":$('#ytURL').val()},	   
-   		success: load,
-   		error: function(data){
-   			console.log(data);
-   		}
-  });
+		data: {"url": url},	   
+			success: load,
+			error: function(data){
+				$('#ytURL').val('Bad link. Please try again...');
+				console.log(data);
+			}
+	});
 }
 
 function getStartTimeFromURL(inputURL) {
 	// See if URL has a t=#m#s parameter to set the start time
-	startTimeRegExp = new RegExp("t=([0-9]+)m([0-9]+)s");
+	var startTimeRegExp = new RegExp("t=([0-9]+)m([0-9]+)s");
 	startTimeResult = startTimeRegExp.exec(inputURL);
 	if(startTimeResult && startTimeResult.length >= 3) {
 		// Start time = minutes * 60 + seconds from the URL
@@ -246,9 +336,23 @@ function getStartTimeFromURL(inputURL) {
 	}
 }
 
+// Return just the ID from a longer youtube URL
+function getIDFromURL(inputURL) {
+	var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+	var match = inputURL.match(regExp);
+	if (match&&match[2].length==11){
+	    return match[2];
+	}else{
+	    return -1;
+	}
+}
+
+
 function showMenu() {
 
 	console.log('showMenu');
+
+	History.pushState(null, null, '?');
 
 	// If menu is already visible, show information.
 	if($('#about').position().left > -1800) {
@@ -285,9 +389,11 @@ function showMenu() {
 function showAbout() {
 	//console.log('showAbout()');
 	$('#about').css({'left':'-1350px', 'top':'-1350px'});
-	$('#aboutText').css('left', '24px');
+	$('#aboutText').css('left', '1.5em');
 	$('#aboutText').css('opacity','1');
 	$('#aboutCover').show();
+	$('#navTitle').removeClass('medGray');
+	$('#navTitle').addClass('white');
 }
 
 function hideAbout() {
@@ -295,6 +401,8 @@ function hideAbout() {
 	$('#about').css({'left':'-1800px', 'top':'-1800px'});	
 	$('#aboutText').css('opacity','0');
 	$('#aboutCover').hide();	
+	$('#navTitle').removeClass('white');
+	$('#navTitle').addClass('medGray');
 }
 
 function showControls() {
@@ -319,8 +427,8 @@ function bodyClick() {}
 
 function stopAllTimers() {
 	for (var i=0; i<globalTimers.length; i++) {
-	  clearTimeout(globalTimers[i]);
-	  console.log('clear timer'+globalTimers[i]);
+		clearTimeout(globalTimers[i]);
+		console.log('clear timer'+globalTimers[i]);
 	}
 	globalTimers = [];
 }
@@ -374,31 +482,31 @@ function handleMessage(msg) {
 function handleYtPlayerStateChange(newState) {
 
 	switch(newState) {
-	  case -1:
+		case -1:
 			// Unstarted
 			console.log('ytPlayer stage change: unstarted');
 			break;
-	  case 0:
+		case 0:
 			// Ended
 			break;
-	  case 1:
+		case 1:
 			// Playing		
 			console.log('ytPlayer stage change: playing');
 			$('#progressBar').css('background-color', 'red');        
 			break;
-	  case 2:
+		case 2:
 			// Paused
 			console.log('ytPlayer stage change: paused');
 			break;
-	  case 3:
+		case 3:
 			// Buffering
 			console.log('ytPlayer stage change: buffering');
 			break;
-	  case 5:
+		case 5:
 			// Video cued
 			break;    
 	}
-		  // Keep track of yT state for everyone to reference.
+			// Keep track of yT state for everyone to reference.
 	ytCurState = newState;
 	//console.log('ytCurState = '+ytCurState);
 
@@ -425,6 +533,46 @@ function toggleFullscreen() {
 	}
 }
 
+function convertToSlug(text) {
+	return text
+			.toLowerCase()
+			.replace(/[^\w ]+/g,'')
+			.replace(/ +/g,'-');
+}
 
+// Builds arguments to push onto the root URL with History.js
+// curMode is just the index of the mode to add to the URL
+function buildStateFromArguments(curMode, id, time) {
+	var mode = convertToSlug(modes[curMode].name);
+	if (typeof id != 'undefined') {
+		if (typeof time != 'undefined') {
+			return '?m='+mode+'&id='+id+'&time='+time;
+		} else {
+			return '?m='+mode+'&id='+id;
+		}
+	} else {
+		return '?m='+mode;
+	}
+}
 
+function buildURLFromID(id) {
+	return 'http://www.youtube.com/watch?v='+id;
+}
 
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? null : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function modeFromSlug(slug, modes) {
+	var mode;
+	$.each(modes, function(i,m) {
+		if (convertToSlug(m.name) == slug) {
+			mode = i;
+			return false;
+		}
+	});
+	return (mode == null) ? -1 : mode;
+}

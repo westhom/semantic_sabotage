@@ -1,0 +1,16 @@
+#template_oneByOne .topContainer {
+	width:100%;
+	height:100%;
+	background-color:yellow;
+}
+
+#template_oneByOne .centerContainer {
+	margin: auto auto auto auto;
+    display: table;
+}
+
+#template_oneByOne .centerText{
+	font-size:260px;
+	margin: 25% 0 0 0;
+}	
+
