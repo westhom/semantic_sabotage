@@ -41,42 +41,51 @@
 
 	// Get the list of available caption tracks
 	$captions_list_url = str_replace("\/", "/", $ccUrl)."&type=list&asrs=1";	// Will include automatic subs (asr)
-	$captions_list_xml = simplexml_load_file($captions_list_url);
+	$captions_list_xml = @simplexml_load_file($captions_list_url);
 
-	// Find all listed tracks with lang_code="en" (English)
-	$english_caption_tracks = $captions_list_xml->xpath("//track[@lang_code='en']");
-	
-	// Choose the first one that isn't an asr track, if possible
-	$chosenTrack = "";
+	if($captions_list_xml) {
 
-	foreach($english_caption_tracks as $track) {
-		if(!isset($track['kind']) || $track['kind'] != "asr") { 
-			$chosenTrack = $track;
-			$error .= "Found non-asr track.";
-			break;
-		}			
+		// Find all listed tracks with lang_code="en" (English)
+		$english_caption_tracks = $captions_list_xml->xpath("//track[@lang_code='en']");
+		
+		// Choose the first one that isn't an asr track, if possible
+		$chosenTrack = "";
+
+		foreach($english_caption_tracks as $track) {
+			if(!isset($track['kind']) || $track['kind'] != "asr") { 
+				$chosenTrack = $track;
+				$error .= "Found non-asr track.";
+				break;
+			}			
+		}
+
+		// Choose first track if finding a non-asr track failed
+		if(!isset($chosenTrack['name'])) { 
+			$chosenTrack = $english_caption_tracks[0];
+			$error .= "Couldn't find non-asr track. Using first result.";
+		}
+
+		// Get chosen track xml file
+
+		$captions_track_url = str_replace("\/", "/", $ccUrl)."&type=track&lang=" . $chosenTrack['lang_code'] .
+																		"&name=" . urlencode($chosenTrack['name']) .
+																		"&kind=" . $chosenTrack['kind'] .
+																		"&fmt=1";
+		
+		$captions_track_xml = @simplexml_load_file($captions_track_url);
+		$cc = array();
+		if($captions_track_xml) 
+			foreach($captions_track_xml->text as $text)
+				$cc[] = $text;
+		else
+			$error = "Could not load captions (failed to parse XML)";
 	}
+	else {
+		$error = "No captions available.";
+		$captions_track_url = "";
+		$cc = "";
 
-	// Choose first track if finding a non-asr track failed
-	if(!isset($chosenTrack['name'])) { 
-		$chosenTrack = $english_caption_tracks[0];
-		$error .= "Couldn't find non-asr track. Using first result.";
 	}
-
-	// Get chosen track xml file
-
-	$captions_track_url = str_replace("\/", "/", $ccUrl)."&type=track&lang=" . $chosenTrack['lang_code'] .
-																	"&name=" . urlencode($chosenTrack['name']) .
-																	"&kind=" . $chosenTrack['kind'] .
-																	"&fmt=1";
-	
-	$captions_track_xml = @simplexml_load_file($captions_track_url);
-	$cc = array();
-	if($captions_track_xml) 
-		foreach($captions_track_xml->text as $text)
-			$cc[] = $text;
-	else
-		$error = "Could not load captions (failed to parse XML)";
 
 	$response = array("youtube_id" => $url_fragments['v'], "url" => $captions_track_url,  "cc" => $cc, "error" => $error);
 	
