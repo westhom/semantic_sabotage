@@ -40,6 +40,9 @@ function init() {
 	 		// Stupid hack to get it offscreen, while still rendering.
 			if($(this).css('opacity') == 0)	$('#aboutText').css('left', '-600px');
 		});
+
+	// Wait then show menu.
+	setTimeout(showMenu, 1000);
 }
 
 function loadFills() {
@@ -285,9 +288,11 @@ function showMenu() {
 function showAbout() {
 	//console.log('showAbout()');
 	$('#about').css({'left':'-1350px', 'top':'-1350px'});
-	$('#aboutText').css('left', '24px');
+	$('#aboutText').css('left', '1.5em');
 	$('#aboutText').css('opacity','1');
 	$('#aboutCover').show();
+	$('#navTitle').removeClass('medGray');
+	$('#navTitle').addClass('white');
 }
 
 function hideAbout() {
@@ -295,6 +300,8 @@ function hideAbout() {
 	$('#about').css({'left':'-1800px', 'top':'-1800px'});	
 	$('#aboutText').css('opacity','0');
 	$('#aboutCover').hide();	
+	$('#navTitle').removeClass('white');
+	$('#navTitle').addClass('medGray');
 }
 
 function showControls() {
