@@ -84,23 +84,6 @@ legend{
 }
 
 
-/*
-#fullscreenButton {
-	position:absolute;
-	top:0.25em;
-	right:100px;
-	cursor: pointer;
-	background-image:url("img/fullscreenButtonGray.png");
-	width:42px;
-	height:24px;
-	border:none;
-	border-width:0px;
-}
-#fullscreenButton:hover {
-	background-image:url("img/fullscreenButton.png");
-}
-*/
-
 
 .navBar{
 	position: relative;
