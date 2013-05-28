@@ -28,7 +28,7 @@ var mode = function(id) {
 			$('#madlib').empty();
 			this.buildSentence = true;
 
-			var holder = $('<div class="sentence franklin-gothic-condensed size-64"></div>');
+			var holder = $('<div class="sentence franklin-gothic-condensed"></div>');
 			$('#madlib').append(holder);
 			
 		},
@@ -61,10 +61,22 @@ var mode = function(id) {
 		    clearTimeout(this.timeoutEvents[i]);
 	    };
     },
+
+    setWordPositions: function(words) {
+    	//words is a jQuery collection
+    	//console.log('set word pos');
+    	var x = 100;
+    	var space_width = 36;
+    	words.each(function(i) {
+    		
+    		$(this).css("left", x);
+    		x += $(this).outerWidth();
+    		x += space_width;
+    		console.log(i + ' ' + $(this).html() + ' '  + $(this).outerWidth());
+    	});
+    },
 		
 		appendWordInContext: function(msg) {
-
-
 			
 			//BUILD a SENTENCE
 			if (this.buildSentence)
@@ -82,8 +94,12 @@ var mode = function(id) {
 							//console.log('Category ' + msg.cats[i]);
 						}
 					}
+
+					el.css('left', $('#madlib').width());
+					el.css('top', '200px');
+
 					$('.sentence').append(el);
-					$('.sentence').append('<div class="space">  </div>');
+					//$('.sentence').append('<div class="space-word">&nbsp</div>');
 
 					this.sentenceWordCount++;
 				}
@@ -124,6 +140,30 @@ var mode = function(id) {
 								{ el.addClass(msg.cats[j]); }			
 							el.html(msg.word.toUpperCase());
 
+							//make it invisible and then show it?
+							el.css('opacity', '0.0');
+							
+							setTimeout(function(element){
+								element.addClass('opacity-tween');
+							}, 250, el);
+
+							setTimeout(function(element){
+								element.css('opacity', '1.0');
+							}, 500, el);
+
+							//set the top position, then slide it in?
+							/*
+							el.css('top', '100px');
+							
+							setTimeout(function(element){
+								element.addClass('top-tween');
+							}, 500, el);
+
+							setTimeout(function(element){
+								element.css('top', '200px');
+							}, 1000, el);
+							*/
+
 						}
 						//break so that the same word doesn't appear twice
 						break;
@@ -140,6 +180,9 @@ var mode = function(id) {
 					}
 				}
 			}
+
+			//SET WORD POSITIONS
+			this.setWordPositions($('.landing-word, .space-word'));
 
 		 	
 		}
