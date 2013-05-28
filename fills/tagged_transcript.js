@@ -21,7 +21,7 @@ var mode = function(id) {
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('#transcript').empty();
+			$('#tagged_container #transcript').empty();
 		},
 
 
@@ -76,7 +76,7 @@ var mode = function(id) {
 		 	// end punct always followed by space
 		 	if($.inArray('endPunct', msg.cats) >= 0){
 		 		var e = $('<span class="' + c + '">' + word + ' ' + '</span>');
-				$('#transcript').append(e);
+				$('#tagged_container #transcript').append(e);
 				e.css("color", black);
 
 				this.lastLeadPunct = 0;
@@ -89,7 +89,7 @@ var mode = function(id) {
 		 		if (this.lastEndPunct) e = $('<span class="' + c + '">' + word + '</span>');
 		 		else e = $('<span class="' + c + '">' + ' ' + word + '</span>');
 
-		 		$('#transcript').append(e);
+		 		$('#tagged_container #transcript').append(e);
 		 		e.css("color", black);
 
 		 		this.lastLeadPunct = 1;
@@ -99,10 +99,10 @@ var mode = function(id) {
 		 	else {	
 
 		 		
-		 		if (!this.lastLeadPunct) e = $('#transcript').append('<span class="space"> </span>');
+		 		if (!this.lastLeadPunct) e = $('#tagged_container #transcript').append('<span class="space"> </span>');
 		 		var e = $('<span class="' + c + '">' + word + '</span>');
 
-		 		$('#transcript').append(e);
+		 		$('#tagged_container #transcript').append(e);
 
 		 		if (c != 'blank') {
 		 			e.addClass('marked');
