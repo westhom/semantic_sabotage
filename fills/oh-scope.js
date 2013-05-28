@@ -9,7 +9,16 @@ var mode = function(id) {
 		storeID: 'empty',
 		storeClass: 'tower',
 		radius: 500,
+		buffer: 50,
 		period: 30,
+		ringRatio1: 10/5,
+		ringRatio2: 7.5/5,
+		ringRatio3: 5/5,
+		ringRatio4: 2.5/5,
+		ringStroke: 2,
+		floatx: 25,
+		floaty: 50,
+
 	
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
@@ -27,22 +36,29 @@ var mode = function(id) {
 
 			this.el.append('<div class="container"></div>');
 
-//			$('#oh-scope .container').css('background-image','-webkit-gradient(radial, center center, ' + (this.radius) + ', center center, ' + (this.radius+10) + ', color-stop(0, #666), color-stop(1, #000))');
+			var divWidth = $('#oh-scope .container').width();
+			var divHeight = $('#oh-scope .container').height();
 
-			$('#oh-scope .container').append('<div class="ring1" style="left:' +($('#oh-scope .container').width()-(this.radius)*10/5)/2+ 'px; top:' +($('#oh-scope .container').height()-(this.radius)*10/5)/2+ 'px; width:' +(this.radius)*10/5+ 'px; height:' +(this.radius)*10/5+ 'px;"></div>');
-			$('#oh-scope .container').append('<div class="ring2" style="left:' +(($('#oh-scope .container').width()-(this.radius)*10/5)/2+2)+ 'px; top:' +(($('#oh-scope .container').height()-(this.radius)*10/5)/2+2)+ 'px; width:' +((this.radius)*10/5-4)+ 'px; height:' +((this.radius)*10/5-4)+ 'px;"></div>');
+			$('#oh-scope .container').append('<div class="ring1" style="left:' +(divWidth-(this.radius)*this.ringRatio1)/2+ 'px; top:' +(divHeight-(this.radius)*this.ringRatio1)/2+ 'px; width:' +(this.radius)*this.ringRatio1+ 'px; height:' +(this.radius)*this.ringRatio1+ 'px;"></div>');
+			$('#oh-scope .container').append('<div class="ring2" style="left:' +((divWidth-(this.radius)*this.ringRatio1)/2+this.ringStroke)+ 'px; top:' +((divHeight-(this.radius)*this.ringRatio1)/2+this.ringStroke)+ 'px; width:' +((this.radius)*this.ringRatio1-2*this.ringStroke)+ 'px; height:' +((this.radius)*this.ringRatio1-2*this.ringStroke)+ 'px;"></div>');
 
-			$('#oh-scope .container').append('<div class="ring1" style="left:' +($('#oh-scope .container').width()-(this.radius)*6/5)/2+ 'px; top:' +($('#oh-scope .container').height()-(this.radius)*6/5)/2+ 'px; width:' +(this.radius)*6/5+ 'px; height:' +(this.radius)*6/5+ 'px;"></div>');
-			$('#oh-scope .container').append('<div class="ring2" style="left:' +(($('#oh-scope .container').width()-(this.radius)*6/5)/2+2)+ 'px; top:' +(($('#oh-scope .container').height()-(this.radius)*6/5)/2+2)+ 'px; width:' +((this.radius)*6/5-4)+ 'px; height:' +((this.radius)*6/5-4)+ 'px;"></div>');
+			$('#oh-scope .container').append('<div class="ring1" style="left:' +(divWidth-(this.radius-this.buffer)*this.ringRatio1)/2+ 'px; top:' +(divHeight-(this.radius-this.buffer)*this.ringRatio1)/2+ 'px; width:' +(this.radius-this.buffer)*this.ringRatio1+ 'px; height:' +(this.radius-this.buffer)*this.ringRatio1+ 'px;"></div>');
+			$('#oh-scope .container').append('<div class="ring2" style="left:' +((divWidth-(this.radius-this.buffer)*this.ringRatio1)/2+this.ringStroke)+ 'px; top:' +((divHeight-(this.radius-this.buffer)*this.ringRatio1)/2+this.ringStroke)+ 'px; width:' +((this.radius-this.buffer)*this.ringRatio1-2*this.ringStroke)+ 'px; height:' +((this.radius-this.buffer)*this.ringRatio1-2*this.ringStroke)+ 'px;"></div>');
 
-			$('#oh-scope .container').append('<div class="ring1" style="left:' +($('#oh-scope .container').width()-(this.radius)*2/5)/2+ 'px; top:' +($('#oh-scope .container').height()-(this.radius)*2/5)/2+ 'px; width:' +(this.radius)*2/5+ 'px; height:' +(this.radius)*2/5+ 'px;"></div>');
-			$('#oh-scope .container').append('<div class="ring2" style="left:' +(($('#oh-scope .container').width()-(this.radius)*2/5)/2+2)+ 'px; top:' +(($('#oh-scope .container').height()-(this.radius)*2/5)/2+2)+ 'px; width:' +((this.radius)*2/5-4)+ 'px; height:' +((this.radius)*2/5-4)+ 'px;"></div>');
+			$('#oh-scope .container').append('<div class="ring1" style="left:' +(divWidth-(this.radius-this.buffer)*this.ringRatio2)/2+ 'px; top:' +(divHeight-(this.radius-this.buffer)*this.ringRatio2)/2+ 'px; width:' +(this.radius-this.buffer)*this.ringRatio2+ 'px; height:' +(this.radius-this.buffer)*this.ringRatio2+ 'px;"></div>');
+			$('#oh-scope .container').append('<div class="ring2" style="left:' +((divWidth-(this.radius-this.buffer)*this.ringRatio2)/2+this.ringStroke)+ 'px; top:' +((divHeight-(this.radius-this.buffer)*this.ringRatio2)/2+this.ringStroke)+ 'px; width:' +((this.radius-this.buffer)*this.ringRatio2-2*this.ringStroke)+ 'px; height:' +((this.radius-this.buffer)*this.ringRatio2-2*this.ringStroke)+ 'px;"></div>');
+
+			$('#oh-scope .container').append('<div class="ring1" style="left:' +(divWidth-(this.radius-this.buffer)*this.ringRatio3)/2+ 'px; top:' +(divHeight-(this.radius-this.buffer)*this.ringRatio3)/2+ 'px; width:' +(this.radius-this.buffer)*this.ringRatio3+ 'px; height:' +(this.radius-this.buffer)*this.ringRatio3+ 'px;"></div>');
+			$('#oh-scope .container').append('<div class="ring2" style="left:' +((divWidth-(this.radius-this.buffer)*this.ringRatio3)/2+this.ringStroke)+ 'px; top:' +((divHeight-(this.radius-this.buffer)*this.ringRatio3)/2+this.ringStroke)+ 'px; width:' +((this.radius-this.buffer)*this.ringRatio3-2*this.ringStroke)+ 'px; height:' +((this.radius-this.buffer)*this.ringRatio3-2*this.ringStroke)+ 'px;"></div>');
+
+			$('#oh-scope .container').append('<div class="ring1" style="left:' +(divWidth-(this.radius-this.buffer)*this.ringRatio4)/2+ 'px; top:' +(divHeight-(this.radius-this.buffer)*this.ringRatio4)/2+ 'px; width:' +(this.radius-this.buffer)*this.ringRatio4+ 'px; height:' +(this.radius-this.buffer)*this.ringRatio4+ 'px;"></div>');
+			$('#oh-scope .container').append('<div class="ring2" style="left:' +((divWidth-(this.radius-this.buffer)*this.ringRatio4)/2+this.ringStroke)+ 'px; top:' +((divHeight-(this.radius-this.buffer)*this.ringRatio4)/2+this.ringStroke)+ 'px; width:' +((this.radius-this.buffer)*this.ringRatio4-2*this.ringStroke)+ 'px; height:' +((this.radius-this.buffer)*this.ringRatio4-2*this.ringStroke)+ 'px;"></div>');
 
 			$('#oh-scope .container').append('<div class="timer"></div>');
 			$('#oh-scope .container').append('<div class="marqueeCenter"></div>');
 			$('#oh-scope .container').append('<div class="particleCenter"></div>');
 
-			$('#oh-scope .marqueeCenter').css('width', this.radius+'px')
+			$('#oh-scope .marqueeCenter').css('width', (this.radius)+'px')
 
 		},
 
@@ -91,14 +107,19 @@ var mode = function(id) {
 					setTimeout( function() { $(m).remove() }, this.period*1000 );
 
 					var angle = -$('#oh-scope .timer').width()/10 * Math.PI/180;
-					var r = 100 + Math.round(Math.random()*(this.radius-75-100)) - Math.round(Math.cos(angle) * 50);
-					var dx = Math.round(Math.cos(angle) * r);
-					var dy = Math.round(Math.sin(angle) * r);
-					console.log(dx + ',' + dy);
+
+					var rMin = this.ringRatio4*(this.radius-this.buffer)/2;
+					var rMax = (this.radius-this.buffer);
+					var rDelta = Math.round(Math.random()*(rMax-rMin));
+
+					var r = rMin + rDelta;
+
+					var x = Math.round(Math.cos(angle) * r);
+					var y = Math.round(Math.sin(angle) * r);
 
 					var p = document.createElement('div');
 					$(p).addClass('particle ' + this.storeClass + ' proxima-nova-400');
-					$(p).css('-webkit-transform','translate(' + dx + 'px, ' + dy + 'px)');
+					$(p).css('-webkit-transform','translate(' + x + 'px, ' + y + 'px)');
 
 					var w = document.createElement('div');
 					$(w).addClass('word');
@@ -115,11 +136,11 @@ var mode = function(id) {
 					setTimeout( function() { $(p).remove() }, this.period*1000 );
 					window.getComputedStyle(p).WebkitTransform;
 
-					var deltax = Math.round(25-Math.random()*25*2);
-					var deltay = Math.round(50-Math.random()*50*2);
+					var dx = Math.round(this.floatx-Math.random()*this.floatx*2);
+					var dy = Math.round(this.floaty-Math.random()*this.floaty*2);
 
-					$(p).css('left',+ deltax + 'px');
-					$(p).css('top',+ deltay + 'px');
+					$(p).css('left',+ dx + 'px');
+					$(p).css('top',+ dy + 'px');
 
 				}				
 			}			

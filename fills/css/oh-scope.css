@@ -4,7 +4,7 @@
 /*
 
 COLORS
-background: #666666
+background: #555555
 field: #444444
 fieldlines: #333333
 radar: #80FF80
@@ -13,11 +13,11 @@ tower_glow: #FFFFFF
 tower_light: #BFBFBF
 tower_dark: #808080
 
-airfrance_glow: #FF4040
+airfrance_glow: #FF8080
 airfrance_light: #FF0000
 airfrance_dark: #BF0000
 
-comair_glow: #4040FF
+comair_glow: #8080FF
 comair_light: #0000FF
 comair_dark: #0000BF
 
@@ -26,7 +26,7 @@ comair_dark: #0000BF
 #oh-scope .container {
 	z-index: 0;
 	position: relative;
-	background-color: #666666;
+	background-color: #555555;
 	width: 100%;
 	height: 100%;
 	text-transform:lowercase;
@@ -58,7 +58,6 @@ comair_dark: #0000BF
 	0% {width: 0px;}
 	100% {width: 3600px;}
 }
-
 
 #oh-scope .marqueeCenter {
 	z-index: +4;
@@ -155,7 +154,7 @@ comair_dark: #0000BF
 }
 
 @-webkit-keyframes kf_tower {
-	0% {color: #FFFFFF; text-shadow: 0px 0px 5px #FFFFFF;}
+	0% {color: #FFFFFF; text-shadow: 0px 0px 10px #FFFFFF;}
 	2% {color: #BFBFBF; text-shadow: 0px 0px 0px #BFBFBF;}
 	5% {color: #808080; text-shadow: 0px 0px 0px #808080;}
 	96% {color: #808080; text-shadow: 0px 0px 0px #808080;}
@@ -169,7 +168,7 @@ comair_dark: #0000BF
 }
 
 @-webkit-keyframes kf_airfrance {
-	0% {color: #FF4040; text-shadow: 0px 0px 5px #FF4040;}
+	0% {color: #FF8080; text-shadow: 0px 0px 10px #FF8080;}
 	2% {color: #FF0000; text-shadow: 0px 0px 0px #FF0000;}
 	5% {color: #BF0000; text-shadow: 0px 0px 0px #BF0000;}
 	96% {color: #BF0000; text-shadow: 0px 0px 0px #BF0000;}
@@ -183,7 +182,7 @@ comair_dark: #0000BF
 }
 
 @-webkit-keyframes kf_comair {
-	0% {color: #4040FF; text-shadow: 0px 0px 5px #4040FF;}
+	0% {color: #8080FF; text-shadow: 0px 0px 10px #8080FF;}
 	2% {color: #0000FF; text-shadow: 0px 0px 0px #0000FF;}
 	5% {color: #0000BF; text-shadow: 0px 0px 0px #0000BF;}
 	96% {color: #0000BF; text-shadow: 0px 0px 0px #0000BF;}
