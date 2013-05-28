@@ -28,7 +28,7 @@ var mode = function(id) {
 			$('#madlib').empty();
 			this.buildSentence = true;
 
-			var holder = $('<div class="sentence franklin-gothic-condensed size-64"></div>');
+			var holder = $('<div class="sentence franklin-gothic-condensed"></div>');
 			$('#madlib').append(holder);
 			
 		},
@@ -99,7 +99,7 @@ var mode = function(id) {
 					el.css('top', '200px');
 
 					$('.sentence').append(el);
-					//$('.sentence').append('<div class="space-word">  </div>');
+					//$('.sentence').append('<div class="space-word">&nbsp</div>');
 
 					this.sentenceWordCount++;
 				}
@@ -182,9 +182,7 @@ var mode = function(id) {
 			}
 
 			//SET WORD POSITIONS
-			//setTimeout(function (context) {
-				this.setWordPositions($('.landing-word, .space-word'));
-			//}, 20, this);
+			this.setWordPositions($('.landing-word, .space-word'));
 
 		 	
 		}

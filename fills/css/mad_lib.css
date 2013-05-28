@@ -22,9 +22,29 @@
 	position: absolute;
 	display: inline;
 
+	background-color: white;
+
+	padding: 3px;
+
+	font-size: 64px;
+	line-height: 64px;
+
 	transition:left 0.5s linear;
 	-webkit-transition:left 0.5s linear;
 
+}
+
+#mad_lib .space-word
+{
+	position: absolute;
+	display: inline;
+
+	background-color: white;
+
+	font-size: 64px;
+	line-height: 64px;
+
+	width: 36px;
 }
 
 #mad_lib .top-tween
@@ -37,13 +57,6 @@
 {
 	transition:opacity 1.0s linear;
 	-webkit-transition:opacity 1.0s linear;
-}
-
-#mad_lib .space-word
-{
-	position: absolute;
-	display: inline;
-	width: 36px;
 }
 
 #mad_lib .color-tween
