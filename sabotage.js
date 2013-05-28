@@ -41,8 +41,6 @@ function init() {
 			if($(this).css('opacity') == 0)	$('#aboutText').css('left', '-600px');
 		});
 
-	// Wait then show menu.
-	setTimeout(showMenu, 1000);
 }
 
 function loadFills() {
@@ -71,7 +69,7 @@ function loadFills() {
 					   modes.push(m);
 					   // Add entry to menu.
 					   if(m.template==true){
-					   	$('#modeButtons').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+j+'"" onclick="goToMode('+j+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');	
+					   	$('#modeButtonsRight').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+j+'"" onclick="goToMode('+j+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');	
 					   }else{
 					   	$('#modeButtons').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+j+'"" onclick="goToMode('+j+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');
 					   }
