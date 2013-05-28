@@ -414,7 +414,16 @@ function updateYouTubeProgressBar() {
 }
 
 
-
+function toggleFullscreen() {
+	if(fullScreenApi.isFullScreen()) {
+		fullScreenApi.cancelFullScreen();
+		$("#fullscreenButton").html("FULLSCREEN &#8682;");
+	}
+	else{
+		fullScreenApi.requestFullScreen(document.getElementsByTagName("body")[0]);
+		$("#fullscreenButton").html("FULLSCREEN &#8681;");
+	}
+}
 
 
 
