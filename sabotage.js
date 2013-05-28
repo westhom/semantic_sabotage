@@ -318,7 +318,13 @@ function pausePlayback() {
 
 // Handle incoming messages and distribute to appropriate functions.
 function handleMessage(msg) {
-	
+	// Make sure this message isn't stale (because the user has switched to another tab or something)
+	var stale_message_threshold = 1000;
+	if(document.getElementById("ytplayer").getCurrentTime()*1000 - msg["time"] > stale_message_threshold) {
+		//console.log("STALE MESSAGE");
+		return;
+	}
+
 	switch(msg.type) {
 		case 'live':
 			console.log('live');
