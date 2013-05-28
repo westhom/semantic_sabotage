@@ -350,6 +350,7 @@ function showMenu() {
 
 	History.pushState(null, null, '?');
 
+	/*
 	// If menu is already visible, show information.
 	if($('#about').position().left > -1800) {
 		hideAbout();
@@ -357,7 +358,8 @@ function showMenu() {
 		//console.log('menu is shown already');
 		showAbout();
 	}
-
+	*/
+	
 	$('#menu').show();
 	$('#modes').hide();	
 
