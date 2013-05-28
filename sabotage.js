@@ -67,7 +67,7 @@ function loadFills() {
 
 					   modes.push(m);
 					   // Add entry to menu.
-					   $('#modeButtons').append('<li class="modeName proxima-nova-400" href="#" id=mode'+j+' onclick=goToMode('+j+'); >'+m.name.toUpperCase()+'</li>');
+					   $('#modeButtons').append('<li><span class="modeName proxima-nova-400" href="#" id="mode'+j+'"" onclick="goToMode('+j+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');
 					   // Append to mode's element to DOM.
 					   m.el.hide();				   
 					   $('#modes').append(m.el);				   
