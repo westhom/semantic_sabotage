@@ -70,7 +70,11 @@ function loadFills() {
 
 					   modes.push(m);
 					   // Add entry to menu.
-					   $('#modeButtons').append('<li><span class="modeName proxima-nova-400" href="#" id="mode'+j+'"" onclick="goToMode('+j+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');
+					   if(m.template==true){
+					   	$('#modeButtons').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+j+'"" onclick="goToMode('+j+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');	
+					   }else{
+					   	$('#modeButtons').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+j+'"" onclick="goToMode('+j+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');
+					   }
 					   // Append to mode's element to DOM.
 					   m.el.hide();				   
 					   $('#modes').append(m.el);				   

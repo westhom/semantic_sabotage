@@ -103,8 +103,6 @@ legend{
 	cursor: hand;
 }
 
-.medGray { color:rgb(110,110,110); }
-.white { color:rgb(255,255,255); }
 
 .navText:hover {
 	color: white;
@@ -328,8 +326,6 @@ input.navInput[type="text"]:focus
 	position:static;
 	display:inline-block;
 	font-size: 3.0em;
-	color: rgb(0,0,0);
-	background-color: rgb(255,255,255);
 	margin: 0px 0px 4px 0px;
 	cursor: hand;
 }
@@ -519,9 +515,20 @@ body {
 	font-weight: 700;
 }
 
-.darkGray {
-	color: rgb(40,40,40);
+.darkGray { color: rgb(40,40,40); }
+.medGray { color:rgb(110,110,110); }
+.white { color:rgb(255,255,255); }
+
+.blackOnWhite {
+	color: rgb(0,0,0);
+	background-color: rgb(255,255,255);
 }
+
+.whiteOnGray {
+	color: rgb(255,255,255);
+	background-color: rgb(120,120,120);
+}
+
 
 .size-512{
 	font-size: 512px;
