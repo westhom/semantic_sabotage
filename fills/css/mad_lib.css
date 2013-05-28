@@ -14,28 +14,36 @@
 		left: 0px;
 		top: 0px;
 		width: 85%;
-		padding: 30% 5% 10% 10%;
-}
-
-#mad_lib .fixed
-{
-	display: inline;
-}
-
-#mad_lib .variable
-{
-	display: inline;
+		padding: 20% 5% 10% 10%;
 }
 
 #mad_lib .landing-word
 {
+	position: absolute;
 	display: inline;
+
+	transition:left 0.5s linear;
+	-webkit-transition:left 0.5s linear;
+
 }
 
-#mad_lib .space
+#mad_lib .top-tween
 {
+	transition:top 0.5s linear;
+	-webkit-transition:top 0.5s linear;
+}
+
+#mad_lib .opacity-tween
+{
+	transition:opacity 1.0s linear;
+	-webkit-transition:opacity 1.0s linear;
+}
+
+#mad_lib .space-word
+{
+	position: absolute;
 	display: inline;
-	width: 48px;
+	width: 36px;
 }
 
 #mad_lib .color-tween
