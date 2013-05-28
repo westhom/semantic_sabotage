@@ -48,16 +48,20 @@
 	
 	// Choose the first one that isn't an asr track, if possible
 	$chosenTrack = "";
-	if(count($english_caption_tracks) == 1) $chosenTrack = $english_caption_tracks[0]; // Don't bother looping if only 1 track
-	else {
-		foreach($english_caption_tracks as $track) {
-			if($track['kind'] != "asr") { 
-				$chosenTrack = $track;
-				break;
-			}			
-		}
+
+	foreach($english_caption_tracks as $track) {
+		if(!isset($track['kind']) || $track['kind'] != "asr") { 
+			$chosenTrack = $track;
+			$error .= "Found non-asr track.";
+			break;
+		}			
 	}
-	if($chosenTrack == "") $chosenTrack = $english_caption_tracks[0]; // Default to 0 in case count(tracks) > 1 but all are asr (hypothetical error case)
+
+	// Choose first track if finding a non-asr track failed
+	if(!isset($chosenTrack['name'])) { 
+		$chosenTrack = $english_caption_tracks[0];
+		$error .= "Couldn't find non-asr track. Using first result.";
+	}
 
 	// Get chosen track xml file
 
