@@ -269,11 +269,17 @@ input.navInput[type="text"]:focus
 	padding: 1em 1.5em 0em 1em;
 }
 
+#modeButtons {
+
+}
+
 .modeName {
+	position:static;
 	font-size: 1.5em;
-	font-family: Helvetica;
-	font-weight: bold;	
-	color: rgb(255,255,255);
+	color: rgb(255, 255, 255);
+	/* background-color: rgb(255,255,255); */
+	/* margin: 0px 0px 3px 0px; */
+
 }
 
 .modeName:hover {
