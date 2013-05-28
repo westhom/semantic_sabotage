@@ -59,11 +59,9 @@ usfRtJpyJDk - How to act in California court
 
 mox4InKEwgU - Obama talking about agenda
 
-QnZ0Y4rvz6E - Hahvahd Bah (also horrible)
-
 UF8uR6Z6KLc - Steve Jobs Stanford commencement (real captions)
 
-n3Sntwy4Z7g - Pink Floyd : Money (lyrics come in after 60 seconds, will find better songs)
+http://www.youtube.com/watch?v=ORxR5E7GXh4 - Allen Ginsberg reading a poem
 
 drTyNDRnyxs - how to download CC instructions
 

@@ -3,13 +3,16 @@ var mode = function(id) {
 	return {
 	
 		name: "Mad Lib",
-		defaultURL: "http://www.youtube.com/watch?v=l26Uq3PX-fk",
+		defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,
 		lastEndPunct: 0,
 		timeoutEvents: [],
-		nounIndex: 0,
+		buildSentence: true,
+		sentenceCount: 0,
+		sentenceWordCount: 0,
+
 				 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
@@ -21,20 +24,13 @@ var mode = function(id) {
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('#madlib').empty();
 			
-			var intro = 'A screaming comes across the sky.';
-			var holder = $('<div class="sentence meta-serif-book size-64"></div>');
+			$('#madlib').empty();
+			this.buildSentence = true;
 
-			holder.append('<div class="variable pronoun" >IT </div>');
-			holder.append('<div class="variable past present future">WAS </div>');
-			holder.append('<div class="variable article">THE </div>');
-			holder.append('<div class="variable quant">BEST </div>');
-			holder.append('<div class="variable prep">OF </div>');
-			holder.append('<div class="variable time">TIMES </div>');
-
+			var holder = $('<div class="sentence franklin-gothic-condensed size-64"></div>');
 			$('#madlib').append(holder);
-
+			
 		},
 
 
@@ -68,29 +64,81 @@ var mode = function(id) {
 		
 		appendWordInContext: function(msg) {
 
-			var categories = ['pronoun', 'past', 'present', 'future', 'article', 'quant', 'prep', 'time'];
-			var found = false;
 
-			//ignore any punctuation
-			if($.inArray('punct', msg.cats) < 0)
+			
+			//BUILD a SENTENCE
+			if (this.buildSentence)
 			{
-
-				//no categories is a strange mix
-				//if (msg.cats.length < 1) console.log(msg.word);	
-
-				for (i in categories)
+				//ignore any punctuation
+				if($.inArray('punct', msg.cats) < 0)
 				{
-					var term = categories[i];
-					var word = msg.word.toUpperCase();			
-					if ($.inArray(term, msg.cats) >= 0)
+					var el = $('<div class="landing-word">' + msg.word.toUpperCase() + '</div>');
+					//console.log('New Word:');
+					for (i in msg.cats)
 					{
-						//console.log(term + ' >> ' + msg.word);
-						$('.' + term).html(word + ' ');
+						//console.log(msg.cats[i]);
+						if ((msg.cats[i] != 'funct') && (msg.cats[i] != 'pronoun') && (msg.cats[i] != 'sentencesmode')) {
+							el.addClass(msg.cats[i]);
+							//console.log('Category ' + msg.cats[i]);
+						}
+					}
+					$('.sentence').append(el);
+					$('.sentence').append('<div class="space">  </div>');
+
+					this.sentenceWordCount++;
+				}
+				/*
+				else if ($.inArray('endPunct', msg.cats) >= 0)
+				{
+					if ((msg.word == '.') || (msg.word == '!') || (msg.word == '?')) {
+						this.buildSentence = false;
+						this.sentenceCount = 0;
+					}
+				}
+				*/
+				//Instead of using punctuation, use word count to cap the number of word objects
+				if (this.sentenceWordCount > 5)
+				{
+					this.buildSentence = false;
+					this.sentenceCount = 0;
+				}
+			}
+
+			//SUBSTITUTE similiar words, based on LIWC categories
+			else 
+			{
+				//ignore any punctuation
+				if($.inArray('punct', msg.cats) < 0)
+				{
+					//try to find the 
+					for (i in msg.cats)
+					{
+						//if it finds something with the same class
+						var el = $('.' + msg.cats[i]).first();
+						if (el.size() > 0) 
+						{	
+							//replace all the classes of the div with the new ones
+							el.removeClass();
+							el.addClass('landing-word');
+							for (j in msg.cats) 
+								{ el.addClass(msg.cats[j]); }			
+							el.html(msg.word.toUpperCase());
+
+						}
+						//break so that the same word doesn't appear twice
 						break;
 					}
-					
 				}
-
+				//terminate after a certain number of sentences
+				//starting on sentences is clean
+				else {
+					if ((msg.word == '.') || (msg.word == '!') || (msg.word == '?')) this.sentenceCount++;
+					if (this.sentenceCount > 4) {
+						this.buildSentence = true;
+						this.sentenceWordCount = 0;
+						$('.sentence').empty();
+					}
+				}
 			}
 
 		 	

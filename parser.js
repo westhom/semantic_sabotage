@@ -22,36 +22,44 @@ var Parser = function(db, messages) {
 			// making two tables for LIWC because it's faster
 			
 			// create cached_messages table if nec
+			//this.db.dropTable("cached_messages");
 			if (!this.db.tableExists("cached_messages")) {
 		  	this.db.createTable("cached_messages", ["ytID", "messages"]);
 				this.db.commit();
 			}
 
+			// Use these two to trigger a re-build of the LIWC database
+			//this.db.dropTable("LIWC_words");
+			//this.db.dropTable("LIWC_words_wild");
+
 			// load non-wild table if needed
+
 		  if (!this.db.tableExists("LIWC_words")) {
 		  	this.db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
-		  	//db.truncate("LIWC_words");
-		  
+		  	console.log("Created LIWC_words table");
+		  	//this.db.truncate("LIWC_words");
+		  		var thisthis = this;
 			  $.getJSON("LIWC/LIWC.json", function(json) {
 			  	for (var i=0; i<json.length; i++) {
 			  		if (json[i]['word'])
-					  	this.db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+					  	thisthis.db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
 			  	}
 			  	console.log("loaded nonwild "+json.length);
-			  	this.db.commit();
+			  	thisthis.db.commit();
 
 			  	// then load wild table
-				  if (!db.tableExists("LIWC_words_wild")) {
-				  	db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
-				  	//db.truncate("LIWC_words_wild");
+				  if (!thisthis.db.tableExists("LIWC_words_wild")) {
+				  	thisthis.db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
+				  	thisthis.db.commit();
+				  	//thisthis.db.truncate("LIWC_words_wild");
 					  
 					  $.getJSON("LIWC/LIWC_wildcards.json", function(json) {
 					  	for (var i=0; i<json.length; i++) {
 					  		if (json[i]['word'])
-							  	this.db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
+							  	thisthis.db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
 					  	}
 					  	console.log("loaded wild "+json.length);
-					  	this.db.commit();
+					  	thisthis.db.commit();
 					  	
 					  	// call callback fxn
 					  	callback(args);
