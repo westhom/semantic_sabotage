@@ -55,8 +55,8 @@
 
 #mad_lib .opacity-tween
 {
-	transition:opacity 1.0s linear;
-	-webkit-transition:opacity 1.0s linear;
+	transition:opacity 0.5s linear;
+	-webkit-transition:opacity 0.5s linear;
 }
 
 #mad_lib .color-tween
