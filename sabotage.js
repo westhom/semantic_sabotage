@@ -127,7 +127,6 @@ function loadFills() {
 
 			}
 
-			
 			// Load CSS for fills.
 			for (var i=0; i<resp.styles.length; i++) {
 				//console.log(resp.styles[i]);  
@@ -294,6 +293,10 @@ function goToMode(m, post, video, time) {
 function submitURL() {
 	var url = $('#ytURL').val().trim();
 	var id = getIDFromURL(url);
+	if (id == -1) {
+		$('#ytURL').val('Bad link. Please try again...');
+		return false;
+	}
 	var time = getStartTimeFromURL(url);
 
 	console.log('submitURL()');
@@ -314,6 +317,7 @@ function submitURL() {
 		data: {"url": url},	   
 			success: load,
 			error: function(data){
+				$('#ytURL').val('Bad link. Please try again...');
 				console.log(data);
 			}
 	});
