@@ -417,11 +417,11 @@ function updateYouTubeProgressBar() {
 function toggleFullscreen() {
 	if(fullScreenApi.isFullScreen()) {
 		fullScreenApi.cancelFullScreen();
-		$("#fullscreenButton").html("FULLSCREEN &#8682;");
+		$("#fullscreenButton").html("FULLSCREEN");
 	}
 	else{
 		fullScreenApi.requestFullScreen(document.getElementsByTagName("body")[0]);
-		$("#fullscreenButton").html("FULLSCREEN &#8681;");
+		$("#fullscreenButton").html("FULLSCREEN");
 	}
 }
 
