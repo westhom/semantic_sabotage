@@ -66,7 +66,7 @@ var mode = function(id) {
     	//words is a jQuery collection
     	//console.log('set word pos');
     	var x = 100;
-    	var space_width = 36;
+    	var space_width = 24;
     	words.each(function(i) {
     		
     		$(this).css("left", x);
@@ -113,7 +113,7 @@ var mode = function(id) {
 				}
 				*/
 				//Instead of using punctuation, use word count to cap the number of word objects
-				if (this.sentenceWordCount > 5)
+				if (this.sentenceWordCount > 6)
 				{
 					this.buildSentence = false;
 					this.sentenceCount = 0;
@@ -133,36 +133,40 @@ var mode = function(id) {
 						var el = $('.' + msg.cats[i]).first();
 						if (el.size() > 0) 
 						{	
-							//replace all the classes of the div with the new ones
-							el.removeClass();
-							el.addClass('landing-word');
-							for (j in msg.cats) 
-								{ el.addClass(msg.cats[j]); }			
-							el.html(msg.word.toUpperCase());
+							if (el.html() != msg.word)
+							{
 
-							//make it invisible and then show it?
-							el.css('opacity', '0.0');
-							
-							setTimeout(function(element){
-								element.addClass('opacity-tween');
-							}, 250, el);
+								//replace all the classes of the div with the new ones
+								el.removeClass();
+								el.addClass('landing-word');
+								for (j in msg.cats) 
+									{ el.addClass(msg.cats[j]); }			
+								el.html(msg.word.toUpperCase());
 
-							setTimeout(function(element){
-								element.css('opacity', '1.0');
-							}, 500, el);
+								//make it invisible and then show it?
+								el.css('opacity', '0.0');
+								
+								setTimeout(function(element){
+									element.addClass('opacity-tween');
+								}, 250, el);
 
-							//set the top position, then slide it in?
-							/*
-							el.css('top', '100px');
-							
-							setTimeout(function(element){
-								element.addClass('top-tween');
-							}, 500, el);
+								setTimeout(function(element){
+									element.css('opacity', '1.0');
+								}, 500, el);
 
-							setTimeout(function(element){
-								element.css('top', '200px');
-							}, 1000, el);
-							*/
+								//set the top position, then slide it in?
+								/*
+								el.css('top', '100px');
+								
+								setTimeout(function(element){
+									element.addClass('top-tween');
+								}, 500, el);
+
+								setTimeout(function(element){
+									element.css('top', '200px');
+								}, 1000, el);
+								*/
+							}
 
 						}
 						//break so that the same word doesn't appear twice
