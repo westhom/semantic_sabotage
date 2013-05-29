@@ -24,6 +24,8 @@ var mode = function(id) {
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		// When you create your own mutation, you can delete this line. 
 		template: true,
+		// This variable is for tracking punctuation rules
+		lastWordPunct: false,
 				 
 		// Do anything you want to do to set up your mode the first time.
 		// This gets called once after the mode is loaded.
@@ -62,15 +64,16 @@ var mode = function(id) {
 		 	
 		 	// Choose a color based on the category of the word in the LIWC Dictionary.
 		 	var c;
-		 	if($.inArray('funct', msg.cats) >= 0) c = 'rgb(255,255,0)';
-		 	else if($.inArray('percept', msg.cats) >= 0) c = 'rgb(0,255,0)';	
-		 	else if($.inArray('heshe', msg.cats) >= 0) c = 'rgb(0,255,0)';
-		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(255,255,0)';
+		 	if($.inArray('cogmech', msg.cats) >= 0) c = 'rgb(51,154,96)';  			//green
+		 	else if($.inArray('social', msg.cats) >= 0) c = 'rgb(193,250,164)';	//light green
+		 	else if($.inArray('affect', msg.cats) >= 0) c = 'rgb(232,218,122)'; //yellow
+		 	else if($.inArray('percept', msg.cats) >= 0) c = 'rgb(255,161,92)'; //orange
+		 	else if($.inArray('verb', msg.cats) >= 0) c = 'rgb(237,75,58)'; 		//red
 		 	else c = 'rgb(255,255,255)';
 
 		 	var msgWord = msg.word;
 		 	// If not punct, add a space before the word.
-		 	if($.inArray('punct', msg.cats) < 0){
+		 	if($.inArray('endPunct', msg.cats) < 0){
 		 		msgWord = ' '+msg.word;
 		 	}
 
@@ -82,11 +85,6 @@ var mode = function(id) {
 		 	// Move the scroller div based on the position of the last word added.
 		 	$('#templateLeftScroll > .scroller').css('left', -parseInt($('#templateLeftScroll > .scroller span:last-child').position().left)+'px');	
 
-		 	// Use a timer to start animating the color back to gray
-		 	// after the element has been inserted into the DOM.
-			setTimeout(function(e){
-				e.css('color', 'rgb(100,100,100)');
-			}, 20, w);
 		}
 	}
 };
