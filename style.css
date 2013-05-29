@@ -190,7 +190,7 @@ input.navInput[type="text"]:focus
 	position:absolute;
 
 	top: 1em;
-	right: 6.25em;
+	right: 7.25em;
 	height: 1em;
 	cursor: pointer;
 	font-family: Helvetica, sans-serif;
@@ -249,7 +249,8 @@ input.navInput[type="text"]:focus
 	left:0px;
 }
 
-#aboutCover {
+
+/*#aboutCover {
 	position:absolute;
 	top:0px;
 	left:0px;
@@ -280,12 +281,10 @@ input.navInput[type="text"]:focus
 	position:absolute;
 	top: 72px;
 	left: -600px;
-	/* margin: 24px 0 0 24px; */
 	width: 400px;
 	height: 800px;
 	font-size: 14px;
 	line-height: 16px;
-	/*font-family: Helvetica, sans-serif;*/
 	color: white;
 	opacity:0;
 	margin: 0;
@@ -305,7 +304,7 @@ input.navInput[type="text"]:focus
 	color: rgb(255,255,255);
 	background-color: rgb(0,174,242);
 	text-decoration:none;
-}
+}*/
 
 
 #menu {
@@ -316,6 +315,13 @@ input.navInput[type="text"]:focus
 	padding: 1em 1.5em 0em 1em;
 }
 
+.menuHeading {
+	font-size:1em;
+	color:rgb(255,255,255);
+	text-decoration:underline;
+	margin: 0 0 0.5em 0;
+}
+
 #modeButtons {
 	position:absolute;
 	left: 1.5em;
@@ -324,7 +330,7 @@ input.navInput[type="text"]:focus
 
 #modeButtonsRight {
 	position:absolute;
-	left: 600px;
+	left: 560px;
 	top: 36px;
 }
 
@@ -344,23 +350,39 @@ input.navInput[type="text"]:focus
 	cursor: hand;
 }
 
-#aboutBody {
+hr.menu {
+	color: rgb(255,255,255);
+
+}
+
+#about {
 	position:absolute;
 	font-size: 1em;
-	left:500px;
-	top: 36px;
-	width:360px;
+	left:560px;
+	top: 320px;
+	width:400px;
+}
+
+#aboutBody {
+	font-size: 1em;
 	color: rgb(10,10,10);
 }
 
 #aboutBody a {
-	color: rgb(80,80,80);
+	color: rgb(255,255,255);
+	text-decoration:none;
 }
 
 #aboutBody a:hover {
 	color: rgb(255,255,255);
 	background-color: rgb(0,174,242);
 	text-decoration:none;
+}
+
+p.aboutIntro {
+	color:white; 
+	font-size:2em;
+	line-height:1.25em;
 }
 
 #modes {
