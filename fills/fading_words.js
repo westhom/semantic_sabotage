@@ -2,8 +2,8 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Fading Words",
-		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
+		name: "Shadow Words",
+		defaultURL: "http://www.youtube.com/watch?v=Ia7N1l7zrlk&t=0m4s",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 				 
@@ -44,17 +44,22 @@ var mode = function(id) {
 		 		this.el.append(' ');
 		 	
 		 	var c;
-		 	if($.inArray('funct', msg.cats) >= 0) c = 'rgb(255,0,0)';		 	
+		 	if($.inArray('work', msg.cats) >= 0 || $.inArray('money', msg.cats) >= 0) c = 'rgb(255,0,0)';		 	
 		 	//else if($.inArray('heshe', msg.cats) >= 0) c = 'rgb(240,0,0)';
-		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(240,240,0)';
-		 	else c = 'rgb(0,0,0)';
+		 	else if($.inArray('relig', msg.cats) >= 0 || $.inArray('death', msg.cats) >= 0) c = 'rgb(100,0,0)';
+		 	else if($.inArray('social', msg.cats) >= 0 || 
+		 		$.inArray('family', msg.cats) >= 0 || 
+		 		$.inArray('friend', msg.cats) >= 0 || 
+		 		$.inArray('human', msg.cats) >= 0) c = 'rgb(160,0,0)';
+		 	else c = 'rgb(255,255,255)';
 
 		 	//c = 'rgb(10,10,10)';
 
 		 	var newWord = $('<span class= "bigText franklin-gothic-condensed" style="color:' + c + ';">' + msg.word + '</span>');
 		 	
 		 	setTimeout(function() { 
-		 		newWord.css({'color':'rgb(255,255,255)', 'opacity':'0', 'top':'1000px'});
+		 		// newWord.css({'color':'rgb(255,255,255)', 'opacity':'0', 'top':'1000px'});
+		 		newWord.css({'color':'rgb(0,0,0)', 'opacity':'0.5', 'top':'2000px'});
 		 	}, 20);
 
 		 	setTimeout(function() {
