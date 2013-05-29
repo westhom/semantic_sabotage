@@ -82,60 +82,60 @@ var mode = function(id) {
 		 		var w,h,ww,hh;
 
 		 		if (this.curDiv === 1) {
-			 		$('#stretch .container').append(s);
+			 		$('#tabloid .container').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container').width();
+			 		ww = $('#tabloid .container').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container').height();
+			 		hh = $('#tabloid .container').height();
 			 		this.curDiv = 2;
 				} else if (this.curDiv === 2) {
-			 		$('#stretch .container2').append(s);
+			 		$('#tabloid .container2').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container2').width();
+			 		ww = $('#tabloid .container2').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container2').height();
+			 		hh = $('#tabloid .container2').height();
 			 		this.curDiv = 3;
 				} else if (this.curDiv === 3) {
-			 		$('#stretch .container3').append(s);
+			 		$('#tabloid .container3').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container3').width();
+			 		ww = $('#tabloid .container3').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container3').height();
+			 		hh = $('#tabloid .container3').height();
 			 		this.curDiv = 4;
 				} else if (this.curDiv === 4) {
-			 		$('#stretch .container4').append(s);
+			 		$('#tabloid .container4').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container4').width();
+			 		ww = $('#tabloid .container4').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container4').height();
+			 		hh = $('#tabloid .container4').height();
 			 		this.curDiv = 5;
 				} else if (this.curDiv === 5) {
-			 		$('#stretch .container5').append(s);
+			 		$('#tabloid .container5').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container5').width();
+			 		ww = $('#tabloid .container5').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container5').height();
+			 		hh = $('#tabloid .container5').height();
 			 		this.curDiv = 6;
 				} else if (this.curDiv === 6) {
-			 		$('#stretch .container6').append(s);
+			 		$('#tabloid .container6').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container6').width();
+			 		ww = $('#tabloid .container6').width();
 					h = $(s).height();
-			 		hh = $('#stretch .container6').height();
+			 		hh = $('#tabloid .container6').height();
 			 		this.curDiv = 7;
 				} else if (this.curDiv === 7) {
-			 		$('#stretch .container7').append(s);
+			 		$('#tabloid .container7').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container7').width();
+			 		ww = $('#tabloid .container7').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container7').height();
+			 		hh = $('#tabloid .container7').height();
 			 		this.curDiv = 8;
 				} else if (this.curDiv === 8) {
-			 		$('#stretch .container8').append(s);
+			 		$('#tabloid .container8').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container8').width();
+			 		ww = $('#tabloid .container8').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container8').height();
+			 		hh = $('#tabloid .container8').height();
 			 		this.curDiv = 1;
 				}
 
