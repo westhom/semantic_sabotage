@@ -18,8 +18,8 @@
 }
 
 @-webkit-keyframes tf_marquee {
-	0%		{-webkit-transform: translate(400px, 100px); opacity: 1.0;}
-	100%	{-webkit-transform: translate(400px, 50px); opacity: 0.0;}
+	0%		{-webkit-transform: translate(100px, 100px); opacity: 1.0;}
+	100%	{-webkit-transform: translate(100px, 50px); opacity: 0.0;}
 }
 
 #tf_container .faller {
@@ -32,6 +32,6 @@
 }
 
 @-webkit-keyframes faller {
-	0%		{-webkit-transform: translate(400px, 100px); opacity: 1.0;}
-	100%	{-webkit-transform: translate(400px, 800px); opacity: 0.1;}
+	0%		{-webkit-transform: translate(100px, 100px); color: black; text-shadow: 0;}
+	100%	{-webkit-transform: translate(100px, 800px); color: transparent; text-shadow: 0 0 72px black;}
 }

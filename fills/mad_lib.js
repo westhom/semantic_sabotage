@@ -3,13 +3,16 @@ var mode = function(id) {
 	return {
 	
 		name: "Mad Lib",
-		defaultURL: "http://www.youtube.com/watch?v=weNO9k1TXS0",
+		defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,
 		lastEndPunct: 0,
 		timeoutEvents: [],
-		nounIndex: 0,
+		buildSentence: true,
+		sentenceCount: 0,
+		sentenceWordCount: 0,
+
 				 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
@@ -21,20 +24,13 @@ var mode = function(id) {
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('#madlib').empty();
 			
-			var intro = 'A screaming comes across the sky.';
-			var holder = $('<div class="sentence meta-serif-book size-64"></div>');
+			$('#madlib').empty();
+			this.buildSentence = true;
 
-			holder.append('<div class="variable pronoun" >IT </div>');
-			holder.append('<div class="fixed">WAS </div>');
-			holder.append('<div class="variable article">THE </div>');
-			holder.append('<div class="variable quant">BEST </div>');
-			holder.append('<div class="variable prep">OF </div>');
-			holder.append('<div class="variable time">TIMES </div>');
-
+			var holder = $('<div class="sentence franklin-gothic-condensed"></div>');
 			$('#madlib').append(holder);
-
+			
 		},
 
 
@@ -65,30 +61,132 @@ var mode = function(id) {
 		    clearTimeout(this.timeoutEvents[i]);
 	    };
     },
+
+    setWordPositions: function(words) {
+    	//words is a jQuery collection
+    	//console.log('set word pos');
+    	var x = 100;
+    	var space_width = 24;
+    	words.each(function(i) {
+    		
+    		$(this).css("left", x);
+    		x += $(this).outerWidth();
+    		x += space_width;
+    		console.log(i + ' ' + $(this).html() + ' '  + $(this).outerWidth());
+    	});
+    },
 		
 		appendWordInContext: function(msg) {
-
-			var categories = ['pronoun', 'past', 'present', 'future', 'article', 'quant', 'prep', 'time'];
-			var found = false;
-
-			//ignore any punctuation
-			if($.inArray('punct', msg.cats) < 0)
+			
+			//BUILD a SENTENCE
+			if (this.buildSentence)
 			{
-
-				for (i in categories)
+				//ignore any punctuation
+				if($.inArray('punct', msg.cats) < 0)
 				{
-					var term = categories[i];
-					var word = msg.word.toUpperCase();			
-					if ($.inArray(term, msg.cats) >= 0)
+					var el = $('<div class="landing-word">' + msg.word.toUpperCase() + '</div>');
+					//console.log('New Word:');
+					for (i in msg.cats)
 					{
-						console.log(term + ' >> ' + msg.word);
-						$('.' + term).html(word + ' ');
+						//console.log(msg.cats[i]);
+						if ((msg.cats[i] != 'funct') && (msg.cats[i] != 'pronoun') && (msg.cats[i] != 'sentencesmode')) {
+							el.addClass(msg.cats[i]);
+							//console.log('Category ' + msg.cats[i]);
+						}
+					}
+
+					el.css('left', $('#madlib').width());
+					el.css('top', '200px');
+
+					$('.sentence').append(el);
+					//$('.sentence').append('<div class="space-word">&nbsp</div>');
+
+					this.sentenceWordCount++;
+				}
+				/*
+				else if ($.inArray('endPunct', msg.cats) >= 0)
+				{
+					if ((msg.word == '.') || (msg.word == '!') || (msg.word == '?')) {
+						this.buildSentence = false;
+						this.sentenceCount = 0;
+					}
+				}
+				*/
+				//Instead of using punctuation, use word count to cap the number of word objects
+				if (this.sentenceWordCount > 6)
+				{
+					this.buildSentence = false;
+					this.sentenceCount = 0;
+				}
+			}
+
+			//SUBSTITUTE similiar words, based on LIWC categories
+			else 
+			{
+				//ignore any punctuation
+				if($.inArray('punct', msg.cats) < 0)
+				{
+					//try to find the 
+					for (i in msg.cats)
+					{
+						//if it finds something with the same class
+						var el = $('.' + msg.cats[i]).first();
+						if (el.size() > 0) 
+						{	
+							if (el.html() != msg.word)
+							{
+
+								//replace all the classes of the div with the new ones
+								el.removeClass();
+								el.addClass('landing-word');
+								for (j in msg.cats) 
+									{ el.addClass(msg.cats[j]); }			
+								el.html(msg.word.toUpperCase());
+
+								//make it invisible and then show it?
+								el.css('opacity', '0.0');
+								
+								setTimeout(function(element){
+									element.addClass('opacity-tween');
+								}, 250, el);
+
+								setTimeout(function(element){
+									element.css('opacity', '1.0');
+								}, 500, el);
+
+								//set the top position, then slide it in?
+								/*
+								el.css('top', '100px');
+								
+								setTimeout(function(element){
+									element.addClass('top-tween');
+								}, 500, el);
+
+								setTimeout(function(element){
+									element.css('top', '200px');
+								}, 1000, el);
+								*/
+							}
+
+						}
+						//break so that the same word doesn't appear twice
 						break;
 					}
-					
 				}
-
+				//terminate after a certain number of sentences
+				//starting on sentences is clean
+				else {
+					if ((msg.word == '.') || (msg.word == '!') || (msg.word == '?')) this.sentenceCount++;
+					if (this.sentenceCount > 4) {
+						this.buildSentence = true;
+						this.sentenceWordCount = 0;
+						$('.sentence').empty();
+					}
+				}
 			}
+
+			//SET WORD POSITIONS
+			this.setWordPositions($('.landing-word, .space-word'));
 
 		 	
 		}

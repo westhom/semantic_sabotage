@@ -2,10 +2,12 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Tagged Transcript",
-		defaultURL: "http://www.youtube.com/watch?v=4H5ocEjhkYw",
+		name: "Paragraph",
+		defaultURL: "http://www.youtube.com/watch?v=PKffm2uI4dk",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		template: true,
+		
 		lastLeadPunct: 0,
 		lastEndPunct: 0,
 		posEvents: [],
@@ -14,14 +16,14 @@ var mode = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div id='tagged_container' class='container bg-white'></div>");
-			$('#tagged_container').append('<div id="transcript" class="transcript museo-slab-300 size-32"></div>');
+			this.el.append("<div id='paragraph_container' class='container bg-white'></div>");
+			$('#paragraph_container').append('<div id="transcript" class="transcript museo-slab-300 size-32"></div>');
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('#tagged_container #transcript').empty();
+			$('#paragraph_container #transcript').empty();
 		},
 
 
@@ -76,7 +78,7 @@ var mode = function(id) {
 		 	// end punct always followed by space
 		 	if($.inArray('endPunct', msg.cats) >= 0){
 		 		var e = $('<span class="' + c + '">' + word + ' ' + '</span>');
-				$('#tagged_container #transcript').append(e);
+				$('#paragraph_container #transcript').append(e);
 				e.css("color", black);
 
 				this.lastLeadPunct = 0;
@@ -89,7 +91,7 @@ var mode = function(id) {
 		 		if (this.lastEndPunct) e = $('<span class="' + c + '">' + word + '</span>');
 		 		else e = $('<span class="' + c + '">' + ' ' + word + '</span>');
 
-		 		$('#tagged_container #transcript').append(e);
+		 		$('#paragraph_container #transcript').append(e);
 		 		e.css("color", black);
 
 		 		this.lastLeadPunct = 1;
@@ -99,10 +101,10 @@ var mode = function(id) {
 		 	else {	
 
 		 		
-		 		if (!this.lastLeadPunct) e = $('#tagged_container #transcript').append('<span class="space"> </span>');
+		 		if (!this.lastLeadPunct) e = $('#paragraph_container #transcript').append('<span class="space"> </span>');
 		 		var e = $('<span class="' + c + '">' + word + '</span>');
 
-		 		$('#tagged_container #transcript').append(e);
+		 		$('#paragraph_container #transcript').append(e);
 
 		 		if (c != 'blank') {
 		 			e.addClass('marked');

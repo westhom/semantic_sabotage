@@ -22,12 +22,18 @@ var Parser = function(db, messages) {
 			// making two tables for LIWC because it's faster
 			
 			// create cached_messages table if nec
+			//this.db.dropTable("cached_messages");
 			if (!this.db.tableExists("cached_messages")) {
 		  	this.db.createTable("cached_messages", ["ytID", "messages"]);
 				this.db.commit();
 			}
 
+			// Use these two to trigger a re-build of the LIWC database
+			//this.db.dropTable("LIWC_words");
+			//this.db.dropTable("LIWC_words_wild");
+
 			// load non-wild table if needed
+
 		  if (!this.db.tableExists("LIWC_words")) {
 		  	this.db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
 		  	//db.truncate("LIWC_words");

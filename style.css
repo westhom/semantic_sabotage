@@ -7,11 +7,15 @@ http://yuilibrary.com/license/
 html, body {
 	height: 100%;
 	min-width: 1024px;
+	width: 100%;
 }
 
 html{
 	color:#000;
 	background:#FFF}
+
+
+
 
 body,div,dl,dt,dd,ul,ol,li,
 h1,h2,h3,h4,h5,h6,pre,code,
@@ -71,39 +75,48 @@ legend{
 
 /* END YUI CSS reset */
 
+
+
+
+
+
 .navBar{
 	position: relative;
-	height: 2.5%;
-	min-height:1.5em;
+	height: 3.5%;																	
+	min-height:2em;															
 	z-index:999;
 	background-color: black;
-	padding: 1em 1em 0.5em 1em;
+	padding: 0em 1em 0em 1.5em;										
 }
 
 .navText{
 	position: relative;
 	display: inline;
-	top: 0em;
+
+	top: 0.25em;
 	height:1.5em;
-	font-family: Helvetica, sans-serif;
-	font-weight: bold;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: bold;*/
 	font-size: 1.5em;
-	color: rgb(110,110,110);
-	margin: 0;
+	/* color: rgb(110,110,110); */
+	margin: 0em;
+	cursor: hand;
 }
+
 
 .navText:hover {
 	color: white;
-	cursor: hand;
 }
 
 .navStatus {
 	position: relative;
 	display: inline;
-	top: 0em;
+
+	top: 0.25em;
 	height:1.5em;
-	font-family: Helvetica, sans-serif;
-	font-weight: lighter;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: lighter;*/
+
 	font-size: 1.5em;
 	margin-left: 0.5em;
 	color: white;
@@ -112,16 +125,17 @@ legend{
 #navControls {
 	position:relative;
 	display: inline;
+	top: 0.07em;																		
 	height:1.5em;
 }
 
 .navInput {
 	position: relative;
 	display: inline;
-	top: -0.16em;
+	top: 0em;																		
 	height:1.3em;
-	font-family: Helvetica, sans-serif;
-	font-weight: normal;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: normal;*/
 	padding: 0px;
 	border-style: none;
 }
@@ -155,12 +169,13 @@ input.navInput[type="text"]:focus
 .navButton {
 	position: relative;
 	margin-left: 0.5em;
-	top: 0em;
+	top: 0.26em;
+	height: 1em;																		
 	font-family: Helvetica, sans-serif;
 	font-weight: normal; 
 	font-size: 0.9em;
 	border-style: none;
-	padding: 0.25em;
+	padding: 0em 0.25em 0em 0.25em;								
 	background-color: black;
 	color: rgb(110,110,110);
 	cursor: hand;
@@ -170,10 +185,30 @@ input.navInput[type="text"]:focus
 	color: white;
 }
 
+
+#fullscreenButton {
+	position:absolute;
+
+	top: 1em;
+	right: 7.25em;
+	height: 1em;
+	cursor: pointer;
+	font-family: Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 0.9em;
+	color: rgb(110,110,110);
+	margin: 0em;
+
+}
+
+#fullscreenButton:hover {
+	color: white;
+}
+
 #logo_link {
 	position:absolute;
-	top:1em;
-	right:1em;
+	top:0.45em;										
+	right:1em;										
 	width:0em;
 	height:0em;
 	overflow: visible;
@@ -181,19 +216,19 @@ input.navInput[type="text"]:focus
 
 #logo {
 	position:absolute;
-	top:0.05em;
+	top:0em;										
 	right:0em;
-	height:1.4em;
+	height:1.3em;
 }
 
 #progressBarBox {
 	position:relative;
-	background-color: black;
+	background-color: #333;										
 	left:0em;
 	bottom:0em;
 	width:100%;
-	height:0.5%;
-	min-height:4px;
+	height:0.5%;										
+	min-height:3px;										
 }
 
 #progressBar {
@@ -202,7 +237,6 @@ input.navInput[type="text"]:focus
 	opacity: 0.8;
 	width: 0%;
 	height:100%;
-	min-height:4px;
 }
 
 #ytplayer {
@@ -215,14 +249,15 @@ input.navInput[type="text"]:focus
 	left:0px;
 }
 
-#aboutCover {
+
+/*#aboutCover {
 	position:absolute;
 	top:0px;
 	left:0px;
 	width:100%;
 	height:100%;
 	display:none;
-	z-index: 101;
+	z-index: 98;
 }
 
 #about {
@@ -246,20 +281,31 @@ input.navInput[type="text"]:focus
 	position:absolute;
 	top: 72px;
 	left: -600px;
-	/* margin: 24px 0 0 24px; */
 	width: 400px;
 	height: 800px;
 	font-size: 14px;
 	line-height: 16px;
-	font-family: Helvetica, sans-serif;
 	color: white;
 	opacity:0;
+	margin: 0;
 
 	transition:opacity 0.5s linear;
 	-webkit-transition:opacity 0.5s linear;
 
 	z-index:100;
 }
+
+#aboutText a {
+	color: rgb(0,174,242);
+	text-decoration:none;
+}
+
+#aboutText a:hover {
+	color: rgb(255,255,255);
+	background-color: rgb(0,174,242);
+	text-decoration:none;
+}*/
+
 
 #menu {
 	position:relative;
@@ -269,16 +315,74 @@ input.navInput[type="text"]:focus
 	padding: 1em 1.5em 0em 1em;
 }
 
+.menuHeading {
+	font-size:1em;
+	color:rgb(255,255,255);
+	text-decoration:underline;
+	margin: 0 0 0.5em 0;
+}
+
+#modeButtons {
+	position:absolute;
+	left: 1.5em;
+	top: 36px;
+}
+
+#modeButtonsRight {
+	position:absolute;
+	left: 560px;
+	top: 36px;
+}
+
 .modeName {
-	font-size: 1.5em;
-	font-family: Helvetica;
-	font-weight: bold;	
-	color: rgb(255,255,255);
+	position:static;
+	display:inline-block;
+	font-size: 3.0em;
+	margin: 0px 0px 4px 0px;
+	padding: 0 0 0 0.1em;
+	cursor: hand;
 }
 
 .modeName:hover {
-	color: rgb(0,0,0);
+	color: rgb(255,255,255);
+	/*background-color: rgb(242,0,255);*/
+	background-color: rgb(0,174,242);
 	cursor: hand;
+}
+
+hr.menu {
+	color: rgb(255,255,255);
+
+}
+
+#about {
+	position:absolute;
+	font-size: 1em;
+	left:560px;
+	top: 360px;
+	width:400px;
+}
+
+#aboutBody {
+	font-size: 1em;
+	color: rgb(10,10,10);
+}
+
+#aboutBody a {
+	color: rgb(255,255,255);
+	text-decoration:none;
+}
+
+#aboutBody a:hover {
+	color: rgb(255,255,255);
+	background-color: rgb(0,174,242);
+	text-decoration:none;
+}
+
+p.aboutIntro {
+	color:white; 
+	font-size:2em;
+	line-height:1.25em;
 }
 
 #modes {
@@ -286,7 +390,7 @@ input.navInput[type="text"]:focus
 	display: none;
 	top: 0em;
 	width: 100%;
-	height: 97%;
+	height: 96%;	/* #navBar: 3.5%, #progressBarBox: 0.5% ==> total: 100%; */
 	margin: 0px 0px 0px 0px;
 }
 
@@ -305,7 +409,7 @@ input.navInput[type="text"]:focus
 }
 
 body {
-	background-color: rgb(0, 170, 255);
+	background-color: rgb(162, 163, 160);
 	overflow:hidden;
 
 }
@@ -440,9 +544,20 @@ body {
 	font-weight: 700;
 }
 
-.darkGray {
-	color: rgb(40,40,40);
+.darkGray { color: rgb(40,40,40); }
+.medGray { color:rgb(110,110,110); }
+.white { color:rgb(255,255,255); }
+
+.blackOnWhite {
+	color: rgb(0,0,0);
+	background-color: rgb(255,255,255);
 }
+
+.whiteOnGray {
+	color: rgb(255,255,255);
+	background-color: rgb(120,120,120);
+}
+
 
 .size-512{
 	font-size: 512px;

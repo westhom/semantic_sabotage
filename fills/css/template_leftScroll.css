@@ -1,0 +1,23 @@
+#template_leftScroll .topContainer {
+	position:relative;
+	width:4000px;
+	height:100%;
+	background-color:rgb(20,20,20);
+}
+
+#template_leftScroll .scroller {
+	position:absolute;
+	height:100px;
+	left:0px;
+	transition:left 1.0s linear;
+	-webkit-transition:left 1.0s linear;
+	margin: 0px 0px 0px 200px;
+}
+
+
+#template_leftScroll .scrollword {
+	font-size: 120px;
+
+	transition:color 1.0s linear;
+	-webkit-transition:color 1.0s linear;
+}
