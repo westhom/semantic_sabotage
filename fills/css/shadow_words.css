@@ -1,4 +1,4 @@
-#fading_words .container {
+#shadow_words .container {
 	width:6000px;
 	height:100%;
 	/* background-color: rgb(200,200,200); */
@@ -12,7 +12,7 @@
 	);
 }
 
-#fading_words .bigText{
+#shadow_words .bigText{
 	position:absolute;
 	top:0px;
 	left:0px;
