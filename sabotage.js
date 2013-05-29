@@ -14,6 +14,13 @@ var curVideoID = '6LPaCN-_XWg';
 var curVideoStartTime = "";
 var globalTimers = [];	// For keeping track of setTimeout events.
 
+// Set up pie chart favicon for loading captions
+Piecon.setOptions({
+  color: '#fff',
+  background: '#000000',
+  shadow: '#333',
+  fallback: false
+});
 
 // Shim layer with setTimeout fallback.
 window.requestAnimFrame = (function(){	
@@ -34,10 +41,12 @@ window.requestAnimFrame = (function(){
 	player.updateMessagePlayback();
 })();
 
-function init() {	
+function init() {
+
+	Piecon.reset();
 	
 	// Load fills and insert them into DOM.
-		loadFills();
+	loadFills();
 
 	// Set up aboutText div to hide after transitioning.
 	$("#aboutText").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
@@ -494,7 +503,8 @@ function handleYtPlayerStateChange(newState) {
 		case 1:
 			// Playing		
 			console.log('ytPlayer stage change: playing');
-			$('#progressBar').css('background-color', 'red');        
+			$('#progressBar').css('background-color', 'red');
+			Piecon.reset();        
 			break;
 		case 2:
 			// Paused

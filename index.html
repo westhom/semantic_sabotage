@@ -1,50 +1,55 @@
 <!DOCTYPE html>
+<html class="no-js">
 	<head>
 	
-	<title>Eyeo</title>
-	        
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Semantic Sabotage</title>
+	<meta name="description" content="Semantic Sabotage, an open source platform for creating live typographic YouTube mutations.  By Sosolimited, for Eyeo Festival">
+	<link rel="shortcut icon" href="favicon.ico" >
 	<link rel="stylesheet" href="./style.css" type="text/css" media="screen, projection">
 	
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>	
 	<script src="http://code.jquery.com/jquery-migrate-1.1.0.min.js"></script>
 
-  <!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
-  <script src="libs/jquery.form.js"></script>
-  <script src="libs/jquery.history.js"></script>
+	<!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
+	<script src="libs/jquery.form.js"></script>
+	<script src="libs/jquery.history.js"></script>
+	<script src="libs/piecon.min.js"></script>
 	
 
-  <!-- google yt api stuff -->
+	<!-- google yt api stuff -->
 	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
 	<script type="text/javascript" src="./embed.js"></script>
 
 
-  <!-- Typekit -->
-  <script type="text/javascript" src="//use.typekit.net/rim7nin.js"></script>
+	<!-- Typekit -->
+	<script type="text/javascript" src="//use.typekit.net/rim7nin.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 								
 	<script> 
-    // Wait for the DOM to be loaded.
-    	$(document).ready(function() { 
-    		init();
-    		
-        	// bind 'myForm' and provide a simple callback function 
-        	$('#youtube_load').ajaxForm({ 
-		        // DataType identifies the expected content type of the server response.
-		        dataType:  'json', 
-		        // Success identifies the function to invoke when the server response has been received.
-		        success:   load 
-          	}); 
-      	}); 
+		// Wait for the DOM to be loaded.
+			$(document).ready(function() { 
+				init();
+				
+					// bind 'myForm' and provide a simple callback function 
+					$('#youtube_load').ajaxForm({ 
+						// DataType identifies the expected content type of the server response.
+						dataType:  'json', 
+						// Success identifies the function to invoke when the server response has been received.
+						success:   load 
+						}); 
+				}); 
 	</script> 
 
 		
-	<script src="./localStorageDB/localstoragedb.min.js"></script>
-	<script src="./statsHandler.js"></script>
-	<script src="./parser.js"></script>
-	<script src="./player.js"></script>
-	<script src="./sabotage.js"></script>
-	<script src="./fullscreen.js"></script>
+	<script src="localStorageDB/localstoragedb.min.js"></script>
+	<script src="statsHandler.js"></script>
+	<script src="parser.js"></script>
+	<script src="player.js"></script>
+	<script src="sabotage.js"></script>
+	<script src="fullscreen.js"></script>
 
 	<!-- Gets rid of Indonesian translation request -->
 	<meta name="google" content="notranslate" />
@@ -65,11 +70,11 @@
 					<input id="ytURL" class="navInput proxima-nova-400" type="text" value="Enter a YouTube URL." name="url" size="44">
 					<input id="ytURLButton" class="navButton proxima-nova-400" type="submit"  value="SUBMIT" onclick="submitURL();">
 					<button id="playButton" class="navButton proxima-nova-400" style="display:none" onclick="playback();">PLAY</button>
-			  	<button id="pauseButton" class="navButton proxima-nova-400" style="display:none" onclick="pausePlayback();">PAUSE</button>
-			  	<button id="muteButton" class="navButton proxima-nova-400" style="display:none" onclick="muteVideo();">MUTE</button>
-			  	<button id="unmuteButton" class="navButton proxima-nova-400" style="display:none" onclick="unMuteVideo();">UNMUTE</button>
-			  </form>
-    
+					<button id="pauseButton" class="navButton proxima-nova-400" style="display:none" onclick="pausePlayback();">PAUSE</button>
+					<button id="muteButton" class="navButton proxima-nova-400" style="display:none" onclick="muteVideo();">MUTE</button>
+					<button id="unmuteButton" class="navButton proxima-nova-400" style="display:none" onclick="unMuteVideo();">UNMUTE</button>
+				</form>
+		
 			</div>
 
 
@@ -90,6 +95,7 @@
 		<div id="aboutText" class="meta-serif-book">Semantic Sabotage is an open source platform for creating live typographic YouTube mutations.</br></br>Each mutation uses HTML5 and Javascript to visualize the transcript of a YouTube movie, as it plays. A Javascript language engine uses the <a href="http://www.liwc.net/" target="_blank">LIWC</a> dictionary to parse the transcript for meaning. Big thanks to <a href="http://homepage.psy.utexas.edu/homepage/faculty/pennebaker/home2000/jwphome.htm" target="_blank">James Pennebaker</a> and the UT Austin Department of Psychology, whose research made this project possible.</br></br>Download the code from GitHub and create your own mutation. Start with one of the templates or with an existing mutation.</div> -->
 
 
+
 	  <div id="menu">
 	  		
 	    	<ul id="modeButtons">
@@ -101,22 +107,22 @@
 	    
 	    	<div id="about">
 	    		<hr class="menu"/>
-		    	<div id="aboutBody" class="meta-serif-book"><p class="aboutIntro meta-serif-book-italic">Semantic Sabotage is an open source platform for creating live typographic YouTube mutations.</p></br>Each mutation uses HTML5 and Javascript to visualize the transcript of a YouTube movie, as it plays. A Javascript language engine uses the <a href="http://www.liwc.net/" target="_blank">LIWC</a> dictionary to parse the transcript for meaning. Big thanks to <a href="http://homepage.psy.utexas.edu/homepage/faculty/pennebaker/home2000/jwphome.htm" target="_blank">James Pennebaker</a> and the UT Austin Department of Psychology, whose research made this project possible.</br></br>Download the code from <a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank">GitHub</a> and create your own mutation. Start with one of the templates or with an existing mutation.</div>
+		    	<div id="aboutBody" class="meta-serif-book"><p class="aboutIntro meta-serif-book-italic">Semantic Sabotage is an open source platform for creating live typographic YouTube mutations.</p></br>Each mutation uses HTML5 and Javascript to visualize the transcript of a YouTube movie, as it plays. Big thanks to <a href="http://homepage.psy.utexas.edu/homepage/faculty/pennebaker/home2000/jwphome.htm" target="_blank">James Pennebaker</a> and the UT Austin Department of Psychology, whose research made this project possible.</br></br>Download the code from <a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank">GitHub</a> and create your own mutation. Start with one of the templates or with an existing mutation.</div>
 		    </div>
 		</div>		
 
-	    <div id="modes">	    	
+			<div id="modes">	    	
 						
-	    	<div id="videoInfo">
-		      <p>Player state: <span id="playerState">--</span></p>
-		      <p>Current Time: <span id="videoCurrentTime">--:--</span> | Duration: <span id="videoDuration">--:--</span></p>
-		      <p>Bytes Total: <span id="bytesTotal">--</span> | Start Bytes: <span id="startBytes">--</span> | Bytes Loaded: <span id="bytesLoaded">--</span></p>
-	    	</div>
+				<div id="videoInfo">
+					<p>Player state: <span id="playerState">--</span></p>
+					<p>Current Time: <span id="videoCurrentTime">--:--</span> | Duration: <span id="videoDuration">--:--</span></p>
+					<p>Bytes Total: <span id="bytesTotal">--</span> | Start Bytes: <span id="startBytes">--</span> | Bytes Loaded: <span id="bytesLoaded">--</span></p>
+				</div>
 
-	    </div>
+			</div>
 
 		
-	    <div id="results"></div>
+			<div id="results"></div>
 	
 	</body>
 	

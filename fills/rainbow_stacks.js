@@ -4,7 +4,7 @@ var mode = function(id) {
 	
 		name: "Rainbow Stacks",
 
-		defaultURL: "http://www.youtube.com/watch?v=OQSNhk5ICTI",
+		defaultURL: "http://www.youtube.com/watch?v=4H5ocEjhkYw",
 		el: $('<div class="modeContainer" style="background-color:black" id="'+id+'"></div>'),
 				 
 		lineHeight: 72,
