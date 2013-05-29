@@ -25,7 +25,8 @@ var mode = function(id) {
 		// When you create your own mutation, you can delete this line. 
 		template: true,
 		// This variable is for tracking punctuation rules
-		lastWordPunct: false,
+		sentenceTermination: false,
+		lastLeadPunct: false,
 				 
 		// Do anything you want to do to set up your mode the first time.
 		// This gets called once after the mode is loaded.
@@ -63,6 +64,7 @@ var mode = function(id) {
 		appendWordInContext: function(msg) {
 		 	
 		 	// Choose a color based on the category of the word in the LIWC Dictionary.
+		 	// These are five very broad LIWC categories
 		 	var c;
 		 	if($.inArray('cogmech', msg.cats) >= 0) c = 'rgb(51,154,96)';  			//green
 		 	else if($.inArray('social', msg.cats) >= 0) c = 'rgb(193,250,164)';	//light green
@@ -72,10 +74,24 @@ var mode = function(id) {
 		 	else c = 'rgb(255,255,255)';
 
 		 	var msgWord = msg.word;
-		 	// If not punct, add a space before the word.
+		
+			// If the word is not end punctuation, add a space before the word.
 		 	if($.inArray('endPunct', msg.cats) < 0){
+		 		// But only if it doesn't follow lead punctuation
+		 		if (!this.lastLeadPunct) msgWord = ' '+msg.word;
+		 	}
+		 	// Any word gets a preceeding space when it follows sentence termination
+		 	else if (this.sentenceTermination) {
 		 		msgWord = ' '+msg.word;
 		 	}
+
+		 	// Keep track of whether the word ends the sentence
+		 	if ((msg.word == '.') || (msg.word == '!') || (msg.word == '?')) this.sentenceTermination = true;
+		 	else this.sentenceTermination = false;
+
+		 	// Keep track of lead punctuation for layout rules
+		 	if($.inArray('leadPunct', msg.cats) >= 0) this.lastLeadPunct = true;
+		 	else this.lastLeadPunct = false;
 
 		 	// Create the span element that contains the word.
 		 	var w = $('<span class= "scrollword proxima-nova-400-italic" style="color:' + c + ';">' + msgWord + '</span>');
