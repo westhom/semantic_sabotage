@@ -1,4 +1,4 @@
-#tagged_transcript .container {
+#highlighter .container {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -8,29 +8,29 @@
 	/* background-color: rgb(245, 242, 226); */
 }
 
-#tagged_transcript .transcript 
+#highlighter .transcript 
 {
 	padding: 24px;
 }
 
-#tagged_transcript .color-tween
+#highlighter .color-tween
 {
 	transition:color 1.0s linear;
 	-webkit-transition:color 1.0s linear;
 }
 
-#tagged_transcript .bgcolor-tween
+#highlighter .bgcolor-tween
 {
 	transition:background-color 1.0s linear;
 	-webkit-transition:background-color 1.0s linear;
 }
 
-#tagged_transcript .white
+#highlighter .white
 {
 	color: rgb(245, 242, 226);
 }
 
-#tagged_transcript .bg-white
+#highlighter .bg-white
 {
 	background-color: rgb(245, 242, 226);
 }

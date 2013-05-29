@@ -82,60 +82,60 @@ var mode = function(id) {
 		 		var w,h,ww,hh;
 
 		 		if (this.curDiv === 1) {
-			 		$('#tabloid .container').append(s);
+			 		this.el.find('.container').append(s);
 			 		w = $(s).width();
-			 		ww = $('#tabloid .container').width();
+			 		ww = this.el.find('.container').width();
 			 		h = $(s).height();
-			 		hh = $('#tabloid .container').height();
+			 		hh = this.el.find('.container').height();
 			 		this.curDiv = 2;
 				} else if (this.curDiv === 2) {
-			 		$('#tabloid .container2').append(s);
+			 		this.el.find('.container2').append(s);
 			 		w = $(s).width();
-			 		ww = $('#tabloid .container2').width();
+			 		ww = this.el.find('.container2').width();
 			 		h = $(s).height();
-			 		hh = $('#tabloid .container2').height();
+			 		hh = this.el.find('.container2').height();
 			 		this.curDiv = 3;
 				} else if (this.curDiv === 3) {
-			 		$('#tabloid .container3').append(s);
+			 		this.el.find('.container3').append(s);
 			 		w = $(s).width();
-			 		ww = $('#tabloid .container3').width();
+			 		ww = this.el.find('.container3').width();
 			 		h = $(s).height();
-			 		hh = $('#tabloid .container3').height();
+			 		hh = this.el.find('.container3').height();
 			 		this.curDiv = 4;
 				} else if (this.curDiv === 4) {
-			 		$('#tabloid .container4').append(s);
+			 		this.el.find('.container4').append(s);
 			 		w = $(s).width();
-			 		ww = $('#tabloid .container4').width();
+			 		ww = this.el.find('.container4').width();
 			 		h = $(s).height();
-			 		hh = $('#tabloid .container4').height();
+			 		hh = this.el.find('.container4').height();
 			 		this.curDiv = 5;
 				} else if (this.curDiv === 5) {
-			 		$('#tabloid .container5').append(s);
+			 		this.el.find('.container5').append(s);
 			 		w = $(s).width();
-			 		ww = $('#tabloid .container5').width();
+			 		ww = this.el.find('.container5').width();
 			 		h = $(s).height();
-			 		hh = $('#tabloid .container5').height();
+			 		hh = this.el.find('.container5').height();
 			 		this.curDiv = 6;
 				} else if (this.curDiv === 6) {
-			 		$('#tabloid .container6').append(s);
+			 		this.el.find('.container6').append(s);
 			 		w = $(s).width();
-			 		ww = $('#tabloid .container6').width();
+			 		ww = this.el.find('.container6').width();
 					h = $(s).height();
-			 		hh = $('#tabloid .container6').height();
+			 		hh = this.el.find('.container6').height();
 			 		this.curDiv = 7;
 				} else if (this.curDiv === 7) {
-			 		$('#tabloid .container7').append(s);
+			 		this.el.find('.container7').append(s);
 			 		w = $(s).width();
-			 		ww = $('#tabloid .container7').width();
+			 		ww = this.el.find('.container7').width();
 			 		h = $(s).height();
-			 		hh = $('#tabloid .container7').height();
+			 		hh = this.el.find('.container7').height();
 			 		this.curDiv = 8;
 				} else if (this.curDiv === 8) {
-			 		$('#tabloid .container8').append(s);
+			 		this.el.find('.container8').append(s);
 			 		w = $(s).width();
-			 		ww = $('#tabloid .container8').width();
+			 		ww = this.el.find('.container8').width();
 			 		h = $(s).height();
-			 		hh = $('#tabloid .container8').height();
+			 		hh = this.el.find('.container8').height();
 			 		this.curDiv = 1;
 				}
 
