@@ -1,4 +1,4 @@
-#shadow_words .container {
+#black_list .container {
 	width:6000px;
 	height:100%;
 	/* background-color: rgb(200,200,200); */
@@ -12,7 +12,7 @@
 	);
 }
 
-#shadow_words .bigText{
+#black_list .bigText{
 	position:absolute;
 	top:0px;
 	left:0px;

@@ -82,60 +82,60 @@ var mode = function(id) {
 		 		var w,h,ww,hh;
 
 		 		if (this.curDiv === 1) {
-			 		$('#stretch .container').append(s);
+			 		this.el.find('.container').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container').width();
+			 		ww = this.el.find('.container').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container').height();
+			 		hh = this.el.find('.container').height();
 			 		this.curDiv = 2;
 				} else if (this.curDiv === 2) {
-			 		$('#stretch .container2').append(s);
+			 		this.el.find('.container2').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container2').width();
+			 		ww = this.el.find('.container2').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container2').height();
+			 		hh = this.el.find('.container2').height();
 			 		this.curDiv = 3;
 				} else if (this.curDiv === 3) {
-			 		$('#stretch .container3').append(s);
+			 		this.el.find('.container3').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container3').width();
+			 		ww = this.el.find('.container3').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container3').height();
+			 		hh = this.el.find('.container3').height();
 			 		this.curDiv = 4;
 				} else if (this.curDiv === 4) {
-			 		$('#stretch .container4').append(s);
+			 		this.el.find('.container4').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container4').width();
+			 		ww = this.el.find('.container4').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container4').height();
+			 		hh = this.el.find('.container4').height();
 			 		this.curDiv = 5;
 				} else if (this.curDiv === 5) {
-			 		$('#stretch .container5').append(s);
+			 		this.el.find('.container5').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container5').width();
+			 		ww = this.el.find('.container5').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container5').height();
+			 		hh = this.el.find('.container5').height();
 			 		this.curDiv = 6;
 				} else if (this.curDiv === 6) {
-			 		$('#stretch .container6').append(s);
+			 		this.el.find('.container6').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container6').width();
+			 		ww = this.el.find('.container6').width();
 					h = $(s).height();
-			 		hh = $('#stretch .container6').height();
+			 		hh = this.el.find('.container6').height();
 			 		this.curDiv = 7;
 				} else if (this.curDiv === 7) {
-			 		$('#stretch .container7').append(s);
+			 		this.el.find('.container7').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container7').width();
+			 		ww = this.el.find('.container7').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container7').height();
+			 		hh = this.el.find('.container7').height();
 			 		this.curDiv = 8;
 				} else if (this.curDiv === 8) {
-			 		$('#stretch .container8').append(s);
+			 		this.el.find('.container8').append(s);
 			 		w = $(s).width();
-			 		ww = $('#stretch .container8').width();
+			 		ww = this.el.find('.container8').width();
 			 		h = $(s).height();
-			 		hh = $('#stretch .container8').height();
+			 		hh = this.el.find('.container8').height();
 			 		this.curDiv = 1;
 				}
 
