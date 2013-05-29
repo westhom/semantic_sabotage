@@ -1,0 +1,21 @@
+#blur_painting {
+	background-color: white;
+}
+
+#bp_container {
+	position: absolute;
+	width: 100%;
+	color: white;	
+	text-align: center;
+}
+
+#bp_container .faller {
+	position: absolute;
+	font-size: 50px;
+	color: black; 
+	text-shadow: 0 0 0 transparent;
+
+	transition: top 5s ease-in, opacity 5s ease-in, color 5s ease-in, text-shadow 5s linear;
+	-webkit-transition: top 5s ease-in, opacity 5s ease-in, color 5s ease-in, text-shadow 5s linear;
+
+}

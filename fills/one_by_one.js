@@ -4,21 +4,22 @@ var mode = function(id) {
 	
 		name: "One x One",
 
-		defaultURL: "http://www.youtube.com/watch?v=6ucfgdFrlho",
+		defaultURL: "http://www.youtube.com/watch?v=6ucfgdFrlho&t=0m05s",
 		//usfRtJpyJDk = how to behave in court
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		fontSize: 200,
 				 
 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div class='topContainer'><div id='eg' class='centerContainer'></div></div>");
+			this.el.append('<div class="topContainer"><div id="word" class="centerContainer museo-slab-1000-italic"></div></div>');
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('#eg').empty();
+			$('#word').empty();
 		},
 
 		// Handle incoming word message.
@@ -35,23 +36,31 @@ var mode = function(id) {
 		// Handle incoming stats message.
 		handleStats: function(msg) {
 			//console.log(msg);
+			//console.log('pos '+ msg["posemo"]   + ' neg ' + msg["negemo"]);
+
+			this.fontSize = 200 + msg["posemo"]*1000 - msg["negemo"]*1000;
+			if (this.fontSize < 24) this.fontSize = 24;
 		},
 		
 		appendWordInContext: function(msg) {
-		
-		 	// update curSentence
-		 	if (!msg.sentenceStartFlag && !msg.punctuationFlag)
-		 		this.el.append(' ');
-		 	
+
 		 	var c;
-		 	if($.inArray('funct', msg.cats) >= 0) c = 'rgb(255,0,0)';
-		 	else if($.inArray('percept', msg.cats) >= 0) c = 'rgb(0,255,0)';
-		 	else if($.inArray('heshe', msg.cats) >= 0) c = 'rgb(45,255,0)';
-		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(255,180,140)';
+		 	if($.inArray('percep', msg.cats) >= 0) c = 'rgb(255,0,0)';
+		 	else if($.inArray('bio', msg.cats) >= 0) c = 'rgb(0,255,0)';
+		 	else if($.inArray('word', msg.cats) >= 0) c = 'rgb(45,255,0)';
+		 	else if($.inArray('leisure', msg.cats) >= 0) c = 'rgb(255,180,140)';
+		 	else if($.inArray('home', msg.cats) >= 0) c = 'rgb(255,180,140)';
+		 	else if($.inArray('money', msg.cats) >= 0) c = 'rgb(0,180,140)';
+		 	else if (msg.cats.length == 0) c = 'rgb(0,0,0)';
 		 	else c = 'rgb(40,40,40)';
 
-		 	var w = $('<div class= "museo-slab-1000-italic" style="font-size:'+200+'px; color:' + c + ';">' + msg.word + '</div>');
-		 	$('#eg').html(w);
+		 	$('#word').html(msg.word);
+		 	$('#word').css('font-size', this.fontSize + 'px');
+		 	$('#word').css('color', c);
+
+
+		 	
+		 	
 		}
 	}
 };

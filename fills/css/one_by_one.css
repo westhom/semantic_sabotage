@@ -5,12 +5,15 @@
 }
 
 #one_by_one .centerContainer {
-	margin: auto auto auto auto;
-    display: table;
+  background-color: yellow;
+
+  padding-top: 150px;
+  margin-left: auto;
+	margin-right: auto;
+
+	text-align: center;
+	font-size: 200px;
 }
 
-#one_by_one .centerText{
-	font-size:260px;
-	margin: 25% 0 0 0;
-}	
+
 

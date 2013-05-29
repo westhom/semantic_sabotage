@@ -49,6 +49,7 @@ var Player = function(app) {
 					// Gotta use offset setTimeouts, so progress bar reflow can happen.
 					parseTimeoutEvents.push(setTimeout(function(data, i){
 						parser.parseLine(data[i]);
+						Piecon.setProgress(Math.floor((i/data.length)*100));
 						$('#progressBar').width((i/data.length)*100 + "%");		
 					}, i*offset, cc, i));
 				}
