@@ -8,6 +8,7 @@ var mode = function(id) {
 		el: $('<div class="modeContainer" style="background-color:black" id="'+id+'"></div>'),
 				 
 		lineHeight: 72,
+		whoaToggle: true,
 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
@@ -51,24 +52,13 @@ var mode = function(id) {
 		 	// update curSentence
 		 	if($.inArray('punct', msg.cats) < 0){
 			 	
-			 	var c;
-			 	if($.inArray('posemo', msg.cats) >= 0) c = "blue";
-			 	else if($.inArray('negemo', msg.cats) >= 0) c = "orange";
-			 	else if($.inArray('certain', msg.cats) >= 0) c = "green";
-			 	else if($.inArray('tentat', msg.cats) >= 0) c = "yellow";
-			 	else c = "white";
-
-			 	//c = 'rgb(10,10,10)';
-
-			 	var newWord = $('<div class= "bigText motor" style="color:' + c + ';">' + msg.word + '</div>');
-			 	
-			 	setTimeout(function() { 
-			 		newWord.css({'color':'rgb(255,255,255)', 'opacity':'0', 'top':'1000px'});
-			 	}, 20);
-
-			 	setTimeout(function() {
-			 		newWord.remove();
-			 	}, 6000);
+		 		//a little hack to fill out the 5-letter column
+				if (msg.word.toUpperCase() === 'WHOA') {
+					if (this.whoaToggle)
+						msg.word = 'WHOAH';	
+					console.log("whoa = " + msg.word);
+					this.whoaToggle = !this.whoaToggle;
+				} 
 
 				var e = $('<div class= "bigText motor" opacity:0;">' + msg.word.toUpperCase() + '</div>');
 

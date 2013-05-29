@@ -41,7 +41,9 @@ var mode = function(id) {
 			 	if($.inArray('affect', msg.cats) >= 0) c = 'blue';
 			 	else if($.inArray('cogmech', msg.cats) >= 0) c = 'orange';
 			 	else if($.inArray('social', msg.cats) >= 0) c = 'magenta';
-			 	else if($.inArray('time', msg.cats) >= 0) c = 'yellowgreen';
+			 	else if($.inArray('pronoun', msg.cats) >= 0) c = 'yellowgreen';
+			 	else if($.inArray('verb', msg.cats) >= 0) c = 'thistle';		
+			 	else if($.inArray('bio', msg.cats) >= 0) c = 'firebrick';					 		 	
 			 	else c = 'rgb(40,40,40)';
 
 				var s = $('<div class= "faller proxima-nova-400" style="color:' + c + '; opacity:1; top:0px">' + msg.word + '</div>');
@@ -57,16 +59,20 @@ var mode = function(id) {
 					e.css({'color':'transparent', 'text-shadow':'0 0 36px '+c,'top':h+'px'});
 				}, 20, s);
 
+				var fadeOutTime = 20000;
+				if (c === 'rgb(40,40,40)')
+						fadeOutTime = 10020;
+
 				setTimeout(function(e){
 					e.css({'text-shadow':'0 0 36px transparent'});
-				}, 20000, s);
+				}, fadeOutTime, s);
 
 
 				this.curWordPos = (this.curWordPos + wordWidth);
 				if (this.curWordPos > windowWidth)
 					this.curWordPos = 0;
 
-			 	var death = 30000;
+			 	var death = fadeOutTime + 10000;
 			 	$(s).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd',
 			 	function() { 
 			 		setTimeout(function(){$(s).remove()},death);

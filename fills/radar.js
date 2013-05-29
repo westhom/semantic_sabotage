@@ -27,22 +27,22 @@ var mode = function(id) {
 
 			this.el.append('<div class="container"></div>');
 
-//			$('#oh-scope .container').css('background-image','-webkit-gradient(radial, center center, ' + (this.radius) + ', center center, ' + (this.radius+10) + ', color-stop(0, #666), color-stop(1, #000))');
+//			$('#radar .container').css('background-image','-webkit-gradient(radial, center center, ' + (this.radius) + ', center center, ' + (this.radius+10) + ', color-stop(0, #666), color-stop(1, #000))');
 
-			$('#oh-scope .container').append('<div class="ring1" style="left:' +($('#oh-scope .container').width()-(this.radius)*10/5)/2+ 'px; top:' +($('#oh-scope .container').height()-(this.radius)*10/5)/2+ 'px; width:' +(this.radius)*10/5+ 'px; height:' +(this.radius)*10/5+ 'px;"></div>');
-			$('#oh-scope .container').append('<div class="ring2" style="left:' +(($('#oh-scope .container').width()-(this.radius)*10/5)/2+2)+ 'px; top:' +(($('#oh-scope .container').height()-(this.radius)*10/5)/2+2)+ 'px; width:' +((this.radius)*10/5-4)+ 'px; height:' +((this.radius)*10/5-4)+ 'px;"></div>');
+			this.el.find('.container').append('<div class="ring1" style="left:' +(this.el.find('.container').width()-(this.radius)*10/5)/2+ 'px; top:' +($('#radar .container').height()-(this.radius)*10/5)/2+ 'px; width:' +(this.radius)*10/5+ 'px; height:' +(this.radius)*10/5+ 'px;"></div>');
+			this.el.find('.container').append('<div class="ring2" style="left:' +((this.el.find('.container').width()-(this.radius)*10/5)/2+2)+ 'px; top:' +((this.el.find('.container').height()-(this.radius)*10/5)/2+2)+ 'px; width:' +((this.radius)*10/5-4)+ 'px; height:' +((this.radius)*10/5-4)+ 'px;"></div>');
 
-			$('#oh-scope .container').append('<div class="ring1" style="left:' +($('#oh-scope .container').width()-(this.radius)*6/5)/2+ 'px; top:' +($('#oh-scope .container').height()-(this.radius)*6/5)/2+ 'px; width:' +(this.radius)*6/5+ 'px; height:' +(this.radius)*6/5+ 'px;"></div>');
-			$('#oh-scope .container').append('<div class="ring2" style="left:' +(($('#oh-scope .container').width()-(this.radius)*6/5)/2+2)+ 'px; top:' +(($('#oh-scope .container').height()-(this.radius)*6/5)/2+2)+ 'px; width:' +((this.radius)*6/5-4)+ 'px; height:' +((this.radius)*6/5-4)+ 'px;"></div>');
+			this.el.find('.container').append('<div class="ring1" style="left:' +(this.el.find('.container').width()-(this.radius)*6/5)/2+ 'px; top:' +(this.el.find('.container').height()-(this.radius)*6/5)/2+ 'px; width:' +(this.radius)*6/5+ 'px; height:' +(this.radius)*6/5+ 'px;"></div>');
+			this.el.find('.container').append('<div class="ring2" style="left:' +((this.el.find('.container').width()-(this.radius)*6/5)/2+2)+ 'px; top:' +((this.el.find('.container').height()-(this.radius)*6/5)/2+2)+ 'px; width:' +((this.radius)*6/5-4)+ 'px; height:' +((this.radius)*6/5-4)+ 'px;"></div>');
 
-			$('#oh-scope .container').append('<div class="ring1" style="left:' +($('#oh-scope .container').width()-(this.radius)*2/5)/2+ 'px; top:' +($('#oh-scope .container').height()-(this.radius)*2/5)/2+ 'px; width:' +(this.radius)*2/5+ 'px; height:' +(this.radius)*2/5+ 'px;"></div>');
-			$('#oh-scope .container').append('<div class="ring2" style="left:' +(($('#oh-scope .container').width()-(this.radius)*2/5)/2+2)+ 'px; top:' +(($('#oh-scope .container').height()-(this.radius)*2/5)/2+2)+ 'px; width:' +((this.radius)*2/5-4)+ 'px; height:' +((this.radius)*2/5-4)+ 'px;"></div>');
+			this.el.find('.container').append('<div class="ring1" style="left:' +(this.el.find('.container').width()-(this.radius)*2/5)/2+ 'px; top:' +(this.el.find('.container').height()-(this.radius)*2/5)/2+ 'px; width:' +(this.radius)*2/5+ 'px; height:' +(this.radius)*2/5+ 'px;"></div>');
+			this.el.find('.container').append('<div class="ring2" style="left:' +((this.el.find('.container').width()-(this.radius)*2/5)/2+2)+ 'px; top:' +((this.el.find('.container').height()-(this.radius)*2/5)/2+2)+ 'px; width:' +((this.radius)*2/5-4)+ 'px; height:' +((this.radius)*2/5-4)+ 'px;"></div>');
 
-			$('#oh-scope .container').append('<div class="timer"></div>');
-			$('#oh-scope .container').append('<div class="marqueeCenter"></div>');
-			$('#oh-scope .container').append('<div class="particleCenter"></div>');
+			this.el.find('.container').append('<div class="timer"></div>');
+			this.el.find('.container').append('<div class="marqueeCenter"></div>');
+			this.el.find('.container').append('<div class="particleCenter"></div>');
 
-			$('#oh-scope .marqueeCenter').css('width', this.radius+'px')
+			this.el.find('.marqueeCenter').css('width', this.radius+'px')
 
 		},
 
@@ -87,10 +87,10 @@ var mode = function(id) {
 					var m = document.createElement('div');
 					$(m).append(msg.word);
 					$(m).addClass('marquee proxima-nova-700');
-					$('#oh-scope .marqueeCenter').append(m);
+					$('#radar .marqueeCenter').append(m);
 					setTimeout( function() { $(m).remove() }, this.period*1000 );
 
-					var angle = -$('#oh-scope .timer').width()/10 * Math.PI/180;
+					var angle = -$('#radar .timer').width()/10 * Math.PI/180;
 					var r = 100 + Math.round(Math.random()*(this.radius-75-100)) - Math.round(Math.cos(angle) * 50);
 					var dx = Math.round(Math.cos(angle) * r);
 					var dy = Math.round(Math.sin(angle) * r);
@@ -111,7 +111,7 @@ var mode = function(id) {
 					$(p).append(d);
 					$(p).append(w);
 
-					$('#oh-scope .particleCenter').append(p);
+					$('#radar .particleCenter').append(p);
 					setTimeout( function() { $(p).remove() }, this.period*1000 );
 					window.getComputedStyle(p).WebkitTransform;
 

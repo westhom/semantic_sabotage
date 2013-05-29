@@ -1,5 +1,5 @@
 
-#stretch .container {
+#tabloid .container {
 	position: absolute;
 	width: 100%;
 	height: 33%;
@@ -9,7 +9,7 @@
 	font-size: 100px;
 }
 
-#stretch .container2 {
+#tabloid .container2 {
 	position: absolute;
 	width: 100%;
 	height: 33%;
@@ -19,7 +19,7 @@
 	font-size: 100px;
 }
 
-#stretch .container3 {
+#tabloid .container3 {
 	position: absolute;
 	width: 100%;
 	height: 33%;
@@ -29,7 +29,7 @@
 	font-size: 100px;
 }
 
-#stretch .container4 {
+#tabloid .container4 {
 	position: absolute;
 	width: 45%;
 	height: 33%;
@@ -39,7 +39,7 @@
 	font-size: 100px;
 }
 
-#stretch .container5 {
+#tabloid .container5 {
 	position: absolute;
 	width: 45%;
 	height: 33%;
@@ -49,7 +49,7 @@
 	font-size: 100px;
 }
 
-#stretch .container6 {
+#tabloid .container6 {
 	position: absolute;
 	width: 100%;
 	height: 33%;
@@ -59,7 +59,7 @@
 	font-size: 100px;
 }
 
-#stretch .container7 {
+#tabloid .container7 {
 	position: absolute;
 	width: 45%;
 	height: 33%;
@@ -69,7 +69,7 @@
 	font-size: 100px;
 }
 
-#stretch .container8 {
+#tabloid .container8 {
 	position: absolute;
 	width: 45%;
 	height: 33%;
@@ -80,7 +80,7 @@
 }
 
 
-#stretch .word {
+#tabloid .word {
 	position: absolute;
 	top: 0px;
 	left: 0px;
