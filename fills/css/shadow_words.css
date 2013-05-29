@@ -1,4 +1,4 @@
-#fading_words .container {
+#shadow_words .container {
 	width:6000px;
 	height:100%;
 	/* background-color: rgb(200,200,200); */
@@ -12,13 +12,13 @@
 	);
 }
 
-#fading_words .bigText{
+#shadow_words .bigText{
 	position:absolute;
 	top:0px;
 	left:0px;
 	width: 6000px;
 	font-size: 260px;
 
-	transition: color 1s ease-out, opacity 3s linear, top 6s ease-in 1s;
-	-webkit-transition: color 1s ease-out, opacity 3s linear, top 6s ease-in 1s;
+	transition: color 1s ease-out, opacity 3s linear, top 6s ease-in 0.5s;
+	-webkit-transition: color 1s ease-out, opacity 3s linear, top 6s ease-in 0.5s;
 }	
