@@ -36,38 +36,28 @@ var Parser = function(db, messages) {
 
 		  if (!this.db.tableExists("LIWC_words")) {
 		  	this.db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
-		  	console.log("Created LIWC_words table");
-		  	//this.db.truncate("LIWC_words");
-		  		var thisthis = this;
-			  $.getJSON("LIWC/LIWC.json", function(json) {
-			  	for (var i=0; i<json.length; i++) {
-			  		if (json[i]['word'])
-					  	thisthis.db.insertOrUpdate("LIWC_words", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
-			  	}
-			  	console.log("loaded nonwild "+json.length);
-			  	thisthis.db.commit();
-
-			  	// then load wild table
-				  if (!thisthis.db.tableExists("LIWC_words_wild")) {
-				  	thisthis.db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
-				  	thisthis.db.commit();
-				  	//thisthis.db.truncate("LIWC_words_wild");
-					  
-					  $.getJSON("LIWC/LIWC_wildcards.json", function(json) {
-					  	for (var i=0; i<json.length; i++) {
-					  		if (json[i]['word'])
-							  	thisthis.db.insertOrUpdate("LIWC_words_wild", {word: json[i]['word']}, {word: json[i]['word'], wildcard: json[i]['wildcard'], cats: json[i]['cat']});
-					  	}
-					  	console.log("loaded wild "+json.length);
-					  	thisthis.db.commit();
-					  	
-					  	// call callback fxn
-					  	callback(args);
-					  });
-					} else callback(args);
-		
-			  });
-		 } else callback(args);
+		  	//db.truncate("LIWC_words");
+		  	for (var i=0; i<LIWC.length; i++) {
+		  		if (LIWC[i]['word'])
+				  	this.db.insertOrUpdate("LIWC_words", {word: LIWC[i]['word']}, {word: LIWC[i]['word'], wildcard: false, cats: LIWC[i]['cat']});
+		  	}
+		  	console.log("loaded nonwild "+LIWC.length);
+		  	this.db.commit();
+	 		}
+	  	// then load wild table
+		  if (!this.db.tableExists("LIWC_words_wild")) {
+		  	this.db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
+		  	//db.truncate("LIWC_words_wild");
+			  
+			  for (var i=0; i<LIWC_wild.length; i++) {
+		  		if (LIWC_wild[i]['word'])
+				  	this.db.insertOrUpdate("LIWC_words_wild", {word: LIWC_wild[i]['word']}, {word: LIWC_wild[i]['word'], wildcard: true, cats: LIWC_wild[i]['cat']});
+		  	}
+		  	console.log("loaded wild "+LIWC_wild.length);
+		  	this.db.commit();	
+			} 
+			
+			callback(args);
 		}, 
 	
 		parseLine: function(line) {
