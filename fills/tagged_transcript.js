@@ -2,7 +2,7 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Tagged Transcript",
+		name: "Highlighter",
 		defaultURL: "http://www.youtube.com/watch?v=4H5ocEjhkYw",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),

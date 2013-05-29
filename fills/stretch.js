@@ -2,7 +2,7 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Stretched Layout",
+		name: "Tabloid",
 		//defaultURL: "http://www.youtube.com/watch?v=ORxR5E7GXh4",
 		defaultURL: "http://www.youtube.com/watch?v=EOCcFcgRcTg",
 		el: $('<div class="modeContainer" style="background-color:white" id="'+id+'"></div>'),

@@ -2,7 +2,7 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Oh-Scope",
+		name: "Radar",
 		defaultURL: "http://www.youtube.com/watch?v=WjuCI2yAVD8",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),	
 
