@@ -7,7 +7,7 @@ eyeo_semanticsabotage
 
 + Clone the repo and duplicate fill_firstname_lastname.js, change the name to yours.
 
-+ Enable lamp stack for local dev [OSX 10.8](http://coolestguyplanettech.com/downtown/install-and-configure-apache-mysql-php-and-phpmyadmin-osx-108-mountain-lion)
++ Enable Apache and PHP for local dev [OSX 10.8](http://coolestguyplanettech.com/downtown/install-and-configure-apache-mysql-php-and-phpmyadmin-osx-108-mountain-lion)
 
 + See [Eyeo-Architecture.pdf](https://github.com/sosolimited/eyeo_semanticsabotage/blob/master/Eyeo-Architecture.pdf) for more about software layout.
 

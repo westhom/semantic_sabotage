@@ -2,7 +2,7 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Mad Lib",
+		name: "Five Words",
 		defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
@@ -113,7 +113,7 @@ var mode = function(id) {
 				}
 				*/
 				//Instead of using punctuation, use word count to cap the number of word objects
-				if (this.sentenceWordCount > 6)
+				if (this.sentenceWordCount > 4)
 				{
 					this.buildSentence = false;
 					this.sentenceCount = 0;
@@ -177,7 +177,7 @@ var mode = function(id) {
 				//starting on sentences is clean
 				else {
 					if ((msg.word == '.') || (msg.word == '!') || (msg.word == '?')) this.sentenceCount++;
-					if (this.sentenceCount > 4) {
+					if (this.sentenceCount > 3) {
 						this.buildSentence = true;
 						this.sentenceWordCount = 0;
 						$('.sentence').empty();
