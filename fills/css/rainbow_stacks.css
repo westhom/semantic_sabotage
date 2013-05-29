@@ -1,0 +1,97 @@
+#rainbow_stacks .container {
+	height:100%;
+	width:40px;
+	left:0px;
+	color:red;
+	background-color: rgba(0,0,0,.15); 
+	position:absolute;
+}
+
+#rainbow_stacks .container2 {
+	height:100%;
+	width:70px;
+	left:40px;	
+	color:orange;
+	background-color: rgba(20,20,20,0.15 ); 
+	position:absolute;	
+}
+
+#rainbow_stacks .container3 {
+	height:100%;
+	width:100px;
+	left:110px;	
+	color:yellow;
+	background-color: rgba(0,0,0,0.15); 
+	position:absolute;	
+}
+
+#rainbow_stacks .container4 {
+	height:100%;
+	width:130px;
+	left:210px;			
+	color:lime;
+	background-color: rgba(20,20,20,0.15); 
+	position:absolute;	
+}
+
+#rainbow_stacks .container5 {
+	height:100%;
+	width:160px;
+	left:340px;		
+	color:aqua;
+	background-color: rgba(0,0,0,0.15); 
+	position:absolute;	
+}
+
+#rainbow_stacks .container6 {
+	height:100%;
+	width:190px;
+	left:500px;			
+	color:blue;
+	background-color: rgba(20,20,20,0.15); 
+	position:absolute;	
+}
+
+#rainbow_stacks .container7 {
+	height:100%;
+	width:220px;
+	left:690px;
+	color:purple;
+	background-color: rgba(0,0,0,0.15); 
+	position:absolute;	
+}
+
+#rainbow_stacks .container8 {
+	height:100%;
+	width:250px;
+	left:910px;	
+	color:magenta;
+	background-color: rgba(20,20,20,0.15); 
+	position:absolute;
+}
+
+#rainbow_stacks .container9 {
+	height:100%;
+	width:280px;
+	left:1160px;
+	color:rgb(238,130,238);
+	background-color: rgba(2,0,0,0.15); 
+	position:absolute;	
+}
+
+#rainbow_stacks .container10 {
+	height:100%;
+	width:310px;
+	left:1440px;	
+	color:white;
+	position:absolute;
+}
+
+#rainbow_stacks .bigText{
+	position:absolute;
+	top:0px;
+	font-size: 60px;
+
+	transition: color 25s ease-out, opacity .5s linear, top 0.1s ease-in;
+	-webkit-transition: color 25s ease-out, opacity .5s linear, top 0.1s ease-in;
+}	
