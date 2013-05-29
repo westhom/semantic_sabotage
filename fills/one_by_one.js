@@ -13,7 +13,7 @@ var mode = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append('<div class="topContainer"><div id="word" class="centerContainer museo-slab-1000-italic"></div></div>');
+			this.el.append('<div class="topContainer"><div id="word" class="centerContainer museo-slab-1000-italic">Hello</div></div>');
 		},
 
 		// Gets called evertime you go to the mode.
@@ -47,17 +47,20 @@ var mode = function(id) {
 			if($.inArray('punct', msg.cats) < 0)
 			{
 
+				console.log(msg.word);
+
 			 	var c;
-			 	if($.inArray('percep', msg.cats) >= 0) c = 'rgb(107,0,56)';
+			 	
+			 	if($.inArray('home', msg.cats) >= 0) c = 'rgb(107,0,56)';
 			 	else if($.inArray('bio', msg.cats) >= 0) c = 'rgb(250,16,48)';
 			 	else if($.inArray('word', msg.cats) >= 0) c = 'rgb(219,198,0)';
 			 	else if($.inArray('leisure', msg.cats) >= 0) c = 'rgb(0,168,88)';
-			 	else if($.inArray('home', msg.cats) >= 0) c = 'rgb(250,95,62)';
-			 	else if($.inArray('money', msg.cats) >= 0) c = 'rgb(0,65,55)';
+			 	else if($.inArray('money', msg.cats) >= 0) c = 'rgb(250,95,62)';
+			 	else if($.inArray('social', msg.cats) >= 0) c = 'rgb(0,65,55)';
 			 	else if (msg.cats.length == 0) c = 'rgb(255,240,186)';
 			 	else c = 'rgb(33,31,24)';
-
 			 	$('#word').html(msg.word);
+ 	
 			 	$('#word').css('font-size', this.fontSize + 'px');
 			 	$('#word').css('color', c);
 
@@ -73,13 +76,7 @@ var mode = function(id) {
 			 	}
 
 			 	$('#word').css('font-size', size + 'px');
-
-
-		 	}
-
-
-		 	else {
-		 		//$('#word').html('...');
+				
 		 	}
 		 	
 		}

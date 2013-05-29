@@ -8,8 +8,8 @@ var mode = function(id) {
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		template: true,
 		
-		lastLeadPunct: 0,
-		lastEndPunct: 0,
+		lastLeadPunct: false,
+		lastEndPunct: false,
 		posEvents: [],
 		negEvents: [],
 				 
@@ -17,7 +17,7 @@ var mode = function(id) {
 		// This gets called once after the mode is created.
 		init: function() {
 			this.el.append("<div id='paragraph_container' class='container bg-white'></div>");
-			$('#paragraph_container').append('<div id="transcript" class="transcript museo-slab-300 size-32"></div>');
+			$('#paragraph_container').append('<div id="transcript" class="transcript proxima-nova-400 size-48"></div>');
 		},
 
 		// Gets called evertime you go to the mode.
@@ -61,29 +61,22 @@ var mode = function(id) {
 		
 		appendWordInContext: function(msg) {
 
-			var green = 'rgb(78, 191, 125)';
-			var yellow = 'rgb(255, 193, 65)';
-			var blue = 'rgb(45, 203, 237)';
-			var orange = 'rgb(209, 85, 50)';
-			var black = 'rgb(61, 59, 56)';
-
 			var c = 'blank';
 		 	if($.inArray('posemo', msg.cats) >= 0) c = 'posemo';
 		 	else if($.inArray('negemo', msg.cats) >= 0) c = 'negemo';
 		 	
 		 	//console.log(msg.word);
 		 	var word = this.htmlEncode(msg.word);
-		 	//console.log(word);
 		 	
 		 	// end punct always followed by space
 		 	if($.inArray('endPunct', msg.cats) >= 0){
 		 		var e = $('<span class="' + c + '">' + word + ' ' + '</span>');
 				$('#paragraph_container #transcript').append(e);
-				e.css("color", black);
 
-				this.lastLeadPunct = 0;
-				this.lastEndPunct = 1;
+				this.lastLeadPunct = false;
+				this.lastEndPunct = true;
 		 	}
+		 	
 		 	// lead punct
 		 	else if ($.inArray('leadPunct', msg.cats) >= 0){
 		 		//no lead space if it follows a sentence end
@@ -92,14 +85,12 @@ var mode = function(id) {
 		 		else e = $('<span class="' + c + '">' + ' ' + word + '</span>');
 
 		 		$('#paragraph_container #transcript').append(e);
-		 		e.css("color", black);
 
-		 		this.lastLeadPunct = 1;
-		 		this.lastEndPunct = 0;
+		 		this.lastLeadPunct = true;
+		 		this.lastEndPunct = false;
 			}
 			// words get a preceeding space, unless they follow lead punct
 		 	else {	
-
 		 		
 		 		if (!this.lastLeadPunct) e = $('#paragraph_container #transcript').append('<span class="space"> </span>');
 		 		var e = $('<span class="' + c + '">' + word + '</span>');
@@ -108,58 +99,11 @@ var mode = function(id) {
 
 		 		if (c != 'blank') {
 		 			e.addClass('marked');
-		 			e.addClass('bgcolor-tween');
-		 			e.addClass('color-tween');
-		 			
-		 			if (c == 'posemo') e.css("background-color", blue);
-		 			else if (c == 'negemo') e.css("background-color", orange);
 		 		}
 
-		 		this.lastLeadPunct = 0;
-		 		this.lastEndPunct = 0;
+		 		this.lastLeadPunct = false;
+		 		this.lastEndPunct = false;
 		 	}
-
-		 	//animating words based on categorization
-		 	if (c != 'blank')
-		 	{
-		 		var events; 
-		 		if (c == 'posemo') events = this.posEvents;
-		 		else events = this.negEvents;
-
-		 		this.clearTimeoutEvents(c);
-	
-		 		var delay = 2500;
-
-	 			$('.marked').each(function(i) {
-	 				//find all the words of the same class
-	 				if ($(this).hasClass(c)) 
-	 				{
-	 					//set their background and color 
-	 					//$(this).removeClass('bgcolor-tween');
-	 					//$(this).removeClass('color-tween');
-	 					
-	 					$(this).css("color", black);
-
-	 					if ($(this).hasClass('posemo')) $(this).css("background-color", blue);
-						else if ($(this).hasClass('negemo')) $(this).css("background-color", orange);
-
-						//and then fade them out after a timeout
-	 					//$(this).addClass('bgcolor-tween');
-	 					//$(this).addClass('color-tween');
-	 					
-	 					events.push(setTimeout( function(element) {
-	 							element.css("background-color", "transparent");
-	 					}, delay, $(this)));
-
-	 					events.push(setTimeout( function(element) {
-	 							if (element.hasClass('posemo')) element.css("color", blue);
-								else if (element.hasClass('negemo')) element.css("color", orange);
-	 					}, delay+500, $(this)));
-
-	 				}
-	 			});
-	 		}
-
 		 	
 		}
 	}

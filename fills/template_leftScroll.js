@@ -71,8 +71,7 @@ var mode = function(id) {
 		 	else if($.inArray('affect', msg.cats) >= 0) c = 'rgb(232,218,122)'; //yellow
 		 	else if($.inArray('percept', msg.cats) >= 0) c = 'rgb(255,161,92)'; //orange
 		 	else if($.inArray('verb', msg.cats) >= 0) c = 'rgb(237,75,58)'; 		//red
-		 	else c = 'rgb(255,255,255)';
-
+		 	else c = 'rgb(240,240,240)';
 		 	var msgWord = msg.word;
 		
 			// If the word is not end punctuation, add a space before the word.
