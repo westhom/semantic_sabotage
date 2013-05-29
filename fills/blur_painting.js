@@ -35,36 +35,40 @@ var mode = function(id) {
 		appendWordInContext: function(msg) {
 		
 		 	// update curSentence
+		 	if($.inArray('punct', msg.cats) < 0){
 
-		 	var c;
-		 	if($.inArray('affect', msg.cats) >= 0) c = 'red';
-		 	else if($.inArray('cogmech', msg.cats) >= 0) c = 'green';
-		 	else if($.inArray('senses', msg.cats) >= 0) c = 'blue';
-		 	else if($.inArray('time', msg.cats) >= 0) c = 'pink';
-		 	else c = 'rgb(40,40,40)';
+			 	var c;
+			 	if($.inArray('affect', msg.cats) >= 0) c = 'blue';
+			 	else if($.inArray('cogmech', msg.cats) >= 0) c = 'orange';
+			 	else if($.inArray('social', msg.cats) >= 0) c = 'magenta';
+			 	else if($.inArray('time', msg.cats) >= 0) c = 'yellowgreen';
+			 	else c = 'rgb(40,40,40)';
 
-			var s = $('<div class= "faller proxima-nova-400" style="color:' + c + '; opacity:1; top:0px">' + msg.word + '</div>');
-		 	var ww = $('#bp_container').width();
+				var s = $('<div class= "faller proxima-nova-400" style="color:' + c + '; opacity:1; top:0px">' + msg.word + '</div>');
+			 	var ww = $('#bp_container').width();
 
-			//$(s).addClass('faller proxima-nova-400');			
-			//$(s).append(msg.word);
-			$(s).css('left', this.curWordPos + 'px');		
-			$('#bp_container').append(s);
-			var h = 50*msg.word.length;
-			setTimeout(function(e){
-				e.css({'color':'transparent', 'text-shadow':'0 0 72px '+c,'top':h+'px'});
-			}, 20, s);
+		 		var d = document.createElement('div');
+		 		$(d).addClass('faller proxima-nova-400');
+		 		$(d).append(msg.word);
+		 		var w = $(d).width() + 50;
+
+				$(s).css('left', this.curWordPos + 'px');		
+				$('#bp_container').append(s);
+				var h = 50*msg.word.length;
+				setTimeout(function(e){
+					e.css({'color':'transparent', 'text-shadow':'0 0 72px '+c,'top':h+'px'});
+				}, 20, s);
 
 
-			this.curWordPos = (this.curWordPos + 50)%ww;
-			console.log("width =" + ww);
+				this.curWordPos = (this.curWordPos + h*0.5)%ww;
+				console.log("width =" + w);
 
-		 	var death = 30000;
-		 	$(s).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd',
-		 	function() { 
-		 		setTimeout(function(){$(s).remove()},death);
-		 	});
-
+			 	var death = 30000;
+			 	$(s).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd',
+			 	function() { 
+			 		setTimeout(function(){$(s).remove()},death);
+			 	});
+			}
 		}
 	}
 };
