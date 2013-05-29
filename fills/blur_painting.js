@@ -54,19 +54,17 @@ var mode = function(id) {
 				var h = 50*msg.word.length;
 
 				setTimeout(function(e){
-					e.css({'color':'transparent', 'text-shadow':'0 0 72px '+c,'top':h+'px'});
+					e.css({'color':'transparent', 'text-shadow':'0 0 36px '+c,'top':h+'px'});
 				}, 20, s);
 
 				setTimeout(function(e){
-					e.css({'text-shadow':'0 0 72px transparent'});
+					e.css({'text-shadow':'0 0 36px transparent'});
 				}, 20000, s);
 
-				
+
 				this.curWordPos = (this.curWordPos + wordWidth);
 				if (this.curWordPos > windowWidth)
 					this.curWordPos = 0;
-
-				console.log("width =" + w);
 
 			 	var death = 30000;
 			 	$(s).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd',
