@@ -237,7 +237,7 @@ function goToMode(m, post, video, time) {
 		$('#menu').hide();
 		$('#modes').show();
 
-		hideAbout();
+		//hideAbout();
 
 		// Hide all but the current mode's element.
 		for(var i=0; i < modes.length; i++){

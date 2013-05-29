@@ -1,8 +1,12 @@
+/* #template_leftScroll should be changed 			*/
+/* to the name of your mutation files. 					*/
+/* This is how we avoid CSS naming collisions.	*/
+
 #template_leftScroll .topContainer {
 	position:relative;
 	width:4000px;
 	height:100%;
-	background-color:rgb(20,20,20);
+	background-color:rgb(50,50,50);
 }
 
 #template_leftScroll .scroller {
@@ -11,7 +15,7 @@
 	left:0px;
 	transition:left 1.0s linear;
 	-webkit-transition:left 1.0s linear;
-	margin: 0px 0px 0px 200px;
+	margin: 140px 0px 0px 200px;
 }
 
 
