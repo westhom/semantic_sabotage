@@ -1,0 +1,68 @@
+#blurry_paragraph .container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width:100%;
+	min-height: 100%;
+	overflow: scroll;
+	background-color: rgb(250, 250, 250);
+	color: rgb(40, 40, 40);
+	
+	text-shadow: 0 0 0 transparent;
+
+	transition: opacity 5s ease-in, color 5s ease-in, text-shadow 5s linear;
+	-webkit-transition: opacity 5s ease-in, color 5s ease-in, text-shadow 5s linear;	
+	
+}
+
+#blurry_paragraph .transcript 
+{
+	padding: 24px;
+	
+}
+
+#blurry_paragraph .blank
+{
+	color: rgb(48,48,48);
+	
+	text-shadow: 0 0 0 transparent;
+
+	transition: opacity 5s ease-in, color 5s ease-in, text-shadow 10s linear;
+	-webkit-transition: opacity 5s ease-in, color 5s ease-in, text-shadow 10s linear;		
+}
+
+#blurry_paragraph .nocat
+{
+	color: rgb(48,48,48);
+	
+	text-shadow: 0 0 0 transparent;
+
+	transition: opacity 5s ease-in, color 5s ease-in, text-shadow 45s linear;
+	-webkit-transition: opacity 5s ease-in, color 5s ease-in, text-shadow 45s linear;		
+}
+
+#blurry_paragraph .posemo
+{
+	color: rgb(193,250,164);
+	
+	text-shadow: 0 0 0 transparent;
+
+	transition: opacity 5s ease-in, color 5s ease-in, text-shadow 35s linear;
+	-webkit-transition: opacity 5s ease-in, color 5s ease-in, text-shadow 35s linear;		
+}
+
+#blurry_paragraph .negemo
+{
+	color: rgb(255,161,92);
+	
+	text-shadow: 0 0 0 transparent;
+
+	transition: opacity 5s ease-in, color 5s ease-in, text-shadow 35s linear;
+	-webkit-transition: opacity 5s ease-in, color 5s ease-in, text-shadow 35s linear;		
+}
+
+#blurry_paragraph .size-48
+{
+	font-size: 48px;
+}
+
