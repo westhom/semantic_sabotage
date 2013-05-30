@@ -3,13 +3,11 @@ var mode = function(id) {
 	return {
 	
 		name: "Word Stack",
-		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
+		defaultURL: "http://www.youtube.com/watch?v=6JDM4MY71G4",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),		
-		template: true,
-				 		
-								
-		lineHeight: 210,
+		template: true,	
+		lineHeight: 80,
 																
 
 		// Anything you want to do to initialize your mode. 
@@ -41,14 +39,10 @@ var mode = function(id) {
 		},
 		
 		appendWordInContext: function(msg) {
-		
-		 	// update curSentence
-		 	if (!msg.sentenceStartFlag && !msg.punctuationFlag)
-		 		this.el.append(' ');
 		 	
-		 	
-		 	if(msg.word.length > 8) {
-		 		var e = $('<div class= "bigText proxima-nova-700" style="color:white; opacity:0;">' + msg.word + '</div>');
+		 	if($.inArray('punct', msg.cats) < 0) 
+		 	{
+		 		var e = $('<div class= "bigText proxima-nova-400 white" style="opacity:0;">' + msg.word + '</div>');
 			 	$('#wordstack').prepend(e);
 
 			 	setTimeout(function(element){
@@ -64,7 +58,7 @@ var mode = function(id) {
 		 		//console.log($('#bigwords > .bigText').length*this.lineHeight+"px");
 
 		 		$('#wordstack').css('height', $('#wordstack > .bigText').length*this.lineHeight+"px");
-		 	}		 	
+		 	}	 	
 		},
 
 

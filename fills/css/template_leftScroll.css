@@ -13,9 +13,12 @@
 	position:absolute;
 	height:100px;
 	left:0px;
+	
 	transition:left 1.0s linear;
 	-webkit-transition:left 1.0s linear;
+	
 	margin: 140px 0px 0px 200px;
+	padding: 10px;
 }
 
 
@@ -24,4 +27,5 @@
 
 	transition:color 1.0s linear;
 	-webkit-transition:color 1.0s linear;
+	padding: 1px;
 }

@@ -5,7 +5,8 @@
 	width:100%;
 	min-height: 100%;
 	overflow: scroll;
-	/* background-color: rgb(245, 242, 226); */
+	background-color: rgb(50, 50, 50);
+	color: rgb(240, 240, 240);
 }
 
 #template_paragraph .transcript 
@@ -13,25 +14,18 @@
 	padding: 24px;
 }
 
-#template_paragraph .color-tween
+#template_paragraph .posemo
 {
-	transition:color 1.0s linear;
-	-webkit-transition:color 1.0s linear;
+	color: rgb(193,250,164);
 }
 
-#template_paragraph .bgcolor-tween
+#template_paragraph .negemo
 {
-	transition:background-color 1.0s linear;
-	-webkit-transition:background-color 1.0s linear;
+	color: rgb(255,161,92);
 }
 
-#template_paragraph .white
+#template_paragraph .size-48
 {
-	color: rgb(245, 242, 226);
-}
-
-#template_paragraph .bg-white
-{
-	background-color: rgb(245, 242, 226);
+	font-size: 48px;
 }
 
