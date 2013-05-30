@@ -47,15 +47,21 @@ window.requestAnimFrame = (function(){
 
 function init() {
 
-	$('.icon').live('mouseenter',function(){
+		// bind 'myForm' and provide a simple callback function 
+	$('#youtube_load').ajaxForm({ 
+		// DataType identifies the expected content type of the server response.
+		dataType:  'json', 
+		// Success identifies the function to invoke when the server response has been received.
+		success:   load 
+		});
+
+	$('.navBar').on('mouseenter','.icon',function(){
 		var type = $(this).data('icon');
 		$(this).attr('src', 'img/icons/hover_'+type+'.png');
-	}).live('mouseleave',function(){
+	}).on('mouseleave','.icon',function(){
 		var type = $(this).data('icon');
 		$(this).attr('src', 'img/icons/'+type+'.png');
 	});
-
-	Piecon.reset();
 	
 	// Load fills and insert them into DOM.
 	loadFills();
@@ -105,7 +111,7 @@ function loadFills() {
 	$.ajax({
 		type: 'post',
 		dataType: 'json',
-			url: "fills_load.php",
+			url: "php/fills_load.php",
 			success: function(resp){
 
 				// filter the response so that only .js files are included in the array (no folders)
@@ -238,6 +244,7 @@ function goToMode(m, post, video, time) {
 
 		// Hide menu and show modes container.
 		$('#menu').hide();
+		turnOffAnimations();
 		$('#modes').show();
 
 
@@ -261,7 +268,7 @@ function goToMode(m, post, video, time) {
 			$.ajax({
 				type: 'post',
 				dataType: 'json',
-				url: "youtube_load.php",
+				url: "php/youtube_load.php",
 				data: {"url": video},
 					success: load,
 					error: function(data){
@@ -324,7 +331,7 @@ function submitURL() {
 	$.ajax({
 		type: 'post',
 		dataType: 'json',
-		url: "youtube_load.php",
+		url: "php/youtube_load.php",
 		data: {"url": url},	   
 			success: load,
 			error: function(data){
@@ -563,4 +570,10 @@ function modeFromSlug(slug, modes) {
 		}
 	});
 	return (mode == null) ? -1 : mode;
+}
+
+// Turns off css animations for the menu,
+// Columns should fade in only the first time the page is loaded
+function turnOffAnimations() {
+	$('#columnLeft, #columnRight').removeClass('delay animated');
 }

@@ -1,7 +1,7 @@
 <?php  
 
 	// Grab javascript files.
-	if ($handle = opendir('fills')) {
+	if ($handle = opendir('../fills')) {
 		$fills =  array();
     	/* This is the correct way to loop over the directory. */
     	while (false !== ($entry = readdir($handle))) {
@@ -13,7 +13,7 @@
 	}
 
 	// Grab CSS files.
-	if ($handle = opendir('fills/css')) {
+	if ($handle = opendir('../fills/css')) {
 		$styles =  array();
     	/* This is the correct way to loop over the directory. */
     	while (false !== ($entry = readdir($handle))) {

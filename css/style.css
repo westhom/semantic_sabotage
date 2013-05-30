@@ -118,9 +118,19 @@ legend{
 	top: 36px;
 }
 
+#columnLeft.delay {
+	animation-delay: .4s;
+	-webkit-animation-delay: .4s;
+}
+
 #columnRight {
 	left: 600px;
 	top: 36px;
+}
+
+#columnRight.delay {
+	animation-delay: .5s;
+	-webkit-animation-delay: .5s;
 }
 
 #columnRight a {
