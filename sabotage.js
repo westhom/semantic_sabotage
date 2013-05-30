@@ -47,16 +47,7 @@ function init() {
 	
 	// Load fills and insert them into DOM.
 	loadFills();
-
-	// Set up aboutText div to hide after transitioning.
-	$("#aboutText").on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', 
-		function() {
-			//if($(this).css('opacity') == 0) $(this).hide();	 		
-			// Stupid hack to get it offscreen, while still rendering.
-			if($(this).css('opacity') == 0)	$('#aboutText').css('left', '-600px');
-		});
-
-
+	
 	// Wait for fills to load before adding the menu links to the DOM
 	$(document).on('loadedFills', function(e, modes) {
 		// Add menu element for each fill
@@ -157,9 +148,9 @@ function drawFills(modes) {
 	$.each(modes, function(i,m){
 		// Add entry to menu.
 		if(m.template==true){
-			$('#modeButtonsRight').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');	
+			$('#templates').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');	
 		}else{
-			$('#modeButtons').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');
+			$('#transforms').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');
 		}
 		// Append to mode's element to DOM.
 		m.el.hide();				   
@@ -237,7 +228,6 @@ function goToMode(m, post, video, time) {
 		$('#menu').hide();
 		$('#modes').show();
 
-		//hideAbout();
 
 		// Hide all but the current mode's element.
 		for(var i=0; i < modes.length; i++){
@@ -362,18 +352,9 @@ function showMenu() {
 	console.log('showMenu');
 
 	History.pushState(null, null, '?');
-
-	/*
-	// If menu is already visible, show information.
-	if($('#about').position().left > -1800) {
-		hideAbout();
-	}else if($('#menu').is(':visible')) {
-		//console.log('menu is shown already');
-		showAbout();
-	}
-	*/
 	
 	$('#menu').show();
+	$('#menu').scrollTop('0px');
 	$('#modes').hide();	
 
 	// Reset progress bar.
@@ -397,24 +378,7 @@ function showMenu() {
 	stopAllTimers();
 }
 
-function showAbout() {
-	//console.log('showAbout()');
-	$('#about').css({'left':'-1350px', 'top':'-1350px'});
-	$('#aboutText').css('left', '1.5em');
-	$('#aboutText').css('opacity','1');
-	$('#aboutCover').show();
-	$('#navTitle').removeClass('medGray');
-	$('#navTitle').addClass('white');
-}
 
-function hideAbout() {
-	//console.log('hideAbout()');
-	$('#about').css({'left':'-1800px', 'top':'-1800px'});	
-	$('#aboutText').css('opacity','0');
-	$('#aboutCover').hide();	
-	$('#navTitle').removeClass('white');
-	$('#navTitle').addClass('medGray');
-}
 
 function showControls() {
 	$('#navControls').show();
