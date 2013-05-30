@@ -27,8 +27,8 @@
 	
 	text-shadow: 0 0 0 transparent;
 
-	transition: opacity 5s ease-in, color 5s ease-in, text-shadow 10s linear;
-	-webkit-transition: opacity 5s ease-in, color 5s ease-in, text-shadow 10s linear;		
+	transition: opacity 5s ease-in, color 10s ease-in, text-shadow 10s linear;
+	-webkit-transition: opacity 5s ease-in, color 10s ease-in, text-shadow 10s linear;		
 }
 
 #blurry_paragraph .nocat
@@ -37,18 +37,28 @@
 	
 	text-shadow: 0 0 0 transparent;
 
-	transition: opacity 5s ease-in, color 5s ease-in, text-shadow 45s linear;
-	-webkit-transition: opacity 5s ease-in, color 5s ease-in, text-shadow 45s linear;		
+	transition: opacity 5s ease-in, color 45s ease-in, text-shadow 45s linear;
+	-webkit-transition: opacity 5s ease-in, color 45s ease-in, text-shadow 45s linear;		
 }
 
-#blurry_paragraph .posemo
+#blurry_paragraph .work
 {
 	color: rgb(193,250,164);
 	
 	text-shadow: 0 0 0 transparent;
 
-	transition: opacity 5s ease-in, color 5s ease-in, text-shadow 35s linear;
-	-webkit-transition: opacity 5s ease-in, color 5s ease-in, text-shadow 35s linear;		
+	transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;
+	-webkit-transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;		
+}
+
+#blurry_paragraph .relig
+{
+	color: rgb(193,250,164);
+	
+	text-shadow: 0 0 0 transparent;
+
+	transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;
+	-webkit-transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;		
 }
 
 #blurry_paragraph .negemo
@@ -57,8 +67,8 @@
 	
 	text-shadow: 0 0 0 transparent;
 
-	transition: opacity 5s ease-in, color 5s ease-in, text-shadow 35s linear;
-	-webkit-transition: opacity 5s ease-in, color 5s ease-in, text-shadow 35s linear;		
+	transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;
+	-webkit-transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;		
 }
 
 #blurry_paragraph .size-48

@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Blurry Notdone",
-		defaultURL: "http://www.youtube.com/watch?v=l26Uq3PX-fk",
+		defaultURL: "http://www.youtube.com/watch?v=GmHqAEkgHGc&t=0m18s",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
@@ -62,17 +62,15 @@ var mode = function(id) {
 
 			var cat = 'blank';
 			var catColor = 'darkslategray';
-		 	if($.inArray('posemo', msg.cats) >= 0) { 
-		 		cat = 'posemo';
+		 	if($.inArray('work', msg.cats) >= 0) { 
+		 		cat = 'work';
 		 		catColor = 'royalblue';
-		 	} else if($.inArray('negemo', msg.cats) >= 0) {
-		 		cat = 'negemo';
-		 		catColor = 'tomato';
-
-		 	} else if(msg.cats.length === 0) { 
+		 	} else if($.inArray('relig', msg.cats) >= 0) {
+		 		cat = 'relig';
+		 		catColor = 'red';
+		 	} else if(msg.cats.length === 0) { //not in dictionary
 		 		cat = 'nocat';
-		 		catColor = 'darkorchid';
-
+		 		catColor = 'saddlebrown';
 			}		 	
 		 	//console.log(msg.word);
 		 	var word = this.htmlEncode(msg.word);
