@@ -8,16 +8,17 @@ var mode = function(id) {
 
 		storeID: 'empty',
 		storeClass: 'tower',
-		radius: 500,
-		buffer: 50,
+		radius: 450,
+		buffer: 100,
 		period: 30,
+		ringRatio0: 12.5/5,
 		ringRatio1: 10/5,
 		ringRatio2: 7.5/5,
 		ringRatio3: 5/5,
 		ringRatio4: 2.5/5,
 		ringStroke: 2,
-		floatx: 25,
-		floaty: 50,
+		floatx: 50,
+		floaty: 100,
 
 	
 		// Anything you want to do to initialize your mode. 
@@ -36,29 +37,31 @@ var mode = function(id) {
 
 			this.el.append('<div class="container"></div>');
 
-			var divWidth = this.el.find('.container').width();
-			var divHeight = this.el.find('.container').height();
+			this.el.find('.container').append('<div class="ringCenter"></div>');
 
-			this.el.find('.container').append('<div class="ring1" style="left:' +(divWidth-(this.radius)*this.ringRatio1)/2+ 'px; top:' +(divHeight-(this.radius)*this.ringRatio1)/2+ 'px; width:' +(this.radius)*this.ringRatio1+ 'px; height:' +(this.radius)*this.ringRatio1+ 'px;"></div>');
-			this.el.find('.container').append('<div class="ring2" style="left:' +((divWidth-(this.radius)*this.ringRatio1)/2+this.ringStroke)+ 'px; top:' +((divHeight-(this.radius)*this.ringRatio1)/2+this.ringStroke)+ 'px; width:' +((this.radius)*this.ringRatio1-2*this.ringStroke)+ 'px; height:' +((this.radius)*this.ringRatio1-2*this.ringStroke)+ 'px;"></div>');
+			this.el.find('.ringCenter').append('<div class="ring1" style="left:' +(-this.radius*this.ringRatio0)/2+ 'px; top:' +(-this.radius*this.ringRatio0)/2+ 'px; width:' +(this.radius*this.ringRatio0)+ 'px; height:' +(this.radius*this.ringRatio0)+ 'px;"></div>');
+			this.el.find('.ringCenter').append('<div class="ring2" style="left:' +((-this.radius*this.ringRatio0)/2+this.ringStroke)+ 'px; top:' +((-this.radius*this.ringRatio0)/2+this.ringStroke)+ 'px; width:' +((this.radius*this.ringRatio0)-2*this.ringStroke)+ 'px; height:' +((this.radius*this.ringRatio0)-2*this.ringStroke)+ 'px;"></div>');
 
-			this.el.find('.container').append('<div class="ring1" style="left:' +(divWidth-(this.radius-this.buffer)*this.ringRatio1)/2+ 'px; top:' +(divHeight-(this.radius-this.buffer)*this.ringRatio1)/2+ 'px; width:' +(this.radius-this.buffer)*this.ringRatio1+ 'px; height:' +(this.radius-this.buffer)*this.ringRatio1+ 'px;"></div>');
-			this.el.find('.container').append('<div class="ring2" style="left:' +((divWidth-(this.radius-this.buffer)*this.ringRatio1)/2+this.ringStroke)+ 'px; top:' +((divHeight-(this.radius-this.buffer)*this.ringRatio1)/2+this.ringStroke)+ 'px; width:' +((this.radius-this.buffer)*this.ringRatio1-2*this.ringStroke)+ 'px; height:' +((this.radius-this.buffer)*this.ringRatio1-2*this.ringStroke)+ 'px;"></div>');
+			this.el.find('.ringCenter').append('<div class="ring1" style="left:' +(-this.radius*this.ringRatio1)/2+ 'px; top:' +(-this.radius*this.ringRatio1)/2+ 'px; width:' +(this.radius*this.ringRatio1)+ 'px; height:' +(this.radius*this.ringRatio1)+ 'px;"></div>');
+			this.el.find('.ringCenter').append('<div class="ring2" style="left:' +((-this.radius*this.ringRatio1)/2+this.ringStroke)+ 'px; top:' +((-this.radius*this.ringRatio1)/2+this.ringStroke)+ 'px; width:' +((this.radius*this.ringRatio1)-2*this.ringStroke)+ 'px; height:' +((this.radius*this.ringRatio1)-2*this.ringStroke)+ 'px;"></div>');
 
-			this.el.find('.container').append('<div class="ring1" style="left:' +(divWidth-(this.radius-this.buffer)*this.ringRatio2)/2+ 'px; top:' +(divHeight-(this.radius-this.buffer)*this.ringRatio2)/2+ 'px; width:' +(this.radius-this.buffer)*this.ringRatio2+ 'px; height:' +(this.radius-this.buffer)*this.ringRatio2+ 'px;"></div>');
-			this.el.find('.container').append('<div class="ring2" style="left:' +((divWidth-(this.radius-this.buffer)*this.ringRatio2)/2+this.ringStroke)+ 'px; top:' +((divHeight-(this.radius-this.buffer)*this.ringRatio2)/2+this.ringStroke)+ 'px; width:' +((this.radius-this.buffer)*this.ringRatio2-2*this.ringStroke)+ 'px; height:' +((this.radius-this.buffer)*this.ringRatio2-2*this.ringStroke)+ 'px;"></div>');
+			this.el.find('.ringCenter').append('<div class="ring1" style="left:' +(-this.radius*this.ringRatio2)/2+ 'px; top:' +(-this.radius*this.ringRatio2)/2+ 'px; width:' +(this.radius*this.ringRatio2)+ 'px; height:' +(this.radius*this.ringRatio2)+ 'px;"></div>');
+			this.el.find('.ringCenter').append('<div class="ring2" style="left:' +((-this.radius*this.ringRatio2)/2+this.ringStroke)+ 'px; top:' +((-this.radius*this.ringRatio2)/2+this.ringStroke)+ 'px; width:' +((this.radius*this.ringRatio2)-2*this.ringStroke)+ 'px; height:' +((this.radius*this.ringRatio2)-2*this.ringStroke)+ 'px;"></div>');
 
-			this.el.find('.container').append('<div class="ring1" style="left:' +(divWidth-(this.radius-this.buffer)*this.ringRatio3)/2+ 'px; top:' +(divHeight-(this.radius-this.buffer)*this.ringRatio3)/2+ 'px; width:' +(this.radius-this.buffer)*this.ringRatio3+ 'px; height:' +(this.radius-this.buffer)*this.ringRatio3+ 'px;"></div>');
-			this.el.find('.container').append('<div class="ring2" style="left:' +((divWidth-(this.radius-this.buffer)*this.ringRatio3)/2+this.ringStroke)+ 'px; top:' +((divHeight-(this.radius-this.buffer)*this.ringRatio3)/2+this.ringStroke)+ 'px; width:' +((this.radius-this.buffer)*this.ringRatio3-2*this.ringStroke)+ 'px; height:' +((this.radius-this.buffer)*this.ringRatio3-2*this.ringStroke)+ 'px;"></div>');
+			this.el.find('.ringCenter').append('<div class="ring1" style="left:' +(-this.radius*this.ringRatio3)/2+ 'px; top:' +(-this.radius*this.ringRatio3)/2+ 'px; width:' +(this.radius*this.ringRatio3)+ 'px; height:' +(this.radius*this.ringRatio3)+ 'px;"></div>');
+			this.el.find('.ringCenter').append('<div class="ring2" style="left:' +((-this.radius*this.ringRatio3)/2+this.ringStroke)+ 'px; top:' +((-this.radius*this.ringRatio3)/2+this.ringStroke)+ 'px; width:' +((this.radius*this.ringRatio3)-2*this.ringStroke)+ 'px; height:' +((this.radius*this.ringRatio3)-2*this.ringStroke)+ 'px;"></div>');
 
-			this.el.find('.container').append('<div class="ring1" style="left:' +(divWidth-(this.radius-this.buffer)*this.ringRatio4)/2+ 'px; top:' +(divHeight-(this.radius-this.buffer)*this.ringRatio4)/2+ 'px; width:' +(this.radius-this.buffer)*this.ringRatio4+ 'px; height:' +(this.radius-this.buffer)*this.ringRatio4+ 'px;"></div>');
-			this.el.find('.container').append('<div class="ring2" style="left:' +((divWidth-(this.radius-this.buffer)*this.ringRatio4)/2+this.ringStroke)+ 'px; top:' +((divHeight-(this.radius-this.buffer)*this.ringRatio4)/2+this.ringStroke)+ 'px; width:' +((this.radius-this.buffer)*this.ringRatio4-2*this.ringStroke)+ 'px; height:' +((this.radius-this.buffer)*this.ringRatio4-2*this.ringStroke)+ 'px;"></div>');
+			this.el.find('.ringCenter').append('<div class="ring1" style="left:' +(-this.radius*this.ringRatio4)/2+ 'px; top:' +(-this.radius*this.ringRatio4)/2+ 'px; width:' +(this.radius*this.ringRatio4)+ 'px; height:' +(this.radius*this.ringRatio4)+ 'px;"></div>');
+			this.el.find('.ringCenter').append('<div class="ring2" style="left:' +((-this.radius*this.ringRatio4)/2+this.ringStroke)+ 'px; top:' +((-this.radius*this.ringRatio4)/2+this.ringStroke)+ 'px; width:' +((this.radius*this.ringRatio4)-2*this.ringStroke)+ 'px; height:' +((this.radius*this.ringRatio4)-2*this.ringStroke)+ 'px;"></div>');
+
+			this.el.find('.ringCenter').append('<div class="line" style="left:' +(-this.ringStroke)/2+ 'px; top:' +(-this.radius*this.ringRatio0)/2+ 'px; width:' +this.ringStroke+ 'px; height:' +(this.radius*this.ringRatio0)*2+ 'px;"></div>');
+			this.el.find('.ringCenter').append('<div class="line" style="left:' +(-this.radius*this.ringRatio0)/2+ 'px; top:' +(-this.ringStroke)/2+ 'px; width:' +(this.radius*this.ringRatio0)*2+ 'px; height:' +this.ringStroke+ 'px;"></div>');
 
 			this.el.find('.container').append('<div class="timer"></div>');
 			this.el.find('.container').append('<div class="marqueeCenter"></div>');
 			this.el.find('.container').append('<div class="particleCenter"></div>');
 
-			this.el.find('.marqueeCenter').css('width', this.radius+'px')
+			this.el.find('.marqueeCenter').css('width', (this.radius*this.ringRatio0)/2+'px');
 
 		},
 
@@ -108,8 +111,8 @@ var mode = function(id) {
 
 					var angle = -$('#radar .timer').width()/10 * Math.PI/180;
 
-					var rMin = this.ringRatio4*(this.radius-this.buffer)/2;
-					var rMax = (this.radius-this.buffer);
+					var rMin = this.radius*this.ringRatio4/2;
+					var rMax = this.radius*this.ringRatio1/2;
 					var rDelta = Math.round(Math.random()*(rMax-rMin));
 
 					var r = rMin + rDelta;
@@ -118,7 +121,7 @@ var mode = function(id) {
 					var y = Math.round(Math.sin(angle) * r);
 
 					var p = document.createElement('div');
-					$(p).addClass('particle ' + this.storeClass + ' proxima-nova-400');
+					$(p).addClass('particle ' + this.storeClass );
 					$(p).css('-webkit-transform','translate(' + x + 'px, ' + y + 'px)');
 
 					var w = document.createElement('div');
@@ -127,7 +130,8 @@ var mode = function(id) {
 
 					var d = document.createElement('div');
 					$(d).addClass('dot');
-					$(d).append('.');
+					$(d).append('&#8853;');
+//					$(d).append('&#9674;&#8853;&#8855;&#8224;&#8225;');
 
 					$(p).append(d);
 					$(p).append(w);

@@ -141,6 +141,7 @@ legend{
 	margin: 0px 0px 4px 0px;
 	padding: 0 0 0 0.1em;
 	cursor: hand;
+	text-transform: uppercase;
 }
 
 .modeName:hover {
@@ -157,6 +158,7 @@ legend{
 	margin: 0px 0px 0.5em 0px;
 	padding: 0 0 0 0.1em;
 	cursor: hand;
+	text-transform: uppercase;
 }
 
 .downloadButton:hover {
@@ -181,12 +183,11 @@ hr.menu {
 
 #aboutBody {
 	font-size: 1em;
-	color: rgb(10,10,10);
+	color: rgb(50,50,50);
 }
 
 
 p.aboutIntro {
-	/* color:white; */
 	font-size:2em;
 	line-height:1.25em;
 }

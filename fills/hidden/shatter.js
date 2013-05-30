@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Shatter",
-		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
+		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU&t=0m6s",
 		el: $('<div class="modeContainer" style="background-color:black" id="'+id+'"></div>'),
 
 		tFall: 1,
