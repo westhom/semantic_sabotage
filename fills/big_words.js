@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Big Words",
-		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU",
+		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU&t=0m5s",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),		
 				 		

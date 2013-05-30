@@ -350,6 +350,22 @@ input.navInput[type="text"]:focus
 	cursor: hand;
 }
 
+.downloadButton {
+	position:static;
+	display:inline-block;
+	font-size: 3.0em;
+	margin: 0px 0px 0.5em 0px;
+	padding: 0 0 0 0.1em;
+	cursor: hand;
+}
+
+.downloadButton:hover {
+	color: rgb(255,255,255);
+	/*background-color: rgb(242,0,255);*/
+	background-color: rgb(0,174,242);
+	cursor: hand;	
+}
+
 hr.menu {
 	color: rgb(255,255,255);
 
@@ -359,7 +375,7 @@ hr.menu {
 	position:absolute;
 	font-size: 1em;
 	left:560px;
-	top: 360px;
+	top: 350px;
 	width:400px;
 }
 
