@@ -183,12 +183,11 @@ hr.menu {
 
 #aboutBody {
 	font-size: 1em;
-	color: rgb(10,10,10);
+	color: rgb(50,50,50);
 }
 
 
 p.aboutIntro {
-	/* color:white; */
 	font-size:2em;
 	line-height:1.25em;
 }
