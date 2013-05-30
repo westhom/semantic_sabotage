@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Blurry Notdone",
-		defaultURL: "http://www.youtube.com/watch?v=GmHqAEkgHGc&t=0m18s",
+		defaultURL: "http://www.youtube.com/watch?v=3zi699WzAL0",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
@@ -15,7 +15,7 @@ var mode = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div id='blurry_container' class='container bg-white'></div>");
+			this.el.append("<div id='blurry_container' class='container' style='background-color: #191919'></div>");
 			$('#blurry_container').append('<div id="transcript" class="transcript proxima-nova-400 size-48"></div>');
 		},
 
@@ -61,17 +61,22 @@ var mode = function(id) {
 		appendWordInContext: function(msg) {
 
 			var cat = 'blank';
-			var catColor = 'darkslategray';
+			var catColor = '#FFBE73'; //tan
 		 	if($.inArray('work', msg.cats) >= 0) { 
 		 		cat = 'work';
-		 		catColor = 'royalblue';
+		 		catColor = '#0A7AA6'; //blue
 		 	} else if($.inArray('relig', msg.cats) >= 0) {
 		 		cat = 'relig';
-		 		catColor = 'red';
+		 		catColor = '#FF8900'; //bright orange
+		 	} else if($.inArray('relativ', msg.cats) >= 0) {
+		 		cat = 'relativ';
+		 		catColor = '#FFB800'; //yellow
 		 	} else if(msg.cats.length === 0) { //not in dictionary
 		 		cat = 'nocat';
-		 		catColor = 'saddlebrown';
+		 		catColor = '#F23005'; //red
+		 		console.log('missing word :'+msg.word)
 			}		 	
+
 		 	//console.log(msg.word);
 		 	var word = this.htmlEncode(msg.word);
 		 	
@@ -103,9 +108,7 @@ var mode = function(id) {
 			// words get a preceeding space, unless they follow lead punct
 		 	else {	
 		 		
-		 		var s;
-		 		
-		 		if (!this.lastLeadPunct) s = $('#blurry_container #transcript').append('<span class="space"> </span>');
+		 		if (!this.lastLeadPunct) $('#blurry_container #transcript').append('<span class="space"> </span>');
 		 		var s = $('<span class="' + cat + '">' + word + '</span>');
 				$(s).css('color',catColor);
 		 		$('#blurry_container #transcript').append(s);
@@ -114,7 +117,7 @@ var mode = function(id) {
 					e.css({'color':'transparent', 'text-shadow':'0 0 36px '+ catColor});
 				}, 20, s);
 
-		 		if (c != 'blank') {
+		 		if (cat != 'blank') {
 		 			s.addClass('marked');
 		 		}
 

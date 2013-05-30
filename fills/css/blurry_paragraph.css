@@ -23,7 +23,7 @@
 
 #blurry_paragraph .blank
 {
-	color: rgb(48,48,48);
+	color: #FFBE73;
 	
 	text-shadow: 0 0 0 transparent;
 
@@ -33,7 +33,7 @@
 
 #blurry_paragraph .nocat
 {
-	color: rgb(48,48,48);
+	color: #FFBE73;
 	
 	text-shadow: 0 0 0 transparent;
 
@@ -53,7 +53,17 @@
 
 #blurry_paragraph .relig
 {
-	color: rgb(193,250,164);
+	color: olivedrab;
+	
+	text-shadow: 0 0 0 transparent;
+
+	transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;
+	-webkit-transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;		
+}
+
+#blurry_paragraph .relativ
+{
+	color: mediumaquamarine;
 	
 	text-shadow: 0 0 0 transparent;
 
