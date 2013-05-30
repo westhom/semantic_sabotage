@@ -12,15 +12,12 @@ var Parser = function(db, messages) {
 		messages: null,
 		statsHandler: null,
 
-		setup: function(db, messages) {
+		initialize: function(db, messages) {
 			this.db = db;
 			this.messages = messages;
-			this.statsHandler = StatsHandler(this.messages, this.db);
-		},
-	
-		initialize: function(callback, args) {
-			// making two tables for LIWC because it's faster
 			
+			// making two tables for LIWC because it's faster
+
 			// create cached_messages table if nec
 			//this.db.dropTable("cached_messages");
 			if (!this.db.tableExists("cached_messages")) {
@@ -56,9 +53,12 @@ var Parser = function(db, messages) {
 		  	console.log("loaded wild "+LIWC_wild.length);
 		  	this.db.commit();	
 			} 
-			
-			callback(args);
-		}, 
+
+			// init stats handler
+			this.statsHandler = StatsHandler(this.messages, this.db);
+
+
+		},
 	
 		parseLine: function(line) {
 
