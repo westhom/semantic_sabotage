@@ -213,6 +213,8 @@ var Parser = function(db, messages) {
 			var res = this.db.query("LIWC_words", {word: w.toLowerCase()}); 
 			if (res.length > 0) {
 				cats = res[0].cats;
+				console.log("found cats for word "+w);
+				console.log(cats);
 			}
 			
 			// check for wildcards
@@ -227,6 +229,8 @@ var Parser = function(db, messages) {
 			  });
 			  if (res.length > 0) {
 				  cats = res[0].cats;
+				  console.log("found wild cats for word "+w);
+				  console.log(cats);
 			  }
 			}
 						 
