@@ -4,10 +4,6 @@ window.onpopstate = function(e) {
 	if (e && e.state) location.reload();
 }
 
-document.addEventListener("fullscreenchange", function (e) { 
-   e.stopPropagation();
-});
-
 var player = Player(this);
 var embedUrl;
 var video;
