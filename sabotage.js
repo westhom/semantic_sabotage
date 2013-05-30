@@ -4,6 +4,10 @@ window.onpopstate = function(e) {
 	if (e && e.state) location.reload();
 }
 
+document.addEventListener("fullscreenchange", function (e) { 
+   e.stopPropagation();
+});
+
 var player = Player(this);
 var embedUrl;
 var video;
@@ -42,6 +46,14 @@ window.requestAnimFrame = (function(){
 })();
 
 function init() {
+
+	$('.icon').live('mouseenter',function(){
+		var type = $(this).data('icon');
+		$(this).attr('src', 'img/icons/hover_'+type+'.png');
+	}).live('mouseleave',function(){
+		var type = $(this).data('icon');
+		$(this).attr('src', 'img/icons/'+type+'.png');
+	});
 
 	Piecon.reset();
 	
@@ -148,9 +160,9 @@ function drawFills(modes) {
 	$.each(modes, function(i,m){
 		// Add entry to menu.
 		if(m.template==true){
-			$('#templates').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');	
+			$('#templates').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name+'&nbsp;</span></li>');	
 		}else{
-			$('#transforms').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name.toUpperCase()+'&nbsp;</span></li>');
+			$('#transforms').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name+'&nbsp;</span></li>');
 		}
 		// Append to mode's element to DOM.
 		m.el.hide();				   
@@ -501,11 +513,11 @@ function updateYouTubeProgressBar() {
 function toggleFullscreen() {
 	if(fullScreenApi.isFullScreen()) {
 		fullScreenApi.cancelFullScreen();
-		$("#fullscreenButton").html("FULLSCREEN");
+		$("#fullscreenButton").html('<img src="img/icons/fullscreen.png" class="icon" data-icon="fullscreen">');
 	}
 	else{
 		fullScreenApi.requestFullScreen(document.getElementsByTagName("body")[0]);
-		$("#fullscreenButton").html("FULLSCREEN");
+		$("#fullscreenButton").html('<img src="img/icons/normalscreen.png" class="icon" data-icon="normalscreen">');
 	}
 }
 

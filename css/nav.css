@@ -1,12 +1,15 @@
-
-
 .navBar{
 	position: relative;
 	height: 3.5%;																	
 	min-height:2em;															
 	z-index:999;
 	background-color: black;
-	padding: 0em 1em 0em 1.5em;										
+	padding: 0em 1em 0em 1.5em;
+	text-transform: uppercase;
+}
+
+#youtube_load {
+	margin-left: 1.3em;
 }
 
 .navText{
@@ -20,7 +23,7 @@
 	font-size: 1.5em;
 	/* color: rgb(110,110,110); */
 	margin: 0em;
-	cursor: hand;
+	cursor: pointer;
 }
 
 
@@ -63,7 +66,7 @@
 input.navInput[type="text"]
 {
 	border-style: none;
-	padding: 0.075em;
+	padding: 0.2em;
 	font-size: 0.75em;
 	background-color: rgb(225, 225, 225);
 	color: black;
@@ -73,7 +76,7 @@ input.navInput[type="text"]
 input.navInput[type="text"]:hover
 {
 	background-color: rgb(255, 255, 255);
-	color: rgb(0, 149, 194);
+	color: rgb(110,110,110);
 }
 
 input.navInput[type="text"]:focus
@@ -86,19 +89,17 @@ input.navInput[type="text"]:focus
 
 }
 
+#ytURLButton {
+	top: .4em;
+}
+
 .navButton {
 	position: relative;
-	margin-left: 0.5em;
 	top: 0.26em;
-	height: 1em;																		
-	font-family: Helvetica, sans-serif;
-	font-weight: normal; 
-	font-size: 0.9em;
 	border-style: none;
-	padding: 0em 0.25em 0em 0.25em;								
 	background-color: black;
-	color: rgb(110,110,110);
-	cursor: hand;
+	cursor: pointer;
+	padding: 0;
 }
 
 .navButton:hover {
@@ -109,36 +110,17 @@ input.navInput[type="text"]:focus
 #fullscreenButton {
 	position:absolute;
 
-	top: 1em;
-	right: 7.25em;
-	height: 1em;
+	top: 0.8em;
+	right: 1em;
 	cursor: pointer;
-	font-family: Helvetica, sans-serif;
-	font-weight: normal;
-	font-size: 0.9em;
-	color: rgb(110,110,110);
-	margin: 0em;
 
-}
-
-#fullscreenButton:hover {
-	color: white;
-}
-
-#logo_link {
-	position:absolute;
-	top:0.45em;										
-	right:1em;										
-	width:0em;
-	height:0em;
-	overflow: visible;
 }
 
 #logo {
-	position:absolute;
-	top:0em;										
-	right:0em;
-	height:1.3em;
+	position:relative;
+	top:.4em;
+	height:1.2em;
+	margin-right:.6em;
 }
 
 #progressBarBox {
