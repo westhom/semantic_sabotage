@@ -4,7 +4,7 @@ var mode = function(id) {
 	
 		name: "One x One",
 
-		defaultURL: "http://www.youtube.com/watch?v=gdtQrSnEPCM",
+		defaultURL: "http://www.youtube.com/watch?v=gdtQrSnEPCM&t=0m3s",
 		//usfRtJpyJDk = how to behave in court
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		fontSize: 200,
@@ -46,7 +46,6 @@ var mode = function(id) {
 
 			if($.inArray('punct', msg.cats) < 0)
 			{
-
 				console.log(msg.word);
 
 			 	var c;
