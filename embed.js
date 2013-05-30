@@ -33,11 +33,13 @@ function updatePlayerInfo() {
   // Also check that at least one function exists since when IE unloads the
   // page, it will destroy the SWF before clearing the interval.
   if(ytplayer && ytplayer.getDuration) {
+    /*
     updateHTML("videoDuration", ytplayer.getDuration());
     updateHTML("videoCurrentTime", ytplayer.getCurrentTime());
     updateHTML("bytesTotal", ytplayer.getVideoBytesTotal());
     updateHTML("startBytes", ytplayer.getVideoStartBytes());
     updateHTML("bytesLoaded", ytplayer.getVideoBytesLoaded());
+    */
   }
 }
 

@@ -1,0 +1,110 @@
+/* Typography */
+
+/* MUSEO-SLAB */
+.museo-slab-300
+{
+	font-family: "museo-slab",serif;
+	font-style: normal;
+	font-weight: 300;
+}
+
+.museo-slab-300-italic
+{
+	font-family: "museo-slab",serif;
+	font-style: italic;
+	font-weight: 300;
+}
+
+.museo-slab-500
+{
+	font-family: "museo-slab",serif;
+	font-style: normal;
+	font-weight: 500;
+}
+
+.museo-slab-500-italic
+{
+	font-family: "museo-slab",serif;
+	font-style: italic;
+	font-weight: 500;
+}
+
+.museo-slab-1000
+{
+	font-family: "museo-slab",serif;
+	font-style: normal;
+	font-weight: 900;
+}
+
+.museo-slab-1000-italic
+{
+	font-family: "museo-slab",serif;
+	font-style: italic;
+	font-weight: 900;
+}
+
+/* FRANKLIN-GOTHIC */
+.franklin-gothic-condensed
+{
+	font-family: "franklin-gothic-urw-cond",sans-serif;
+	font-style: normal;
+	font-weight: 700;
+}
+
+.franklin-gothic-condensed-italic
+{
+	font-family: "franklin-gothic-urw-cond",sans-serif;
+	font-style: italic;
+	font-weight: 700;
+}
+
+/* META-SERIF */
+.meta-serif-book
+{
+	font-family: "ff-meta-serif-web-pro",serif;
+	font-style: normal;
+	font-weight: 500;
+}
+
+.meta-serif-book-italic
+{
+	font-family: "ff-meta-serif-web-pro",serif;
+	font-style: italic;
+	font-weight: 500;
+}
+
+/* MOTOR - monospaced */
+.motor
+{
+	font-family: "motor", sans-serif;
+	font-style: normal;
+}
+
+/* PROXIMA-NOVA */
+.proxima-nova-400
+{
+	font-family: "proxima-nova",serif;
+	font-style: normal;
+	font-weight: 400;
+}
+
+.proxima-nova-400-italic
+{
+	font-family: "proxima-nova",serif;
+	font-style: italic;
+	font-weight: 400;
+}
+
+.proxima-nova-700
+{
+	font-family: "proxima-nova",serif;
+	font-style: normal;
+	font-weight: 700;
+}
+
+.proxima-nova-700-italic
+{
+	font-family: "proxima-nova",serif;
+	font-style: italic;
+	font-weight: 700;
+}

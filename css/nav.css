@@ -1,0 +1,160 @@
+
+
+.navBar{
+	position: relative;
+	height: 3.5%;																	
+	min-height:2em;															
+	z-index:999;
+	background-color: black;
+	padding: 0em 1em 0em 1.5em;										
+}
+
+.navText{
+	position: relative;
+	display: inline;
+
+	top: 0.25em;
+	height:1.5em;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: bold;*/
+	font-size: 1.5em;
+	/* color: rgb(110,110,110); */
+	margin: 0em;
+	cursor: hand;
+}
+
+
+.navText:hover {
+	color: white;
+}
+
+.navStatus {
+	position: relative;
+	display: inline;
+
+	top: 0.25em;
+	height:1.5em;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: lighter;*/
+
+	font-size: 1.5em;
+	margin-left: 0.5em;
+	color: white;
+}
+
+#navControls {
+	position:relative;
+	display: inline;
+	top: 0.07em;																		
+	height:1.5em;
+}
+
+.navInput {
+	position: relative;
+	display: inline;
+	top: 0em;																		
+	height:1.3em;
+	/*font-family: Helvetica, sans-serif;
+	font-weight: normal;*/
+	padding: 0px;
+	border-style: none;
+}
+
+input.navInput[type="text"]
+{
+	border-style: none;
+	padding: 0.075em;
+	font-size: 0.75em;
+	background-color: rgb(225, 225, 225);
+	color: black;
+	margin-left: 1em;
+}
+
+input.navInput[type="text"]:hover
+{
+	background-color: rgb(255, 255, 255);
+	color: rgb(0, 149, 194);
+}
+
+input.navInput[type="text"]:focus
+{
+	outline: none;
+}
+
+
+#ytURL {
+
+}
+
+.navButton {
+	position: relative;
+	margin-left: 0.5em;
+	top: 0.26em;
+	height: 1em;																		
+	font-family: Helvetica, sans-serif;
+	font-weight: normal; 
+	font-size: 0.9em;
+	border-style: none;
+	padding: 0em 0.25em 0em 0.25em;								
+	background-color: black;
+	color: rgb(110,110,110);
+	cursor: hand;
+}
+
+.navButton:hover {
+	color: white;
+}
+
+
+#fullscreenButton {
+	position:absolute;
+
+	top: 1em;
+	right: 7.25em;
+	height: 1em;
+	cursor: pointer;
+	font-family: Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 0.9em;
+	color: rgb(110,110,110);
+	margin: 0em;
+
+}
+
+#fullscreenButton:hover {
+	color: white;
+}
+
+#logo_link {
+	position:absolute;
+	top:0.45em;										
+	right:1em;										
+	width:0em;
+	height:0em;
+	overflow: visible;
+}
+
+#logo {
+	position:absolute;
+	top:0em;										
+	right:0em;
+	height:1.3em;
+}
+
+#progressBarBox {
+	position:relative;
+	background-color: #333;										
+	left:0em;
+	bottom:0em;
+	width:100%;
+	height:0.5%;										
+	min-height:3px;										
+}
+
+#progressBar {
+	position:absolute;
+	background-color: white;
+	opacity: 0.8;
+	width: 0%;
+	height:100%;
+}
