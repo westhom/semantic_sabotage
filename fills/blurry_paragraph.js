@@ -2,8 +2,10 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Blurry Notdone",
+		name: "Fading Memories",
 		defaultURL: "http://www.youtube.com/watch?v=3zi699WzAL0",
+		//defaultURL: "http://www.youtube.com/watch?v=RB1OhJBbzkM", //rupert sheldrake metaphysics
+		//defaultURL: "http://www.youtube.com/watch?v=JnA8GUtXpXY&t=6m0s",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
@@ -24,7 +26,6 @@ var mode = function(id) {
 			console.log(this.name+" enter()");
 			$('#blurry_container #transcript').empty();
 		},
-
 
 		// Handle incoming word message.
 		handleWord: function(msg) {
