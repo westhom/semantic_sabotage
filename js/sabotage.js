@@ -401,8 +401,6 @@ function showMenu() {
 
 function showControls() {
 	$('#navControls').show();
-	$('#pauseButton').show();
-	$('#muteButton').show();
 }
 
 function hideControls() {
@@ -416,8 +414,6 @@ function hidePlayingMessage() { $('#playing').hide(); }
 
 
 function bodyClick() {}
-
-
 
 function stopAllTimers() {
 	for (var i=0; i<globalTimers.length; i++) {
