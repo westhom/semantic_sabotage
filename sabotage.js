@@ -354,6 +354,7 @@ function showMenu() {
 	History.pushState(null, null, '?');
 	
 	$('#menu').show();
+	$('#menu').scrollTop('0px');
 	$('#modes').hide();	
 
 	// Reset progress bar.
