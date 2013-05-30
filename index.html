@@ -1,68 +1,32 @@
 <!DOCTYPE html>
 <html class="no-js">
 	<head>
-	
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Semantic Sabotage</title>
-	<meta name="description" content="Semantic Sabotage, an open source platform for creating live typographic YouTube mutations. By Sosolimited.">
-	<link rel="shortcut icon" href="favicon.ico" >
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection">
-	<link rel="stylesheet" href="css/fonts.css" type="text/css" media="screen, projection">
-	<link rel="stylesheet" href="css/nav.css" type="text/css" media="screen, projection">
-	
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>	
-	<script src="http://code.jquery.com/jquery-migrate-1.1.0.min.js"></script>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
-	<script src="libs/jquery.form.js"></script>
-	<script src="libs/jquery.history.js"></script>
-	<script src="libs/piecon.min.js"></script>
-	
+		<title>Semantic Sabotage</title>
+		<meta name="description" content="Semantic Sabotage, an open source platform for creating live typographic YouTube mutations. By Sosolimited.">
 
-	<!-- google yt api stuff -->
-	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
-	<script type="text/javascript" src="embed.js"></script>
+		<link rel="shortcut icon" href="favicon.ico" >
+		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection">
+		<link rel="stylesheet" href="css/fonts.css" type="text/css" media="screen, projection">
+		<link rel="stylesheet" href="css/nav.css" type="text/css" media="screen, projection">
+		<link rel="stylesheet" href="css/libs/animate-custom.css" type="text/css" media="screen, projection">
 
-
-	<!-- Typekit -->
-	<script type="text/javascript" src="//use.typekit.net/rim7nin.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-								
-	<script> 
-		// Wait for the DOM to be loaded.
-			$(document).ready(function() { 
-				init();
-				
-					// bind 'myForm' and provide a simple callback function 
-					$('#youtube_load').ajaxForm({ 
-						// DataType identifies the expected content type of the server response.
-						dataType:  'json', 
-						// Success identifies the function to invoke when the server response has been received.
-						success:   load 
-						}); 
-				}); 
-	</script> 
-
-		
-	<script src="localStorageDB/localstoragedb.min.js"></script>
-	<script src="LIWC/LIWC.js"></script>
-	<script src="statsHandler.js"></script>
-	<script src="parser.js"></script>
-	<script src="player.js"></script>
-	<script src="sabotage.js"></script>
-	<script src="fullscreen.js"></script>
-
-	<!-- Gets rid of Indonesian translation request -->
-	<meta name="google" content="notranslate" />
-	<!--<script src="https://apis.google.com/js/client.js?onload=load"></script>-->
+		<!-- Use Google CDN for jQuery -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<!-- Typekit -->
+		<script type="text/javascript" src="//use.typekit.net/rim7nin.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+		<!-- Gets rid of Indonesian translation request -->
+		<meta name="google" content="notranslate" />
+		<!-- Rest of JS is below HTML for faster DOM rendering -->
 	</head>
 							
 	<body onclick="bodyClick();">
 
-	
 		<div class="navBar">
+
 			<a id="logo_link" href="http://sosolimited.com" target="_blank"><img id="logo" src="img/sosoLogoSmall.png"/></a>
 			<div id="navTitle" class="medGray navText proxima-nova-700" onclick="showMenu();">Semantic Sabotage</div>			
 			<div id="loading" class="navStatus proxima-nova-400" style="display:none">Loading...</div>
@@ -80,7 +44,6 @@
 				</form>
 			</div>
 
-
 			<div id="fullscreenButton" class="navButton proxima-nova-400" onClick="toggleFullscreen();"><img class="icon" src="img/icons/fullscreen.png" data-icon="fullscreen"></div> 			
 		</div>
 		
@@ -89,48 +52,68 @@
 		</div>
 
 		<div id="videoDiv"></div>
-				
-
 
 	  <div id="menu">
 	  		
-	    	<div id="columnLeft" class="column">
-	    		<div class="menuHeading meta-serif-book-italic">Transforms</div>
-	    		<ul id="transforms"></ul>
-	    		<div id="templateHeading" class="menuHeading meta-serif-book-italic">Templates</div>
-	    		<ul id="templates"></ul>
-	    	</div>
+    	<div id="columnLeft" class="column animated delay fadeIn">
+    		<div class="menuHeading meta-serif-book-italic">Transforms</div>
+    		<ul id="transforms"></ul>
+    		<div id="templateHeading" class="menuHeading meta-serif-book-italic">Templates</div>
+    		<ul id="templates"></ul>
+    	</div>
 
-	    	<div id="columnRight" class="column">
-	    		<div class="menuHeading meta-serif-book-italic">About</div>
+    	<div id="columnRight" class="column animated delay fadeIn">
+    		<div class="menuHeading meta-serif-book-italic">About</div>
 
-	    		<div id="aboutBody" class="meta-serif-book"><p class="aboutIntro meta-serif-book-italic">Semantic Sabotage is an open source platform for creating live typographic YouTube transforms.</p></br>Each transform uses HTML5 and Javascript to visualize the transcript of a YouTube movie, as it plays. The transcripts are analyzed with the LIWC dictionaries, created by <a href="http://www.secretlifeofpronouns.com/author.php" target="_blank">James Pennebaker</a> and the UT Austin Department of Psychology. </br></br>Semantic Sabotage was designed and coded by <a href="http://sosolimited.com" target="_blank">Sosolimited</a>.</br></br></div>
+    		<div id="aboutBody" class="meta-serif-book">
+    			<p class="aboutIntro meta-serif-book-italic">Semantic Sabotage is an open source platform for creating live typographic YouTube transforms.</p>
+    			</br>
+    			Each transform uses HTML5 and Javascript to visualize the transcript of a YouTube movie, as it plays. The transcripts are analyzed with the LIWC dictionaries, created by <a href="http://www.secretlifeofpronouns.com/author.php" target="_blank">James Pennebaker</a> and the UT Austin Department of Psychology.
+    			</br>
+    			</br>
+    			Semantic Sabotage was designed and coded by <a href="http://sosolimited.com" target="_blank">Sosolimited</a>.
+    			</br>
+    			</br>
+    		</div>
 
-					<div class="menuHeading meta-serif-book-italic">Code</div>
-		    	Download the code from <a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank">GitHub</a> and create your own. Start with one of the templates or with an existing transform.</br></br> 
-		    	<div><a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank"><span class="downloadButton proxima-nova-400 whiteOnGray">Download</span></a></div>
-		    	
-
-	    		
-	    		</ul>
-
-	    	</div>
-	    		
-
+				<div class="menuHeading meta-serif-book-italic">Code</div>
+    		Download the code from <a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank">GitHub</a> and create your own. Start with one of the templates or with an existing transform.
+    		</br>
+    		</br> 
+	    	<a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank">
+	    		<span class="downloadButton proxima-nova-400 whiteOnGray">Download</span>
+	    	</a>
+    		</ul>
+    	</div>
 		</div>		
 
-			<div id="modes">	    	
-				<!--		
-				<div id="videoInfo">
-					<p>Player state: <span id="playerState">--</span></p>
-					<p>Current Time: <span id="videoCurrentTime">--:--</span> | Duration: <span id="videoDuration">--:--</span></p>
-					<p>Bytes Total: <span id="bytesTotal">--</span> | Start Bytes: <span id="startBytes">--</span> | Bytes Loaded: <span id="bytesLoaded">--</span></p>
-				</div>
-				-->
-			</div>
-	
+		<div id="modes">
+		</div>
+
+	<script src="LIWC/LIWC.js"></script>
+
+	<!-- google yt api stuff -->
+	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+	<script src="js/embed.js" type="text/javascript"></script>
+
+	<script src="js/libs/jquery.form.js"></script>
+	<script src="js/libs/jquery.history.js"></script>
+	<script src="js/libs/piecon.min.js"></script>
+	<script src="js/libs/localstoragedb.min.js"></script>
+	<script src="js/libs/statsHandler.js"></script>
+	<script src="js/libs/fullscreen.js"></script>
+	<script src="js/parser.js"></script>
+	<script src="js/player.js"></script>
+	<script src="js/sabotage.js"></script>	
+
+	<script> 
+		// Wait for the DOM to be loaded.
+			$(document).ready(function() { 
+				init();
+				}); 
+	</script>
+
 	</body>
-	
 </html>
 
 
