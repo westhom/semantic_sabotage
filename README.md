@@ -98,4 +98,4 @@ http://www.youtube.com/user/blankonblank?feature=watch - PBS blank on blank seri
 
 http://www.youtube.com/watch?v=jq42aHX4qk4 - I am the walrus good captions (doesn't work yet, need to debug this)
 
-
+http://www.youtube.com/watch?v=JnA8GUtXpXY - The Extended Mind (start at 6:00 for crazy)
