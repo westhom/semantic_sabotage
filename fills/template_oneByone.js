@@ -13,13 +13,14 @@ var mode = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div class='topContainer'><div class='centerContainer'></div></div>");
+			this.el.append('<div class="topContainer"><div id="onebyone" class="centerContainer proxima-nova-400"></div></div>');
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			this.el.find('.centerContainer').empty();
+			//this.el.find('.centerContainer').empty();
+			$('#onebyone').empty();
 		},
 
 		// Handle incoming word message.
@@ -40,19 +41,22 @@ var mode = function(id) {
 		
 		appendWordInContext: function(msg) {
 		
-		 	// update curSentence
-		 	if (!msg.sentenceStartFlag && !msg.punctuationFlag)
-		 		this.el.append(' ');
-		 	
-		 	var c;
-		 	if($.inArray('funct', msg.cats) >= 0) c = 'rgb(255,0,0)';
-		 	else if($.inArray('percept', msg.cats) >= 0) c = 'rgb(0,255,0)';
-		 	else if($.inArray('heshe', msg.cats) >= 0) c = 'rgb(45,255,0)';
-		 	else if($.inArray('verbs', msg.cats) >= 0) c = 'rgb(255,180,140)';
-		 	else c = 'rgb(40,40,40)';
+			// Choose a color based on the category of the word in the LIWC Dictionary.
+			// These are five very broad LIWC categories
+			var c;
+			if($.inArray('cogmech', msg.cats) >= 0) c = 'rgb(51,154,96)';  			//green
+			else if($.inArray('social', msg.cats) >= 0) c = 'rgb(193,250,164)';	//light green
+			else if($.inArray('affect', msg.cats) >= 0) c = 'rgb(232,218,122)'; //yellow
+			else if($.inArray('percept', msg.cats) >= 0) c = 'rgb(255,161,92)'; //orange
+			else if($.inArray('verb', msg.cats) >= 0) c = 'rgb(237,75,58)'; 		//red
+			else c = 'rgb(240,240,240)';
 
-		 	var w = $('<div class= "museo-slab-1000-italic" style="font-size:'+200+'px; color:' + c + ';">' + msg.word + '</div>');
-		 	this.el.find('.centerContainer').html(w);
+			// Set the html of the div with id="word" to the new text
+			$('#onebyone').html(msg.word);
+
+			// Color the word to match
+			$('#onebyone').css("color", c);
+
 		}
 	}
 };
