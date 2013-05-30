@@ -13,6 +13,15 @@ var mode = function(id) {
 		// This gets called once after the mode is created.
 		init: function() {
 
+			this.el.empty();
+			
+		},
+
+		// Gets called evertime you go to the mode.
+		enter: function() {
+
+			this.el.empty();
+
 			var c = document.createElement('div');
 			$(c).addClass('container franklin-gothic-condensed');
 			this.el.append(c);
@@ -44,12 +53,7 @@ var mode = function(id) {
 			var c8 = document.createElement('div');
 			$(c8).addClass('container8 franklin-gothic-condensed');
 			this.el.append(c8);			
-			
-		},
 
-		// Gets called evertime you go to the mode.
-		enter: function() {
-			console.log(this.name+" enter()");
 		},
 
 		// Handle incoming word message.

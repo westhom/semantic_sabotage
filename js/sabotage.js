@@ -4,10 +4,6 @@ window.onpopstate = function(e) {
 	if (e && e.state) location.reload();
 }
 
-document.addEventListener("fullscreenchange", function (e) { 
-   e.stopPropagation();
-});
-
 var player = Player(this);
 var embedUrl;
 var video;
@@ -23,7 +19,7 @@ Piecon.setOptions({
   color: '#fff',
   background: '#000000',
   shadow: '#333',
-  fallback: false
+  fallback: 'prohibit'
 });
 
 // Shim layer with setTimeout fallback.
@@ -166,9 +162,9 @@ function drawFills(modes) {
 	$.each(modes, function(i,m){
 		// Add entry to menu.
 		if(m.template==true){
-			$('#templates').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name+'&nbsp;</span></li>');	
+			$('#templates').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'&nbsp;</span></li>');	
 		}else{
-			$('#transforms').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+');" >'+m.name+'&nbsp;</span></li>');
+			$('#transforms').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'&nbsp;</span></li>');
 		}
 		// Append to mode's element to DOM.
 		m.el.hide();				   
@@ -225,8 +221,9 @@ function start() {
 }
 
 // After clicking a menu link, should push new URL state before switching to mode
-function linkToMode(m) {
+function linkToMode(m, title) {
 	History.pushState(null, null, buildStateFromArguments(m));
+	document.title = title;
 	goToMode(m);
 }
 
@@ -371,6 +368,7 @@ function showMenu() {
 	console.log('showMenu');
 
 	History.pushState(null, null, '?');
+	document.title = 'Semantic Sabotage'
 	
 	$('#menu').show();
 	$('#menu').scrollTop('0px');
@@ -401,8 +399,6 @@ function showMenu() {
 
 function showControls() {
 	$('#navControls').show();
-	$('#pauseButton').show();
-	$('#muteButton').show();
 }
 
 function hideControls() {
@@ -416,8 +412,6 @@ function hidePlayingMessage() { $('#playing').hide(); }
 
 
 function bodyClick() {}
-
-
 
 function stopAllTimers() {
 	for (var i=0; i<globalTimers.length; i++) {

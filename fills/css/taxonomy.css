@@ -5,7 +5,7 @@
 	width: 100%;
 	font-size: 150px;
 	text-transform: lowercase;
-	color: #BBB;
+	color: #EEE;
 }
 
 #taxonomy .sentenceObject {
@@ -19,11 +19,13 @@
 }
 
 #taxonomy .wordContainer {
+	z-index: 4;
 	position: relative;
 	display: inline;
 }
 
 #taxonomy .categoryContainer {
+	z-index: 5;
 	position: absolute;
 	left: 0%;
 	bottom: 20%;
