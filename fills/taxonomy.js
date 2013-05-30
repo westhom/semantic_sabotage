@@ -11,6 +11,8 @@ var mode = function(id) {
 		// This gets called once after the mode is created.
 		init: function() {
 
+			this.el.empty();
+
 		},
 
 		// Gets called evertime you go to the mode.
