@@ -1,11 +1,5 @@
 var Parser = function(db, messages) {	
 
-	// var db = db;
-	// var messages = messages;
-
-	// var statsHandler = StatsHandler(messages, db);
-	
-
 	return {
 
 		db: null,
