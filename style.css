@@ -322,17 +322,25 @@ input.navInput[type="text"]:focus
 	margin: 0 0 0.5em 0;
 }
 
-#modeButtons {
+#templateHeading {
+	margin-top: 24px;
+}
+
+.column {
 	position:absolute;
+	width:460px;
+}
+
+#columnLeft {
 	left: 1.5em;
 	top: 36px;
 }
 
-#modeButtonsRight {
-	position:absolute;
-	left: 560px;
+#columnRight {
+	left: 600px;
 	top: 36px;
 }
+
 
 .modeName {
 	position:static;
@@ -374,7 +382,7 @@ hr.menu {
 #about {
 	position:absolute;
 	font-size: 1em;
-	left:560px;
+	left:520px;
 	top: 350px;
 	width:400px;
 }
@@ -384,12 +392,12 @@ hr.menu {
 	color: rgb(10,10,10);
 }
 
-#aboutBody a {
-	color: rgb(255,255,255);
-	text-decoration:none;
+#columnRight a {
+	color: rgb(30,30,30);
+	/*text-decoration:none;*/
 }
 
-#aboutBody a:hover {
+#columnRight a:hover {
 	color: rgb(255,255,255);
 	background-color: rgb(0,174,242);
 	text-decoration:none;
