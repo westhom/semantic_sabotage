@@ -7,9 +7,9 @@
 	<title>Semantic Sabotage</title>
 	<meta name="description" content="Semantic Sabotage, an open source platform for creating live typographic YouTube mutations. By Sosolimited.">
 	<link rel="shortcut icon" href="favicon.ico" >
-	<link rel="stylesheet" href="./css/style.css" type="text/css" media="screen, projection">
-	<link rel="stylesheet" href="./css/fonts.css" type="text/css" media="screen, projection">
-	<link rel="stylesheet" href="./css/nav.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="css/fonts.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="css/nav.css" type="text/css" media="screen, projection">
 	
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>	
@@ -23,7 +23,7 @@
 
 	<!-- google yt api stuff -->
 	<script src="http://www.google.com/jsapi" type="text/javascript"></script>
-	<script type="text/javascript" src="./embed.js"></script>
+	<script type="text/javascript" src="embed.js"></script>
 
 
 	<!-- Typekit -->
@@ -46,12 +46,12 @@
 	</script> 
 
 		
-	<script src="./localStorageDB/localstoragedb.min.js"></script>
-	<script src="./LIWC/LIWC.js"></script>
-	<script src="./statsHandler.js"></script>
-	<script src="./parser.js"></script>
-	<script src="./player.js"></script>
-	<script src="./sabotage.js"></script>
+	<script src="localStorageDB/localstoragedb.min.js"></script>
+	<script src="LIWC/LIWC.js"></script>
+	<script src="statsHandler.js"></script>
+	<script src="parser.js"></script>
+	<script src="player.js"></script>
+	<script src="sabotage.js"></script>
 	<script src="fullscreen.js"></script>
 
 	<!-- Gets rid of Indonesian translation request -->
@@ -62,27 +62,26 @@
 	<body onclick="bodyClick();">
 
 	
-		<div class="navBar">			
-			<div id="navTitle" class="medGray navText proxima-nova-700" onclick="showMenu();">SEMANTIC SABOTAGE</div>			
-			<div id="loading" class="navStatus proxima-nova-400" style="display:none">LOADING CAPTIONS...</div>
-			<div id="playing" class="navStatus proxima-nova-400" style="display:none">PLAYING...</div>
+		<div class="navBar">
+			<a id="logo_link" href="http://sosolimited.com" target="_blank"><img id="logo" src="img/sosoLogoSmall.png"/></a>
+			<div id="navTitle" class="medGray navText proxima-nova-700" onclick="showMenu();">Semantic Sabotage</div>			
+			<div id="loading" class="navStatus proxima-nova-400" style="display:none">Loading...</div>
+			<div id="playing" class="navStatus proxima-nova-400" style="display:none">Playing...</div>
 
 			<div id="navControls" style="display:none">
 				<!-- <form id="youtube_load" class="navInput" action="youtube_load.php"  method="post"> -->
 				<form id="youtube_load" class="navInput">
+					<input id="ytURLButton" class="navButton proxima-nova-400" style="position: absolute; width: 1px; height: 1px; left: -9999px;" type="submit" onclick="submitURL();">
+					<button id="playButton" class="navButton" style="display:none" onclick="playback();"><img class="icon" src="img/icons/play.png" data-icon="play"></button>
+					<button id="pauseButton" class="navButton" style="display:none" onclick="pausePlayback();"><img class="icon" src="img/icons/pause.png" data-icon="pause"></button>
+					<button id="muteButton" class="navButton" style="display:none" onclick="muteVideo();"><img class="icon" src="img/icons/mute.png" data-icon="mute"></button>
+					<button id="unmuteButton" class="navButton" style="display:none" onclick="unMuteVideo();"><img class="icon" src="img/icons/sound.png" data-icon="sound"></button>
 					<input id="ytURL" class="navInput proxima-nova-400" type="text" value="Enter a YouTube URL." name="url" size="44">
-					<input id="ytURLButton" class="navButton proxima-nova-400" type="submit"  value="SUBMIT" onclick="submitURL();">
-					<button id="playButton" class="navButton proxima-nova-400" style="display:none" onclick="playback();">PLAY</button>
-					<button id="pauseButton" class="navButton proxima-nova-400" style="display:none" onclick="pausePlayback();">PAUSE</button>
-					<button id="muteButton" class="navButton proxima-nova-400" style="display:none" onclick="muteVideo();">MUTE</button>
-					<button id="unmuteButton" class="navButton proxima-nova-400" style="display:none" onclick="unMuteVideo();">UNMUTE</button>
 				</form>
 			</div>
 
 
-			<div id="fullscreenButton" class="navButton proxima-nova-400" onClick="toggleFullscreen();">FULLSCREEN</div> 
-			<a id="logo_link" href="http://sosolimited.com" target="_blank"><img id="logo" src="img/sosoLogoSmall.png"/></a>
-			
+			<div id="fullscreenButton" class="navButton proxima-nova-400" onClick="toggleFullscreen();"><img class="icon" src="img/icons/fullscreen.png" data-icon="fullscreen"></div> 			
 		</div>
 		
 		<div id="progressBarBox"> 
@@ -109,7 +108,7 @@
 
 					<div class="menuHeading meta-serif-book-italic">Code</div>
 		    	Download the code from <a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank">GitHub</a> and create your own. Start with one of the templates or with an existing transform.</br></br> 
-		    	<div><a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank"><span class="downloadButton proxima-nova-400 whiteOnGray">DOWNLOAD</span></a></div>
+		    	<div><a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank"><span class="downloadButton proxima-nova-400 whiteOnGray">Download</span></a></div>
 		    	
 
 	    		
