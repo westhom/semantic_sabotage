@@ -19,7 +19,7 @@ Piecon.setOptions({
   color: '#fff',
   background: '#000000',
   shadow: '#333',
-  fallback: false
+  fallback: 'prohibit'
 });
 
 // Shim layer with setTimeout fallback.
