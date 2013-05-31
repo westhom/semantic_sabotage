@@ -49,15 +49,19 @@ var mode = function(id) {
 				console.log(msg.word);
 
 			 	var c;
+			 	var uprword = msg.word.toUpperCase();
 			 	
-			 	if($.inArray('home', msg.cats) >= 0) c = 'rgb(107,0,56)';
-			 	else if($.inArray('bio', msg.cats) >= 0) c = 'rgb(250,16,48)';
-			 	else if($.inArray('word', msg.cats) >= 0) c = 'rgb(219,198,0)';
-			 	else if($.inArray('leisure', msg.cats) >= 0) c = 'rgb(0,168,88)';
-			 	else if($.inArray('money', msg.cats) >= 0) c = 'rgb(250,95,62)';
-			 	else if($.inArray('social', msg.cats) >= 0) c = 'rgb(0,65,55)';
-			 	else if (msg.cats.length == 0) c = 'rgb(255,240,186)';
+			 	if($.inArray('swear', msg.cats) >= 0) c = 'rgb(250,16,48)'; //bright red
+			 	//else if($.inArray('negemo', msg.cats) >= 0) c = 'rgb(107,0,56)'; //purple
+			 	else if((uprword.indexOf('LIVE') >= 0) || (uprword.indexOf('LIFE') >= 0) || ($.inArray('health', msg.cats) >= 0)) c = 'rgb(49,211,255)'; //cyan
+			 	else if((uprword.indexOf('GAME') >= 0) || ($.inArray('leisure', msg.cats) >= 0)) c = 'rgb(0,229,120)'; //mint green
+			 	else if($.inArray('time', msg.cats) >= 0) c = 'rgb(255,208,75)'; //mustard
+			 	else if(uprword.indexOf('INCH') >= 0) c = 'rgb(255,240,195)'; //white
+			 	
+			 	//else if (msg.cats.length == 0) c = 
 			 	else c = 'rgb(33,31,24)';
+
+
 			 	$('#word').html(msg.word);
  	
 			 	$('#word').css('font-size', this.fontSize + 'px');
