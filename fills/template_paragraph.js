@@ -54,12 +54,6 @@ var mode = function(id) {
 			//console.log(msg);
 		},
 
-		htmlEncode: function(value){
-  			//create a in-memory div, set it's inner text(which jQuery automatically encodes)
-  			//then grab the encoded contents back out.  The div never exists on the page.
-  			return $('<div/>').text(value).html();
-		},
-
 		clearTimeoutEvents: function(type) {
 		    var events;
 		    if (type == 'posemo') events = this.posEvents;
@@ -79,11 +73,10 @@ var mode = function(id) {
 		 	else if($.inArray('negemo', msg.cats) >= 0) c = 'negemo';
 		 	
 		 	//console.log(msg.word);
-		 	var word = this.htmlEncode(msg.word);
 		 	
 		 	// end punct always followed by space
 		 	if($.inArray('endPunct', msg.cats) >= 0){
-		 		var e = $('<span class="' + c + '">' + word + ' ' + '</span>');
+		 		var e = $('<span class="' + c + '">' + msg.word + ' ' + '</span>');
 				$('#paragraph_container #transcript').append(e);
 
 				this.lastLeadPunct = false;
@@ -94,8 +87,8 @@ var mode = function(id) {
 		 	else if ($.inArray('leadPunct', msg.cats) >= 0){
 		 		//no lead space if it follows a sentence end
 		 		var e; 
-		 		if (this.lastEndPunct) e = $('<span class="' + c + '">' + word + '</span>');
-		 		else e = $('<span class="' + c + '">' + ' ' + word + '</span>');
+		 		if (this.lastEndPunct) e = $('<span class="' + c + '">' + msg.word + '</span>');
+		 		else e = $('<span class="' + c + '">' + ' ' + msg.word + '</span>');
 
 		 		$('#paragraph_container #transcript').append(e);
 
@@ -105,8 +98,9 @@ var mode = function(id) {
 			// words get a preceeding space, unless they follow lead punct
 		 	else {	
 		 		
+		 		var e;
 		 		if (!this.lastLeadPunct) e = $('#paragraph_container #transcript').append('<span class="space"> </span>');
-		 		var e = $('<span class="' + c + '">' + word + '</span>');
+		 		e = $('<span class="' + c + '">' + msg.word + '</span>');
 
 		 		$('#paragraph_container #transcript').append(e);
 

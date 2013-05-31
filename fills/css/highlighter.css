@@ -15,14 +15,14 @@
 
 #highlighter .color-tween
 {
-	transition:color 1.0s linear;
-	-webkit-transition:color 1.0s linear;
+	transition:color 1.0s ease;
+	-webkit-transition:color 1.0s ease;
 }
 
 #highlighter .bgcolor-tween
 {
-	transition:background-color 1.0s linear;
-	-webkit-transition:background-color 1.0s linear;
+	transition:background-color 1.0s ease;
+	-webkit-transition:background-color 1.0s ease;
 }
 
 #highlighter .white

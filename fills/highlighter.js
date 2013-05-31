@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Highlighter",
-		defaultURL: "http://www.youtube.com/watch?v=4H5ocEjhkYw",
+		defaultURL: "http://www.youtube.com/watch?v=4H5ocEjhkYw&t=0m6s",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,
@@ -41,12 +41,6 @@ var mode = function(id) {
 			//console.log(msg);
 		},
 
-		htmlEncode: function(value){
-  			//create a in-memory div, set it's inner text(which jQuery automatically encodes)
-  			//then grab the encoded contents back out.  The div never exists on the page.
-  			return $('<div/>').text(value).html();
-		},
-
 		clearTimeoutEvents: function(type) {
 	    var events;
 	    if (type == 'posemo') events = this.posEvents;
@@ -59,23 +53,21 @@ var mode = function(id) {
 		
 		appendWordInContext: function(msg) {
 
-			var green = 'rgb(78, 191, 125)';
-			var yellow = 'rgb(255, 193, 65)';
 			var blue = 'rgb(45, 203, 237)';
-			var orange = 'rgb(209, 85, 50)';
+			//var red = 'rgb(209, 85, 50)';
+			var red = 'rgb(250, 69, 54)';
 			var black = 'rgb(61, 59, 56)';
+			var white = 'rgb(250, 250, 250)'
 
 			var c = 'blank';
 		 	if($.inArray('posemo', msg.cats) >= 0) c = 'posemo';
 		 	else if($.inArray('negemo', msg.cats) >= 0) c = 'negemo';
 		 	
 		 	//console.log(msg.word);
-		 	var word = this.htmlEncode(msg.word);
-		 	//console.log(word);
 		 	
 		 	// end punct always followed by space
 		 	if($.inArray('endPunct', msg.cats) >= 0){
-		 		var e = $('<span class="' + c + '">' + word + ' ' + '</span>');
+		 		var e = $('<span class="' + c + '">' + msg.word + ' ' + '</span>');
 				$('#tagged_container #transcript').append(e);
 				e.css("color", black);
 
@@ -86,8 +78,8 @@ var mode = function(id) {
 		 	else if ($.inArray('leadPunct', msg.cats) >= 0){
 		 		//no lead space if it follows a sentence end
 		 		var e; 
-		 		if (this.lastEndPunct) e = $('<span class="' + c + '">' + word + '</span>');
-		 		else e = $('<span class="' + c + '">' + ' ' + word + '</span>');
+		 		if (this.lastEndPunct) e = $('<span class="' + c + '">' + msg.word + '</span>');
+		 		else e = $('<span class="' + c + '">' + ' ' + msg.word + '</span>');
 
 		 		$('#tagged_container #transcript').append(e);
 		 		e.css("color", black);
@@ -100,7 +92,7 @@ var mode = function(id) {
 
 		 		
 		 		if (!this.lastLeadPunct) e = $('#tagged_container #transcript').append('<span class="space"> </span>');
-		 		var e = $('<span class="' + c + '">' + word + '</span>');
+		 		var e = $('<span class="' + c + '">' + msg.word + '</span>');
 
 		 		$('#tagged_container #transcript').append(e);
 
@@ -110,7 +102,7 @@ var mode = function(id) {
 		 			e.addClass('color-tween');
 		 			
 		 			if (c == 'posemo') e.css("background-color", blue);
-		 			else if (c == 'negemo') e.css("background-color", orange);
+		 			else if (c == 'negemo') e.css("background-color", red);
 		 		}
 
 		 		this.lastLeadPunct = 0;
@@ -132,18 +124,15 @@ var mode = function(id) {
 	 				//find all the words of the same class
 	 				if ($(this).hasClass(c)) 
 	 				{
-	 					//set their background and color 
-	 					//$(this).removeClass('bgcolor-tween');
-	 					//$(this).removeClass('color-tween');
-	 					
-	 					$(this).css("color", black);
-
-	 					if ($(this).hasClass('posemo')) $(this).css("background-color", blue);
-						else if ($(this).hasClass('negemo')) $(this).css("background-color", orange);
-
-						//and then fade them out after a timeout
-	 					//$(this).addClass('bgcolor-tween');
-	 					//$(this).addClass('color-tween');
+	 					//set their colors
+	 					if ($(this).hasClass('posemo')) {
+	 						$(this).css("color", black);
+	 						$(this).css("background-color", blue);
+	 					}
+						else if ($(this).hasClass('negemo')) {
+							$(this).css("color", white);
+							$(this).css("background-color", red);
+						}
 	 					
 	 					events.push(setTimeout( function(element) {
 	 							element.css("background-color", "transparent");
@@ -151,8 +140,8 @@ var mode = function(id) {
 
 	 					events.push(setTimeout( function(element) {
 	 							if (element.hasClass('posemo')) element.css("color", blue);
-								else if (element.hasClass('negemo')) element.css("color", orange);
-	 					}, delay+500, $(this)));
+								else if (element.hasClass('negemo')) element.css("color", red);
+	 					}, delay+400, $(this)));
 
 	 				}
 	 			});
