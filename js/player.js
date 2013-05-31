@@ -15,10 +15,10 @@ var Player = function(app) {
 		curMessage : 0,
 
 		initialize: function(data) {
-			this.createMessages(data);
 			parser = Parser();
 			//this.clearDB(); // use this to reset db
 			parser.initialize(this.db, this.messages);
+			this.createMessages(data);
 		},
 	
 		createMessages: function(data) {
@@ -125,7 +125,7 @@ var Player = function(app) {
 
     clearDB: function() {
     	console.log("clearing db");
-    	this.db.dropTable('cached_messages');
+    	this.db.dropTable("cached_messages");
 			this.db.dropTable("LIWC_words");
 			this.db.dropTable("LIWC_words_wild");
     }
