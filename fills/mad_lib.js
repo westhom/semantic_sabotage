@@ -72,7 +72,15 @@ var mode = function(id) {
     		$(this).css("left", x);
     		x += $(this).outerWidth();
     		x += space_width;
-    		console.log(i + ' ' + $(this).html() + ' '  + $(this).outerWidth());
+    		//console.log(i + ' ' + $(this).html() + ' '  + $(this).outerWidth());
+    	});
+    },
+
+    exitWords: function(words) {
+    	var y = this.el.height();
+    	//console.log('Exit Words to ' + y);
+    	words.each(function(i) {
+    		$(this).css('top', y+'px');
     	});
     },
 		
@@ -89,7 +97,14 @@ var mode = function(id) {
 					for (i in msg.cats)
 					{
 						//console.log(msg.cats[i]);
-						if ((msg.cats[i] != 'funct') && (msg.cats[i] != 'pronoun') && (msg.cats[i] != 'sentencesmode')) {
+						if ((msg.cats[i] != 'funct') && 
+							(msg.cats[i] != 'pronoun') && 
+							//(msg.cats[i] != 'verb') && 
+							//(msg.cats[i] != 'adverb') && 
+							//(msg.cats[i] != 'cogmech') && 
+							//(msg.cats[i] != 'bio') && 
+							//(msg.cats[i] != 'relativ') && 
+							(msg.cats[i] != 'sentencesmode')) {
 							el.addClass(msg.cats[i]);
 							//console.log('Category ' + msg.cats[i]);
 						}
@@ -99,7 +114,6 @@ var mode = function(id) {
 					el.css('top', '200px');
 
 					$('.sentence').append(el);
-					//$('.sentence').append('<div class="space-word">&nbsp</div>');
 
 					this.sentenceWordCount++;
 				}
@@ -131,11 +145,12 @@ var mode = function(id) {
 					{
 						//if it finds something with the same class
 						var el = $('.' + msg.cats[i]).first();
-						if (el.size() > 0) 
+						if (el.size() > 0)
 						{	
 							if (el.html() != msg.word)
 							{
-
+								//console.log('found: ' + el.html());
+								
 								//replace all the classes of the div with the new ones
 								el.removeClass();
 								el.addClass('landing-word');
@@ -153,21 +168,7 @@ var mode = function(id) {
 								setTimeout(function(element){
 									element.css('opacity', '1.0');
 								}, 500, el);
-
-								//set the top position, then slide it in?
-								/*
-								el.css('top', '100px');
-								
-								setTimeout(function(element){
-									element.addClass('top-tween');
-								}, 500, el);
-
-								setTimeout(function(element){
-									element.css('top', '200px');
-								}, 1000, el);
-								*/
 							}
-
 						}
 						//break so that the same word doesn't appear twice
 						break;
@@ -177,17 +178,31 @@ var mode = function(id) {
 				//starting on sentences is clean
 				else {
 					if ((msg.word == '.') || (msg.word == '!') || (msg.word == '?')) this.sentenceCount++;
-					if (this.sentenceCount > 3) {
+					if (this.sentenceCount > 2) {
 						this.buildSentence = true;
 						this.sentenceWordCount = 0;
-						$('.sentence').empty();
+						
+						$('.landing-word').each(function(i) {
+							$(this).removeClass();
+							$(this).addClass('delete-word');
+						});
+
+						//move them
+						setTimeout(function(context){
+						 	context.exitWords($('.delete-word'));
+						}, 25, this);
+
+						//delete those fuckers				
+						setTimeout(function(){
+						 	$('.delete-word').remove();
+						}, 1000);
+
 					}
 				}
 			}
 
 			//SET WORD POSITIONS
 			this.setWordPositions($('.landing-word, .space-word'));
-
 		 	
 		}
 	}

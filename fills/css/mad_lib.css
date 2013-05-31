@@ -29,8 +29,28 @@
 	font-size: 64px;
 	line-height: 64px;
 
-	transition:left 0.5s linear;
-	-webkit-transition:left 0.5s linear;
+	transition:left 0.5s ease-in;
+	-webkit-transition:left 0.5s ease-in;
+
+}
+
+#mad_lib .delete-word
+{
+	position: absolute;
+	display: inline;
+
+	background-color: white;
+
+	padding: 3px;
+
+	font-size: 64px;
+	line-height: 64px;
+
+	transition:left 0.5s ease-in;
+	-webkit-transition:left 0.5s ease-in;
+
+	transition:top 1.0s ease-in;
+	-webkit-transition:top 1.0s ease-in;
 
 }
 
