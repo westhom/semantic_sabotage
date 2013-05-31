@@ -14,7 +14,7 @@ var curVideoID = '6LPaCN-_XWg';
 var curVideoStartTime = "";
 var globalTimers = [];	// For keeping track of setTimeout events.
 
-// Set up pie chart favicon for loading captions
+// Set up chart favicon for loading captions
 Piecon.setOptions({
   color: '#fff',
   background: '#000000',
@@ -177,6 +177,8 @@ function drawFills(modes) {
 
 
 function load(resp) {
+
+	if ($('#menu').is(":visible")) return false;
 
 	console.log('load()');
 	curVideoID = resp.youtube_id;
