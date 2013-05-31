@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <!--
-   _____                            __  _     
-  / ___/___  ____ ___  ____ _____  / /_(_)____
-  \__ \/ _ \/ __ `__ \/ __ `/ __ \/ __/ / ___/
+	 _____                            __  _     
+	/ ___/___  ____ ___  ____ _____  / /_(_)____
+	\__ \/ _ \/ __ `__ \/ __ `/ __ \/ __/ / ___/
  ___/ /  __/ / / / / / /_/ / / / / /_/ / /__  
 /____/\___/_/ /_/ /_/\__,_/_/ /_/\__/_/\___/  
-                                              
-   _____       __          __                 
-  / ___/____ _/ /_  ____  / /_____ _____ ____ 
-  \__ \/ __ `/ __ \/ __ \/ __/ __ `/ __ `/ _ \
+																							
+	 _____       __          __                 
+	/ ___/____ _/ /_  ____  / /_____ _____ ____ 
+	\__ \/ __ `/ __ \/ __ \/ __/ __ `/ __ `/ _ \
  ___/ / /_/ / /_/ / /_/ / /_/ /_/ / /_/ /  __/
 /____/\__,_/_.___/\____/\__/\__,_/\__, /\___/ 
-                                 /____/       
+																 /____/       
 -->
 <html class="no-js">
 	<head>
@@ -20,25 +20,25 @@
 
 		<title>Semantic Sabotage</title>
 		<meta name="description" content="Semantic Sabotage, an open source platform for creating live typographic YouTube mutations. By Sosolimited.">
-
+		
 		<link rel="shortcut icon" href="favicon.ico" >
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection">
 		<link rel="stylesheet" href="css/fonts.css" type="text/css" media="screen, projection">
 		<link rel="stylesheet" href="css/nav.css" type="text/css" media="screen, projection">
 		<link rel="stylesheet" href="css/libs/animate-custom.css" type="text/css" media="screen, projection">
-
+		
 		<!-- Use Google CDN for jQuery -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<!-- Typekit -->
 		<script type="text/javascript" src="//use.typekit.net/rim7nin.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+		
 		<!-- Gets rid of Indonesian translation request -->
 		<meta name="google" content="notranslate" />
 		<!-- Rest of JS is below HTML for faster DOM rendering -->
 	</head>
 							
 	<body onclick="bodyClick();">
-
 		<div class="navBar">
 
 			<a id="logo_link" href="http://sosolimited.com" target="_blank"><img id="logo" src="img/sosoLogoSmall.png"/></a>
@@ -47,7 +47,6 @@
 			<div id="playing" class="navStatus proxima-nova-400" style="display:none">Playing...</div>
 
 			<div id="navControls" style="display:none">
-				<!-- <form id="youtube_load" class="navInput" action="youtube_load.php"  method="post"> -->
 				<form id="youtube_load" class="navInput">
 					<input id="ytURLButton" class="navButton proxima-nova-400" style="position: absolute; width: 1px; height: 1px; left: -9999px;" type="submit" onclick="submitURL();">
 					<button id="playButton" class="navButton" style="display:none" onclick="playback();"><img class="icon" src="img/icons/play.png" data-icon="play"></button>
@@ -67,38 +66,37 @@
 
 		<div id="videoDiv"></div>
 
-	  <div id="menu">
-	  		
-    	<div id="columnLeft" class="column animated delay fadeIn">
-    		<div class="menuHeading meta-serif-book-italic">Transforms</div>
-    		<ul id="transforms"></ul>
-    		<div id="templateHeading" class="menuHeading meta-serif-book-italic">Templates</div>
-    		<ul id="templates"></ul>
-    	</div>
+		<div id="menu">
+				
+			<div id="columnLeft" class="column animated delay fadeIn">
+				<div class="menuHeading meta-serif-book-italic">Transforms</div>
+				<ul id="transforms"></ul>
+				<div id="templateHeading" class="menuHeading meta-serif-book-italic">Templates</div>
+				<ul id="templates"></ul>
+			</div>
 
-    	<div id="columnRight" class="column animated delay fadeIn">
-    		<div class="menuHeading meta-serif-book-italic">About</div>
+			<div id="columnRight" class="column animated delay fadeIn">
+				<div class="menuHeading meta-serif-book-italic">About</div>
 
-    		<div id="aboutBody" class="meta-serif-book">
-    			<p class="aboutIntro meta-serif-book-italic">Semantic Sabotage is an open source platform for creating live typographic YouTube transforms.</p>
-    			</br>
-    			Each transform uses HTML5 and Javascript to visualize the transcript of a YouTube movie, as it plays. The transcripts are analyzed with the LIWC dictionaries, created by <a href="http://www.secretlifeofpronouns.com/author.php" target="_blank">James Pennebaker</a> and the UT Austin Department of Psychology.
-    			</br>
-    			</br>
-    			Semantic Sabotage was designed and coded by <a href="http://sosolimited.com" target="_blank">Sosolimited</a>.
-    			</br>
-    			</br>
-    		</div>
+				<div id="aboutBody" class="meta-serif-book">
+					<p class="aboutIntro meta-serif-book-italic">Semantic Sabotage is an open source platform for creating live typographic YouTube transforms.</p>
+					<br>
+					Each transform uses HTML5 and Javascript to visualize the transcript of a YouTube movie, as it plays. The transcripts are analyzed with the LIWC dictionaries, created by <a href="http://www.secretlifeofpronouns.com/author.php" target="_blank">James Pennebaker</a> and the UT Austin Department of Psychology.
+					<br>
+					<br>
+					Semantic Sabotage was designed and coded by <a href="http://sosolimited.com" target="_blank">Sosolimited</a>.
+					<br>
+					<br>
+				</div>
 
 				<div class="menuHeading meta-serif-book-italic">Code</div>
-    		Download the code from <a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank">GitHub</a> and create your own. Start with one of the templates or with an existing transform.
-    		</br>
-    		</br> 
-	    	<a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank">
-	    		<span class="modeName proxima-nova-400 whiteOnGray">Download</span>
-	    	</a>
-    		</ul>
-    	</div>
+				Download the code from <a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank">GitHub</a> and create your own. Start with one of the templates or with an existing transform.
+				<br>
+				<br>
+				<a href="https://github.com/sosolimited/eyeo_semanticsabotage" target="_blank">
+					<span class="modeName proxima-nova-400 whiteOnGray">Download</span>
+				</a>
+			</div>
 		</div>		
 
 		<div id="modes">
@@ -121,10 +119,9 @@
 	<script src="js/sabotage.js"></script>	
 
 	<script> 
-		// Wait for the DOM to be loaded.
-			$(document).ready(function() { 
-				init();
-				}); 
+		$(document).ready(function() { 
+			init();
+		}); 
 	</script>
 
 	</body>

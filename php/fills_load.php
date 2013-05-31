@@ -5,7 +5,7 @@
 		$fills =  array();
     	/* This is the correct way to loop over the directory. */
     	while (false !== ($entry = readdir($handle))) {
-    		if (strlen($entry) > 2 && !strpos($entry, "DS_Store"))
+    		if (strpos($entry, ".js"))
 	      		$fills[] = $entry;
     	}
 
@@ -24,7 +24,6 @@
 	  	closedir($handle);
 	}
 		
-	//echo '{ "cc": "' . json_encode($cc) . '", "url": "' . $ccUrl . '" }';  
 	$response = array("fills" => $fills, "styles" => $styles);
 	
 	echo json_encode($response); 

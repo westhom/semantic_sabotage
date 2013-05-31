@@ -1,20 +1,21 @@
+// Define a local copy of History (used for ajax page states)
 var History = window.History;
 // If history state is popped by the user hitting the back or forward button, refresh the page
 window.onpopstate = function(e) {
 	if (e && e.state) location.reload();
 }
 
+// The player handles the playback of YouTube captions
 var player = Player(this);
+
 var embedUrl;
 var video;
-
 var modes = [];
 var curMode = 0;
-var curVideoID = '6LPaCN-_XWg';
-var curVideoStartTime = "";
+var curVideoID;
 var globalTimers = [];	// For keeping track of setTimeout events.
 
-// Set up chart favicon for loading captions
+// Set up piechart favicon for loading captions
 Piecon.setOptions({
   color: '#fff',
   background: '#000000',
@@ -34,23 +35,23 @@ window.requestAnimFrame = (function(){
 						};
 })();
 
-// This is for updating the youTube progress bar. 
+// Updates the YouTube progress bar.
 (function progressLoop(){
 	requestAnimFrame(progressLoop);
 	updateYouTubeProgressBar();
 	player.updateMessagePlayback();
 })();
 
+// On page load
 function init() {
 
-		// bind 'myForm' and provide a simple callback function 
+	// bind submit URL form to callback
 	$('#youtube_load').ajaxForm({ 
-		// DataType identifies the expected content type of the server response.
 		dataType:  'json', 
-		// Success identifies the function to invoke when the server response has been received.
 		success:   load 
 		});
 
+	// Bind hover event to icon highlight
 	$('.navBar').on('mouseenter','.icon',function(){
 		var type = $(this).data('icon');
 		$(this).attr('src', 'img/icons/hover_'+type+'.png');
@@ -59,21 +60,20 @@ function init() {
 		$(this).attr('src', 'img/icons/'+type+'.png');
 	});
 	
-	// Load fills and insert them into DOM.
+	// Load fills
 	loadFills();
 	
-	// Wait for fills to load before adding the menu links to the DOM
+	// Wait for fills to load before inserting them into the DOM
 	$(document).on('loadedFills', function(e, modes) {
 		// Add menu element for each fill
 		drawFills(modes);
-		// Redirect straight to a mode depending on the URL
+		// Redirect to mode if specified in URL
 		checkURL();
 	});
 }
 
-// Parses URL and redirects to a specific mode if necessary
+// Parse URL and redirect to a specific mode if necessary
 function checkURL() {
-	// mode slug
 	var slug = getParameterByName('m');
 	var video = getParameterByName('id');
 	var time = getParameterByName('time');
@@ -81,7 +81,7 @@ function checkURL() {
 	var url = buildURLFromID(video);
 
 	if (slug != null) {
-		// mode index
+		// look up mode index from array of all fills
 		var mode = modeFromSlug(slug, modes);
 		if (mode >= 0) {
 			if (video != null) {
@@ -89,7 +89,7 @@ function checkURL() {
 					// If video and time are both defined
 					goToMode(mode, true, url, time)
 				} else {
-					// If just video is defined
+					// If only video is defined
 					goToMode(mode, true, url);
 				}
 			} else {
@@ -101,145 +101,88 @@ function checkURL() {
 
 }
 
+// Load fills from directory into `modes` object
 function loadFills() {
 
-	// Hit fills_load PHP script.
+	// Get fill filenames from fills_load.php
 	$.ajax({
-		type: 'post',
+		type: 'get',
 		dataType: 'json',
 			url: "php/fills_load.php",
 			success: function(resp){
+				var fills = resp.fills;
 
-				// filter the response so that only .js files are included in the array (no folders)
-				var fills = $.grep(resp.fills, function(f){return f.indexOf(".js") >= 0;});
-		
+				// need separate iterator for async calls
 				var j = 0;
 				// For each fill, load javascript.
-				for (var i=0; i<fills.length; i++) {
-				//console.log(resp.fills[i]);  
-				
-				// Use function and pass in name because .getScript is asynchronous.
-				(function(name) {	
+				for (var i=0; i<fills.length; i++) {				
+					// Use anonymous function and pass in filename because
+					// .getScript is asynchronous
+					(function(name) {	
+						$.getScript("fills/"+fills[i], function(data, textStatus, jqxhr) {
+							
+							// Strip off .js and pass name to mode for element id.
+							var m = new mode(name.substr(0, name.lastIndexOf('.')));
 
-					$.getScript("fills/"+fills[i], function(data, textStatus, jqxhr) {
+							modes.push(m);
+							
+							j++;
+							// When the last fill finishes loading, trigger the event
+							if (j == fills.length) {
+								$(document).trigger('loadedFills',[modes]);
+							}
+						});
+					})(fills[i]);
+				}
 
-						//console.log(data); //data returned
-						//console.log(textStatus + ' ' + jqxhr.status); //200
-
-						// Strip off .js and pass name to mode for element id.
-						var m = new mode(name.substr(0, name.lastIndexOf('.')));
-
-						modes.push(m);
-						j++;
-
-						// When the last fill finishes loading, trigger the event
-						if (j == fills.length) {
-							$(document).trigger('loadedFills',[modes]);
-						}
-					});
-				})(fills[i]);
-
+				// Load CSS for fills.
+				for (var i=0; i<resp.styles.length; i++) {					
+					$('<style type="text/css"></style>')
+						.html('@import url("fills/css/' + resp.styles[i] + '")')
+						.appendTo("head");
+				}
 			}
-
-			// Load CSS for fills.
-			for (var i=0; i<resp.styles.length; i++) {
-				//console.log(resp.styles[i]);  
-				
-				$('<style type="text/css"></style>')
-					.html('@import url("fills/css/' + resp.styles[i] + '")')
-					.appendTo("head");
-			}
-		}
 	});
 }
 
 // Insert a DOM element in the menu for each mode
 function drawFills(modes) {
+	// Sort alphebetically
 	modes = modes.sort(function(a,b){
 		if (a.name.toLowerCase() == b.name.toLowerCase()) return 0;
 		return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1:-1;
 	});
 	$.each(modes, function(i,m){
-		// Add entry to menu.
-		if(m.template==true){
-			$('#templates').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'</span></li>');	
-		}else{
-			$('#transforms').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'</span></li>');
-		}
-		// Append to mode's element to DOM.
+		var color = (m.template==true) ? 'whiteOnGray' : 'blackOnWhite';
+		var section = (m.template==true) ? '#templates' : '#transforms';
+		var title = m.name+' | Semantic Sabotage'
+		var modeHTML = '<li><span class="modeName proxima-nova-400 '+color+'" href="#" id="mode'+i+'" onclick="linkToMode('+i+',\''+title+'\');" >'+m.name+'</span></li>'
+		// Append mode menu item to DOM
+		$(section).append(modeHTML);
+		// Append hidden mode container to DOM.
 		m.el.hide();				   
-		$('#modes').append(m.el);				   
+		$('#modes').append(m.el);
 		// Initialize the mode.
 		m.init();
 	});
 }
 
-
-
-function load(resp) {
-
-	if ($('#menu').is(":visible")) return false;
-
-	console.log('load()');
-	curVideoID = resp.youtube_id;
-
-	//console.log(resp.url);
-	//console.log(resp.cc);
-	
-	player.initialize(resp);
-
-	//$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
-	
-	console.log("cueVideoById( "+curVideoID+" )");
-	if(typeof modes[curMode]["startTime"] == "undefined")
-		modes[curMode]["startTime"] = 0;
-
-	console.log( "Starting player at: " + modes[curMode]["startTime"] + " seconds");
-
-	ytplayer.cueVideoById(curVideoID, modes[curMode]["startTime"]);
-	//ytplayer.cueVideoById(curVideoID);
-
-	// show loading
-	//$('#loading').show();
-	
-	// save embed url
-	//embedUrl = resp.url.replace('watch?v=', 'embed/');
-}
-
-function start() {
-	console.log("start()");
-	
-	// Set up nav messages and controls.
-	// For a few seconds, show playing message.
-	hideLoadingMessage();
-	showPlayingMessage();
-	// Then show controls.
-	globalTimers.push(setTimeout(function(){
-		showControls();
-		hidePlayingMessage();
-	}, 5000));
-	
-	playback();	
-}
-
 // After clicking a menu link, should push new URL state before switching to mode
+// Wrapper for goToMode
 function linkToMode(m, title) {
 	History.pushState(null, null, buildStateFromArguments(m));
 	document.title = title;
-	goToMode(m);
+	goToMode(m, true);
 }
 
 // Jumps to a mode
 // post optional; used only when switching to a different video from the field in the navbar
 // video and time are optional; used only when switching to a mode directly from URL
-function goToMode(m, post, video, time) {
-	console.log("go to mode "+m);
+function goToMode(m, fullSetup, video, time) {
+	console.log("Loading mode: ", modes[m].name);
 	if (m >= 0 && m < modes.length) {
 		curMode = m;
 
-		// If post arg is not defined, default to true.
-		post = (typeof post == 'undefined')?true:post;
-		video = (typeof video == 'undefined')? modes[curMode].defaultURL : video;
 
 		// Hide menu and show modes container.
 		$('#menu').hide();
@@ -254,7 +197,13 @@ function goToMode(m, post, video, time) {
 		}
 		//console.log("URL = "+modes[curMode].defaultURL);
 
-		if(post){
+		// If post arg is not defined, default to true.
+		fullSetup = (typeof fullSetup == 'undefined')? true : fullSetup;
+
+		if(fullSetup){
+
+			video = (typeof video == 'undefined')? modes[curMode].defaultURL : video;
+
 			// Set start time to mode's default
 			if (typeof time == 'undefined') {
 				modes[curMode].startTime = getStartTimeFromURL(video);
@@ -304,6 +253,52 @@ function goToMode(m, post, video, time) {
 		// Call enter on current mode.
 		modes[curMode].enter();
 	}
+}
+
+function load(resp) {
+
+	if ($('#menu').is(":visible")) return false;
+
+	console.log('load()');
+	curVideoID = resp.youtube_id;
+
+	//console.log(resp.url);
+	//console.log(resp.cc);
+	
+	player.initialize(resp);
+
+	//$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
+	
+	console.log("cueVideoById( "+curVideoID+" )");
+	if(typeof modes[curMode]["startTime"] == "undefined")
+		modes[curMode]["startTime"] = 0;
+
+	console.log( "Starting player at: " + modes[curMode]["startTime"] + " seconds");
+
+	ytplayer.cueVideoById(curVideoID, modes[curMode]["startTime"]);
+	//ytplayer.cueVideoById(curVideoID);
+
+	// show loading
+	//$('#loading').show();
+	
+	// save embed url
+	//embedUrl = resp.url.replace('watch?v=', 'embed/');
+}
+
+function start() {
+	console.log("start()");
+	
+	// Set up nav messages and controls.
+	// For a few seconds, show playing message.
+	hideLoadingMessage();
+	showPlayingMessage();
+	// Then show controls.
+	globalTimers.push(setTimeout(function(){
+		showControls();
+		hidePlayingMessage();
+	}, 5000));
+	
+	playback();	
 }
 
 // When you submit a new URL when already inside of a mode, this does the setup.

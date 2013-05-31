@@ -29,9 +29,8 @@ var Player = function(app) {
 			
 			// check if messages exist in cache
 			var res = this.db.query("cached_messages", {ytID: ytID});
-			console.log(res);
 			if (res && res.length > 0) {
-				console.log("cached messages found");
+				// console.log("Cached messages found");
 				this.messages = res[0]['messages'];
 				//app.start();
 				// Give youTube movie time to cue before playing.
@@ -40,7 +39,7 @@ var Player = function(app) {
 					app.start();
 				}, 100));
 			} else {
-				console.log("creating messages");
+				// console.log("Creating messages");
 				// Delete previously cached messages.
 		  	this.db.truncate("cached_messages");
   			this.db.truncate("word_instances");
@@ -62,7 +61,7 @@ var Player = function(app) {
 					this.parser.cacheMessages(data.youtube_id);
 					this.messages = this.parser.messages; // LM why is this necessary?
 					app.start();
-					console.log(this.messages);
+					// console.log(this.messages);
 				}, cc.length*offset + 500));
 
 			}
@@ -107,7 +106,7 @@ var Player = function(app) {
    
   
     pausePlaybackMessages: function() {
-    	console.log("pause playback");
+    	// console.log("Pause playback");
 	    for (var i=0; i<this.playbackTimeoutEvents.length; i++) {
 		    clearTimeout(this.playbackTimeoutEvents[i]);
 	    }
@@ -124,7 +123,7 @@ var Player = function(app) {
     },
 
     clearDB: function() {
-    	console.log("clearing db");
+    	// console.log("Clearing db");
     	this.db.dropTable("cached_messages");
 			this.db.dropTable("LIWC_words");
 			this.db.dropTable("LIWC_words_wild");
