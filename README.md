@@ -60,6 +60,9 @@ Sent every line
   honesty: float[2]
 }
 
+## YouTube Captioning ##
+
+YouTube search terms can be modified with ', cc' to isolate results to content with closed captioning. Many videos have automatic captions, which are better than nothing, but are often inaccurate and contain little to no punctuation. For this reason, Semantic Sabotage first checks for official captioning, but will default to automatic captions when official captions aren't available.
 
 ## Sample YouTube Links with Good Captions
 

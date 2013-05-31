@@ -90,6 +90,7 @@ var mode = function(id) {
 				var wd = document.createElement('div');
 				$(wd).addClass('wordContainer');
 				$(wd).css('visibility','hidden');
+//				$(wd).append('- '); // hyphen
 				$(wd).append('&#8211; '); // en dash
 //				$(wd).append('&#8212; '); // em dash
 
