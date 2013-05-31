@@ -50,12 +50,7 @@ var mode = function(id) {
 			//console.log(msg);
 		},
 
-		htmlEncode: function(value){
-  			//create a in-memory div, set it's inner text(which jQuery automatically encodes)
-  			//then grab the encoded contents back out.  The div never exists on the page.
-  			return $('<div/>').text(value).html();
-		},
-
+	
 		clearTimeoutEvents: function(type) {
 	    for (var i=0; i<this.timeoutEvents.length; i++) {
 		    clearTimeout(this.timeoutEvents[i]);
