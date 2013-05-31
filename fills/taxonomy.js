@@ -3,7 +3,7 @@ var mode = function(id) {
 	return {
 	
 		name: "Taxonomy",
-		defaultURL: "http://www.youtube.com/watch?v=w5R8gduPZw4",
+		defaultURL: "http://www.youtube.com/watch?v=w5R8gduPZw4&t=0m03s",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 
 		index: 0, // defines global variable this.index used to keep track of sentence objects -- see below
