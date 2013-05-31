@@ -1,3 +1,11 @@
+/*
+
+#template_wordStack should be changed 
+to match the name of your tranform files.
+This is how we avoid CSS naming collisions.
+
+*/
+
 #template_wordStack .container {
 	width:5000px;	
 	min-height:100%;

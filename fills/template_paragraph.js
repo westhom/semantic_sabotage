@@ -1,10 +1,16 @@
+/*
+
+See Left Scroll Template (template_leftScroll.js) for a
+fully-commented explanation of methods and usage.
+
+*/
+
 var mode = function(id) {
 
 	return {
 	
 		name: "Paragraph",
 		defaultURL: "http://www.youtube.com/watch?v=PKffm2uI4dk",
-		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		template: true,
 		
@@ -13,32 +19,37 @@ var mode = function(id) {
 		posEvents: [],
 		negEvents: [],
 				 
-		// Anything you want to do to initialize your mode. 
-		// This gets called once after the mode is created.
+		// INITIALIZE MODE.
+		// Do anything you want to do to set up your mode the first time here.
+		// This gets called once after the mode is loaded.
 		init: function() {
 			this.el.append("<div id='paragraph_container' class='container bg-white'></div>");
 			$('#paragraph_container').append('<div id="transcript" class="transcript proxima-nova-400 size-48"></div>');
 		},
 
-		// Gets called evertime you go to the mode.
+		// ENTER MODE.
+		// This gets called each time you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
 			$('#paragraph_container #transcript').empty();
 		},
 
-
-		// Handle incoming word message.
+		// HANDLE INCOMING word MESSAGE.
+		// Called each time a new word is ready. 
 		handleWord: function(msg) {
 			//console.log('word '+msg.word);
 			this.appendWordInContext(msg);
 		},
 		
-		// Handle incoming sentenceEnd message.
+		// HANDLE INCOMING sentenceEnd MESSAGE.
+		// Called each time a new sentence is complete.
 		handleSentenceEnd: function(msg) {
 			//console.log('sentenceEnd');	
 		},
 		
-		// Handle incoming stats message.
+		// HANDLE INCOMING stats MESSAGE.
+		// Called with each sentence.
+		// Passes a collection of interesting language statistics.
 		handleStats: function(msg) {
 			//console.log(msg);
 		},
@@ -50,15 +61,17 @@ var mode = function(id) {
 		},
 
 		clearTimeoutEvents: function(type) {
-	    var events;
-	    if (type == 'posemo') events = this.posEvents;
-	    else events = this.negEvents;
-	    
-	    for (var i=0; i<events.length; i++) {
-		    clearTimeout(events[i]);
-	    }
-    },
+		    var events;
+		    if (type == 'posemo') events = this.posEvents;
+		    else events = this.negEvents;
+		    
+		    for (var i=0; i<events.length; i++) {
+			    clearTimeout(events[i]);
+		    }
+    	},
 		
+		// APPEND WORD TO DOM.
+		// This is where you insert your words into the DOM.
 		appendWordInContext: function(msg) {
 
 			var c = 'blank';
