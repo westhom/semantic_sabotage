@@ -83,7 +83,7 @@ comair_dark: #B139EF #B139EF
 	left: 50%;
 	top: 50%;
 	height: 100px;
-/*	width: 500px; */
+	/*width: 500px; set by .js */
 	overflow: visible;
 	border-top-style: solid;
 	border-top-width: 4px;
@@ -106,7 +106,7 @@ comair_dark: #B139EF #B139EF
 	height: 80px;
 	width: 100%;
 	opacity: 1;
-	font-size: 4.0em;
+	/*font-size: set by .js */
 	overflow: visible;
 	text-align: right;
 
