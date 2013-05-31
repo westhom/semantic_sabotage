@@ -11,6 +11,7 @@ var mode = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
+			// Insert the container for the words.
 			this.el.append("<div id='faded' class='container'></div>");
 		},
 
@@ -38,16 +39,13 @@ var mode = function(id) {
 		},
 		
 		appendWordInContext: function(msg) {
-		
-		 	// update curSentence
-		 	if (!msg.sentenceStartFlag && !msg.punctuationFlag)
-		 		this.el.append(' ');
-		 	
+			 	
+			// Set the initial color of each word based on 
+			// the associated LIWC categories.
 		 	var c;
 		 	if($.inArray('work', msg.cats) >= 0 || 
 		 		$.inArray('money', msg.cats) >= 0) 
 		 		c = 'rgb(255,0,0)';		 	
-		 	//else if($.inArray('heshe', msg.cats) >= 0) c = 'rgb(240,0,0)';
 		 	else if($.inArray('posemo', msg.cats) >= 0 || 
 		 		$.inArray('negemo', msg.cats) >= 0 ||
 		 		$.inArray('affect', msg.cats) >= 0)
@@ -61,29 +59,30 @@ var mode = function(id) {
 		 		$.inArray('human', msg.cats) >= 0) 
 		 		c = 'rgb(160,0,0)';
 		 	else{
+		 		// Only flash words longer than three letters white.
+		 		// Make shorter words black.
 		 		if(msg.word.length > 3)
 		 		 c = 'rgb(255,255,255)';
 		 		else
 		 		 c ='rgb(0,0,0)'; 
 		 	}
-
-		 	//c = 'rgb(10,10,10)';
-
+		 	// Create span element for word, using the color chosen above.
 		 	var newWord = $('<span class= "bigText franklin-gothic-condensed" style="color:' + c + ';">' + msg.word + '</span>');
 
-		 	
+		 	// Use setTimeout to wait until the element has been inserted into the DOM.
+		 	// Then set its color to black, it's opacity to 0.5, and its height to 2000
+		 	// Note: Since all of these attributes are set up with CSS transitions, they will animate.
+		 	// Note: The small delay before the word falls is set with the CSS transition.
 		 	setTimeout(function() { 
-		 		// newWord.css({'color':'rgb(255,255,255)', 'opacity':'0', 'top':'1000px'});
 		 		newWord.css({'color':'rgb(0,0,0)', 'opacity':'0.5', 'top':'2000px'});
 		 	}, 20);
 
+		 	// After 6 seconds, remove the word from the DOM.
 		 	setTimeout(function() {
 		 		newWord.remove();
 		 	}, 6000);
-		 	//$(newWord).animate({opacity:'0'}, 1000, 'linear', function(){
-		 	//	$(this).remove();
-		 	//});
-
+		 	
+		 	// Insert the element into the container.
 		 	$('#faded').append(newWord);
 
 		 	

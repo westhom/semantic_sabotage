@@ -6,6 +6,7 @@
 	font-size: 150px;
 	text-transform: lowercase;
 	color: #EEE;
+	overflow: hidden;
 }
 
 #taxonomy .sentenceObject {
@@ -28,7 +29,7 @@
 	z-index: 5;
 	position: absolute;
 	left: 0%;
-	bottom: 20%;
+	bottom: 19%;
 	width: 100%;
 
 	color: black;

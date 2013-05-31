@@ -1,3 +1,11 @@
+/*
+
+#template_paragraph should be changed 
+to match the name of your transform files.
+This is how we avoid CSS naming collisions.
+
+*/
+
 #template_paragraph .container {
 	position: absolute;
 	top: 0;

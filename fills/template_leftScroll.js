@@ -7,34 +7,40 @@ It shows the basics of handling incoming words and
 coloring them based on their categories in the LIWC dictionary. 
 See template_leftScroll.css for associated styles.
 
+Your .js and .css files must have the same name and be placed
+in the fills/ and fills/css/ directories accordingly.
+
 */
 
 var mode = function(id) {
 
 	return {
 
-		// This is what your mutation is called on the menue page.
+		// This is what your transform is called on the menu page.
 		name: "Left Scroll",
-		// This is the YouTube movie that is automatically loaded when you first go to the mutation.
+		// This is the YouTube movie that is automatically loaded when you first go to the transform.
 		// Note: If you want the YouTube movie to start at a time other than the beginning, 
-		// attach the &t=0m3s tag to your URL with the desired start time.
+		// attach a &t=1m23s tag to your URL with the desired start time.
 		defaultURL: "http://www.youtube.com/watch?v=NF3FmHw_N9A&t=0m3s",
-		// Don't change this. This line creates the associated div for your mutation and names it 
+		// Don't change this. This line creates the associated div for your transform and names it 
 		// based on the name of your js file.
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
-		// When you create your own mutation, you can delete this line. 
+		// When you create your own transform, you can delete this line. 
 		template: true,
 		// This variable is for tracking punctuation rules
 		sentenceTermination: false,
 		lastLeadPunct: false,
-				 
-		// Do anything you want to do to set up your mode the first time.
+		
+		// INITIALIZE MODE.
+		// Do anything you want to do to set up your mode the first time here.
 		// This gets called once after the mode is loaded.
 		init: function() {
-			// Here, we insert a 
+			// Here, we insert a top-level container div along with a secondary div to enable scrolling.
+			// See template_leftScroll.css to view the associated styles. 
 			this.el.append("<div id='templateLeftScroll' class='topContainer'><div class='scroller'></div></div>");
 		},
 
+		// ENTER MODE.
 		// This gets called each time you go to the mode.
 		enter: function() {			
 			// In this case, we empty the div that moves the words.
@@ -43,28 +49,32 @@ var mode = function(id) {
 			$('#templateLeftScroll > .scroller').css('left', '0px');
 		},
 
+		// HANDLE INCOMING word MESSAGE.
 		// Called each time a new word is ready. 
 		handleWord: function(msg) {
 			//console.log('word '+msg.word);
 			this.appendWordInContext(msg);
 		},
 		
+		// HANDLE INCOMING sentenceEnd MESSAGE.
 		// Called each time a new sentence is complete.
 		handleSentenceEnd: function(msg) {
 			//console.log('sentenceEnd');	
 		},
 		
+		// HANDLE INCOMING stats MESSAGE.
 		// Called with each sentence.
 		// Passes a collection of interesting language statistics.
 		handleStats: function(msg) {
 			//console.log(msg);
 		},
 		
+		// APPEND WORD TO DOM.
 		// This is where you insert your words into the DOM.
 		appendWordInContext: function(msg) {
 		 	
 		 	// Choose a color based on the category of the word in the LIWC Dictionary.
-		 	// These are five very broad LIWC categories
+		 	// These are five very broad LIWC categories that we use in this example.
 		 	var c;
 		 	if($.inArray('cogmech', msg.cats) >= 0) c = 'rgb(51,154,96)';  			//green
 		 	else if($.inArray('social', msg.cats) >= 0) c = 'rgb(193,250,164)';	//light green

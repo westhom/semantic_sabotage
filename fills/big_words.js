@@ -14,14 +14,15 @@ var mode = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
+			// Insert the container.
 			this.el.append("<div id='bigwords' class='container'></div>");
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
+			// Empty the container out each time we enter the mode.
 			$('#bigwords').empty();
 		},
-
 
 		// Handle incoming word message.
 		handleWord: function(msg) {
@@ -41,23 +42,24 @@ var mode = function(id) {
 		
 		appendWordInContext: function(msg) {
 		
-		 	// update curSentence
-		 	if (!msg.sentenceStartFlag && !msg.punctuationFlag)
-		 		this.el.append(' ');
-		 	
-		 	
+		 	// Only show words with more than eight letters.
 		 	if(msg.word.length > 8) {
+		 		// Create a div for the word
 		 		var e = $('<div class= "bigText proxima-nova-700" style="color:white; opacity:0;">' + msg.word + '</div>');
+		 		// And stick it at the beginning of the container
 			 	$('#bigwords').prepend(e);
 
+			 	// Use setTimeout is wait until the element has been added to the DOM
+			 	// before fading it in.
 			 	setTimeout(function(element){
 			 		element.css("opacity", "1");	
 			 	},20,e);
 
+			 	// When each new word is added, go through all the words and lay them out.
+			 	// Since there is a CSS transition on 'top', they will smoothly animate down.
 			 	var h = this.lineHeight;
 		 		$('#bigwords').children().each(function(i){
 			 		var t = h*i+"px";
-			 		//console.log("i="+i+", t="+t);
 			 		$(this).css("top", t);
 		 		});
 		 		//console.log($('#bigwords > .bigText').length*this.lineHeight+"px");

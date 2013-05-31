@@ -14,7 +14,7 @@ var curVideoID = '6LPaCN-_XWg';
 var curVideoStartTime = "";
 var globalTimers = [];	// For keeping track of setTimeout events.
 
-// Set up pie chart favicon for loading captions
+// Set up chart favicon for loading captions
 Piecon.setOptions({
   color: '#fff',
   background: '#000000',
@@ -32,7 +32,7 @@ window.requestAnimFrame = (function(){
 						function( callback ){
 							window.setTimeout(callback, 1000 / 60);
 						};
-})(); 
+})();
 
 // This is for updating the youTube progress bar. 
 (function progressLoop(){
@@ -162,9 +162,9 @@ function drawFills(modes) {
 	$.each(modes, function(i,m){
 		// Add entry to menu.
 		if(m.template==true){
-			$('#templates').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'&nbsp;</span></li>');	
+			$('#templates').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'</span></li>');	
 		}else{
-			$('#transforms').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'&nbsp;</span></li>');
+			$('#transforms').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'</span></li>');
 		}
 		// Append to mode's element to DOM.
 		m.el.hide();				   
@@ -177,6 +177,8 @@ function drawFills(modes) {
 
 
 function load(resp) {
+
+	if ($('#menu').is(":visible")) return false;
 
 	console.log('load()');
 	curVideoID = resp.youtube_id;
@@ -215,7 +217,7 @@ function start() {
 	globalTimers.push(setTimeout(function(){
 		showControls();
 		hidePlayingMessage();
-	}, 10000));
+	}, 5000));
 	
 	playback();	
 }
@@ -376,16 +378,12 @@ function showMenu() {
 
 	// Reset progress bar.
 	$('#progressBar').width("0%");
+	Piecon.reset();
 
-	
-
-	// Stop video and message playback.
-	//if(ytCurState == ytStates.playing) {
-		pauseVideo();
-		player.pausePlaybackMessages();
-		player.resetPlaybackMessages();
-		player.clearParseTimers();
-	//}
+	pauseVideo();
+	player.pausePlaybackMessages();
+	player.resetPlaybackMessages();
+	player.clearParseTimers();
 
 	// Hide all controls.
 	hideControls();
@@ -481,7 +479,7 @@ function handleYtPlayerStateChange(newState) {
 			// Playing		
 			console.log('ytPlayer stage change: playing');
 			$('#progressBar').css('background-color', 'red');
-			Piecon.reset();        
+			Piecon.reset();
 			break;
 		case 2:
 			// Paused

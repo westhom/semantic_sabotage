@@ -176,6 +176,7 @@ comair_dark: #B139EF #B139EF
 	2% {color: #BFBFBF; text-shadow: 0px 0px 0px #BFBFBF; opacity: 1.0;}
 	5% {color: #B3A4A4; text-shadow: 0px 0px 0px #B3A4A4; opacity: 1.0;}
 	95% {color: #B3A4A4; text-shadow: 0px 0px 0px #B3A4A4; opacity: 1.0;}
+	98% {color: #B3A4A4; text-shadow: 0px 0px 0px #B3A4A4; opacity: 0;}
 	100% {color: #B3A4A4; text-shadow: 0px 0px 0px #B3A4A4; opacity: 0;}
 }
 
@@ -189,6 +190,7 @@ comair_dark: #B139EF #B139EF
 	2% {color: #E5950A; text-shadow: 0px 0px 0px #E5950A; opacity: 1.0;}
 	5% {color: #E08F00; text-shadow: 0px 0px 0px #E08F00; opacity: 1.0;}
 	95% {color: #E08F00; text-shadow: 0px 0px 0px #E08F00; opacity: 1.0;}
+	98% {color: #E08F00; text-shadow: 0px 0px 0px #E08F00; opacity: 0;}
 	100% {color: #E08F00; text-shadow: 0px 0px 0px #E08F00; opacity: 0;}
 }
 
@@ -202,5 +204,6 @@ comair_dark: #B139EF #B139EF
 	2% {color: #C462F6; text-shadow: 0px 0px 0px #C462F6; opacity: 1.0;}
 	5% {color: #B139EF; text-shadow: 0px 0px 0px #B139EF; opacity: 1.0;}
 	95% {color: #B139EF; text-shadow: 0px 0px 0px #B139EF; opacity: 1.0;}
+	98% {color: #B139EF; text-shadow: 0px 0px 0px #B139EF; opacity: 0;}
 	100% {color: #B139EF; text-shadow: 0px 0px 0px #B139EF; opacity: 0;}
 }

@@ -15,10 +15,10 @@ var Player = function(app) {
 		curMessage : 0,
 
 		initialize: function(data) {
-			this.createMessages(data);
 			parser = Parser();
 			this.clearDB(); // use this to reset db
 			parser.initialize(this.db, this.messages);
+			this.createMessages(data);
 		},
 	
 		createMessages: function(data) {
@@ -36,9 +36,9 @@ var Player = function(app) {
 				//app.start();
 				// Give youTube movie time to cue before playing.
 				// PEND Using a setTimeout is hackey. Do this right.	 	
-				setTimeout(function(){
+				this.parseTimeoutEvents.push(setTimeout(function(){
 					app.start();
-				}, 100);
+				}, 100));
 			} else {
 				console.log("creating messages");
 				// Delete previously cached messages.
@@ -125,7 +125,7 @@ var Player = function(app) {
 
     clearDB: function() {
     	console.log("clearing db");
-    	this.db.dropTable('cached_messages');
+    	this.db.dropTable("cached_messages");
 			this.db.dropTable("LIWC_words");
 			this.db.dropTable("LIWC_words_wild");
     }
