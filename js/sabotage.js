@@ -162,9 +162,9 @@ function drawFills(modes) {
 	$.each(modes, function(i,m){
 		// Add entry to menu.
 		if(m.template==true){
-			$('#templates').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'&nbsp;</span></li>');	
+			$('#templates').append('<li><span class="modeName proxima-nova-400 whiteOnGray" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'</span></li>');	
 		}else{
-			$('#transforms').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'&nbsp;</span></li>');
+			$('#transforms').append('<li><span class="modeName proxima-nova-400 blackOnWhite" href="#" id="mode'+i+'"" onclick="linkToMode('+i+',\''+m.name+' | Semantic Sabotage\');" >'+m.name+'</span></li>');
 		}
 		// Append to mode's element to DOM.
 		m.el.hide();				   
