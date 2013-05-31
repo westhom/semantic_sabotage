@@ -1,4 +1,4 @@
-#blurry_paragraph .container {
+#plot_erosion .container {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -15,13 +15,13 @@
 	
 }
 
-#blurry_paragraph .transcript 
+#plot_erosion .transcript 
 {
 	padding: 24px;
 	
 }
 
-#blurry_paragraph .blank
+#plot_erosion .blank
 {
 	color: #FFBE73;
 	
@@ -31,7 +31,7 @@
 	-webkit-transition: opacity 5s ease-in, color 10s ease-in, text-shadow 10s linear;		
 }
 
-#blurry_paragraph .nocat
+#plot_erosion .nocat
 {
 	color: #FFBE73;
 	
@@ -41,7 +41,7 @@
 	-webkit-transition: opacity 5s ease-in, color 45s ease-in, text-shadow 45s linear;		
 }
 
-#blurry_paragraph .work
+#plot_erosion .work
 {
 	color: rgb(193,250,164);
 	
@@ -51,7 +51,7 @@
 	-webkit-transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;		
 }
 
-#blurry_paragraph .relig
+#plot_erosion .relig
 {
 	color: olivedrab;
 	
@@ -61,7 +61,7 @@
 	-webkit-transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;		
 }
 
-#blurry_paragraph .relativ
+#plot_erosion .relativ
 {
 	color: mediumaquamarine;
 	
@@ -71,7 +71,7 @@
 	-webkit-transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;		
 }
 
-#blurry_paragraph .negemo
+#plot_erosion .negemo
 {
 	color: rgb(255,161,92);
 	
@@ -81,7 +81,7 @@
 	-webkit-transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;		
 }
 
-#blurry_paragraph .size-48
+#plot_erosion .size-48
 {
 	font-size: 48px;
 }

@@ -2,10 +2,10 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Fading Memories",
+		name: "Plot Erosion",
 		defaultURL: "http://www.youtube.com/watch?v=3zi699WzAL0",
 		//defaultURL: "http://www.youtube.com/watch?v=RB1OhJBbzkM", //rupert sheldrake metaphysics
-		//defaultURL: "http://www.youtube.com/watch?v=JnA8GUtXpXY&t=6m0s",
+		//defaultURL: "http://www.youtube.com/watch?v=9vs00tYPmbU",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
@@ -88,6 +88,8 @@ var mode = function(id) {
 
 				this.lastLeadPunct = false;
 				this.lastEndPunct = true;
+
+				console.log('punct = '+ msg.word);
 		 	}
 		 	
 		 	// lead punct

@@ -17,7 +17,7 @@ var Player = function(app) {
 		initialize: function(data) {
 			this.createMessages(data);
 			parser = Parser();
-			//this.clearDB(); // use this to reset db
+			this.clearDB(); // use this to reset db
 			parser.initialize(this.db, this.messages);
 		},
 	
