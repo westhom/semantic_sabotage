@@ -15,11 +15,50 @@ eyeo_semanticsabotage
 
 ## Create your own
 
-+ getCategoryIndex(category) -- returns the index of the category (useful for comparing proximity of word cats ~ relatedness), returns -1 if not found
-+ getCategoryFullName(category) -- returns full name of category, returns abbreviated name if not found
+- Once you have chosen a transform to start with, navigate to the fills directory.
+- Copy and rename the .js file as well as it’s corresponding .css file.
+  For example: if you were starting with the left scroll template,
+  Copy and rename fills/template_leftScroll.js into the fills directory.
+  Then copy and rename fills/css/template_leftScroll.css into the fills/css directory.
+  The js and css files must have the same exact name.
+- Open your new js file and change the name at the top. e.g. Change 
+    name: "Left Scroll",
+to 
+   name: “My Transform”
+- Open your new css file and change the selectors to match the name of your file
+  e.g. if you started with template_leftScroll and renamed it my_transform, you would change all instances of #template_leftScroll in the css file to #my_transform.
+We are using this convention to avoid collisions with CSS names.
+- If you started with a template, you should comment out the line at the top of the js file
+   template: true,
+- Reload the page in your browser and you should see your new transform in the list.
 
+- The main functions you’ll be working with in the transform are   
+
+  init : Called once after the transform is created. Build things you will re-use here.  
+  enter : Called once each time the transform is shown. Reset your transform and clean things up in here.  
+  handleWord : Called each time a new word is ready.  
+  handleSentenceEnd : Called each time a sentence is completed.  
+  handleStats : Called every time a line of captions is completed (true?). Passes in interesting linguistic information.  
+  appendWordInContext :   Called by handleWord to append element to DOM.  
+
+Some useful notes
++ Each transform has a high-level container div. Always refer to this with this.el as in 
+    ``` this.el.append(<div id=”myDiv”></div>); ```
++ To change the URL that your transform uses, set the defaultURL var 
+    ``` defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE", ```
++ To make your movie start at a specific time, add a &t=0m3s argument to your URL  
+    ``` defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE&t=0m5s", ```
 
 ## Software architecture
+
+
+## LIWC Dictionary
+
+The LIWC Dictionary is loaded 
+All words are looked up against the <a href="http://www.liwc.net/" target="_blank">LIWC Dictionary</a>. 
+
++ getCategoryIndex(category) -- returns the index of the category (useful for comparing proximity of word cats ~ relatedness), returns -1 if not found
++ getCategoryFullName(category) -- returns full name of category, returns abbreviated name if not found
 
 
 ## Message specs
