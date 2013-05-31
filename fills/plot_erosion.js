@@ -81,7 +81,7 @@ var mode = function(id) {
 		 	} else if(msg.cats.length === 0) { //not in dictionary
 		 		cat = 'nocat';
 		 		catColor = '#F23005'; //red
-		 		console.log('missing word :'+msg.word)
+		 		//console.log('missing word :'+msg.word)
 			}		 	
 
 		 	//console.log(msg.word);
@@ -89,8 +89,8 @@ var mode = function(id) {
 		 	
 		 	// end punct always followed by space
 		 	if($.inArray('endPunct', msg.cats) >= 0){
-		 		var e = $('<span class="' + cat + '">' + word + ' ' + '</span>');
-				$('#blurry_container #transcript').append(e);
+		 		var s = $('<span class="' + cat + '">' + word + ' ' + '</span>');
+				$('#blurry_container #transcript').append(s);
 
 				setTimeout(function(e){
 					e.css({'color':'transparent', 'text-shadow':'0 0 18px '+ catColor});
@@ -99,7 +99,7 @@ var mode = function(id) {
 				this.lastLeadPunct = false;
 				this.lastEndPunct = true;
 
-				console.log('punct = '+ msg.word);
+				//console.log('punct = '+ msg.word);
 		 	}
 		 	
 		 	// lead punct
