@@ -176,13 +176,14 @@ function linkToMode(m, title) {
 }
 
 // Jumps to a mode
-// post optional; used only when switching to a different video from the field in the navbar
-// video and time are optional; used only when switching to a mode directly from URL
+// `m` mode index
+// `fullSetup` (optional) if true, loads captions from youtube
+// `video` and `time` are optional; used only when switching to a mode
+// directly from the URL
 function goToMode(m, fullSetup, video, time) {
 	console.log("Loading mode: ", modes[m].name);
 	if (m >= 0 && m < modes.length) {
 		curMode = m;
-
 
 		// Hide menu and show modes container.
 		$('#menu').hide();
@@ -195,24 +196,21 @@ function goToMode(m, fullSetup, video, time) {
 			if(i==curMode) modes[i].el.show();
 			else modes[i].el.hide();
 		}
-		//console.log("URL = "+modes[curMode].defaultURL);
 
-		// If post arg is not defined, default to true.
+		// If fullSetup arg is not defined, default to true.
 		fullSetup = (typeof fullSetup == 'undefined')? true : fullSetup;
 
 		if(fullSetup){
-
 			video = (typeof video == 'undefined')? modes[curMode].defaultURL : video;
 
-			// Set start time to mode's default
 			if (typeof time == 'undefined') {
 				modes[curMode].startTime = getStartTimeFromURL(video);
 			} else {
 				modes[curMode].startTime = time;
 			}
 
-			// Get captions from youTube PHP, using defaultURL of mode.
-			console.log('gotoMode - ajax post', video);
+			// Get captions from youtube_load.php
+			// console.log('Fetching captions for URL ', video);
 			$.ajax({
 				type: 'post',
 				dataType: 'json',
@@ -224,28 +222,21 @@ function goToMode(m, fullSetup, video, time) {
 					}
 			});
 
-			/*
-			// Get captions from youTube PHP, using form.
-			// Update value of input with defaultURL of mode.
-			$('#ytURL').val(modes[curMode].defaultURL);
-			// Ajax call below wasn't working, so for now just click submit button.
-			$('#ytURLButton').click();
-			*/
-
 			// Only set submit field if posting. 
 			$('#ytURL').val("Enter a different YouTube URL");		
 
 		} else {
+			// Full reset of player before changing video
 			pauseVideo();
 			player.pausePlaybackMessages();
 			player.resetPlaybackMessages();
 			player.clearParseTimers();
 		}
 
-		// Set up nav menu.
+		// Set up nav menu
 		hideControls();
 		hidePlayingMessage();
-		showLoadingMessage();	
+		showLoadingMessage();
 		// Reset progress bar color to white, for loading.
 		$('#progressBar').width('0%');
 		$('#progressBar').css('background-color', 'white');        
@@ -255,38 +246,28 @@ function goToMode(m, fullSetup, video, time) {
 	}
 }
 
+// Load messages player and cue YouTube embedded player
+// `resp` is the response from POSTing to youtube_load.php
+// it contains the full captions for the current video
 function load(resp) {
+	// console.log('Captions fetched successfully');
 
+	// Cancel loading if user has returned to the menu early
 	if ($('#menu').is(":visible")) return false;
 
-	console.log('load()');
 	curVideoID = resp.youtube_id;
-
-	//console.log(resp.url);
-	//console.log(resp.cc);
 	
 	player.initialize(resp);
-
-	//$("#sourceVid").attr("src", embedUrl+'?enablejsapi=1');
 	
-	console.log("cueVideoById( "+curVideoID+" )");
 	if(typeof modes[curMode]["startTime"] == "undefined")
 		modes[curMode]["startTime"] = 0;
 
-	console.log( "Starting player at: " + modes[curMode]["startTime"] + " seconds");
-
+	// console.log( "Starting player at: " + modes[curMode]["startTime"] + " seconds");
 	ytplayer.cueVideoById(curVideoID, modes[curMode]["startTime"]);
-	//ytplayer.cueVideoById(curVideoID);
-
-	// show loading
-	//$('#loading').show();
-	
-	// save embed url
-	//embedUrl = resp.url.replace('watch?v=', 'embed/');
 }
 
+// Begin playback
 function start() {
-	console.log("start()");
 	
 	// Set up nav messages and controls.
 	// For a few seconds, show playing message.
@@ -301,27 +282,31 @@ function start() {
 	playback();	
 }
 
-// When you submit a new URL when already inside of a mode, this does the setup.
+// Setup a new YouTube URL, submitting in a mode from the navbar field
 function submitURL() {
 	var url = $('#ytURL').val().trim();
 	var id = getIDFromURL(url);
+
 	if (id == -1) {
 		$('#ytURL').val('Bad link. Please try again...');
 		return false;
 	}
+
 	var time = getStartTimeFromURL(url);
 
-	console.log('submitURL()');
+	// console.log('URL submitted: ', url);
 
+	// Update URL with new video id
 	History.pushState(null, null, buildStateFromArguments(curMode, id, time));
+	
+	// Re-initialize mode, but don't do fetch titles from goToMode
 	goToMode(curMode, false);
 
 	// See if URL has a t=#m#s parameter to set the start time
 	modes[curMode].startTime = time;
 
-	// Post to youTube script with submit field value.
-	console.log('About to post'+url);
-
+	// Load new YouTube captions
+	// console.log('Fetching captions for URL ', video);
 	$.ajax({
 		type: 'post',
 		dataType: 'json',
@@ -359,11 +344,9 @@ function getIDFromURL(inputURL) {
 	}
 }
 
-
 function showMenu() {
 
-	console.log('showMenu');
-
+	// Reset URL to root
 	History.pushState(null, null, '?');
 	document.title = 'Semantic Sabotage'
 	
@@ -371,7 +354,7 @@ function showMenu() {
 	$('#menu').scrollTop('0px');
 	$('#modes').hide();	
 
-	// Reset progress bar.
+	// Reset progress bar
 	$('#progressBar').width("0%");
 	Piecon.reset();
 
@@ -398,52 +381,55 @@ function hideControls() {
 	$('#navControls').hide();
 }
 
-function showLoadingMessage() { $('#loading').show(); }
-function hideLoadingMessage() { $('#loading').hide(); }
-function showPlayingMessage() { $('#playing').show(); }
-function hidePlayingMessage() { $('#playing').hide(); }
+function showLoadingMessage() {
+	$('#loading').show();
+}
+
+function hideLoadingMessage() {
+	$('#loading').hide();
+}
+
+function showPlayingMessage() {
+	$('#playing').show();
+}
+
+function hidePlayingMessage() {
+	$('#playing').hide();
+}
 
 
-function bodyClick() {}
+function bodyClick() {
+}
 
+// Iterate through the globalTimers object and clear timeouts
 function stopAllTimers() {
 	for (var i=0; i<globalTimers.length; i++) {
 		clearTimeout(globalTimers[i]);
-		console.log('clear timer'+globalTimers[i]);
 	}
 	globalTimers = [];
 }
 
-
+// Trigger playVideo() in embed.js
 function playback() {
-	console.log('playback()');
 	playVideo();
 	// Note: Message playback is handled by yT state change callback.
 }
 
-function stopPlayback() {
-	pauseVideo();
-	// Note: Message playback is handled by yT state change callback.
-}
-
 function pausePlayback() {
-	console.log('pausePlayback()');
 	pauseVideo();
 	// Note: Message playback is handled by yT state change callback.
 }
 
 // Handle incoming messages and distribute to appropriate functions.
 function handleMessage(msg) {
-	// Make sure this message isn't stale (because the user has switched to another tab or something)
+	// Make sure this message isn't stale (because the user has switched to another tab)
 	var stale_message_threshold = 1000;
 	if(document.getElementById("ytplayer").getCurrentTime()*1000 - msg["time"] > stale_message_threshold) {
-		//console.log("STALE MESSAGE");
-		return;
+		return false;
 	}
 
 	switch(msg.type) {
 		case 'live':
-			console.log('live');
 			break;
 		case 'word':
 			modes[curMode].handleWord(msg);
@@ -509,8 +495,6 @@ function getCategoryFullName(category) {
 	else return category;
 }
 
-
-
 function updateYouTubeProgressBar() {
 	// If movie is playing, update progress bar
 	if(ytCurState == ytStates.playing){
@@ -518,18 +502,20 @@ function updateYouTubeProgressBar() {
 	}
 }
 
-
 function toggleFullscreen() {
 	if(fullScreenApi.isFullScreen()) {
 		fullScreenApi.cancelFullScreen();
+		// Update icon
 		$("#fullscreenButton").html('<img src="img/icons/fullscreen.png" class="icon" data-icon="fullscreen">');
 	}
 	else{
 		fullScreenApi.requestFullScreen(document.getElementsByTagName("body")[0]);
+		// Update icon
 		$("#fullscreenButton").html('<img src="img/icons/normalscreen.png" class="icon" data-icon="normalscreen">');
 	}
 }
 
+// Helper function to conver mode names to URL friendly slugs
 function convertToSlug(text) {
 	return text
 			.toLowerCase()
@@ -556,6 +542,7 @@ function buildURLFromID(id) {
 	return 'http://www.youtube.com/watch?v='+id;
 }
 
+// Retrieve parameters by `name` from a URL
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -563,6 +550,7 @@ function getParameterByName(name) {
     return results == null ? null : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+// Retrieve the mode index of the `slug` from the `modes` object
 function modeFromSlug(slug, modes) {
 	var mode;
 	$.each(modes, function(i,m) {
