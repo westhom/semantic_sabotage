@@ -2,7 +2,7 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Basic Taxonomy",
+		name: "Taxonomy",
 		defaultURL: "http://www.youtube.com/watch?v=w5R8gduPZw4",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		index: 0,
