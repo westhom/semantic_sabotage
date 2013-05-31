@@ -2,13 +2,15 @@ var mode = function(id) {
 
 	return {
 	
-		name: "Rainbow Stacks",
+		name: "Rainbow Sort",
 
-		defaultURL: "http://www.youtube.com/watch?v=OQSNhk5ICTI",
+		defaultURL: "http://www.youtube.com/watch?v=OQSNhk5ICTI", //Double Rainbow!
 		el: $('<div class="modeContainer" style="background-color:black" id="'+id+'"></div>'),
 				 
+		//line spacing between words in the stack		 
 		lineHeight: 72,
-		whoaToggle: true,
+		// There's a hack here to make some 5-letter words to fill out the rainbow
+		whoaToggle: true, 
 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
@@ -18,7 +20,7 @@ var mode = function(id) {
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
-			//console.log(this.name+" enter()");
+			//empty out all the words columns
 			$('#one').empty();
 			$('#two').empty();
 			$('#three').empty();
@@ -52,35 +54,36 @@ var mode = function(id) {
 		 	// update curSentence
 		 	if($.inArray('punct', msg.cats) < 0){
 			 	
-		 		//a little hack to fill out the 5-letter column
+		 		//a little hack to fill out the 5-letter word column. converts every other 'whoa' to a 'whoah'
 				if (msg.word.toUpperCase() === 'WHOA') {
 					if (this.whoaToggle)
 						msg.word = 'WHOAH';	
-					console.log("whoa = " + msg.word);
+					//console.log("whoa = " + msg.word);
 					this.whoaToggle = !this.whoaToggle;
 				} 
 
 				var e = $('<div class= "bigText motor" opacity:0;">' + msg.word.toUpperCase() + '</div>');
 
+				//wait until element is in the DOM (20ms) until you start animating it
 			 	setTimeout(function(element){
 			 		element.css("opacity", "1");	
-			 		//element.css("color", "black");			 		
 			 	},20,e);
 
 				var h = this.lineHeight;
 
-			 	if (msg.word.length === 1) {
-				 	//$('#one').prepend(newWord);
+				//sort words by # of characters and place them in the correct div
+			 	if (msg.word.length === 1) { //one letter words
 				 	$('#one').prepend(e);
+				 	//walk through all old words in that column and push them down and fade them down a little
 			 		$('#one').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
+			 		//grow height of div by lineHeight
 			 		$('#one').css('height', $('#one > .bigText').length*this.lineHeight+"px");					 	
-				} else if (msg.word.length === 2) {
-				 	//$('#two').prepend(newWord);
+				} else if (msg.word.length === 2) { //two letter words
 				 	$('#two').prepend(e);
 			 		$('#two').children().each(function(i){
 				 		var t = h*i+"px";
@@ -89,10 +92,7 @@ var mode = function(id) {
 				 		$(this).css("opacity", o);
 			 		});
 			 		$('#two').css('height', $('#two > .bigText').length*this.lineHeight+"px");		
-
-				} else if (msg.word.length === 3) {
-				 	//$('#three').prepend(newWord);
-
+				} else if (msg.word.length === 3) { //....
 				 	$('#three').prepend(e);
 			 		$('#three').children().each(function(i){
 				 		var t = h*i+"px";
@@ -102,8 +102,6 @@ var mode = function(id) {
 			 		});
 			 		$('#three').css('height', $('#three > .bigText').length*this.lineHeight+"px");			 	
 				} else if (msg.word.length === 4) {
-				 	//$('#four').prepend(newWord);
-			 		
 				 	$('#four').prepend(e);
 			 		$('#four').children().each(function(i){
 				 		var t = h*i+"px";
@@ -112,9 +110,7 @@ var mode = function(id) {
 				 		$(this).css("opacity", o);
 			 		});
 			 		$('#four').css('height', $('#four > .bigText').length*this.lineHeight+"px");
-
 				} else if (msg.word.length === 5) {
-				 	//$('#five').prepend(newWord);	
 				 	$('#five').prepend(e);
 			 		$('#five').children().each(function(i){
 				 		var t = h*i+"px";
@@ -123,9 +119,7 @@ var mode = function(id) {
 				 		$(this).css("opacity", o);
 			 		});
 			 		$('#five').css('height', $('#five > .bigText').length*this.lineHeight+"px");			
-
-				} else if (msg.word.length === 6) {
-				 	//$('#six').prepend(newWord);					 			 				 
+				} else if (msg.word.length === 6) {			 			 				 
 				 	$('#six').prepend(e);
 			 		$('#six').children().each(function(i){
 				 		var t = h*i+"px";
@@ -134,8 +128,7 @@ var mode = function(id) {
 				 		$(this).css("opacity", o);
 			 		});
 			 		$('#six').css('height', $('#six > .bigText').length*this.lineHeight+"px");		
-				 } else if (msg.word.length === 7){
-				 	//$('#seven').prepend(newWord);					 			 				 
+				 } else if (msg.word.length === 7){				 			 				 
 				 	$('#seven').prepend(e);
 			 		$('#seven').children().each(function(i){
 				 		var t = h*i+"px";
@@ -145,7 +138,6 @@ var mode = function(id) {
 			 		});
 			 		$('#seven').css('height', $('#seven > .bigText').length*this.lineHeight+"px");		
 				 } else if (msg.word.length === 8){
-				 			 				 
 				 	$('#eight').prepend(e);
 			 		$('#eight').children().each(function(i){
 				 		var t = h*i+"px";
@@ -154,8 +146,7 @@ var mode = function(id) {
 				 		$(this).css("opacity", o);
 			 		});
 			 		$('#eight').css('height', $('#eight > .bigText').length*this.lineHeight+"px");		
-				 } else if (msg.word.length === 9){
-				 			 				 
+				 } else if (msg.word.length === 9){ 				 
 				 	$('#nine').prepend(e);
 			 		$('#nine').children().each(function(i){
 				 		var t = h*i+"px";
@@ -164,8 +155,7 @@ var mode = function(id) {
 				 		$(this).css("opacity", o);
 			 		});
 			 		$('#nine').css('height', $('#nine > .bigText').length*this.lineHeight+"px");		
-				 } else {
-					 			 				 
+				 } else {			 
 				 	$('#ten').prepend(e);
 			 		$('#ten').children().each(function(i){
 				 		var t = h*i+"px";
