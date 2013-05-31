@@ -215,7 +215,7 @@ function start() {
 	globalTimers.push(setTimeout(function(){
 		showControls();
 		hidePlayingMessage();
-	}, 10000));
+	}, 5000));
 	
 	playback();	
 }
