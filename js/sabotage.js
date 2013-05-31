@@ -32,7 +32,7 @@ window.requestAnimFrame = (function(){
 						function( callback ){
 							window.setTimeout(callback, 1000 / 60);
 						};
-})(); 
+})();
 
 // This is for updating the youTube progress bar. 
 (function progressLoop(){
@@ -215,7 +215,7 @@ function start() {
 	globalTimers.push(setTimeout(function(){
 		showControls();
 		hidePlayingMessage();
-	}, 10000));
+	}, 5000));
 	
 	playback();	
 }
@@ -376,16 +376,12 @@ function showMenu() {
 
 	// Reset progress bar.
 	$('#progressBar').width("0%");
+	Piecon.reset();
 
-	
-
-	// Stop video and message playback.
-	//if(ytCurState == ytStates.playing) {
-		pauseVideo();
-		player.pausePlaybackMessages();
-		player.resetPlaybackMessages();
-		player.clearParseTimers();
-	//}
+	pauseVideo();
+	player.pausePlaybackMessages();
+	player.resetPlaybackMessages();
+	player.clearParseTimers();
 
 	// Hide all controls.
 	hideControls();
@@ -481,7 +477,7 @@ function handleYtPlayerStateChange(newState) {
 			// Playing		
 			console.log('ytPlayer stage change: playing');
 			$('#progressBar').css('background-color', 'red');
-			Piecon.reset();        
+			Piecon.reset();
 			break;
 		case 2:
 			// Paused
