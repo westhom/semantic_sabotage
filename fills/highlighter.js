@@ -41,12 +41,6 @@ var mode = function(id) {
 			//console.log(msg);
 		},
 
-		htmlEncode: function(value){
-  			//create a in-memory div, set it's inner text(which jQuery automatically encodes)
-  			//then grab the encoded contents back out.  The div never exists on the page.
-  			return $('<div/>').text(value).html();
-		},
-
 		clearTimeoutEvents: function(type) {
 	    var events;
 	    if (type == 'posemo') events = this.posEvents;
@@ -70,12 +64,10 @@ var mode = function(id) {
 		 	else if($.inArray('negemo', msg.cats) >= 0) c = 'negemo';
 		 	
 		 	//console.log(msg.word);
-		 	var word = this.htmlEncode(msg.word);
-		 	//console.log(word);
 		 	
 		 	// end punct always followed by space
 		 	if($.inArray('endPunct', msg.cats) >= 0){
-		 		var e = $('<span class="' + c + '">' + word + ' ' + '</span>');
+		 		var e = $('<span class="' + c + '">' + msg.word + ' ' + '</span>');
 				$('#tagged_container #transcript').append(e);
 				e.css("color", black);
 
@@ -86,8 +78,8 @@ var mode = function(id) {
 		 	else if ($.inArray('leadPunct', msg.cats) >= 0){
 		 		//no lead space if it follows a sentence end
 		 		var e; 
-		 		if (this.lastEndPunct) e = $('<span class="' + c + '">' + word + '</span>');
-		 		else e = $('<span class="' + c + '">' + ' ' + word + '</span>');
+		 		if (this.lastEndPunct) e = $('<span class="' + c + '">' + msg.word + '</span>');
+		 		else e = $('<span class="' + c + '">' + ' ' + msg.word + '</span>');
 
 		 		$('#tagged_container #transcript').append(e);
 		 		e.css("color", black);
@@ -100,7 +92,7 @@ var mode = function(id) {
 
 		 		
 		 		if (!this.lastLeadPunct) e = $('#tagged_container #transcript').append('<span class="space"> </span>');
-		 		var e = $('<span class="' + c + '">' + word + '</span>');
+		 		var e = $('<span class="' + c + '">' + msg.word + '</span>');
 
 		 		$('#tagged_container #transcript').append(e);
 

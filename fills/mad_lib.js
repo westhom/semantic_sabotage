@@ -50,7 +50,6 @@ var mode = function(id) {
 			//console.log(msg);
 		},
 
-	
 		clearTimeoutEvents: function(type) {
 	    for (var i=0; i<this.timeoutEvents.length; i++) {
 		    clearTimeout(this.timeoutEvents[i]);

@@ -58,7 +58,7 @@ var Parser = function(db, messages) {
 
 			//console.log(line);
 			var spaceRegEx = new RegExp(/\S{1,}/g);
-			var leadPunctRegEx = new RegExp(/^[\"|\'|\u201C|\u2018|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
+			var leadPunctRegEx = new RegExp(/^[\"|\'|\(|\u201C|\u2018|>|<|\-|\+|\[|\{|$]{1,}/); //JRO edit
 			//var leadPunctRegEx = new RegExp(/^\W{1,}/);
 			var numberRegEx = new RegExp(/\d{1,}.{1,}\d{1,}/);
 			var abbrevRegEx = new RegExp(/\w{1,}[\'|\-|\u2019]\w{1,}/); //JRO edit
