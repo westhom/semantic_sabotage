@@ -36,9 +36,9 @@ var Player = function(app) {
 				//app.start();
 				// Give youTube movie time to cue before playing.
 				// PEND Using a setTimeout is hackey. Do this right.	 	
-				setTimeout(function(){
+				this.parseTimeoutEvents.push(setTimeout(function(){
 					app.start();
-				}, 100);
+				}, 100));
 			} else {
 				console.log("creating messages");
 				// Delete previously cached messages.
