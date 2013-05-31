@@ -31,6 +31,16 @@
 	-webkit-transition: opacity 5s ease-in, color 10s ease-in, text-shadow 10s linear;		
 }
 
+#plot_erosion .punct
+{
+	color: #FFBE73;
+	
+	text-shadow: 0 0 0 transparent;
+
+	transition: opacity 5s ease-in, color 10s ease-in, text-shadow 50s linear;
+	-webkit-transition: opacity 5s ease-in, color 10s ease-in, text-shadow 50s linear;		
+}
+
 #plot_erosion .nocat
 {
 	color: #FFBE73;

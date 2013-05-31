@@ -72,6 +72,12 @@ var mode = function(id) {
 		 	} else if($.inArray('relativ', msg.cats) >= 0) {
 		 		cat = 'relativ';
 		 		catColor = '#FFB800'; //yellow
+		 	} else if ($.inArray('endPunct', msg.cats) >= 0) {
+		 		cat = 'punct';
+		 		catColor = '#FFBE73'; //tan
+		 	} else if ($.inArray('leadPunct', msg.cats) >= 0) {
+		 		cat = 'punct';
+		 		catColor = '#FFBE73'; //tan
 		 	} else if(msg.cats.length === 0) { //not in dictionary
 		 		cat = 'nocat';
 		 		catColor = '#F23005'; //red
@@ -85,6 +91,10 @@ var mode = function(id) {
 		 	if($.inArray('endPunct', msg.cats) >= 0){
 		 		var e = $('<span class="' + cat + '">' + word + ' ' + '</span>');
 				$('#blurry_container #transcript').append(e);
+
+				setTimeout(function(e){
+					e.css({'color':'transparent', 'text-shadow':'0 0 18px '+ catColor});
+				}, 20, s);
 
 				this.lastLeadPunct = false;
 				this.lastEndPunct = true;
