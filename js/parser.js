@@ -214,7 +214,7 @@ var Parser = function(db, messages) {
 			if (res.length > 0) {
 				cats = res[0].cats;
 				//console.log("found cats for word "+w);
-				console.log(cats);
+				//console.log(cats);
 			}
 			
 			// check for wildcards
@@ -230,7 +230,7 @@ var Parser = function(db, messages) {
 			  if (res.length > 0) {
 				  cats = res[0].cats;
 				  //console.log("found wild cats for word "+w);
-				  console.log(cats);
+				  //console.log(cats);
 			  }
 			}
 						 
