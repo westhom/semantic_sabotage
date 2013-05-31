@@ -14,7 +14,7 @@ var mode = function(id) {
 		ringRatio: new Array(), // used to store values for radial division scaling
 
 		lineStroke: 2, // line thickness
-		drift: 50, // movement bounds for drifting objects
+		drift: 1, // movement bounds for drifting objects -- gets reset below based on window width and height
 	
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
@@ -31,7 +31,8 @@ var mode = function(id) {
 
 			this.el.append('<div class="container"></div>'); // create container div within modeContainer
 
-			this.radius = Math.min(this.el.width(),this.el.height())/2;
+			this.radius = Math.min(this.el.width(),this.el.height())/2*0.95; // set radar radius
+			this.drift = this.radius * 0.15; // set particle drift
 
 			this.el.find('.container').append('<div class="ringCenter"></div>'); // create central anchor to contain graphical elements
 
