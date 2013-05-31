@@ -76,7 +76,9 @@ var mode = function(id) {
 				}
 				else {
 					for (var i=0; i<msg.cats.length; i++) {
-						if (msg.cats[i] != 'sentencesmode') $(cc).append(msg.cats[i] + ' ');
+						if (msg.cats[i] != 'sentencesmode') {
+							$(cc).append(getCategoryFullName(msg.cats[i]) + ' ');
+						}
 					}
 				}
 				

@@ -496,9 +496,24 @@ function handleYtPlayerStateChange(newState) {
 			// Keep track of yT state for everyone to reference.
 	ytCurState = newState;
 	//console.log('ytCurState = '+ytCurState);
-
-	//$('#playerState').html(newState);
 }
+
+function getCategoryIndex(category) {
+  var i = 0;
+  for (var cat in LIWC_cats) {
+      if (cat == category)
+      	return i;
+      else i++;
+  }
+  return -1;
+}
+
+function getCategoryFullName(category) {
+	var name = LIWC_cats[category];
+	if (name) return name;
+	else return category;
+}
+
 
 
 function updateYouTubeProgressBar() {
