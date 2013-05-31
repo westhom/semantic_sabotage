@@ -15,8 +15,8 @@ eyeo_semanticsabotage
 
 ## Create your own
 
-+ getCategoryIndex(category) -- returns the index of the category (useful for comparing proximity of word cats ~ relatedness)
-+ getCategoryFullName(category) -- returns full name of category
++ getCategoryIndex(category) -- returns the index of the category (useful for comparing proximity of word cats ~ relatedness), returns -1 if not found
++ getCategoryFullName(category) -- returns full name of category, returns abbreviated name if not found
 
 
 ## Software architecture
