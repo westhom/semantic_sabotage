@@ -23,42 +23,42 @@ eyeo_semanticsabotage
 
 Use these specs to get useful information out of incoming messages.
 
-Sent every word
-{  
-  type: ”word”, 
-  timeDiff: int,
-  dbid: (uniquewords_id) int,
-  word: string, 
-  speaker: int 
-  cats: string[], 
-  wordInstances: int, 
-  ngrams: [ [ngramID, ngramInstances], ... ]
-}
+Sent every word 
+{   
+  type: ”word”,    
+  timeDiff: int,   
+  dbid: (uniquewords_id) int, 
+  word: string,  
+  speaker: int,  
+  cats: string[],  
+  wordInstances: int,  
+  ngrams: [ [ngramID, ngramInstances], ... ] 
+} 
 
-Sent every time new n-gram is found ( when more than 3 instances have appeared)
-{	
-  type: ”newNGram”, 
-  timeDiff: int,
-  dbid: int,
-  ngram: string[],
-  instances: string[] //word ids of last words
-}
+Sent every time new n-gram is found ( when more than 3 instances have appeared) 
+{	 
+  type: ”newNGram”,  
+  timeDiff: int, 
+  dbid: int, 
+  ngram: string[], 
+  instances: string[] //word ids of last words 
+}  
 
-Sent every line
-{	
-  type: “stats”,
-  timeDiff: int,
-  posemo: float[2],
-  negemo: float[2],
-  anger: float[2],
-  I: float[2],
-  we: float[2],
-  complexity: float[2],
-  status: float[2],
-  depression: float[2],
-  formality: float[2],
-  honesty: float[2]
-}
+Sent every line  
+{ 	
+  type: “stats”, 
+  timeDiff: int, 
+  posemo: float[2], 
+  negemo: float[2], 
+  anger: float[2], 
+  I: float[2], 
+  we: float[2], 
+  complexity: float[2], 
+  status: float[2], 
+  depression: float[2], 
+  formality: float[2], 
+  honesty: float[2] 
+} 
 
 ## YouTube Captioning ##
 
