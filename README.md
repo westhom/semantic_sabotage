@@ -66,8 +66,6 @@ YouTube search terms can be modified with ', cc' to isolate results to content w
 
 ## Sample YouTube Links with Good Captions
 
-Search for YouTube movies with captions by adding ", cc" to your search phrase.
-
 http://www.youtube.com/watch?v=usfRtJpyJDk - How to act in California court
 http://www.youtube.com/watch?v=mox4InKEwgU - Obama talking about agenda
 http://www.youtube.com/watch?v=UF8uR6Z6KLc - Steve Jobs Stanford commencement (real captions)
