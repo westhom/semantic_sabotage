@@ -3,7 +3,9 @@ var mode = function(id) {
 	return {
 	
 		name: "Big Words",
-		defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU&t=0m5s",
+
+		defaultURL: "http://www.youtube.com/watch?v=o1qsr76E5ww&t=0m1s",
+		//defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU&t=0m5s",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),		
 				 		
@@ -43,7 +45,7 @@ var mode = function(id) {
 		appendWordInContext: function(msg) {
 		
 		 	// Only show words with more than eight letters.
-		 	if(msg.word.length > 8) {
+		 	if(msg.word.length > 7) {
 		 		// Create a div for the word
 		 		var e = $('<div class= "bigText proxima-nova-700" style="color:white; opacity:0;">' + msg.word + '</div>');
 		 		// And stick it at the beginning of the container
