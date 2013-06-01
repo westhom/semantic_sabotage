@@ -1,6 +1,6 @@
 <?php
 	
-	// handle youtube cc scraping
+	// use curl if available, but fallback to fopen
 	function get_data($url) {
 		if  (in_array  ('curl', get_loaded_extensions())) {
 			$ch = curl_init();
@@ -23,14 +23,12 @@
 			//die("Curl not enabled.");
 		}
 	}
-	
 
-	//grab the video ID from the URL
+	// parse url arguments into $url_fragments
 	parse_str( parse_url( $_POST["url"], PHP_URL_QUERY ), $url_fragments);
 
-	$urlData = get_data($_POST["url"], false);
-	//$urlData = get_data("http://www.youtube.com/watch?v=0vVCSUafFVI", false);
-	
+	$urlData = get_data($_POST["url"]);
+
 	$startInd = strpos($urlData, "ttsurl") + 10;
 	
 	$endInd = strpos($urlData, '"', $startInd);
@@ -66,29 +64,37 @@
 		}
 
 		// Get chosen track xml file
-
 		$captions_track_url = str_replace("\/", "/", $ccUrl)."&type=track&lang=" . $chosenTrack['lang_code'] .
 																		"&name=" . urlencode($chosenTrack['name']) .
 																		"&kind=" . $chosenTrack['kind'] .
 																		"&fmt=1";
-		
 		$captions_track_xml = @simplexml_load_file($captions_track_url);
+
+		// build closed captions array
 		$cc = array();
-		if($captions_track_xml) 
-			foreach($captions_track_xml->text as $text)
-				$cc[] = $text;
-		else
+		if($captions_track_xml) {
+			
+			foreach($captions_track_xml->text as $t) {
+				$text = (string) $t; // line text
+				$start = (string) $t->attributes()->start; // start time of line
+				$dur = (string) $t->attributes()->dur; // duration of line
+				$cc[] = array(
+					"@attributes" => array(
+						"start" => $start,
+						"dur" => $dur,
+					),
+					"0" => $text
+				);
+			}
+		} else
 			$error = "Could not load captions (failed to parse XML)";
-	}
-	else {
+	} else {
 		$error = "No captions available.";
 		$captions_track_url = "";
 		$cc = "";
-
 	}
 
 	$response = array("youtube_id" => $url_fragments['v'], "url" => $captions_track_url,  "cc" => $cc, "error" => $error);
-	
 	echo json_encode($response); 
 	
 		
