@@ -8,11 +8,18 @@ Each transform uses HTML5 and Javascript to visualize the transcript of a YouTub
 
 Semantic Sabotage was designed and coded by [Sosolimited](http://sosolimited.com). 
 
+## Dependencies
+
+* __Apache__
+* __PHP 5__
+
+You can install Apache and PHP manually on [OSX](http://coolestguyplanettech.com/downtown/install-and-configure-apache-mysql-php-and-phpmyadmin-osx-108-mountain-lion) or [Linux](https://help.ubuntu.com/community/ApacheMySQLPHP), or download a one-click bundle: [MAMP](http://www.mamp.info/en/index.html) (for OSX) or [WAMP](http://www.wampserver.com/en/) (for Windows).
+
 ## Installation
 
 + Clone the repo and duplicate fill_firstname_lastname.js, change the name to yours.
 
-+ Enable Apache and PHP for local dev [OSX 10.8](http://coolestguyplanettech.com/downtown/install-and-configure-apache-mysql-php-and-phpmyadmin-osx-108-mountain-lion)
++ Enable Apache and PHP (instructions linked above).
 
 + See [Eyeo-Architecture.pdf](https://github.com/sosolimited/eyeo_semanticsabotage/blob/master/Eyeo-Architecture.pdf) for more about software layout.
 
