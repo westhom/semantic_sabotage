@@ -5,13 +5,6 @@
 	width:100%;
 	min-height: 100%;
 	overflow: scroll;
-	background-color: rgb(250, 250, 250);
-	color: rgb(40, 40, 40);
-	
-	text-shadow: 0 0 0 transparent;
-
-	transition: opacity 5s ease-in, color 5s ease-in, text-shadow 5s linear;
-	-webkit-transition: opacity 5s ease-in, color 5s ease-in, text-shadow 5s linear;	
 	
 }
 
@@ -23,8 +16,7 @@
 
 #plot_erosion .blank
 {
-	color: #FFBE73;
-	
+	color: #FFBE73; /*tan*/
 	text-shadow: 0 0 0 transparent;
 
 	transition: opacity 5s ease-in, color 10s ease-in, text-shadow 10s linear;
@@ -33,8 +25,7 @@
 
 #plot_erosion .punct
 {
-	color: #FFBE73;
-	
+	color: #FFBE73; /*tan*/
 	text-shadow: 0 0 0 transparent;
 
 	transition: opacity 5s ease-in, color 10s ease-in, text-shadow 50s linear;
@@ -43,8 +34,7 @@
 
 #plot_erosion .nocat
 {
-	color: #FFBE73;
-	
+	color: #F23005; /*red*/
 	text-shadow: 0 0 0 transparent;
 
 	transition: opacity 5s ease-in, color 45s ease-in, text-shadow 45s linear;
@@ -53,8 +43,7 @@
 
 #plot_erosion .work
 {
-	color: rgb(193,250,164);
-	
+	color: #0A7AA6; /*blue*/
 	text-shadow: 0 0 0 transparent;
 
 	transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;
@@ -63,8 +52,7 @@
 
 #plot_erosion .relig
 {
-	color: olivedrab;
-	
+	color: #FF8900; /*orange*/	
 	text-shadow: 0 0 0 transparent;
 
 	transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;
@@ -73,18 +61,7 @@
 
 #plot_erosion .relativ
 {
-	color: mediumaquamarine;
-	
-	text-shadow: 0 0 0 transparent;
-
-	transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;
-	-webkit-transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;		
-}
-
-#plot_erosion .negemo
-{
-	color: rgb(255,161,92);
-	
+	color: #FFB800; /*yellow*/
 	text-shadow: 0 0 0 transparent;
 
 	transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;

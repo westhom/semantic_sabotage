@@ -55,7 +55,7 @@ var mode = function(id) {
 		 		msgWord = ' '+msg.word;
 		 	}
 
-		 	var w = $('<span class= "scrollword museo-slab-300-italic" style="color:' + c + ';">' + msgWord + '</span>');
+		 	var w = $('<span class= "scrollword museo-slab-100-italic" style="color:' + c + ';">' + msgWord + '</span>');
 		 	$('#scrollticker > .scroller').append(w); 	
 
 		 	$('#scrollticker > .scroller').css('left', -parseInt($('#scrollticker > .scroller span:last-child').position().left)+'px');	
