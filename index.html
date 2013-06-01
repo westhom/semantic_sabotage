@@ -37,27 +37,28 @@
 		<meta name="google" content="notranslate" />
 		<!-- Rest of JS is below HTML for faster DOM rendering -->
 	</head>
-							
+
 	<body onclick="bodyClick();">
 		<div class="navBar">
 
-			<a id="logo_link" href="http://sosolimited.com" target="_blank"><img id="logo" src="img/sosoLogoSmall.png"/></a>
 			<div id="navTitle" class="medGray navText proxima-nova-700" onclick="showMenu();">Semantic Sabotage</div>			
-			<div id="loading" class="navStatus proxima-nova-400" style="display:none">Loading...</div>
-			<div id="playing" class="navStatus proxima-nova-400" style="display:none">Playing...</div>
 
 			<div id="navControls" style="display:none">
 				<form id="youtube_load" class="navInput">
 					<input id="ytURLButton" class="navButton proxima-nova-400" style="position: absolute; width: 1px; height: 1px; left: -9999px;" type="submit" onclick="submitURL();">
+					<div id="loading" class="navStatus proxima-nova-400" style="display:none">Loading...</div>
+					<div id="playing" class="navStatus proxima-nova-400" style="display:none">Playing...</div>
+					<input id="ytURL" class="navInput proxima-nova-400" type="text" onfocus="if(this.value.indexOf('Enter a') !== -1) { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Enter a different YouTube URL'; }" value='Enter a YouTube URL.' name="url" size="44">
 					<button id="playButton" class="navButton" style="display:none" onclick="playback();"><img class="icon" src="img/icons/play.png" data-icon="play"></button>
 					<button id="pauseButton" class="navButton" style="" onclick="pausePlayback();"><img class="icon" src="img/icons/pause.png" data-icon="pause"></button>
 					<button id="muteButton" class="navButton" style="" onclick="muteVideo();"><img class="icon" src="img/icons/mute.png" data-icon="mute"></button>
 					<button id="unmuteButton" class="navButton" style="display:none" onclick="unMuteVideo();"><img class="icon" src="img/icons/sound.png" data-icon="sound"></button>
-					<input id="ytURL" class="navInput proxima-nova-400" type="text" onfocus="if(this.value.indexOf('Enter a') !== -1) { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Enter a different YouTube URL'; }" value='Enter a YouTube URL.' name="url" size="44">
+					<button id="fullscreenButton" class="navButton" style="" onclick="toggleFullscreen();"><img class="icon" src="img/icons/fullscreen.png" data-icon="fullscreen"></button>
 				</form>
 			</div>
+			<a id="logo_link" href="http://sosolimited.com" target="_blank"><img id="logo" src="img/sosoLogoSmall.png"/></a>
 
-			<div id="fullscreenButton" class="navButton proxima-nova-400" onClick="toggleFullscreen();"><img class="icon" src="img/icons/fullscreen.png" data-icon="fullscreen"></div> 			
+
 		</div>
 		
 		<div id="progressBarBox"> 

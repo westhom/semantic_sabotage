@@ -234,7 +234,8 @@ function goToMode(m, fullSetup, video, time) {
 		}
 
 		// Set up nav menu
-		hideControls();
+		showControls();
+		hideSubmit();
 		hidePlayingMessage();
 		showLoadingMessage();
 		// Reset progress bar color to white, for loading.
@@ -275,7 +276,7 @@ function start() {
 	showPlayingMessage();
 	// Then show controls.
 	globalTimers.push(setTimeout(function(){
-		showControls();
+		showSubmit();
 		hidePlayingMessage();
 	}, 5000));
 	
@@ -379,6 +380,14 @@ function showControls() {
 
 function hideControls() {
 	$('#navControls').hide();
+}
+
+function hideSubmit() {
+	$('#ytURL').hide();
+}
+
+function showSubmit() {
+	$('#ytURL').show();
 }
 
 function showLoadingMessage() {

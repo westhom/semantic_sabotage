@@ -1,10 +1,10 @@
 .navBar{
 	position: relative;
 	height: 3.5%;																	
-	min-height:2em;															
+	min-height:2.3em;															
 	z-index:999;
 	background-color: black;
-	padding: 0em 1em 0em 1.5em;
+	padding: 0em 1em;
 	text-transform: uppercase;
 }
 
@@ -35,20 +35,20 @@
 	position: relative;
 	display: inline;
 
-	top: 0.25em;
+	top: 0.15em;
 	height:1.5em;
 	/*font-family: Helvetica, sans-serif;
 	font-weight: lighter;*/
 
-	font-size: 1.5em;
-	margin-left: 0.5em;
+	font-size: 1.2em;
+	margin-right: 1em;
 	color: white;
 }
 
 #navControls {
 	position:relative;
 	display: inline;
-	top: 0.07em;																		
+	top: 0.1em;																		
 	height:1.5em;
 }
 
@@ -63,30 +63,22 @@
 	border-style: none;
 }
 
-input.navInput[type="text"]
-{
+#ytURL {
 	border-style: none;
 	padding: 0.2em;
 	font-size: 0.75em;
 	background-color: rgb(225, 225, 225);
 	color: black;
-	margin-left: 1em;
+	margin-right: 1em;
 }
 
-input.navInput[type="text"]:hover
-{
+#ytURL:hover {
 	background-color: rgb(255, 255, 255);
 	color: rgb(110,110,110);
 }
 
-input.navInput[type="text"]:focus
-{
+#ytURL:focus {
 	outline: none;
-}
-
-
-#ytURL {
-
 }
 
 #ytURLButton {
@@ -106,21 +98,14 @@ input.navInput[type="text"]:focus
 	color: white;
 }
 
-
-#fullscreenButton {
-	position:absolute;
-
-	top: 0.7em;
+#logo_link {
+	position: absolute;
+	top: .6em;
 	right: 1em;
-	cursor: pointer;
-
 }
 
 #logo {
-	position:relative;
-	top:.4em;
-	height:1.2em;
-	margin-right:.6em;
+	height:1.3em;
 }
 
 #progressBarBox {
