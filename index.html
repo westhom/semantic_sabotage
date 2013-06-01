@@ -53,7 +53,7 @@
 					<button id="pauseButton" class="navButton" style="" onclick="pausePlayback();"><img class="icon" src="img/icons/pause.png" data-icon="pause"></button>
 					<button id="muteButton" class="navButton" style="" onclick="muteVideo();"><img class="icon" src="img/icons/mute.png" data-icon="mute"></button>
 					<button id="unmuteButton" class="navButton" style="display:none" onclick="unMuteVideo();"><img class="icon" src="img/icons/sound.png" data-icon="sound"></button>
-					<input id="ytURL" class="navInput proxima-nova-400" type="text" value="Enter a YouTube URL." name="url" size="44">
+					<input id="ytURL" class="navInput proxima-nova-400" type="text" onfocus="if(this.value.indexOf('Enter a') !== -1) { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Enter a different YouTube URL'; }" value='Enter a YouTube URL.' name="url" size="44">
 				</form>
 			</div>
 
