@@ -1,9 +1,12 @@
-eyeo_semanticsabotage
-=====================
+![Semantic Sabotage](https://raw.github.com/sosolimited/eyeo_semanticsabotage/master/img/logo.png)
 
+## Introduction
 
-## Introduction 
+Semantic Sabotage is an open source platform for creating live typographic YouTube transforms.
 
+Each transform uses HTML5 and Javascript to visualize the transcript of a YouTube movie, as it plays. The transcripts are analyzed with the LIWC dictionaries, created by [James Pennebaker](http://www.secretlifeofpronouns.com/author.php) and the UT Austin Department of Psychology.
+
+Semantic Sabotage was designed and coded by [Sosolimited](http://sosolimited.com). 
 
 ## Installation
 
