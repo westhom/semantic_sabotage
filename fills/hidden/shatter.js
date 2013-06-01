@@ -24,7 +24,7 @@ var mode = function(id) {
 			this.el.append('<div id="shatContainer"></div>');
 			$('#shatContainer').css('-webkit-transform','perspective(' + $(window).width() + 'px)');
 			this.el.append('<span id="shatShell"></span>');
-			$('#shatShell').addClass('museo-slab-500');
+			$('#shatShell').addClass('museo-slab-100');
 
 			for (var i = 0; i < 200 ; i++)
 				this.letterCounts[i] = 0;

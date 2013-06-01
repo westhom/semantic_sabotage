@@ -15,7 +15,7 @@ var mode = function(id) {
 		// This gets called once after the mode is created.
 		init: function() {
 			this.el.append("<div id='tagged_container' class='container bg-white'></div>");
-			$('#tagged_container').append('<div id="transcript" class="transcript museo-slab-300 size-32"></div>');
+			$('#tagged_container').append('<div id="transcript" class="transcript museo-slab-100 size-32"></div>');
 		},
 
 		// Gets called evertime you go to the mode.

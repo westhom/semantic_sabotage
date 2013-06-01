@@ -18,7 +18,7 @@ var mode = function(id) {
 		// This gets called once after the mode is created.
 		init: function() {
 			this.el.append("<div id='blurry_container' class='container' style='background-color: #191919'></div>");
-			$('#blurry_container').append('<div id="transcript" class="transcript proxima-nova-400 size-48"></div>');
+			$('#blurry_container').append('<div id="transcript" class="transcript meta-serif-book size-48"></div>');
 		},
 
 		// Gets called evertime you go to the mode.
@@ -62,29 +62,28 @@ var mode = function(id) {
 		appendWordInContext: function(msg) {
 
 			var cat = 'blank';
-			var catColor = '#FFBE73'; //tan
+			//var catColor = '#FFBE73'; //tan
 		 	if($.inArray('work', msg.cats) >= 0) { 
 		 		cat = 'work';
-		 		catColor = '#0A7AA6'; //blue
+		 		//catColor = '#0A7AA6'; //blue
 		 	} else if($.inArray('relig', msg.cats) >= 0) {
 		 		cat = 'relig';
-		 		catColor = '#FF8900'; //bright orange
+		 		//catColor = '#FF8900'; //bright orange
 		 	} else if($.inArray('relativ', msg.cats) >= 0) {
 		 		cat = 'relativ';
-		 		catColor = '#FFB800'; //yellow
+		 		//catColor = '#FFB800'; //yellow
 		 	} else if ($.inArray('endPunct', msg.cats) >= 0) {
 		 		cat = 'punct';
-		 		catColor = '#FFBE73'; //tan
+		 		//catColor = '#FFBE73'; //tan
 		 	} else if ($.inArray('leadPunct', msg.cats) >= 0) {
 		 		cat = 'punct';
-		 		catColor = '#FFBE73'; //tan
+		 		//catColor = '#FFBE73'; //tan
 		 	} else if(msg.cats.length === 0) { //not in dictionary
 		 		cat = 'nocat';
-		 		catColor = '#F23005'; //red
+		 		//catColor = '#F23005'; //red
 		 		//console.log('missing word :'+msg.word)
 			}		 	
-
-		 	//console.log(msg.word);
+			
 		 	var word = this.htmlEncode(msg.word);
 		 	
 		 	// end punct always followed by space
@@ -92,6 +91,7 @@ var mode = function(id) {
 		 		var s = $('<span class="' + cat + '">' + word + ' ' + '</span>');
 				$('#blurry_container #transcript').append(s);
 
+				var catColor = $(s).css('color');
 				setTimeout(function(e){
 					e.css({'color':'transparent', 'text-shadow':'0 0 18px '+ catColor});
 				}, 20, s);
@@ -108,8 +108,9 @@ var mode = function(id) {
 		 		var s; 
 		 		if (this.lastEndPunct) s = $('<span class="' + cat + '">' + word + '</span>');
 		 		else s = $('<span class="' + cat + '">' + ' ' + word + '</span>');
-				$(s).css('color',catColor);
 		 		$('#blurry_container #transcript').append(s);
+
+				var catColor = $(s).css('color');
 
 				setTimeout(function(e){
 					e.css({'color':'transparent', 'text-shadow':'0 0 36px '+ catColor});
@@ -123,8 +124,9 @@ var mode = function(id) {
 		 		
 		 		if (!this.lastLeadPunct) $('#blurry_container #transcript').append('<span class="space"> </span>');
 		 		var s = $('<span class="' + cat + '">' + word + '</span>');
-				$(s).css('color',catColor);
 		 		$('#blurry_container #transcript').append(s);
+
+				var catColor = $(s).css('color');
 			
 				setTimeout(function(e){
 					e.css({'color':'transparent', 'text-shadow':'0 0 36px '+ catColor});
