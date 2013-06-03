@@ -121,6 +121,7 @@ var mode = function(id) {
 					// creates and particle div and establishes placement location
 					var p = document.createElement('div');
 					$(p).addClass('particle ' + this.storeClass );
+					$(p).css('transform','translate(' + x + 'px, ' + y + 'px)');
 					$(p).css('-webkit-transform','translate(' + x + 'px, ' + y + 'px)');
 
 					// creates word object with appended message for eventual placement into the particle object
