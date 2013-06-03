@@ -12,8 +12,9 @@ var mode = function(id) {
 		buildSentence: true,
 		sentenceCount: 0,
 		sentenceWordCount: 0,
-
-				 
+		sentenceLengths: [5,4,7,5,6],
+		sentenceLengthIndex: 0,
+		 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
@@ -55,6 +56,27 @@ var mode = function(id) {
 		    clearTimeout(this.timeoutEvents[i]);
 	    };
     },
+
+    //replace all the classes of the div with the new ones
+    replaceWord: function(el, word, categories) {  
+			el.removeClass();
+			el.addClass('landing-word');
+			
+			for (j in categories) 
+				{ el.addClass(categories[j]); }			
+			el.html(word.toUpperCase());
+
+			//make it invisible and then show it?
+			el.css('opacity', '0.0');
+			
+			setTimeout(function(element){
+				element.addClass('opacity-tween');
+			}, 250, el);
+
+			setTimeout(function(element){
+				element.css('opacity', '1.0');
+			}, 500, el);
+		},
 
     setWordPositions: function(words) {
     	//words is a jQuery collection
@@ -104,6 +126,9 @@ var mode = function(id) {
 						}
 					}
 
+					//add an undefined class
+					if (msg.cats.length == 0) el.addClass('no_category');
+
 					el.css('left', $('#madlib').width());
 					el.css('top', '200px');
 
@@ -121,10 +146,13 @@ var mode = function(id) {
 				}
 				*/
 				//Instead of using punctuation, use word count to cap the number of word objects
-				if (this.sentenceWordCount > 4)
+				if (this.sentenceWordCount >= this.sentenceLengths[this.sentenceLengthIndex])
 				{
+					//console.log(this.sentenceLengths[this.sentenceLengthIndex]);
 					this.buildSentence = false;
 					this.sentenceCount = 0;
+					this.sentenceLengthIndex = (this.sentenceLengthIndex+1)%this.sentenceLengths.length;
+
 				}
 			}
 
@@ -139,40 +167,37 @@ var mode = function(id) {
 					{
 						//if it finds something with the same class
 						var el = $('.' + msg.cats[i]).first();
+						
 						if (el.size() > 0)
 						{	
 							if (el.html() != msg.word)
 							{
-								//console.log('found: ' + el.html());
-								
-								//replace all the classes of the div with the new ones
-								el.removeClass();
-								el.addClass('landing-word');
-								for (j in msg.cats) 
-									{ el.addClass(msg.cats[j]); }			
-								el.html(msg.word.toUpperCase());
-
-								//make it invisible and then show it?
-								el.css('opacity', '0.0');
-								
-								setTimeout(function(element){
-									element.addClass('opacity-tween');
-								}, 250, el);
-
-								setTimeout(function(element){
-									element.css('opacity', '1.0');
-								}, 500, el);
+								//console.log('found: ' + el.html());				
+								this.replaceWord(el, msg.word, msg.cats);
 							}
 						}
 						//break so that the same word doesn't appear twice
 						break;
+					}
+					//check for undefined category too
+					if (msg.cats.length == 0)
+					{
+						var el = $('.no_category').first();
+						if (el.size() > 0)
+						{	
+							if (el.html() != msg.word)
+							{
+								//console.log('found: ' + el.html());				
+								this.replaceWord(el, msg.word, msg.cats);
+							}
+						}
 					}
 				}
 				//terminate after a certain number of sentences
 				//starting on sentences is clean
 				else {
 					if ((msg.word == '.') || (msg.word == '!') || (msg.word == '?')) this.sentenceCount++;
-					if (this.sentenceCount > 2) {
+					if (this.sentenceCount > 3) {
 						this.buildSentence = true;
 						this.sentenceWordCount = 0;
 						
