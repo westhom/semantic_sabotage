@@ -10,15 +10,17 @@
 		color-stop(0.1, rgb(60,60,60)),
 		color-stop(0.9, rgb(180,180,180))
 	);
+	overflow: visible;
 }
 
 #black_list .bigText{
 	position:absolute;
-	top:0px;
-	left:0px;
+	top:0em;
+	left:0.25em;
 	width: 6000px;
 	font-size: 260px;
+	overflow: visible;
 
-	transition: color 1s ease-out, opacity 3s linear, top 6s ease-in 0.5s;
-	-webkit-transition: color 1s ease-out, opacity 3s linear, top 6s ease-in 0.5s;
+	transition: color 1s ease-out, opacity 3s ease-out, top 6s ease-in 0.5s;
+	-webkit-transition: color 1s ease-out, opacity 3s ease-out, top 6s ease-in 0.5s;
 }	
