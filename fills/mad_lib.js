@@ -1,4 +1,4 @@
-var mode = function(id) {
+var mad_lib = function(id) {
 
 	return {
 	

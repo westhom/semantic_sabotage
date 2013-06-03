@@ -1,4 +1,4 @@
-var mode = function(id) {
+var scrabble = function(id) {
 
 	return {
 	

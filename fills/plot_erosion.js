@@ -1,4 +1,4 @@
-var mode = function(id) {
+var plot_erosion = function(id) {
 
 	return {
 	

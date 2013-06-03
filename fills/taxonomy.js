@@ -1,4 +1,4 @@
-var mode = function(id) {
+var taxonomy = function(id) {
 
 	return {
 	

@@ -5,7 +5,7 @@ fully-commented explanation of methods and usage.
 
 */
 
-var mode = function(id) {
+var template_wordStack = function(id) {
 
 	return {
 	

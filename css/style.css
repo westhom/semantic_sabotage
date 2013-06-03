@@ -133,8 +133,8 @@ legend{
 }
 
 #columnLeft.delay {
-	animation-delay: .4s;
-	-webkit-animation-delay: .4s;
+	animation-delay: .5s;
+	-webkit-animation-delay: .5s;
 }
 
 #columnRight {
@@ -143,8 +143,8 @@ legend{
 }
 
 #columnRight.delay {
-	animation-delay: .5s;
-	-webkit-animation-delay: .5s;
+	animation-delay: .6s;
+	-webkit-animation-delay: .6s;
 }
 
 #columnRight a {

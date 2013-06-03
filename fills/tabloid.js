@@ -1,4 +1,4 @@
-var mode = function(id) {
+var tabloid = function(id) {
 
 	return {
 	

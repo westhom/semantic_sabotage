@@ -46,6 +46,9 @@ window.requestAnimFrame = (function(){
 
 // On page load
 function init() {
+	
+	// Load fills
+	drawFills();
 
 	// bind submit URL form to callback
 	$('#youtube_load').ajaxForm({ 
@@ -61,17 +64,9 @@ function init() {
 		var type = $(this).data('icon');
 		$(this).attr('src', 'img/icons/'+type+'.png');
 	});
-	
-	// Load fills
-	loadFills();
-	
-	// Wait for fills to load before inserting them into the DOM
-	$(document).on('loadedFills', function(e, modes) {
-		// Add menu element for each fill
-		drawFills(modes);
-		// Redirect to mode if specified in URL
-		checkURL();
-	});
+
+	checkURL();
+
 }
 
 // Parse URL and redirect to a specific mode if necessary
@@ -103,57 +98,7 @@ function checkURL() {
 
 }
 
-// Load fills from directory into `modes` object
-function loadFills() {
-
-	// Get fill filenames from fills_load.php
-	$.ajax({
-		type: 'get',
-		dataType: 'json',
-			url: "php/fills_load.php",
-			success: function(resp){
-				var fills = resp.fills;
-
-				// need separate iterator for async calls
-				var j = 0;
-				// For each fill, load javascript.
-				for (var i=0; i<fills.length; i++) {				
-					// Use anonymous function and pass in filename because
-					// .getScript is asynchronous
-					(function(name) {	
-						$.getScript("fills/"+fills[i], function(data, textStatus, jqxhr) {
-							
-							// Strip off .js and pass name to mode for element id.
-							var m = new mode(name.substr(0, name.lastIndexOf('.')));
-
-							modes.push(m);
-							
-							j++;
-							// When the last fill finishes loading, trigger the event
-							if (j == fills.length) {
-								$(document).trigger('loadedFills',[modes]);
-							}
-						});
-					})(fills[i]);
-				}
-
-				// Load CSS for fills.
-				for (var i=0; i<resp.styles.length; i++) {					
-					$('<style type="text/css"></style>')
-						.html('@import url("fills/css/' + resp.styles[i] + '")')
-						.appendTo("head");
-				}
-			}
-	});
-}
-
-// Insert a DOM element in the menu for each mode
-function drawFills(modes) {
-	// Sort alphebetically
-	modes = modes.sort(function(a,b){
-		if (a.name.toLowerCase() == b.name.toLowerCase()) return 0;
-		return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1:-1;
-	});
+function drawFills() {
 	$.each(modes, function(i,m){
 		var color = (m.template==true) ? 'whiteOnGray' : 'blackOnWhite';
 		var section = (m.template==true) ? '#templates' : '#transforms';
@@ -171,7 +116,8 @@ function drawFills(modes) {
 
 // After clicking a menu link, should push new URL state before switching to mode
 // Wrapper for goToMode
-function linkToMode(m, title) {
+function linkToMode(m) {
+	var title = modes[m].name;
 	History.pushState(null, null, buildStateFromArguments(m));
 	document.title = title;
 	goToMode(m, true);
