@@ -1,4 +1,4 @@
-![Semantic Sabotage](https://raw.github.com/sosolimited/eyeo_semanticsabotage/master/img/logo.png)
+![Semantic Sabotage](https://raw.github.com/sosolimited/semantic_sabotage/master/img/logo.png)
 
 ## Introduction
 
@@ -21,7 +21,7 @@ You can install Apache and PHP manually on [OSX](http://coolestguyplanettech.com
 
 + Enable Apache and PHP (instructions linked above).
 
-+ See [Eyeo-Architecture.pdf](https://github.com/sosolimited/eyeo_semanticsabotage/blob/master/Eyeo-Architecture.pdf) for more about software layout.
++ See [Eyeo-Architecture.pdf](https://github.com/sosolimited/semantic_sabotage/blob/master/Eyeo-Architecture.pdf) for more about software layout.
 
 ## Create your own
 
@@ -132,7 +132,7 @@ YouTube search terms can be modified with ', cc' to isolate results to content w
 + http://www.youtube.com/watch?v=cpQtyCCJk0c - beatles 'oh yeah'
 + http://www.youtube.com/watch?v=KaOC9danxNo - Astronaut singing "Ground Control to Major Tom" - good cc
 + http://www.youtube.com/watch?v=iBVtRPmMZXY - Andrew Soloman on hope
-+ http://www.youtube.com/watch?v=YLO7tCdBVrA - Bob Ross remixed **** Currently crashes app.
++ http://www.youtube.com/watch?v=YLO7tCdBVrA - Bob Ross remixed
 + http://www.youtube.com/watch?v=weNO9k1TXS0 - Glenn Danzig on books
 + http://www.youtube.com/watch?v=EOCcFcgRcTg - "America" by Allen Ginsberg
 + http://www.youtube.com/watch?v=l26Uq3PX-fk - Maya Angelou Presidential Medal of Freedom recipiant
@@ -144,7 +144,6 @@ YouTube search terms can be modified with ', cc' to isolate results to content w
 + http://www.youtube.com/watch?v=Uq1noGpVfEU - Syrian army beating civilian 
 + http://www.youtube.com/watch?v=28BXqQWqYJU - There Will Be Blood Scene (lots of silences)
 + http://www.youtube.com/watch?v=ALS92big4TY - Pussy Riot Punk Prayer (singing in russian, subtitles in english)
-+ http://www.youtube.com/user/blankonblank?feature=watch - PBS blank on blank series **** NOT A VALID LINK - GO HERE FOR VIDS
 + http://www.youtube.com/watch?v=jq42aHX4qk4 - I am the walrus good captions
 + http://www.youtube.com/watch?v=JnA8GUtXpXY&t=6m0s - The Extended Mind (start at 6:00 for crazy)
 
