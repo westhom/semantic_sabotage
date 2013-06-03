@@ -47,7 +47,7 @@ window.requestAnimFrame = (function(){
 // On page load
 function init() {
 	
-	// Load fills
+	// Load mode containers and fill menu items
 	drawFills();
 
 	// bind submit URL form to callback
@@ -103,7 +103,7 @@ function drawFills() {
 		var color = (m.template==true) ? 'whiteOnGray' : 'blackOnWhite';
 		var section = (m.template==true) ? '#templates' : '#transforms';
 		var title = m.name+' | Semantic Sabotage'
-		var modeHTML = '<li><span class="modeName proxima-nova-400 '+color+'" href="#" id="mode'+i+'" onclick="linkToMode('+i+',\''+title+'\');" >'+m.name+'</span></li>'
+		var modeHTML = '<li><span class="modeName proxima-nova-400 '+color+'" href="#" id="mode'+i+'" onclick="linkToMode('+i+');" >'+m.name+'</span></li>'
 		// Append mode menu item to DOM
 		$(section).append(modeHTML);
 		// Append hidden mode container to DOM.
@@ -119,7 +119,6 @@ function drawFills() {
 function linkToMode(m) {
 	var title = modes[m].name;
 	History.pushState(null, null, buildStateFromArguments(m));
-	document.title = title;
 	goToMode(m, true);
 }
 
@@ -132,7 +131,9 @@ function goToMode(m, fullSetup, video, time) {
 	console.log("Loading mode: ", modes[m].name);
 	if (m >= 0 && m < modes.length) {
 		curMode = m;
-
+		
+		document.title = modes[curMode].name + ' | Semantic Sabotage';
+		
 		// Hide menu and show modes container.
 		$('#menu').hide();
 		turnOffAnimations();
@@ -297,7 +298,7 @@ function showMenu() {
 
 	// Reset URL to root
 	History.pushState(null, null, '?');
-	document.title = 'Semantic Sabotage'
+	document.title = 'Semantic Sabotage';
 	
 	$('#menu').show();
 	$('#menu').scrollTop('0px');
