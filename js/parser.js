@@ -13,21 +13,14 @@ var Parser = function(db, messages) {
 			// making two tables for LIWC because it's faster
 
 			// create cached_messages table if nec
-			//this.db.dropTable("cached_messages");
 			if (!this.db.tableExists("cached_messages")) {
 		  	this.db.createTable("cached_messages", ["ytID", "messages"]);
 				this.db.commit();
 			}
 
-			// Use these two to trigger a re-build of the LIWC database
-			//this.db.dropTable("LIWC_words");
-			//this.db.dropTable("LIWC_words_wild");
-
 			// load non-wild table if needed
-
 		  if (!this.db.tableExists("LIWC_words")) {
 		  	this.db.createTable("LIWC_words", ["word", "cats", "wildcard"]);
-		  	//db.truncate("LIWC_words");
 		  	for (var i=0; i<LIWC.length; i++) {
 		  		if (LIWC[i]['word'])
 				  	this.db.insertOrUpdate("LIWC_words", {word: LIWC[i]['word']}, {word: LIWC[i]['word'], wildcard: false, cats: LIWC[i]['cat']});
@@ -38,7 +31,6 @@ var Parser = function(db, messages) {
 	  	// then load wild table
 		  if (!this.db.tableExists("LIWC_words_wild")) {
 		  	this.db.createTable("LIWC_words_wild", ["word", "cats", "wildcard"]);
-		  	//db.truncate("LIWC_words_wild");
 			  
 			  for (var i=0; i<LIWC_wild.length; i++) {
 		  		if (LIWC_wild[i]['word'])
@@ -117,59 +109,38 @@ var Parser = function(db, messages) {
 					var leadPunct = null;
 					var endPunct = null;
 		
-					//first look for a URL
-					var urlText = tok.match(urlRegEx);
-					if (urlText) {
-						//if (print) console.log(urlText[0].toString());
-						//word = urlText[0].toString();
-						//if (print) console.log("Found URL, not adding: " + urlText[0].toString());
+					// strip any leading punctuation
+					leadPunct = tok.match(leadPunctRegEx);
+					if (leadPunct) {
+						//NOTE: substring was not working correctly ... might actually be length that was off
+						//using replace instead
+						tok = tok.replace(leadPunct, "");
 					}
-					//otherwise treat the text normally
-					else
-					{
-						// strip any leading punctuation
-						leadPunct = tok.match(leadPunctRegEx);
-						if (leadPunct) {
-							//NOTE: substring was not working correctly ... might actually be length that was off
-							//using replace instead
-							tok = tok.replace(leadPunct, "");
-							//if (print) console.log('lead p ' + leadPunct);
-						}
-						//if (print) console.log("tok1:"+tok);
-			
-						// pull any numbers	
-						var numWord = tok.match(numberRegEx);
-						if (numWord) {
-							//console.log('number');
-							word = numWord[0];
-						}
-						//console.log("tok2:"+tok);
-			
-						// pull any abbreviations
-						var abbrevWord = tok.match(abbrevRegEx);
-						if (abbrevWord && !word) {
-							//console.log('abbrev ' + abbrevWord);
-							word = abbrevWord[0];
-						}
-						//console.log("tok3:"+tok);
-			
-						// pull out word
-						var plainWord = tok.match(wordRegEx);
-						if (plainWord && !word) {
-							word = plainWord[0];
-						} 
-						//console.log("tok4:"+tok);
-						
-						//look for final punctutation, the leftovers
-						endPunct = tok.replace(word, "");
-						
+		
+					// pull any numbers	
+					var numWord = tok.match(numberRegEx);
+					if (numWord) {
+						//console.log('number');
+						word = numWord[0];
 					}
+		
+					// pull any abbreviations
+					var abbrevWord = tok.match(abbrevRegEx);
+					if (abbrevWord && !word) {
+						//console.log('abbrev ' + abbrevWord);
+						word = abbrevWord[0];
+					}
+		
+					// pull out word
+					var plainWord = tok.match(wordRegEx);
+					if (plainWord && !word) {
+						word = plainWord[0];
+					} 
 					
-					// timing
-					//var msgTime = start + Math.round(i*wordDur);
-					// Now word timing is based on char length of words. 
+					//look for final punctutation, the leftovers
+					endPunct = tok.replace(word, "");
 					
-					//console.log(leadPunct + "___" + word + "___" +endPunct);
+					
 
 					// add message
 					if (leadPunct) {
@@ -206,41 +177,33 @@ var Parser = function(db, messages) {
 			this.statsHandler.doStats(start+dur);
 		},
 		
+		// returns an array of the LIWC categories associated with the word, [] if none found
+		// first check regular words table, if it doesn't find the word, check wildcards table
 		getCats: function(w) {
 			var cats = [];
 			
-			// check for regular match
+			// check for match in regular words table
 			var res = this.db.query("LIWC_words", {word: w.toLowerCase()}); 
 			if (res.length > 0) {
 				cats = res[0].cats;
-				//console.log("found cats for word "+w);
-				//console.log(cats);
 			}
 			
-			// check for wildcards
+			// check for match in wildcards table
 			else {
 			// select all books by Torday and Sparrow
 				res = this.db.query("LIWC_words_wild", function(row) {
-			    if(w.toLowerCase().indexOf(row.word) == 0) {
-			        return true;
-			    } else {
-			        return false;
-			    }
+			    return (w.toLowerCase().indexOf(row.word) == 0);
 			  });
 			  if (res.length > 0) {
 				  cats = res[0].cats;
-				  //console.log("found wild cats for word "+w);
-				  //console.log(cats);
 			  }
 			}
-						 
 			return cats;
 		},
 
 		cacheMessages: function(ytID) {
 			this.db.insertOrUpdate("cached_messages", {ytID: ytID}, {ytID: ytID, messages: this.messages});
 			this.db.commit();
-			console.log("cached messages for "+ytID);
 		}
 	}
 };
