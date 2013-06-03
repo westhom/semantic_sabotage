@@ -17,7 +17,7 @@
 #plot_erosion .blank
 {
 	/*color: #FFBE73; /*tan*/
-	color: cornsilk;
+	color: #ffeecc;
 	text-shadow: 0 0 0 transparent;
 
 	transition: opacity 5s ease-in, color 10s ease-in, text-shadow 10s linear;
@@ -27,7 +27,7 @@
 #plot_erosion .punct
 {
 	/*color: #FFBE73; /*tan*/
-	color: cornsilk;
+	color: #ffeecc;
 	text-shadow: 0 0 0 transparent;
 
 	transition: opacity 5s ease-in, color 10s ease-in, text-shadow 50s linear;
