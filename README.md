@@ -17,7 +17,7 @@ You can install Apache and PHP manually on [OSX](http://coolestguyplanettech.com
 
 ## Installation
 
-+ Clone the repo and duplicate fill_firstname_lastname.js, change the name to yours.
++ Fork and clone the repo.
 
 + Enable Apache and PHP (instructions linked above).
 
@@ -54,6 +54,7 @@ We are using this convention to avoid collisions with CSS names.
 Some useful notes
 + Each transform has a high-level container div. Always refer to this with this.el as in 
     ``` this.el.append(<div id=”myDiv”></div>); ```
++ Note that your div ID has to be unique.
 + To change the URL that your transform uses, set the defaultURL var 
     ``` defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE", ```
 + To make your movie start at a specific time, add a &t=0m3s argument to your URL  
@@ -67,6 +68,7 @@ Some useful notes
 The LIWC Dictionary is loaded 
 All words are looked up against the <a href="http://www.liwc.net/" target="_blank">LIWC Dictionary</a>. 
 
++ LIWC categories and abreviations can be found [here](https://github.com/sosolimited/semantic_sabotage/wiki/LIWC-Categories">).
 + getCategoryIndex(category) -- returns the index of the category (useful for comparing proximity of word cats ~ relatedness), returns -1 if not found
 + getCategoryFullName(category) -- returns full name of category, returns abbreviated name if not found
 
