@@ -67,6 +67,8 @@
 
 		<div id="videoDiv"></div>
 
+		<div id="unsupported" class="proxima-nova-400-italic">Please view Semantic Sabotage in Chrome, Safari, or Firefox.</div>
+
 		<div id="menu">
 				
 			<div id="columnLeft" class="column animated delay fadeIn">
@@ -121,6 +123,9 @@
 
 	<script> 
 		$(document).ready(function() { 
+			// Check browser type.
+			checkBrowser();
+			// Initialize the app.
 			init();
 		}); 
 	</script>
