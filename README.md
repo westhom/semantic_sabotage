@@ -78,9 +78,9 @@ All words are looked up against the <a href="http://www.liwc.net/" target="_blan
 Use these specs to get useful information out of incoming messages.
 
 Sent every word 
-```
+```javascript
 {   
-  type: ”word”,    
+  type: 'word',    
   timeDiff: int,   
   dbid: (uniquewords_id) int, 
   word: string,  
@@ -92,9 +92,9 @@ Sent every word
 ```
 
 Sent every time new n-gram is found ( when more than 3 instances have appeared) 
-```
+```javascript
 {	 
-  type: ”newNGram”,  
+  type: 'newNGram',  
   timeDiff: int, 
   dbid: int, 
   ngram: string[], 
@@ -103,9 +103,9 @@ Sent every time new n-gram is found ( when more than 3 instances have appeared)
 ```
 
 Sent every line  
-```
+```javascript
 { 	
-  type: “stats”, 
+  type: 'stats', 
   timeDiff: int, 
   posemo: float[2], 
   negemo: float[2], 
