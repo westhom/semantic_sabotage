@@ -57,11 +57,14 @@ var mode = function(id) {
 			// If it's not punctuation.
 			if($.inArray('punct', msg.cats) < 0)
 			{
+				// convert the incoming word to lowercase
+				var word = msg.word.toLowerCase();
+
 				// If the word is longer than 4 letters long.
 				// Note: We're doing this to slow the flow of words and give
 				// the letter animations time to play out.
-				if(msg.word.length > 4){
-					//console.log(msg.word);
+				if(word.length > 4){
+					//console.log(word);
 				 	
 				 	// For all the letters current in the DOM.
 				 	this.el.find('.centerContainer').children().each(function(i){
@@ -76,12 +79,12 @@ var mode = function(id) {
 				 	var sp = this.letterSpacing;
 
 				 	// Reset all the found flags.
-				 	for(var j=0; j<msg.word.length; j++){
+				 	for(var j=0; j<word.length; j++){
 				 		flags[j] = false;
 				 	}
 
 				 	// For each letter in the new incoming word.
-				 	for(var i=0; i < msg.word.length; i++){
+				 	for(var i=0; i < word.length; i++){
 				 		// If it hasn't been found yet.
 				 		if(!flags[i]){
 				 			// For each letter in the current word on screen.
@@ -89,7 +92,7 @@ var mode = function(id) {
 				 				// If the letter has not already been used.
 				 				if($(this).attr("used") == "false"){
 				 					// If the letter matches the letter in the incoming word.
-						 			if(msg.word[i] == $(this).html()){
+						 			if(word[i] == $(this).html()){
 						 				// Move it to the position in the new incoming word.
 						 				$(this).css('left', i*sp+'px');						 										 				
 						 				// Flag as used.
@@ -113,10 +116,10 @@ var mode = function(id) {
 
 			 		
 			 		// Create elements for letters that haven't been found in previous word. 
-			 		for(var j=0; j < msg.word.length; j++){			 			
+			 		for(var j=0; j < word.length; j++){			 			
 			 			if(flags[j] == false){
 			 				// Create element and position it appropriately. 	 				
-				 			var newLetter = $('<span class="letter" style="left:'+ j*this.letterSpacing +'px; top:200px; opacity:0; color:white;">'+msg.word[j]+'</span>');
+				 			var newLetter = $('<span class="letter" style="left:'+ j*this.letterSpacing +'px; top:200px; opacity:0; color:white;">'+word[j]+'</span>');
 							// Append it to the DOM.				 			
 				 			this.el.find('.centerContainer').append(newLetter);
 				 			
@@ -129,7 +132,7 @@ var mode = function(id) {
 			 			}
 			 		}
 					// Keep track of the previous word.
-	 				this.lastWord = msg.word;
+	 				this.lastWord = word;
 	
  				}
 		 	}
