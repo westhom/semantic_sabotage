@@ -18,7 +18,7 @@ var mode = function(id) {
 		// This gets called once after the mode is created.
 		init: function() {
 			this.el.append("<div id='blurry_container' class='container' style='background-color: #191919'></div>");
-			$('#blurry_container').append('<div id="transcript" class="transcript meta-serif-book size-48"></div>');
+			$('#blurry_container').append('<div id="transcript" class="transcript meta-serif-book"></div>');
 		},
 
 		// Gets called evertime you go to the mode.
@@ -113,7 +113,7 @@ var mode = function(id) {
 				var catColor = $(s).css('color');
 
 				setTimeout(function(e){
-					e.css({'color':'transparent', 'text-shadow':'0 0 36px '+ catColor});
+					e.css({'color':'transparent', 'text-shadow':'0 0 24px '+ catColor});
 				}, 20, s);
 
 		 		this.lastLeadPunct = true;
@@ -129,7 +129,7 @@ var mode = function(id) {
 				var catColor = $(s).css('color');
 			
 				setTimeout(function(e){
-					e.css({'color':'transparent', 'text-shadow':'0 0 36px '+ catColor});
+					e.css({'color':'transparent', 'text-shadow':'0 0 24px '+ catColor});
 				}, 20, s);
 
 		 		if (cat != 'blank') {
