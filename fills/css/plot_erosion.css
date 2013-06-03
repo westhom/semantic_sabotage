@@ -11,12 +11,13 @@
 #plot_erosion .transcript 
 {
 	padding: 24px;
-	
+	font-size: 36px;
 }
 
 #plot_erosion .blank
 {
-	color: #FFBE73; /*tan*/
+	/*color: #FFBE73; /*tan*/
+	color: cornsilk;
 	text-shadow: 0 0 0 transparent;
 
 	transition: opacity 5s ease-in, color 10s ease-in, text-shadow 10s linear;
@@ -25,7 +26,8 @@
 
 #plot_erosion .punct
 {
-	color: #FFBE73; /*tan*/
+	/*color: #FFBE73; /*tan*/
+	color: cornsilk;
 	text-shadow: 0 0 0 transparent;
 
 	transition: opacity 5s ease-in, color 10s ease-in, text-shadow 50s linear;
@@ -67,9 +69,3 @@
 	transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;
 	-webkit-transition: opacity 5s ease-in, color 35s ease-in, text-shadow 35s linear;		
 }
-
-#plot_erosion .size-48
-{
-	font-size: 48px;
-}
-
