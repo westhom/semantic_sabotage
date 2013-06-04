@@ -82,7 +82,7 @@ var mad_lib = function(id) {
     setWordPositions: function(words) {
     	//words is a jQuery collection
     	//console.log('set word pos');
-    	var x = 100;
+    	var x = 24;
     	var space_width = 24;
     	words.each(function(i) {
     		
