@@ -117,7 +117,6 @@ function drawFills() {
 // After clicking a menu link, should push new URL state before switching to mode
 // Wrapper for goToMode
 function linkToMode(m) {
-	var title = modes[m].name;
 	History.pushState(null, null, buildStateFromArguments(m));
 	goToMode(m, true);
 }
