@@ -181,9 +181,6 @@
     };
 
     Piecon.reset = function() {
-        if (originalTitle) {
-            document.title = originalTitle;
-        }
 
         if (originalFavicon) {
             currentFavicon = originalFavicon;
