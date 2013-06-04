@@ -12,7 +12,7 @@ in the fills/ and fills/css/ directories accordingly.
 
 */
 
-var mode = function(id) {
+var template_leftScroll = function(id) {
 
 	return {
 

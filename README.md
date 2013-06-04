@@ -23,44 +23,83 @@ You can install Apache and PHP manually on [OSX](http://coolestguyplanettech.com
 
 + See [Eyeo-Architecture.pdf](https://github.com/sosolimited/semantic_sabotage/blob/master/Eyeo-Architecture.pdf) for more about software layout.
 
-## Create your own
 
-- Once you have chosen a transform to start with, navigate to the fills directory.
-- Copy and rename the .js file as well as it’s corresponding .css file.
-  For example: if you were starting with the left scroll template,
-  Copy and rename fills/template_leftScroll.js into the fills directory.
-  Then copy and rename fills/css/template_leftScroll.css into the fills/css directory.
-  The js and css files must have the same exact name.
-- Open your new js file and change the name at the top. e.g. Change 
-    name: "Left Scroll",
-to 
-   name: “My Transform”
-- Open your new css file and change the selectors to match the name of your file
-  e.g. if you started with template_leftScroll and renamed it my_transform, you would change all instances of #template_leftScroll in the css file to #my_transform.
-We are using this convention to avoid collisions with CSS names.
-- If you started with a template, you should comment out the line at the top of the js file
-   template: true,
-- Reload the page in your browser and you should see your new transform in the list.
+## Get the Source Code
+Assuming you've followed the Apache and PHP setup instructions above, you're ready to get the source code. We recommend that you sign up for GitHub account if you don’t have one. If you don’t want to sign up for one, there are instructions below for getting the code.
 
-- The main functions you’ll be working with in the transform are   
+*With a GitHub account*
+  1. Log into your account and go to the URL https://github.com/sosolimited/semantic_sabotage
+  2. Press the Fork button at the top right, which will fork the repo to your account.
+  3. On a Mac, use Terminal and on Windows, use cmd, and  
+   Navigate to the folder where apache is set up.  
+   If you used MAMP on a Mac to set up apache, the folder is Applications/MAMP/htdocs  
+   If you set up Apache manually on a Mac, the folder is ~/Sites  
+      If you used WAMP on Windows to set up apache, the folder is C:/WAMP/www  
+  4. Type in   
+   ```git clone git@github.com:your_name/semantic_sabotage.git```  
+   where your_name is your GitHub account name, and press return.  
+   This will create a folder in your current folder called semantic_sabotage  
+  5. Navigate into this folder.  
+  6. Open this folder in Sublime or your chosen text editor.  
+ 
 
-  init : Called once after the transform is created. Build things you will re-use here.  
-  enter : Called once each time the transform is shown. Reset your transform and clean things up in here.  
-  handleWord : Called each time a new word is ready.  
-  handleSentenceEnd : Called each time a sentence is completed.  
-  handleStats : Called every time a line of captions is completed (true?). Passes in interesting linguistic information.  
-  appendWordInContext :   Called by handleWord to append element to DOM.  
+*Without a GitHub account*
+  1. Go to the URL https://github.com/sosolimited/semantic_sabotage
+  2. Press the Zip button with the down arrow to download the code.
+  3. Save it into the folder where Apache is set up. See step 3 above for where this is on different machines.
+  4. Navigate to the folder where you saved the zip files and unzip it.
+  5. It should be in a folder called semantic_sabotage_master
+  6. Open this folder in Sublime or your chosen text editor. 
 
-Some useful notes
-+ Each transform has a high-level container div. Always refer to this with this.el as in 
-    ``` this.el.append(<div id=”myDiv”></div>); ```
-+ Note that your div ID has to be unique.
-+ To change the URL that your transform uses, set the defaultURL var 
-    ``` defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE", ```
-+ To make your movie start at a specific time, add a &t=0m3s argument to your URL  
-    ``` defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE&t=0m5s", ```
 
-## Software architecture
+## Creating your own transform
+You can start with a template, with an existing transform, or from scratch.
+We’re going to do a quick walkthrough of the steps to create your own. 
+
+
+  1. Once you have chosen a transform from sabotage.sosolimited.com to start with, navigate to the fills directory.
+  2. Copy and rename the .js file as well as it’s corresponding .css file.  
+  For example: if you were starting with the left scroll template,  
+  Copy and rename fills/template_leftScroll.js into the fills directory.  
+  Then copy and rename fills/css/template_leftScroll.css into the fills/css directory.  
+  The js and css files must have the same exact name.   
+  For the following instructions, let’s assume you named them my_transform.js and my_transform.css  
+  3. Open your new js file and change the following two things  
+
+    -At the very top, there is a line that looks like  
+    ```var mode = function(id) {```  
+    Change it to be the name of your js file. For example,  
+    ```var my_transform = function(id) {```  
+
+    -Near at the top, give your transform a name. This is how it will appear in the menu list. For example, change 
+    ```name: "Left Scroll",```  
+    to   
+    ```name: “My Sweet Transform”,```  
+  4. Open your new css file and change the selectors to match the name of your file  
+  e.g. if you started with template_leftScroll and renamed it my_transform, you would change all instances of #template_leftScroll in the css file to #my_transform.  
+We are using this convention to avoid collisions with CSS names.  
+  5. If you started with a template, you should comment out the line at the top of the js file  
+   ```template: true,```  
+  6. Reload the page in your browser and you should see your new transform in the list.  
+
+*The main functions you’ll be working with in the transform are*  
+init : Called once after the transform is created. Build things you will re-use here.
+enter : Called once each time the transform is shown. Reset your transform and clean things up in here.
+handleWord : Called each time a new word is ready.
+handleSentenceEnd : Called each time a sentence is completed.
+handleStats : Called every time a line of captions is completed. Passes in interesting linguistic information.
+appendWordInContext :   Called by handleWord to append element to DOM.
+
+Some useful notes:
+- Each transform has a high-level container div. Always refer to this with this.el as in
+    ```this.el.append(<div id=”myDiv”></div>);```
+- To change the URL that your transform uses, set the defaultURL var
+    ```defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE",```
+- To make your movie start at a specific time, add a &t=0m3s argument to your URL 
+    ```defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE&t=0m5s",```
+- See the Message Specs section of the WIKI for detailed information on the messages.
+
+
 
 
 ## LIWC Dictionary
@@ -73,52 +112,6 @@ All words are looked up against the <a href="http://www.liwc.net/" target="_blan
 + getCategoryFullName(category) -- returns full name of category, returns abbreviated name if not found
 
 
-## Message specs
-
-Use these specs to get useful information out of incoming messages.
-
-Sent every word 
-```
-{   
-  type: ”word”,    
-  timeDiff: int,   
-  dbid: (uniquewords_id) int, 
-  word: string,  
-  speaker: int,  
-  cats: string[],  
-  wordInstances: int,  
-  ngrams: [ [ngramID, ngramInstances], ... ] 
-} 
-```
-
-Sent every time new n-gram is found ( when more than 3 instances have appeared) 
-```
-{	 
-  type: ”newNGram”,  
-  timeDiff: int, 
-  dbid: int, 
-  ngram: string[], 
-  instances: string[] //word ids of last words 
-}  
-```
-
-Sent every line  
-```
-{ 	
-  type: “stats”, 
-  timeDiff: int, 
-  posemo: float[2], 
-  negemo: float[2], 
-  anger: float[2], 
-  I: float[2], 
-  we: float[2], 
-  complexity: float[2], 
-  status: float[2], 
-  depression: float[2], 
-  formality: float[2], 
-  honesty: float[2] 
-} 
-```
 
 ## YouTube Captioning ##
 

@@ -1,4 +1,4 @@
-var mode = function(id) {
+var taxonomy = function(id) {
 
 	return {
 	
@@ -76,11 +76,11 @@ var mode = function(id) {
 
 				if (msg.cats.length <= 0) { // check to see if current message has no category designations
 					$(cc).append('undefined'); // appends "undefined" to indicate that it doesn't fit into any categories
+					$(cc).addClass('undefined'); // appends "undefined" to indicate that it doesn't fit into any categories
 				}
 				else {
 					for (var i=0; i<msg.cats.length; i++) { // for each category designation, appends category names to the categoryContainer
-						if (msg.cats[i] != 'sentencesmode') $(cc).append(msg.cats[i] + ' '); // checks for a LIWC SOSO artifact to ingore it
-//						$(cc).append(msg.cats[i] + ' ');
+						if (msg.cats[i] != msg.cats[i-1] && msg.cats[i] != 'sentencesmode') $(cc).append(msg.cats[i] + ' '); // checks for double-tagging (and for a LIWC SOSO artifact)
 					}
 				}
 				

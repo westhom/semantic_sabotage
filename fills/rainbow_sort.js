@@ -1,4 +1,4 @@
-var mode = function(id) {
+var rainbow_sort = function(id) {
 
 	return {
 	

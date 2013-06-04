@@ -69,7 +69,13 @@ comair_dark: #B139EF #B139EF
 	left: 0px;
 	top: 0px;
 
+	animation: kf_timer linear 30s infinite;
 	-webkit-animation: kf_timer linear 30s infinite;
+}
+
+@keyframes kf_timer {
+	0% {width: 0px;}
+	100% {width: 3600px;}
 }
 
 @-webkit-keyframes kf_timer {
@@ -89,8 +95,15 @@ comair_dark: #B139EF #B139EF
 	border-top-width: 4px;
 	border-color: #80FF80;
 	color:  #80FF80;
+	transform-origin: 0% 0%;
+	animation: kf_marqueeCenter linear 30s infinite;
 	-webkit-transform-origin: 0% 0%;
 	-webkit-animation: kf_marqueeCenter linear 30s infinite;
+}
+
+@keyframes kf_marqueeCenter {
+	0% {transform: rotate(0deg); left: 50%; top: 50%;}
+	100% {transform: rotate(-360deg); left: 50%; top: 50%;}
 }
 
 @-webkit-keyframes kf_marqueeCenter {
@@ -110,9 +123,19 @@ comair_dark: #B139EF #B139EF
 	overflow: visible;
 	text-align: right;
 
+	transform-origin: 0% 50%;
+	animation: kf_marquee linear 30s 1;
+	animation-fill-mode: forwards;
 	-webkit-transform-origin: 0% 50%;
 	-webkit-animation: kf_marquee linear 30s 1;
 	-webkit-animation-fill-mode: forwards;
+}
+
+@keyframes kf_marquee {
+	0% {transform: rotate(0deg); opacity: 0.75}
+	1% {transform: rotate(3.6deg); opacity: 0.33}
+	25% {transform: rotate(90deg); opacity: 0}
+	100% {transform: rotate(360deg); opacity: 0}
 }
 
 @-webkit-keyframes kf_marquee {
@@ -143,6 +166,7 @@ comair_dark: #B139EF #B139EF
 	font-size: 18px;
 	overflow: visible;
 
+	transition: left 30s linear, top 30s linear;;
 	-webkit-transition: left 30s linear, top 30s linear;;
 }
 
@@ -167,8 +191,19 @@ comair_dark: #B139EF #B139EF
 }
 
 #radar .tower {
+	animation: kf_tower linear 30s 1;
+	animation-fill-mode: forwards;
 	-webkit-animation: kf_tower linear 30s 1;
 	-webkit-animation-fill-mode: forwards;
+}
+
+@keyframes kf_tower {
+	0% {color: #DADADA; text-shadow: 0px 0px 10px #DADADA; opacity: 1.0;}
+	2% {color: #BFBFBF; text-shadow: 0px 0px 0px #BFBFBF; opacity: 1.0;}
+	5% {color: #B3A4A4; text-shadow: 0px 0px 0px #B3A4A4; opacity: 1.0;}
+	95% {color: #B3A4A4; text-shadow: 0px 0px 0px #B3A4A4; opacity: 1.0;}
+	98% {color: #B3A4A4; text-shadow: 0px 0px 0px #B3A4A4; opacity: 0;}
+	100% {color: #B3A4A4; text-shadow: 0px 0px 0px #B3A4A4; opacity: 0;}
 }
 
 @-webkit-keyframes kf_tower {
@@ -181,8 +216,19 @@ comair_dark: #B139EF #B139EF
 }
 
 #radar .airfrance {
+	animation: kf_airfrance linear 30s 1;
+	animation-fill-mode: forwards;
 	-webkit-animation: kf_airfrance linear 30s 1;
 	-webkit-animation-fill-mode: forwards;
+}
+
+@keyframes kf_airfrance {
+	0% {color: #EF9800; text-shadow: 0px 0px 10px #EF9800; opacity: 1.0;}
+	2% {color: #E5950A; text-shadow: 0px 0px 0px #E5950A; opacity: 1.0;}
+	5% {color: #E08F00; text-shadow: 0px 0px 0px #E08F00; opacity: 1.0;}
+	95% {color: #E08F00; text-shadow: 0px 0px 0px #E08F00; opacity: 1.0;}
+	98% {color: #E08F00; text-shadow: 0px 0px 0px #E08F00; opacity: 0;}
+	100% {color: #E08F00; text-shadow: 0px 0px 0px #E08F00; opacity: 0;}
 }
 
 @-webkit-keyframes kf_airfrance {
@@ -195,8 +241,19 @@ comair_dark: #B139EF #B139EF
 }
 
 #radar .comair {
+	animation: kf_comair linear 30s 1;
+	animation-fill-mode: forwards;
 	-webkit-animation: kf_comair linear 30s 1;
 	-webkit-animation-fill-mode: forwards;
+}
+
+@keyframes kf_comair {
+	0% {color: #CF82F6; text-shadow: 0px 0px 10px #CF82F6; opacity: 1.0;}
+	2% {color: #C462F6; text-shadow: 0px 0px 0px #C462F6; opacity: 1.0;}
+	5% {color: #B139EF; text-shadow: 0px 0px 0px #B139EF; opacity: 1.0;}
+	95% {color: #B139EF; text-shadow: 0px 0px 0px #B139EF; opacity: 1.0;}
+	98% {color: #B139EF; text-shadow: 0px 0px 0px #B139EF; opacity: 0;}
+	100% {color: #B139EF; text-shadow: 0px 0px 0px #B139EF; opacity: 0;}
 }
 
 @-webkit-keyframes kf_comair {

@@ -35,15 +35,20 @@ window.requestAnimFrame = (function(){
 						};
 })();
 
-// Updates the YouTube progress bar.
+
 (function progressLoop(){
+	// Updates the YouTube progress bar.
 	requestAnimFrame(progressLoop);
 	updateYouTubeProgressBar();
+	//Update the captioning message player object.
 	player.updateMessagePlayback();
 })();
 
 // On page load
 function init() {
+	
+	// Load mode containers and fill menu items
+	drawFills();
 
 	// bind submit URL form to callback
 	$('#youtube_load').ajaxForm({ 
@@ -59,17 +64,9 @@ function init() {
 		var type = $(this).data('icon');
 		$(this).attr('src', 'img/icons/'+type+'.png');
 	});
-	
-	// Load fills
-	loadFills();
-	
-	// Wait for fills to load before inserting them into the DOM
-	$(document).on('loadedFills', function(e, modes) {
-		// Add menu element for each fill
-		drawFills(modes);
-		// Redirect to mode if specified in URL
-		checkURL();
-	});
+
+	checkURL();
+
 }
 
 // Parse URL and redirect to a specific mode if necessary
@@ -101,62 +98,12 @@ function checkURL() {
 
 }
 
-// Load fills from directory into `modes` object
-function loadFills() {
-
-	// Get fill filenames from fills_load.php
-	$.ajax({
-		type: 'get',
-		dataType: 'json',
-			url: "php/fills_load.php",
-			success: function(resp){
-				var fills = resp.fills;
-
-				// need separate iterator for async calls
-				var j = 0;
-				// For each fill, load javascript.
-				for (var i=0; i<fills.length; i++) {				
-					// Use anonymous function and pass in filename because
-					// .getScript is asynchronous
-					(function(name) {	
-						$.getScript("fills/"+fills[i], function(data, textStatus, jqxhr) {
-							
-							// Strip off .js and pass name to mode for element id.
-							var m = new mode(name.substr(0, name.lastIndexOf('.')));
-
-							modes.push(m);
-							
-							j++;
-							// When the last fill finishes loading, trigger the event
-							if (j == fills.length) {
-								$(document).trigger('loadedFills',[modes]);
-							}
-						});
-					})(fills[i]);
-				}
-
-				// Load CSS for fills.
-				for (var i=0; i<resp.styles.length; i++) {					
-					$('<style type="text/css"></style>')
-						.html('@import url("fills/css/' + resp.styles[i] + '")')
-						.appendTo("head");
-				}
-			}
-	});
-}
-
-// Insert a DOM element in the menu for each mode
-function drawFills(modes) {
-	// Sort alphebetically
-	modes = modes.sort(function(a,b){
-		if (a.name.toLowerCase() == b.name.toLowerCase()) return 0;
-		return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1:-1;
-	});
+function drawFills() {
 	$.each(modes, function(i,m){
 		var color = (m.template==true) ? 'whiteOnGray' : 'blackOnWhite';
 		var section = (m.template==true) ? '#templates' : '#transforms';
 		var title = m.name+' | Semantic Sabotage'
-		var modeHTML = '<li><span class="modeName proxima-nova-400 '+color+'" href="#" id="mode'+i+'" onclick="linkToMode('+i+',\''+title+'\');" >'+m.name+'</span></li>'
+		var modeHTML = '<li><span class="modeName proxima-nova-400 '+color+'" href="#" id="mode'+i+'" onclick="linkToMode('+i+');" >'+m.name+'</span></li>'
 		// Append mode menu item to DOM
 		$(section).append(modeHTML);
 		// Append hidden mode container to DOM.
@@ -169,9 +116,8 @@ function drawFills(modes) {
 
 // After clicking a menu link, should push new URL state before switching to mode
 // Wrapper for goToMode
-function linkToMode(m, title) {
+function linkToMode(m) {
 	History.pushState(null, null, buildStateFromArguments(m));
-	document.title = title;
 	goToMode(m, true);
 }
 
@@ -184,7 +130,9 @@ function goToMode(m, fullSetup, video, time) {
 	console.log("Loading mode: ", modes[m].name);
 	if (m >= 0 && m < modes.length) {
 		curMode = m;
-
+		
+		document.title = modes[curMode].name + ' | Semantic Sabotage';
+		
 		// Hide menu and show modes container.
 		$('#menu').hide();
 		turnOffAnimations();
@@ -349,7 +297,7 @@ function showMenu() {
 
 	// Reset URL to root
 	History.pushState(null, null, '?');
-	document.title = 'Semantic Sabotage'
+	document.title = 'Semantic Sabotage';
 	
 	$('#menu').show();
 	$('#menu').scrollTop('0px');
@@ -372,7 +320,77 @@ function showMenu() {
 	stopAllTimers();
 }
 
+function showBrowserMessage() {
+	$('#menu').hide();
+	$('#unsupported').show();
+}
 
+function checkBrowser() {
+	var nVer = navigator.appVersion;
+	var nAgt = navigator.userAgent;
+	var browserName  = navigator.appName;
+	var fullVersion  = ''+parseFloat(navigator.appVersion); 
+	var majorVersion = parseInt(navigator.appVersion,10);
+	var nameOffset,verOffset,ix;
+
+	// In Opera, the true version is after "Opera" or after "Version"
+	if ((verOffset=nAgt.indexOf("Opera"))!=-1) {
+	 browserName = "Opera";
+	 fullVersion = nAgt.substring(verOffset+6);
+	 if ((verOffset=nAgt.indexOf("Version"))!=-1) 
+	   fullVersion = nAgt.substring(verOffset+8);
+	}
+	// In MSIE, the true version is after "MSIE" in userAgent
+	else if ((verOffset=nAgt.indexOf("MSIE"))!=-1) {
+	 browserName = "Microsoft Internet Explorer";
+	 fullVersion = nAgt.substring(verOffset+5);
+	}
+	// In Chrome, the true version is after "Chrome" 
+	else if ((verOffset=nAgt.indexOf("Chrome"))!=-1) {
+	 browserName = "Chrome";
+	 fullVersion = nAgt.substring(verOffset+7);
+	}
+	// In Safari, the true version is after "Safari" or after "Version" 
+	else if ((verOffset=nAgt.indexOf("Safari"))!=-1) {
+	 browserName = "Safari";
+	 fullVersion = nAgt.substring(verOffset+7);
+	 if ((verOffset=nAgt.indexOf("Version"))!=-1) 
+	   fullVersion = nAgt.substring(verOffset+8);
+	}
+	// In Firefox, the true version is after "Firefox" 
+	else if ((verOffset=nAgt.indexOf("Firefox"))!=-1) {
+	 browserName = "Firefox";
+	 fullVersion = nAgt.substring(verOffset+8);
+	}
+	// In most other browsers, "name/version" is at the end of userAgent 
+	else if ( (nameOffset=nAgt.lastIndexOf(' ')+1) < 
+	          (verOffset=nAgt.lastIndexOf('/')) ) 
+	{
+	 browserName = nAgt.substring(nameOffset,verOffset);
+	 fullVersion = nAgt.substring(verOffset+1);
+	 if (browserName.toLowerCase()==browserName.toUpperCase()) {
+	  browserName = navigator.appName;
+	 }
+	}
+	// trim the fullVersion string at semicolon/space if present
+	if ((ix=fullVersion.indexOf(";"))!=-1)
+	   fullVersion=fullVersion.substring(0,ix);
+	if ((ix=fullVersion.indexOf(" "))!=-1)
+	   fullVersion=fullVersion.substring(0,ix);
+
+	majorVersion = parseInt(''+fullVersion,10);
+	if (isNaN(majorVersion)) {
+	 fullVersion  = ''+parseFloat(navigator.appVersion); 
+	 majorVersion = parseInt(navigator.appVersion,10);
+	}
+
+	if(browserName=='Chrome' || browserName=='Safari' || browserName=='Firefox'){
+		// We're good to go. Don't do anything.
+	}else{
+		// Show the browser not supported message.
+		showBrowserMessage();
+	}
+}
 
 function showControls() {
 	$('#navControls').show();

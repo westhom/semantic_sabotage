@@ -1,4 +1,4 @@
-var mode = function(id) {
+var one_by_one = function(id) {
 
 	return {
 	

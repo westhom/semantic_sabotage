@@ -1,4 +1,4 @@
-var mode = function(id) {
+var big_words = function(id) {
 
 	return {
 	
@@ -6,9 +6,9 @@ var mode = function(id) {
 
 		defaultURL: "http://www.youtube.com/watch?v=o1qsr76E5ww&t=0m1s",
 		//defaultURL: "http://www.youtube.com/watch?v=mox4InKEwgU&t=0m5s",
-		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
+
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),		
-				 		
+						
 								
 		lineHeight: 210,
 																

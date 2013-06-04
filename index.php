@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <!--
-	 _____                            __  _     
-	/ ___/___  ____ ___  ____ _____  / /_(_)____
-	\__ \/ _ \/ __ `__ \/ __ `/ __ \/ __/ / ___/
+   _____                            __  _     
+  / ___/___  ____ ___  ____ _____  / /_(_)____
+  \__ \/ _ \/ __ `__ \/ __ `/ __ \/ __/ / ___/
  ___/ /  __/ / / / / / /_/ / / / / /_/ / /__  
 /____/\___/_/ /_/ /_/\__,_/_/ /_/\__/_/\___/  
-																							
-	 _____       __          __                 
-	/ ___/____ _/ /_  ____  / /_____ _____ ____ 
-	\__ \/ __ `/ __ \/ __ \/ __/ __ `/ __ `/ _ \
+
+   _____       __          __                 
+  / ___/____ _/ /_  ____  / /_____ _____ ____ 
+  \__ \/ __ `/ __ \/ __ \/ __/ __ `/ __ `/ _ \
  ___/ / /_/ / /_/ / /_/ / /_/ /_/ / /_/ /  __/
 /____/\__,_/_.___/\____/\__/\__,_/\__, /\___/ 
-																 /____/       
+                                 /____/       
 -->
 <html class="no-js">
 	<head>
@@ -26,6 +26,9 @@
 		<link rel="stylesheet" href="css/fonts.css" type="text/css" media="screen, projection">
 		<link rel="stylesheet" href="css/nav.css" type="text/css" media="screen, projection">
 		<link rel="stylesheet" href="css/libs/animate-custom.css" type="text/css" media="screen, projection">
+		<style type="text/css">
+			<?php include 'php/fills_css.php'; ?>
+		</style>
 		
 		<!-- Use Google CDN for jQuery -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -67,6 +70,8 @@
 
 		<div id="videoDiv"></div>
 
+		<div id="unsupported" class="proxima-nova-400-italic">Please view Semantic Sabotage in Chrome, Safari, or Firefox.</div>
+
 		<div id="menu">
 				
 			<div id="columnLeft" class="column animated delay fadeIn">
@@ -95,7 +100,7 @@
 				<br>
 				<br>
 				<a href="https://github.com/sosolimited/semantic_sabotage" target="_blank">
-					<span class="modeName proxima-nova-400 whiteOnGray">Download</span>
+					<span class="modeName proxima-nova-400 whiteOnGray">Source code</span>
 				</a>
 			</div>
 		</div>		
@@ -113,16 +118,23 @@
 	<script src="js/libs/jquery.history.js"></script>
 	<script src="js/libs/piecon-custom.js"></script>
 	<script src="js/libs/localstoragedb.min.js"></script>
-	<script src="js/libs/statsHandler.js"></script>
+	<script src="js/statsHandler.js"></script>
 	<script src="js/libs/fullscreen.js"></script>
 	<script src="js/parser.js"></script>
 	<script src="js/player.js"></script>
 	<script src="js/sabotage.js"></script>
 
-	<script> 
-		$(document).ready(function() { 
+	<script type="text/javascript"> 
+		$(document).ready(function() {
+			// Check browser type
+			checkBrowser();
+			// Initialize the app
 			init();
-		}); 
+		});
+	</script>
+
+	<script type="text/javascript">
+		<?php include 'php/fills_js.php'; ?>
 	</script>
 
 	</body>

@@ -14,7 +14,8 @@
 	top: 100%;
 	text-shadow: 0px 0px 0px;
 
--webkit-transition: top 0.5s, opacity 1s;
+	transition: top 0.5s, opacity 1s;
+	-webkit-transition: top 0.5s, opacity 1s;
 }
 
 #taxonomy .wordContainer {
@@ -35,5 +36,10 @@
 
 	opacity: 0;
 
+	transition: opacity 0.5s;
 	-webkit-transition: opacity 0.5s;
+}
+
+#taxonomy .undefined {
+	color: #AAA;
 }

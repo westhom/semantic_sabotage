@@ -86,6 +86,20 @@ legend{
 }
 
 
+#unsupported {
+	position:relative;
+	display:none;
+	width: 90%;
+	height: 96%;
+	margin: 0px 0px 0px 0px;
+	padding: 1em 1.5em 0em 1em;
+	overflow: scroll;
+	font-size: 96px;
+	line-height: 102px;
+	color:rgb(20,20,20);
+}
+
+
 /* MENU */ 
 
 #menu {
@@ -119,8 +133,8 @@ legend{
 }
 
 #columnLeft.delay {
-	animation-delay: .4s;
-	-webkit-animation-delay: .4s;
+	animation-delay: .5s;
+	-webkit-animation-delay: .5s;
 }
 
 #columnRight {
@@ -129,8 +143,8 @@ legend{
 }
 
 #columnRight.delay {
-	animation-delay: .5s;
-	-webkit-animation-delay: .5s;
+	animation-delay: .6s;
+	-webkit-animation-delay: .6s;
 }
 
 #columnRight a {

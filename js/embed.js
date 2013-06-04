@@ -3,6 +3,7 @@ google.load("swfobject", "2.1");
  * Chromeless player has no controls.
  */
 
+
 // Object with official youTube states. 
 var ytStates = {'unstarted':-1, 'ended':0, 'playing':1, 'paused':2, 'buffering':3, 'videocued':5};
 var ytCurState = -2;
