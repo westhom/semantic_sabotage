@@ -11,6 +11,8 @@
 
 	  	closedir($handle);
 	}
+	
+	sort($fills);
 
 ?>
 
