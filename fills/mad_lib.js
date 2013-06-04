@@ -3,7 +3,8 @@ var mad_lib = function(id) {
 	return {
 	
 		name: "Mad Lib",
-		defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE",
+		defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE", //kennedy
+
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,
@@ -12,7 +13,7 @@ var mad_lib = function(id) {
 		buildSentence: true,
 		sentenceCount: 0,
 		sentenceWordCount: 0,
-		sentenceLengths: [5,4,7,5,6],
+		sentenceLengths: [5,7,6,6,7],
 		sentenceLengthIndex: 0,
 		 
 		// Anything you want to do to initialize your mode. 
@@ -102,6 +103,11 @@ var mad_lib = function(id) {
 		
 		appendWordInContext: function(msg) {
 			
+			//check all words for no-categories
+			if (msg.cats.length === 0)  {			
+				//console.log('prelim : ' + msg.word);
+			}
+
 			//BUILD a SENTENCE
 			if (this.buildSentence)
 			{
@@ -115,19 +121,23 @@ var mad_lib = function(id) {
 						//console.log(msg.cats[i]);
 						if ((msg.cats[i] != 'funct') && 
 							(msg.cats[i] != 'pronoun') && 
-							//(msg.cats[i] != 'verb') && 
+							(msg.cats[i] != 'verb') && 
 							//(msg.cats[i] != 'adverb') && 
 							//(msg.cats[i] != 'cogmech') && 
 							//(msg.cats[i] != 'bio') && 
 							//(msg.cats[i] != 'relativ') && 
 							(msg.cats[i] != 'sentencesmode')) {
 							el.addClass(msg.cats[i]);
-							//console.log('Category ' + msg.cats[i]);
+
+							//console.log('word: ' + msg.word + ' Category ' + msg.cats[i]);
 						}
 					}
 
 					//add an undefined class
-					if (msg.cats.length == 0) el.addClass('no_category');
+					if (msg.cats.length === 0)  {
+						el.addClass('no_category');
+						//console.log('building :' + msg.word);
+					}
 
 					el.css('left', $('#madlib').width());
 					el.css('top', '200px');
@@ -180,17 +190,21 @@ var mad_lib = function(id) {
 						break;
 					}
 					//check for undefined category too
-					if (msg.cats.length == 0)
+					if (msg.cats.length === 0)
 					{
 						var el = $('.no_category').first();
+						//console.log("found1: %i %o ", el.size(), el );	
 						if (el.size() > 0)
 						{	
+							//console.log('found2: ' + el.html());	
 							if (el.html() != msg.word)
 							{
-								//console.log('found: ' + el.html());				
+								//console.log('found3: %o', el);				
 								this.replaceWord(el, msg.word, msg.cats);
+								found = true;
 							}
 						}
+
 					}
 				}
 				//terminate after a certain number of sentences
