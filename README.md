@@ -84,12 +84,13 @@ We’re going to do a quick walkthrough of the steps to create your own.
     ```name: "Left Scroll",```  
     to   
     ```name: “My Sweet Transform”,```  
-  4. Open your new css file and change the selectors to match the name of your file  
+  4. If there are any divs being inserted with a unique id, change the id to something else, so that it does not clash with another transform. Places to look for this are in the init() and enter() functions.
+  5. Open your new css file and change the selectors to match the name of your file  
   e.g. if you started with template_leftScroll and renamed it my_transform, you would change all instances of #template_leftScroll in the css file to #my_transform.  
 We are using this convention to avoid collisions with CSS names.  
-  5. If you started with a template, you should comment out the line at the top of the js file  
+  6. If you started with a template, you should comment out the line at the top of the js file  
    ```template: true,```  
-  6. Reload the page in your browser and you should see your new transform in the list.  
+  7. Reload the page in your browser and you should see your new transform in the list.  
 
 *The main functions you’ll be working with in the transform are*  
 init : Called once after the transform is created. Build things you will re-use here.
