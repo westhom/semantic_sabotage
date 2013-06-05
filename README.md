@@ -116,7 +116,7 @@ Some useful notes:
 The LIWC Dictionary is loaded 
 All words are looked up against the <a href="http://www.liwc.net/" target="_blank">LIWC Dictionary</a>. 
 
-+ LIWC categories and abreviations can be found [here](https://github.com/sosolimited/semantic_sabotage/wiki/LIWC-Categories">).
++ LIWC categories and abreviations can be found <a href="https://github.com/sosolimited/semantic_sabotage/wiki/LIWC-Categories" target="_blank">here</a>.
 + getCategoryIndex(category) -- returns the index of the category (useful for comparing proximity of word cats ~ relatedness), returns -1 if not found
 + getCategoryFullName(category) -- returns full name of category, returns abbreviated name if not found
 
