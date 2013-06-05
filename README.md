@@ -54,12 +54,12 @@ Assuming you've followed the Apache and PHP setup instructions above, you're rea
 ## Loading the page
 
 Once you've downloaded the code into the appropriate directory, you can load the page using Chrome, Safari, or Firefox.
--If you are on OSX and set up Apache and PHP manually, then enter the following URL into your browser  
-```localhost/~username/semantic_sabotage```  
--If you are on OSX and set up Apache and PHP with MAMP, then enter the following URL into your browser  
-```localhost:8888/semantic_sabotage```
--If you are on Windows and set up Apache and PHP with WAMP, then enter the following URL into your browser
-```localhost/semantic_sabotage```
+-If you are on OSX and set up Apache and PHP manually, then enter the following URL into your browser    
+localhost/~username/semantic_sabotage  
+-If you are on OSX and set up Apache and PHP with MAMP, then enter the following URL into your browser    
+localhost:8888/semantic_sabotage  
+-If you are on Windows and set up Apache and PHP with WAMP, then enter the following URL into your browser  
+localhost/semantic_sabotage  
 
 ## Creating your own transform
 You can start with a template, with an existing transform, or from scratch.
