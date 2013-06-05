@@ -57,7 +57,7 @@ Once you've downloaded the code into the appropriate directory, you can load the
 -If you are on OSX and set up Apache and PHP manually, then enter the following URL into your browser  
 ```localhost/~username/semantic_sabotage```  
 -If you are on OSX and set up Apache and PHP with MAMP, then enter the following URL into your browser  
-```localhost:8888/semantic_sabotage
+```localhost:8888/semantic_sabotage```
 -If you are on Windows and set up Apache and PHP with WAMP, then enter the following URL into your browser
 ```localhost/semantic_sabotage```
 
