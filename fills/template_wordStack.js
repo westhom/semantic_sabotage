@@ -25,7 +25,7 @@ var template_wordStack = function(id) {
 		// ENTER MODE.
 		// This gets called each time you go to the mode.
 		enter: function() {
-			$('#bigwords').empty();
+			$('#wordstack').empty();
 		},
 
 		// HANDLE INCOMING word MESSAGE.
