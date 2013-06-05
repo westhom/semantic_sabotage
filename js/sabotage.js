@@ -112,6 +112,11 @@ function drawFills() {
 		// Initialize the mode.
 		m.init();
 	});
+
+	// Insert extra elements in transforms UL to fix scrolling bug (hacky hacky).
+	$('#templates').append('<li><span class="modeName">&nbsp;</span></li>');
+
+
 }
 
 // After clicking a menu link, should push new URL state before switching to mode
