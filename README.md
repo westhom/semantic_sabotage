@@ -8,20 +8,20 @@ Each transform uses HTML5 and Javascript to visualize the transcript of a YouTub
 
 Semantic Sabotage was designed and coded by [Sosolimited](http://sosolimited.com). 
 
+## Installation
+
++ Enable Apache and PHP, by following the instructions below in *Dependencies*.
+
++ Fork and clone the repo, by following the instructions below in *Get the Source Code*.
+
++ Being creating your own transform, by following instructions below in *Creating your own Transform*.
+
 ## Dependencies
 
 * __Apache__
 * __PHP 5__
 
 You can install Apache and PHP manually on [OSX](http://coolestguyplanettech.com/downtown/install-and-configure-apache-mysql-php-and-phpmyadmin-osx-108-mountain-lion) or [Linux](https://help.ubuntu.com/community/ApacheMySQLPHP), or download a one-click bundle: [MAMP](http://www.mamp.info/en/index.html) (for OSX) or [WAMP](http://www.wampserver.com/en/) (for Windows).
-
-## Installation
-
-+ Fork and clone the repo.
-
-+ Enable Apache and PHP (instructions linked above).
-
-+ See [Eyeo-Architecture.pdf](https://github.com/sosolimited/semantic_sabotage/blob/master/Eyeo-Architecture.pdf) for more about software layout.
 
 
 ## Get the Source Code
@@ -51,6 +51,15 @@ Assuming you've followed the Apache and PHP setup instructions above, you're rea
   5. It should be in a folder called semantic_sabotage_master
   6. Open this folder in Sublime or your chosen text editor. 
 
+## Loading the page
+
+Once you've downloaded the code into the appropriate directory, you can load the page using Chrome, Safari, or Firefox.
+-If you are on OSX and set up Apache and PHP manually, then enter the following URL into your browser  
+```localhost/~username/semantic_sabotage```  
+-If you are on OSX and set up Apache and PHP with MAMP, then enter the following URL into your browser  
+```localhost:8888/semantic_sabotage
+-If you are on Windows and set up Apache and PHP with WAMP, then enter the following URL into your browser
+```localhost/semantic_sabotage```
 
 ## Creating your own transform
 You can start with a template, with an existing transform, or from scratch.
