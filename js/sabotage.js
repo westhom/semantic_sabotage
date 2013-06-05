@@ -325,6 +325,28 @@ function showBrowserMessage() {
 	$('#unsupported').show();
 }
 
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+};
+
+
 function checkBrowser() {
 	var nVer = navigator.appVersion;
 	var nAgt = navigator.userAgent;
@@ -384,8 +406,10 @@ function checkBrowser() {
 	 majorVersion = parseInt(navigator.appVersion,10);
 	}
 
+
 	if(browserName=='Chrome' || browserName=='Safari' || browserName=='Firefox'){
-		// We're good to go. Don't do anything.
+		// Only show not supported if we're on a mobile browser.
+		if( isMobile.any() ) showBrowserMessage();
 	}else{
 		// Show the browser not supported message.
 		showBrowserMessage();
