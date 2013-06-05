@@ -14,7 +14,7 @@ Semantic Sabotage was designed and coded by [Sosolimited](http://sosolimited.com
 
 + Fork and clone the repo, by following the instructions below in *Get the Source Code*.
 
-+ Being creating your own transform, by following instructions below in *Creating your own Transform*.
++ Begin creating your own transform, by following instructions below in *Creating your own Transform*.
 
 ## Dependencies
 
@@ -113,12 +113,12 @@ Some useful notes:
 
 ## LIWC Dictionary
 
-The LIWC Dictionary is loaded 
-All words are looked up against the <a href="http://www.liwc.net/" target="_blank">LIWC Dictionary</a>. 
+The <a href="http://www.liwc.net/" target="_blank">LIWC Dictionary</a> is loaded by the software. All incoming words are looked up against the dictionary, and tagged with their LIWC categories.  
 
++ The messages specs for words and stats can be found <a href="https://github.com/sosolimited/semantic_sabotage/wiki/Message-Specs" target="_blank">here</a>.
 + LIWC categories and abreviations can be found <a href="https://github.com/sosolimited/semantic_sabotage/wiki/LIWC-Categories" target="_blank">here</a>.
-+ getCategoryIndex(category) -- returns the index of the category (useful for comparing proximity of word cats ~ relatedness), returns -1 if not found
-+ getCategoryFullName(category) -- returns full name of category, returns abbreviated name if not found
++ getCategoryIndex(category) Returns the index of the category (useful for comparing proximity or 'relatedness' of word categories.  Returns -1 if not found
++ getCategoryFullName(category) Returns full name of category, returns abbreviated name if not found
 
 
 
