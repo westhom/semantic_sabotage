@@ -320,9 +320,15 @@ function showMenu() {
 	stopAllTimers();
 }
 
-function showBrowserMessage() {
+function showBrowserMessage(mobile) {
 	$('#menu').hide();
-	$('#unsupported').show();
+	$('#unsupported').show();	
+
+	// Fix for funny iOS margin bug.
+	if(mobile){
+	 $('body').css('background-color', 'white');
+	 $('#unsupported').html('Check out Semantic Sabotage in Chrome, Safari, or Firefox on a desktop or laptop.');
+	}
 }
 
 var isMobile = {
@@ -409,7 +415,7 @@ function checkBrowser() {
 
 	if(browserName=='Chrome' || browserName=='Safari' || browserName=='Firefox'){
 		// Only show not supported if we're on a mobile browser.
-		if( isMobile.any() ) showBrowserMessage();
+		if( isMobile.any() ) showBrowserMessage(true);
 	}else{
 		// Show the browser not supported message.
 		showBrowserMessage();

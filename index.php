@@ -70,7 +70,7 @@
 
 		<div id="videoDiv"></div>
 
-		<div id="unsupported" class="proxima-nova-400-italic">Please view Semantic Sabotage in Chrome, Safari, or Firefox.</div>
+		<div id="unsupported" class="proxima-nova-400-italic">Check out Semantic Sabotage in Chrome, Safari, or Firefox.</div>
 
 		<div id="menu">
 				
