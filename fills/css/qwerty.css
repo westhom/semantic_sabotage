@@ -1,0 +1,63 @@
+#qwerty {
+  font-size: 35px;
+/*  padding-left:10px;*/
+}
+.letter {
+  position: absolute;
+/*  font-size:.8em;*/
+  -webkit-transition: all 1.2s;
+  -webkit-transition-delay: all 1.2s;
+  color: #fc0;
+}
+
+#ref, .letter {
+}
+
+#ref {
+  visibility: hidden;
+  padding-top: 200px;
+  padding-left: 20px;
+}
+
+.letters_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 3.5s;
+  transition: all 3.5s;
+  -webkit-transition-delay: 1s;
+  transition-delay: 1s;
+  opacity: 1;
+}
+
+.word_ref {
+/*  white-space:nowrap;*/
+}
+
+#keys {
+  position: absolute;
+  left: 50px;
+/*  bottom: 50px;*/
+  top: 10px;
+  font-size: 1em;
+}
+
+#keys div > span {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 8px;
+  margin: 2px;
+  color: #fff;
+  background: #000;
+}
+#keys div {
+  line-height: 1;
+}
+#keys div:nth-child(2) {
+  margin-left: 15px;
+}
+#keys div:nth-child(3) {
+  margin-left: 30px;
+}
