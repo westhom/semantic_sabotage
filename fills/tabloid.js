@@ -3,6 +3,8 @@ var tabloid = function(id) {
 	return {
 	
 		name: "Tabloid",
+		author: "Sosolimited",
+		
 		defaultURL: "http://www.youtube.com/watch?v=EOCcFcgRcTg&t", //America by Allen Ginsberg
 		el: $('<div class="modeContainer" style="background-color:white" id="'+id+'"></div>'),
 		curDiv: 1,

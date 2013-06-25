@@ -3,6 +3,7 @@ var rainbow_sort = function(id) {
 	return {
 	
 		name: "Rainbow Sort",
+		author: "Sosolimited",
 
 		defaultURL: "http://www.youtube.com/watch?v=OQSNhk5ICTI", //Double Rainbow!
 		el: $('<div class="modeContainer" style="background-color:black" id="'+id+'"></div>'),

@@ -3,6 +3,8 @@ var black_list = function(id) {
 	return {
 	
 		name: "Black List",
+		author: "Sosolimited",
+		
 		defaultURL: "http://www.youtube.com/watch?v=Ia7N1l7zrlk&t=0m4s",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),

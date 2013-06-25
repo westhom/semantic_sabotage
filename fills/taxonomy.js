@@ -3,6 +3,8 @@ var taxonomy = function(id) {
 	return {
 	
 		name: "Taxonomy",
+		author: "Sosolimited",
+		
 		defaultURL: "http://www.youtube.com/watch?v=w5R8gduPZw4&t=0m03s",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 

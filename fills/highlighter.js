@@ -3,6 +3,8 @@ var highlighter = function(id) {
 	return {
 	
 		name: "Highlighter",
+		author: "Sosolimited",
+		
 		defaultURL: "http://www.youtube.com/watch?v=4H5ocEjhkYw&t=0m6s",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,

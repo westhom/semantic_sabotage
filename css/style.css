@@ -122,6 +122,10 @@ legend{
 	margin-top: 24px;
 }
 
+#transforms {
+	margin-bottom: 50px;
+}
+
 .column {
 	position:absolute;
 	width:460px;
@@ -255,6 +259,13 @@ body {
 	background-color: rgb(120,120,120);
 }
 
+.fill {
+	margin-bottom: 10px;
+}
+
+.modeAuthor {
+	padding: 0 10px;
+}
 
 .size-512{
 	font-size: 512px;

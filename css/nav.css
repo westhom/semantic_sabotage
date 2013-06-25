@@ -76,6 +76,15 @@
 	top: .4em;
 }
 
+.navMeta {
+	color: rgb(110,110,110);
+	margin: 0 0 0 20px;
+	top: 0.15em;
+	position: relative;
+	text-transform: none;
+	display: inline;
+}
+
 .navButton {
 	position: relative;
 	top: 0.26em;

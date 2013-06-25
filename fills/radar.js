@@ -3,6 +3,8 @@ var radar = function(id) {
 	return {
 	
 		name: "Radar",
+		author: "Sosolimited",
+		
 		defaultURL: "http://www.youtube.com/watch?v=WjuCI2yAVD8",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),	
 

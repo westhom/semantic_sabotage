@@ -100,12 +100,19 @@ function checkURL() {
 
 function drawFills() {
 	$.each(modes, function(i,m){
-		var color = (m.template==true) ? 'whiteOnGray' : 'blackOnWhite';
-		var section = (m.template==true) ? '#templates' : '#transforms';
-		var title = m.name+' | Semantic Sabotage'
+		var color = m.template ? 'whiteOnGray' : 'blackOnWhite';
+		var section = m.template ? '#templates' : '#transforms';
+		var title = m.name+' | Semantic Sabotage';
+		var $fill = $('<div class="fill"></div>');
 		var modeHTML = '<li><span class="modeName proxima-nova-400 '+color+'" href="#" id="mode'+i+'" onclick="linkToMode('+i+');" >'+m.name+'</span></li>'
+		$fill.html(modeHTML);
+		if (!m.template) {
+			var author = m.author;
+			var authorHTML = '<li><span class="modeAuthor meta-serif-book-italic blackOnWhite" href="#">by '+author+'</span></li>'
+			$fill.append(authorHTML);
+		}
 		// Append mode menu item to DOM
-		$(section).append(modeHTML);
+		$(section).append($fill[0].outerHTML);
 		// Append hidden mode container to DOM.
 		m.el.hide();				   
 		$('#modes').append(m.el);
@@ -137,7 +144,11 @@ function goToMode(m, fullSetup, video, time) {
 		curMode = m;
 		
 		document.title = modes[curMode].name + ' | Semantic Sabotage';
-		
+		$('.navTitle').html(modes[curMode].name.toUpperCase());
+		if (modes[curMode].author) {
+			$('.navAuthor').html('by '+modes[curMode].author);
+		}
+
 		// Hide menu and show modes container.
 		$('#menu').hide();
 		turnOffAnimations();

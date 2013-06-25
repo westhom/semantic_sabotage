@@ -3,6 +3,7 @@ var one_by_one = function(id) {
 	return {
 	
 		name: "One x One",
+		author: "Sosolimited",
 
 		defaultURL: "http://www.youtube.com/watch?v=gdtQrSnEPCM&t=0m3s",
 		//usfRtJpyJDk = how to behave in court

@@ -3,6 +3,7 @@ var scrabble = function(id) {
 	return {
 	
 		name: "Scrabble",
+		author: "Sosolimited",
 
 		defaultURL: "http://www.youtube.com/watch?v=CrB2lxnpDJU",
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),

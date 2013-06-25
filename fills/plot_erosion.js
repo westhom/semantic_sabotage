@@ -3,6 +3,8 @@ var plot_erosion = function(id) {
 	return {
 	
 		name: "Plot Erosion",
+		author: "Sosolimited",
+		
 		defaultURL: "http://www.youtube.com/watch?v=3zi699WzAL0",
 		//defaultURL: "http://www.youtube.com/watch?v=RB1OhJBbzkM", //rupert sheldrake metaphysics
 		//defaultURL: "http://www.youtube.com/watch?v=9vs00tYPmbU",

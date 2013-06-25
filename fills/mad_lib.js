@@ -3,8 +3,9 @@ var mad_lib = function(id) {
 	return {
 	
 		name: "Mad Lib",
-		defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE", //kennedy
-
+		author: "Sosolimited",
+		
+		defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE",
 		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
 		el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,
