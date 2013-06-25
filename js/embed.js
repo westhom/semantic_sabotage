@@ -89,7 +89,7 @@ function onYouTubePlayerReady(playerId) {
   ytplayer.addEventListener("onError", "onPlayerError");
   ytplayer.height= 0;
   ytplayer.width= 0;
-  ready = true;
+  ytPlayerLoaded = true;
   if (startCall) playVideo();
 }
 

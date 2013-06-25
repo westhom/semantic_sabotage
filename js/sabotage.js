@@ -15,6 +15,9 @@ var curMode = 0;
 var curVideoID;
 var globalTimers = [];	// For keeping track of setTimeout events.
 
+// Global variable to keep track of when youtube player embed loads
+var ytPlayerLoaded = false;
+
 // Set up piechart favicon for loading captions
 Piecon.setOptions({
   color: '#fff',
@@ -216,6 +219,14 @@ function goToMode(m, fullSetup, video, time) {
 // it contains the full captions for the current video
 function load(resp) {
 	// console.log('Captions fetched successfully');
+
+	// If ytPlayer isn't loaded yet, try again in 1 second
+	if (!ytPlayerLoaded) {
+		setTimeout(function(){
+			load(resp);
+		}, 1000);
+		return false;
+	}
 
 	// Cancel loading if user has returned to the menu early
 	if ($('#menu').is(":visible")) return false;
