@@ -20,7 +20,7 @@ var mad_lib = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append('<div id="madlib" class="container bg-white"></div>');
+			this.el.append('<div class="madlib container bg-white"></div>');
 
 		},
 
@@ -28,11 +28,11 @@ var mad_lib = function(id) {
 		enter: function() {
 			console.log(this.name+" enter()");
 			
-			$('#madlib').empty();
+			$('.madlib').empty();
 			this.buildSentence = true;
 
 			var holder = $('<div class="sentence franklin-gothic-condensed"></div>');
-			$('#madlib').append(holder);
+			$('.madlib').append(holder);
 			
 		},
 
@@ -140,7 +140,7 @@ var mad_lib = function(id) {
 						//console.log('building :' + msg.word);
 					}
 
-					el.css('left', $('#madlib').width());
+					el.css('left', $('.madlib').width());
 					el.css('top', '200px');
 
 					$('.sentence').append(el);

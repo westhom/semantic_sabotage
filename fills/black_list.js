@@ -14,13 +14,13 @@ var black_list = function(id) {
 		// This gets called once after the mode is created.
 		init: function() {
 			// Insert the container for the words.
-			this.el.append("<div id='faded' class='container'></div>");
+			this.el.append("<div class='faded container'></div>");
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('#faded').empty();
+			$('.faded').empty();
 		},
 
 
@@ -95,7 +95,7 @@ var black_list = function(id) {
 		 	}, 6000);
 		 	
 		 	// Insert the element into the container.
-		 	$('#faded').append(newWord);
+		 	$('.faded').append(newWord);
 
 		 	
 		}

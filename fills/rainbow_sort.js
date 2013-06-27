@@ -16,22 +16,22 @@ var rainbow_sort = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div id='one' class='container'></div><div id='two' class='container2'></div><div id='three' class='container3'></div><div id='four' class='container4'></div><div id='five' class='container5'></div><div id='six' class='container6'></div><div id='seven' class='container7'></div><div id='eight' class='container8'></div><div id='nine' class='container9'></div><div id='ten' class='container10'></div>");
+			this.el.append("<div class='one container'></div><div class='two container2'></div><div class='three container3'></div><div class='four container4'></div><div class='five container5'></div><div class='six container6'></div><div class='seven container7'></div><div class='eight container8'></div><div class='nine container9'></div><div class='ten container10'></div>");
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			//empty out all the words columns
-			$('#one').empty();
-			$('#two').empty();
-			$('#three').empty();
-			$('#four').empty();
-			$('#five').empty();
-			$('#six').empty();
-			$('#seven').empty();
-			$('#eight').empty();
-			$('#nine').empty();
-			$('#ten').empty();
+			$('.one').empty();
+			$('.two').empty();
+			$('.three').empty();
+			$('.four').empty();
+			$('.five').empty();
+			$('.six').empty();
+			$('.seven').empty();
+			$('.eight').empty();
+			$('.nine').empty();
+			$('.ten').empty();
 		},
 
 		// Handle incoming word message.
@@ -74,97 +74,97 @@ var rainbow_sort = function(id) {
 
 				//sort words by # of characters and place them in the correct div
 			 	if (msg.word.length === 1) { //one letter words
-				 	$('#one').prepend(e);
+				 	$('.one').prepend(e);
 				 	//walk through all old words in that column and push them down and fade them down a little
-			 		$('#one').children().each(function(i){
+			 		$('.one').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
 			 		//grow height of div by lineHeight
-			 		$('#one').css('height', $('#one > .bigText').length*this.lineHeight+"px");					 	
+			 		$('.one').css('height', $('.one > .bigText').length*this.lineHeight+"px");					 	
 				} else if (msg.word.length === 2) { //two letter words
-				 	$('#two').prepend(e);
-			 		$('#two').children().each(function(i){
+				 	$('.two').prepend(e);
+			 		$('.two').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#two').css('height', $('#two > .bigText').length*this.lineHeight+"px");		
+			 		$('.two').css('height', $('.two > .bigText').length*this.lineHeight+"px");		
 				} else if (msg.word.length === 3) { //....
-				 	$('#three').prepend(e);
-			 		$('#three').children().each(function(i){
+				 	$('.three').prepend(e);
+			 		$('.three').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#three').css('height', $('#three > .bigText').length*this.lineHeight+"px");			 	
+			 		$('.three').css('height', $('.three > .bigText').length*this.lineHeight+"px");			 	
 				} else if (msg.word.length === 4) {
-				 	$('#four').prepend(e);
-			 		$('#four').children().each(function(i){
+				 	$('.four').prepend(e);
+			 		$('.four').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#four').css('height', $('#four > .bigText').length*this.lineHeight+"px");
+			 		$('.four').css('height', $('.four > .bigText').length*this.lineHeight+"px");
 				} else if (msg.word.length === 5) {
-				 	$('#five').prepend(e);
-			 		$('#five').children().each(function(i){
+				 	$('.five').prepend(e);
+			 		$('.five').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#five').css('height', $('#five > .bigText').length*this.lineHeight+"px");			
+			 		$('.five').css('height', $('.five > .bigText').length*this.lineHeight+"px");			
 				} else if (msg.word.length === 6) {			 			 				 
-				 	$('#six').prepend(e);
-			 		$('#six').children().each(function(i){
+				 	$('.six').prepend(e);
+			 		$('.six').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#six').css('height', $('#six > .bigText').length*this.lineHeight+"px");		
+			 		$('.six').css('height', $('.six > .bigText').length*this.lineHeight+"px");		
 				 } else if (msg.word.length === 7){				 			 				 
-				 	$('#seven').prepend(e);
-			 		$('#seven').children().each(function(i){
+				 	$('.seven').prepend(e);
+			 		$('.seven').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#seven').css('height', $('#seven > .bigText').length*this.lineHeight+"px");		
+			 		$('.seven').css('height', $('.seven > .bigText').length*this.lineHeight+"px");		
 				 } else if (msg.word.length === 8){
-				 	$('#eight').prepend(e);
-			 		$('#eight').children().each(function(i){
+				 	$('.eight').prepend(e);
+			 		$('.eight').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#eight').css('height', $('#eight > .bigText').length*this.lineHeight+"px");		
+			 		$('.eight').css('height', $('.eight > .bigText').length*this.lineHeight+"px");		
 				 } else if (msg.word.length === 9){ 				 
-				 	$('#nine').prepend(e);
-			 		$('#nine').children().each(function(i){
+				 	$('.nine').prepend(e);
+			 		$('.nine').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#nine').css('height', $('#nine > .bigText').length*this.lineHeight+"px");		
+			 		$('.nine').css('height', $('.nine > .bigText').length*this.lineHeight+"px");		
 				 } else {			 
-				 	$('#ten').prepend(e);
-			 		$('#ten').children().each(function(i){
+				 	$('.ten').prepend(e);
+			 		$('.ten').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#ten').css('height', $('#ten > .bigText').length*this.lineHeight+"px");		
+			 		$('.ten').css('height', $('.ten > .bigText').length*this.lineHeight+"px");		
 				 }
 			}
 		}

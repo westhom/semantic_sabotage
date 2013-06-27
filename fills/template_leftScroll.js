@@ -37,16 +37,16 @@ var template_leftScroll = function(id) {
 		init: function() {
 			// Here, we insert a top-level container div along with a secondary div to enable scrolling.
 			// See template_leftScroll.css to view the associated styles. 
-			this.el.append("<div id='templateLeftScroll' class='topContainer'><div class='scroller'></div></div>");
+			this.el.append("<div class='templateLeftScroll topContainer'><div class='scroller'></div></div>");
 		},
 
 		// ENTER MODE.
 		// This gets called each time you go to the mode.
 		enter: function() {			
 			// In this case, we empty the div that moves the words.
-			$('#templateLeftScroll > .scroller').empty();
+			$('.templateLeftScroll > .scroller').empty();
 			// And we reset its position.
-			$('#templateLeftScroll > .scroller').css('left', '0px');
+			$('.templateLeftScroll > .scroller').css('left', '0px');
 		},
 
 		// HANDLE INCOMING word MESSAGE.
@@ -105,10 +105,10 @@ var template_leftScroll = function(id) {
 		 	// Create the span element that contains the word.
 		 	var w = $('<span class= "scrollword proxima-nova-400-italic" style="color:' + c + ';">' + msgWord + '</span>');
 		 	// Append it to the scroller div.
-		 	$('#templateLeftScroll > .scroller').append(w); 	
+		 	$('.templateLeftScroll > .scroller').append(w); 	
 
 		 	// Move the scroller div based on the position of the last word added.
-		 	$('#templateLeftScroll > .scroller').css('left', -parseInt($('#templateLeftScroll > .scroller span:last-child').position().left)+'px');	
+		 	$('.templateLeftScroll > .scroller').css('left', -parseInt($('.templateLeftScroll > .scroller span:last-child').position().left)+'px');	
 
 		}
 	}

@@ -15,14 +15,14 @@ var highlighter = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div id='tagged_container' class='container bg-white'></div>");
-			$('#tagged_container').append('<div id="transcript" class="transcript museo-slab-100 size-32"></div>');
+			this.el.append("<div class='tagged_container container bg-white'></div>");
+			$('.tagged_container').append('<div class="transcript museo-slab-100 size-32"></div>');
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('#tagged_container #transcript').empty();
+			$('.tagged_container .transcript').empty();
 		},
 
 
@@ -69,7 +69,7 @@ var highlighter = function(id) {
 		 	// end punct always followed by space
 		 	if($.inArray('endPunct', msg.cats) >= 0){
 		 		var e = $('<span class="' + c + '">' + msg.word + ' ' + '</span>');
-				$('#tagged_container #transcript').append(e);
+				$('.tagged_container .transcript').append(e);
 				e.css("color", black);
 
 				this.lastLeadPunct = 0;
@@ -82,7 +82,7 @@ var highlighter = function(id) {
 		 		if (this.lastEndPunct) e = $('<span class="' + c + '">' + msg.word + '</span>');
 		 		else e = $('<span class="' + c + '">' + ' ' + msg.word + '</span>');
 
-		 		$('#tagged_container #transcript').append(e);
+		 		$('.tagged_container .transcript').append(e);
 		 		e.css("color", black);
 
 		 		this.lastLeadPunct = 1;
@@ -92,10 +92,10 @@ var highlighter = function(id) {
 		 	else {	
 
 		 		
-		 		if (!this.lastLeadPunct) e = $('#tagged_container #transcript').append('<span class="space"> </span>');
+		 		if (!this.lastLeadPunct) e = $('.tagged_container .transcript').append('<span class="space"> </span>');
 		 		var e = $('<span class="' + c + '">' + msg.word + '</span>');
 
-		 		$('#tagged_container #transcript').append(e);
+		 		$('.tagged_container .transcript').append(e);
 
 		 		if (c != 'blank') {
 		 			e.addClass('marked');

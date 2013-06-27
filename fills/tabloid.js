@@ -30,7 +30,7 @@ var tabloid = function(id) {
 
 			//clear out all the divs of any lingering words
 			for (var i=0; i<8; i++) {
-				$('#container'+(i+1)).empty();			
+				$('.container'+(i+1)).empty();			
 			};
 
 		},
