@@ -106,12 +106,12 @@ function drawFills() {
 		var color = m.template ? 'whiteOnGray' : 'blackOnWhite';
 		var section = m.template ? '#templates' : '#transforms';
 		var title = m.name+' | Semantic Sabotage';
-		var $fill = $('<div class="fill"></div>');
-		var modeHTML = '<li><span class="modeName proxima-nova-400 '+color+'" href="#" id="mode'+i+'" onclick="linkToMode('+i+');" >'+m.name+'</span></li>'
+		var $fill = $('<a class="fill" href="#" onclick="linkToMode('+i+');"></a>');
+		var modeHTML = '<li><span class="modeName proxima-nova-400 '+color+'" id="mode'+i+'">'+m.name+'</span></li>'
 		$fill.html(modeHTML);
 		if (!m.template) {
-			var author = m.author;
-			var authorHTML = '<li><span class="modeAuthor meta-serif-book-italic blackOnWhite" href="#">by '+author+'</span></li>'
+			var author = m.author || 'Anonymous';
+			var authorHTML = '<li><span class="modeAuthor meta-serif-book-italic blackOnWhite">by '+author+'</span></li>'
 			$fill.append(authorHTML);
 		}
 		// Append mode menu item to DOM

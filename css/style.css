@@ -162,6 +162,10 @@ legend{
 	text-decoration:none;
 }
 
+#templates .modeName {
+	margin-bottom: -4px;
+}
+
 .modeName {
 	position:static;
 	display:inline-block;
@@ -171,14 +175,6 @@ legend{
 	/*cursor: hand;*/
 	cursor: pointer;
 	text-transform: uppercase;
-}
-
-.modeName:hover {
-	color: rgb(255,255,255);
-	/*background-color: rgb(242,0,255);*/
-	background-color: rgb(0,174,242);
-	/*cursor: hand;*/
-	cursor: pointer;
 }
 
 hr.menu {
@@ -259,8 +255,19 @@ body {
 	background-color: rgb(120,120,120);
 }
 
-.fill {
+a.fill {
 	margin-bottom: 10px;
+	text-decoration: none;
+	display: block;
+}
+
+a.fill:hover .modeName,
+a.fill:hover .modeAuthor {
+	color: rgb(255,255,255);
+	/*background-color: rgb(242,0,255);*/
+	background-color: rgb(0,174,242);
+	/*cursor: hand;*/
+	cursor: pointer;
 }
 
 .modeAuthor {

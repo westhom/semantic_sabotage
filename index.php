@@ -79,7 +79,7 @@
 		<div id="menu">
 				
 			<div id="columnLeft" class="column animated delay fadeIn">
-				<div class="menuHeading meta-serif-book-italic">Transforms</div>
+				<div class="menuHeading meta-serif-book-italic">Gallery</div>
 				<ul id="transforms"></ul>
 			</div>
 
