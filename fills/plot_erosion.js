@@ -8,8 +8,8 @@ var plot_erosion = function(id) {
 		defaultURL: "http://www.youtube.com/watch?v=3zi699WzAL0",
 		//defaultURL: "http://www.youtube.com/watch?v=RB1OhJBbzkM", //rupert sheldrake metaphysics
 		//defaultURL: "http://www.youtube.com/watch?v=9vs00tYPmbU",
-		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		//$el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
 		lastLeadPunct: false,
 		lastEndPunct: false,
@@ -19,14 +19,14 @@ var plot_erosion = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div class='blurry_container container' style='background-color: #191919'></div>");
-			$('.blurry_container').append('<div class="transcript meta-serif-book"></div>');
+			this.$el.append("<div class='blurry_container container' style='background-color: #191919'></div>");
+			this.$el.find('.blurry_container').append('<div class="transcript meta-serif-book"></div>');
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('.blurry_container .transcript').empty();
+			this.$el.find('.blurry_container .transcript').empty();
 		},
 
 		// Handle incoming word message.
@@ -91,7 +91,7 @@ var plot_erosion = function(id) {
 		 	// end punct always followed by space
 		 	if($.inArray('endPunct', msg.cats) >= 0){
 		 		var s = $('<span class="' + cat + '">' + word + ' ' + '</span>');
-				$('.blurry_container .transcript').append(s);
+				this.$el.find('.blurry_container .transcript').append(s);
 
 				var catColor = $(s).css('color');
 				setTimeout(function(e){
@@ -110,7 +110,7 @@ var plot_erosion = function(id) {
 		 		var s; 
 		 		if (this.lastEndPunct) s = $('<span class="' + cat + '">' + word + '</span>');
 		 		else s = $('<span class="' + cat + '">' + ' ' + word + '</span>');
-		 		$('.blurry_container .transcript').append(s);
+		 		this.$el.find('.blurry_container .transcript').append(s);
 
 				var catColor = $(s).css('color');
 
@@ -124,9 +124,9 @@ var plot_erosion = function(id) {
 			// words get a preceeding space, unless they follow lead punct
 		 	else {	
 		 		
-		 		if (!this.lastLeadPunct) $('.blurry_container .transcript').append('<span class="space"> </span>');
+		 		if (!this.lastLeadPunct) this.$el.find('.blurry_container .transcript').append('<span class="space"> </span>');
 		 		var s = $('<span class="' + cat + '">' + word + '</span>');
-		 		$('.blurry_container .transcript').append(s);
+		 		this.$el.find('.blurry_container .transcript').append(s);
 
 				var catColor = $(s).css('color');
 			

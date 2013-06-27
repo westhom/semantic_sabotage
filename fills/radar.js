@@ -6,7 +6,7 @@ var radar = function(id) {
 		author: "Sosolimited",
 		
 		defaultURL: "http://www.youtube.com/watch?v=WjuCI2yAVD8",
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),	
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),	
 
 		storeID: 'empty', // creates this.storeID to keep track of speaker IDs in the trasncript
 		storeClass: 'tower', // defaults to "tower" class (i.e. control tower)
@@ -22,39 +22,39 @@ var radar = function(id) {
 		// This gets called once after the mode is created.
 		init: function() {
 
-			this.el.empty(); // empty modeContainer div for setup
+			this.$el.empty(); // empty modeContainer div for setup
 
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 
-			this.el.empty(); // empty modeContainer div for setup
+			this.$el.empty(); // empty modeContainer div for setup
 
-			this.el.append('<div class="container"></div>'); // create container div within modeContainer
+			this.$el.append('<div class="container"></div>'); // create container div within modeContainer
 
-			this.radius = Math.min(this.el.width(),this.el.height())/2*0.95; // set radar radius
+			this.radius = Math.min(this.$el.width(),this.$el.height())/2*0.95; // set radar radius
 			this.drift = this.radius * 0.15; // set particle drift
 
-			this.el.find('.container').append('<div class="ringCenter"></div>'); // create central anchor to contain graphical elements
+			this.$el.find('.container').append('<div class="ringCenter"></div>'); // create central anchor to contain graphical elements
 
 			// setup graphical elements
 			for (var i=this.ringCount; i>0; i--) { 
 				this.ringRatio[i] = i/(this.ringCount);
 				console.log(this.ringRatio[i]);
-				this.el.find('.ringCenter').append('<div class="ring1" style="left:' +(-this.radius*this.ringRatio[i])+ 'px; top:' +(-this.radius*this.ringRatio[i])+ 'px; width:' +(this.radius*this.ringRatio[i]*2)+ 'px; height:' +(this.radius*this.ringRatio[i]*2)+ 'px;"></div>');
-				this.el.find('.ringCenter').append('<div class="ring2" style="left:' +(-this.radius*this.ringRatio[i]+this.lineStroke)+ 'px; top:' +(-this.radius*this.ringRatio[i]+this.lineStroke)+ 'px; width:' +(this.radius*this.ringRatio[i]-this.lineStroke)*2+ 'px; height:' +(this.radius*this.ringRatio[i]-this.lineStroke)*2+ 'px;"></div>');
+				this.$el.find('.ringCenter').append('<div class="ring1" style="left:' +(-this.radius*this.ringRatio[i])+ 'px; top:' +(-this.radius*this.ringRatio[i])+ 'px; width:' +(this.radius*this.ringRatio[i]*2)+ 'px; height:' +(this.radius*this.ringRatio[i]*2)+ 'px;"></div>');
+				this.$el.find('.ringCenter').append('<div class="ring2" style="left:' +(-this.radius*this.ringRatio[i]+this.lineStroke)+ 'px; top:' +(-this.radius*this.ringRatio[i]+this.lineStroke)+ 'px; width:' +(this.radius*this.ringRatio[i]-this.lineStroke)*2+ 'px; height:' +(this.radius*this.ringRatio[i]-this.lineStroke)*2+ 'px;"></div>');
 			}
 
-			this.el.find('.ringCenter').append('<div class="line" style="left:' +(-this.lineStroke/2)+ 'px; top:' +(-this.radius*this.ringRatio[this.ringCount])+ 'px; width:' +this.lineStroke+ 'px; height:' +(this.radius*this.ringRatio[this.ringCount]*2)+ 'px;"></div>');
-			this.el.find('.ringCenter').append('<div class="line" style="left:' +(-this.radius*this.ringRatio[this.ringCount])+ 'px; top:' +(-this.lineStroke/2)+ 'px; width:' +(this.radius*this.ringRatio[this.ringCount]*2)+ 'px; height:' +this.lineStroke+ 'px;"></div>');
+			this.$el.find('.ringCenter').append('<div class="line" style="left:' +(-this.lineStroke/2)+ 'px; top:' +(-this.radius*this.ringRatio[this.ringCount])+ 'px; width:' +this.lineStroke+ 'px; height:' +(this.radius*this.ringRatio[this.ringCount]*2)+ 'px;"></div>');
+			this.$el.find('.ringCenter').append('<div class="line" style="left:' +(-this.radius*this.ringRatio[this.ringCount])+ 'px; top:' +(-this.lineStroke/2)+ 'px; width:' +(this.radius*this.ringRatio[this.ringCount]*2)+ 'px; height:' +this.lineStroke+ 'px;"></div>');
 			// end setup graphical elements
 
-			this.el.find('.container').append('<div class="timer"></div>'); // set up "mechanical timer" (driven by -webkit-animation cycle and referenced to synchronize time within animation)
-			this.el.find('.container').append('<div class="marqueeCenter"></div>'); // set up central div to anchor radar line and associated text (rel to center)
-			this.el.find('.container').append('<div class="particleCenter"></div>'); // set up central div to achor particle placement within container (rel to center)
+			this.$el.find('.container').append('<div class="timer"></div>'); // set up "mechanical timer" (driven by -webkit-animation cycle and referenced to synchronize time within animation)
+			this.$el.find('.container').append('<div class="marqueeCenter"></div>'); // set up central div to anchor radar line and associated text (rel to center)
+			this.$el.find('.container').append('<div class="particleCenter"></div>'); // set up central div to achor particle placement within container (rel to center)
 
-			this.el.find('.marqueeCenter').css('width', (this.radius*this.ringRatio[this.ringCount])+'px'); // set marqueeCenter width to establish length of radar line
+			this.$el.find('.marqueeCenter').css('width', (this.radius*this.ringRatio[this.ringCount])+'px'); // set marqueeCenter width to establish length of radar line
 
 		},
 
@@ -104,10 +104,10 @@ var radar = function(id) {
 					$(m).append(msg.word);
 					$(m).addClass('marquee proxima-nova-700');
 					$(m).css('font-size', (this.radius*0.11)+'px'); // set font size of radial trail to fit "[unintelligible]""
-					$('#radar .marqueeCenter').append(m);
+					this.$el.find('#radar .marqueeCenter').append(m);
 					setTimeout( function() { $(m).remove() }, this.period*1000 );
 
-					var angle = -$('#radar .timer').width()/10 * Math.PI/180; // calculates radar angle by referencing the animated timer object (to sync particle placement with animated radar position)
+					var angle = -this.$el.find('#radar .timer').width()/10 * Math.PI/180; // calculates radar angle by referencing the animated timer object (to sync particle placement with animated radar position)
 
 					var rMin = this.radius*this.ringRatio[this.ringCount-1]; // sets minimum radius for particle placement
 					var rMax = this.radius*this.ringRatio[1]; // sets maximium radius for particle placement
@@ -141,7 +141,7 @@ var radar = function(id) {
 					$(p).append(w);
 
 					// attaches particle object to particleCenter and sets timeout function to cull objects following animation
-					$('#radar .particleCenter').append(p);
+					this.$el.find('#radar .particleCenter').append(p);
 					setTimeout( function() { $(p).remove() }, this.period*1000 );
 
 					window.getComputedStyle(p).WebkitTransform; // forces DOM to calculate position of particle object to ensure initial position before css -webkit-transition activity (particle drift)

@@ -6,21 +6,21 @@ var black_list = function(id) {
 		author: "Sosolimited",
 		
 		defaultURL: "http://www.youtube.com/watch?v=Ia7N1l7zrlk&t=0m4s",
-		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		//$el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 				 
 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
 			// Insert the container for the words.
-			this.el.append("<div class='faded container'></div>");
+			this.$el.append("<div class='faded container'></div>");
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('.faded').empty();
+			this.$el.find('.faded').empty();
 		},
 
 
@@ -95,7 +95,7 @@ var black_list = function(id) {
 		 	}, 6000);
 		 	
 		 	// Insert the element into the container.
-		 	$('.faded').append(newWord);
+		 	this.$el.find('.faded').append(newWord);
 
 		 	
 		}

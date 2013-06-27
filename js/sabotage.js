@@ -117,8 +117,8 @@ function drawFills() {
 		// Append mode menu item to DOM
 		$(section).append($fill[0].outerHTML);
 		// Append hidden mode container to DOM.
-		m.el.hide();				   
-		$('#modes').append(m.el);
+		m.$el.hide();				   
+		$('#modes').append(m.$el);
 		// Initialize the mode.
 		m.init();
 	});
@@ -160,8 +160,8 @@ function goToMode(m, fullSetup, video, time) {
 
 		// Hide all but the current mode's element.
 		for(var i=0; i < modes.length; i++){
-			if(i==curMode) modes[i].el.show();
-			else modes[i].el.hide();
+			if(i==curMode) modes[i].$el.show();
+			else modes[i].$el.hide();
 		}
 
 		// If fullSetup arg is not defined, default to true.

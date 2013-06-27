@@ -12,7 +12,7 @@ var template_oneword = function(id) {
 		name: "One Word",
 
 		defaultURL: "http://www.youtube.com/watch?v=l-gQLqv9f4o&t=0m12s",
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		template: true,
 				 
 
@@ -20,15 +20,15 @@ var template_oneword = function(id) {
 		// Do anything you want to do to set up your mode the first time here.
 		// This gets called once after the mode is loaded.
 		init: function() {
-			this.el.append('<div class="topContainer"><div class="onebyone centerContainer proxima-nova-400"></div></div>');
+			this.$el.append('<div class="topContainer"><div class="onebyone centerContainer proxima-nova-400"></div></div>');
 		},
 
 		// ENTER MODE.
 		// This gets called each time you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			//this.el.find('.centerContainer').empty();
-			$('.onebyone').empty();
+			//this.$el.find('.centerContainer').empty();
+			this.$el.find('.onebyone').empty();
 		},
 
 		// HANDLE INCOMING word MESSAGE.
@@ -66,10 +66,10 @@ var template_oneword = function(id) {
 			else c = 'rgb(240,240,240)';
 
 			// Set the html of the div with id="word" to the new text
-			$('.onebyone').html(msg.word);
+			this.$el.find('.onebyone').html(msg.word);
 
 			// Color the word to match
-			$('.onebyone').css("color", c);
+			this.$el.find('.onebyone').css("color", c);
 
 		}
 	}
