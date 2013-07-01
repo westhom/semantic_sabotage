@@ -1,0 +1,40 @@
+/*
+
+#template_paragraph should be changed 
+to match the name of your transform files.
+This is how we avoid CSS naming collisions.
+
+*/
+
+#repetition .container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width:50000px;
+	min-height: 100%;
+	overflow: scroll;
+	background-color: rgb(50, 50, 50);
+	color: rgb(240, 0, 0);
+	padding-top: 10px;
+}
+
+#repetition .transcript 
+{
+	padding-left: 24px;
+}
+
+#repetition .posemo
+{
+	color: rgb(193,250,164);
+}
+
+#repetition .negemo
+{
+	color: rgb(255,161,92);
+}
+
+#repetition .size-48
+{
+	font-size: 48px;
+}
+
