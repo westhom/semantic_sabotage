@@ -5,7 +5,9 @@ var radar = function(id) {
 		name: "Radar",
 		author: "Sosolimited",
 		
-		defaultURL: "http://www.youtube.com/watch?v=WjuCI2yAVD8",
+		//defaultURL: "http://www.youtube.com/watch?v=WjuCI2yAVD8", //air traffic conversation. doesn't work?
+		defaultURL: "http://www.youtube.com/watch?v=o1qsr76E5ww&t=0m1s", //testing
+		
 		$el: $('<div class="modeContainer" id="'+id+'"></div>'),	
 
 		storeID: 'empty', // creates this.storeID to keep track of speaker IDs in the trasncript

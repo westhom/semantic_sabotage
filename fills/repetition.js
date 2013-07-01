@@ -9,6 +9,7 @@ var repetition = function(id) {
 	return {
 	
 		name: "Repetition",
+		author: "Jan Wolski",
 		defaultURL: "http://www.youtube.com/watch?v=PKffm2uI4dk",
 		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
@@ -100,13 +101,16 @@ var repetition = function(id) {
 		 	else {	
 		 		
 		 		var e;
+		 		var hitNum = $("span."+msg.word).length;
+		 		console.log("Hits :" + hitNum);
 		 		c = msg.word;
 		 		if (!this.lastLeadPunct) e = $('#repetition_container #transcript').append('<span class="space"> </span>');
 		 		e = $('<span class="' + c + '">' + msg.word + '</span>');
-		 		$("span."+msg.word).css("background-color", "red");
 
+		 		$("span."+msg.word).css("background-color", "red");
 		 		$('#repetition_container #transcript').last().append(e);
 
+		 		if (hitNum > 0 ) $("span."+msg.word).last().css("background-color", "white");
 
 		 		this.lastLeadPunct = false;
 		 		this.lastEndPunct = false;

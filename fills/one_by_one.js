@@ -48,7 +48,8 @@ var one_by_one = function(id) {
 
 			//if($.inArray('punct', msg.cats) < 0)
 			//{
-				console.log(msg.word);
+
+				//console.log(msg.word);
 
 			 	var c;
 			 	var uprword = msg.word.toUpperCase();
