@@ -46,8 +46,8 @@ var one_by_one = function(id) {
 		
 		appendWordInContext: function(msg) {
 
-			if($.inArray('punct', msg.cats) < 0)
-			{
+			//if($.inArray('punct', msg.cats) < 0)
+			//{
 				console.log(msg.word);
 
 			 	var c;
@@ -82,7 +82,7 @@ var one_by_one = function(id) {
 
 			 	this.$el.find('.word').css('font-size', size + 'px');
 				
-		 	}
+		 	//}
 		 	
 		}
 	}
