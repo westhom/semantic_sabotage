@@ -16,7 +16,7 @@ function updateHTML(elmId, value) {
 
 // This function is called when an error is thrown by the player
 function onPlayerError(errorCode) {
-  alert("An error occured of type:" + errorCode);
+  console.log("An error occured of type: " + errorCode);
 }
 
 // This function is called when the player changes state
@@ -89,7 +89,7 @@ function onYouTubePlayerReady(playerId) {
   ytplayer.addEventListener("onError", "onPlayerError");
   ytplayer.height= 0;
   ytplayer.width= 0;
-  ready = true;
+  ytPlayerLoaded = true;
   if (startCall) playVideo();
 }
 

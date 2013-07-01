@@ -11,7 +11,7 @@ var template_wordStack = function(id) {
 	
 		name: "Word Stack",
 		defaultURL: "http://www.youtube.com/watch?v=6JDM4MY71G4",
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),		
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),		
 		template: true,	
 		lineHeight: 80,
 																
@@ -19,13 +19,13 @@ var template_wordStack = function(id) {
 		// Do anything you want to do to set up your mode the first time here.
 		// This gets called once after the mode is loaded.
 		init: function() {
-			this.el.append("<div id='wordstack' class='container'></div>");
+			this.$el.append("<div class='wordstack container'></div>");
 		},
 
 		// ENTER MODE.
 		// This gets called each time you go to the mode.
 		enter: function() {
-			$('#wordstack').empty();
+			this.$el.find('.wordstack').empty();
 		},
 
 		// HANDLE INCOMING word MESSAGE.
@@ -55,21 +55,21 @@ var template_wordStack = function(id) {
 		 	if($.inArray('punct', msg.cats) < 0) 
 		 	{
 		 		var e = $('<div class= "bigText proxima-nova-400 white" style="opacity:0;">' + msg.word + '</div>');
-			 	$('#wordstack').prepend(e);
+			 	this.$el.find('.wordstack').prepend(e);
 
 			 	setTimeout(function(element){
 			 		element.css("opacity", "1");	
 			 	},20,e);
 
 			 	var h = this.lineHeight;
-		 		$('#wordstack').children().each(function(i){
+		 		this.$el.find('.wordstack').children().each(function(i){
 			 		var t = h*i+"px";
 			 		//console.log("i="+i+", t="+t);
 			 		$(this).css("top", t);
 		 		});
-		 		//console.log($('#bigwords > .bigText').length*this.lineHeight+"px");
+		 		//console.log($('.bigwords > .bigText').length*this.lineHeight+"px");
 
-		 		$('#wordstack').css('height', $('#wordstack > .bigText').length*this.lineHeight+"px");
+		 		this.$el.find('.wordstack').css('height', this.$el.find('.wordstack > .bigText').length*this.lineHeight+"px");
 		 	}	 	
 		},
 

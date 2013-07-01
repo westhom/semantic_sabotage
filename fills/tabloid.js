@@ -3,15 +3,17 @@ var tabloid = function(id) {
 	return {
 	
 		name: "Tabloid",
+		author: "Sosolimited",
+		
 		defaultURL: "http://www.youtube.com/watch?v=EOCcFcgRcTg&t", //America by Allen Ginsberg
-		el: $('<div class="modeContainer" style="background-color:white" id="'+id+'"></div>'),
+		$el: $('<div class="modeContainer" style="background-color:white" id="'+id+'"></div>'),
 		curDiv: 1,
 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
 
-			this.el.empty();
+			this.$el.empty();
 			
 			var b = this.el;
 			//create and add the 8 containers
@@ -28,7 +30,7 @@ var tabloid = function(id) {
 
 			//clear out all the divs of any lingering words
 			for (var i=0; i<8; i++) {
-				$('#container'+(i+1)).empty();			
+				this.$el.find('.container'+(i+1)).empty();			
 			};
 
 		},
@@ -62,13 +64,13 @@ var tabloid = function(id) {
 		 		var w,h,ww,hh;
 
 		 		//find which div you're current word is going to go in
-			 	this.el.find('.container'+this.curDiv).append(s);
+			 	this.$el.find('.container'+this.curDiv).append(s);
 
 			 	//get current word and current div width, so you can smoosh it into shape later
 			 	w = $(s).width();
-			  ww = this.el.find('.container'+this.curDiv).width();
+			  ww = this.$el.find('.container'+this.curDiv).width();
 			 	h = $(s).height();
-			 	hh = this.el.find('.container'+this.curDiv).height();
+			 	hh = this.$el.find('.container'+this.curDiv).height();
 
 		 		$(s).css('top','-40%');
 		 		$(s).css('-webkit-transform-origin','0% 0%');

@@ -3,9 +3,10 @@ var rainbow_sort = function(id) {
 	return {
 	
 		name: "Rainbow Sort",
+		author: "Sosolimited",
 
 		defaultURL: "http://www.youtube.com/watch?v=OQSNhk5ICTI", //Double Rainbow!
-		el: $('<div class="modeContainer" style="background-color:black" id="'+id+'"></div>'),
+		$el: $('<div class="modeContainer" style="background-color:black" id="'+id+'"></div>'),
 				 
 		//line spacing between words in the stack		 
 		lineHeight: 72,
@@ -15,22 +16,22 @@ var rainbow_sort = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div id='one' class='container'></div><div id='two' class='container2'></div><div id='three' class='container3'></div><div id='four' class='container4'></div><div id='five' class='container5'></div><div id='six' class='container6'></div><div id='seven' class='container7'></div><div id='eight' class='container8'></div><div id='nine' class='container9'></div><div id='ten' class='container10'></div>");
+			this.$el.append("<div class='one container'></div><div class='two container2'></div><div class='three container3'></div><div class='four container4'></div><div class='five container5'></div><div class='six container6'></div><div class='seven container7'></div><div class='eight container8'></div><div class='nine container9'></div><div class='ten container10'></div>");
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			//empty out all the words columns
-			$('#one').empty();
-			$('#two').empty();
-			$('#three').empty();
-			$('#four').empty();
-			$('#five').empty();
-			$('#six').empty();
-			$('#seven').empty();
-			$('#eight').empty();
-			$('#nine').empty();
-			$('#ten').empty();
+			this.$el.find('.one').empty();
+			this.$el.find('.two').empty();
+			this.$el.find('.three').empty();
+			this.$el.find('.four').empty();
+			this.$el.find('.five').empty();
+			this.$el.find('.six').empty();
+			this.$el.find('.seven').empty();
+			this.$el.find('.eight').empty();
+			this.$el.find('.nine').empty();
+			this.$el.find('.ten').empty();
 		},
 
 		// Handle incoming word message.
@@ -73,97 +74,97 @@ var rainbow_sort = function(id) {
 
 				//sort words by # of characters and place them in the correct div
 			 	if (msg.word.length === 1) { //one letter words
-				 	$('#one').prepend(e);
+				 	this.$el.find('.one').prepend(e);
 				 	//walk through all old words in that column and push them down and fade them down a little
-			 		$('#one').children().each(function(i){
+			 		this.$el.find('.one').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
 			 		//grow height of div by lineHeight
-			 		$('#one').css('height', $('#one > .bigText').length*this.lineHeight+"px");					 	
+			 		this.$el.find('.one').css('height', this.$el.find('.one > .bigText').length*this.lineHeight+"px");					 	
 				} else if (msg.word.length === 2) { //two letter words
-				 	$('#two').prepend(e);
-			 		$('#two').children().each(function(i){
+				 	this.$el.find('.two').prepend(e);
+			 		this.$el.find('.two').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#two').css('height', $('#two > .bigText').length*this.lineHeight+"px");		
+			 		this.$el.find('.two').css('height', this.$el.find('.two > .bigText').length*this.lineHeight+"px");		
 				} else if (msg.word.length === 3) { //....
-				 	$('#three').prepend(e);
-			 		$('#three').children().each(function(i){
+				 	this.$el.find('.three').prepend(e);
+			 		this.$el.find('.three').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#three').css('height', $('#three > .bigText').length*this.lineHeight+"px");			 	
+			 		this.$el.find('.three').css('height', this.$el.find('.three > .bigText').length*this.lineHeight+"px");			 	
 				} else if (msg.word.length === 4) {
-				 	$('#four').prepend(e);
-			 		$('#four').children().each(function(i){
+				 	this.$el.find('.four').prepend(e);
+			 		this.$el.find('.four').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#four').css('height', $('#four > .bigText').length*this.lineHeight+"px");
+			 		this.$el.find('.four').css('height', this.$el.find('.four > .bigText').length*this.lineHeight+"px");
 				} else if (msg.word.length === 5) {
-				 	$('#five').prepend(e);
-			 		$('#five').children().each(function(i){
+				 	this.$el.find('.five').prepend(e);
+			 		this.$el.find('.five').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#five').css('height', $('#five > .bigText').length*this.lineHeight+"px");			
+			 		this.$el.find('.five').css('height', this.$el.find('.five > .bigText').length*this.lineHeight+"px");			
 				} else if (msg.word.length === 6) {			 			 				 
-				 	$('#six').prepend(e);
-			 		$('#six').children().each(function(i){
+				 	this.$el.find('.six').prepend(e);
+			 		this.$el.find('.six').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#six').css('height', $('#six > .bigText').length*this.lineHeight+"px");		
+			 		this.$el.find('.six').css('height', this.$el.find('.six > .bigText').length*this.lineHeight+"px");		
 				 } else if (msg.word.length === 7){				 			 				 
-				 	$('#seven').prepend(e);
-			 		$('#seven').children().each(function(i){
+				 	this.$el.find('.seven').prepend(e);
+			 		this.$el.find('.seven').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#seven').css('height', $('#seven > .bigText').length*this.lineHeight+"px");		
+			 		this.$el.find('.seven').css('height', this.$el.find('.seven > .bigText').length*this.lineHeight+"px");		
 				 } else if (msg.word.length === 8){
-				 	$('#eight').prepend(e);
-			 		$('#eight').children().each(function(i){
+				 	this.$el.find('.eight').prepend(e);
+			 		this.$el.find('.eight').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#eight').css('height', $('#eight > .bigText').length*this.lineHeight+"px");		
+			 		this.$el.find('.eight').css('height', this.$el.find('.eight > .bigText').length*this.lineHeight+"px");		
 				 } else if (msg.word.length === 9){ 				 
-				 	$('#nine').prepend(e);
-			 		$('#nine').children().each(function(i){
+				 	this.$el.find('.nine').prepend(e);
+			 		this.$el.find('.nine').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#nine').css('height', $('#nine > .bigText').length*this.lineHeight+"px");		
+			 		this.$el.find('.nine').css('height', this.$el.find('.nine > .bigText').length*this.lineHeight+"px");		
 				 } else {			 
-				 	$('#ten').prepend(e);
-			 		$('#ten').children().each(function(i){
+				 	this.$el.find('.ten').prepend(e);
+			 		this.$el.find('.ten').children().each(function(i){
 				 		var t = h*i+"px";
 				 		var o = 1.0 - i*0.07;
 				 		$(this).css("top", t);
 				 		$(this).css("opacity", o);
 			 		});
-			 		$('#ten').css('height', $('#ten > .bigText').length*this.lineHeight+"px");		
+			 		this.$el.find('.ten').css('height', this.$el.find('.ten > .bigText').length*this.lineHeight+"px");		
 				 }
 			}
 		}

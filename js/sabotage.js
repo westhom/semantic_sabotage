@@ -15,6 +15,9 @@ var curMode = 0;
 var curVideoID;
 var globalTimers = [];	// For keeping track of setTimeout events.
 
+// Global variable to keep track of when youtube player embed loads
+var ytPlayerLoaded = false;
+
 // Set up piechart favicon for loading captions
 Piecon.setOptions({
   color: '#fff',
@@ -100,15 +103,22 @@ function checkURL() {
 
 function drawFills() {
 	$.each(modes, function(i,m){
-		var color = (m.template==true) ? 'whiteOnGray' : 'blackOnWhite';
-		var section = (m.template==true) ? '#templates' : '#transforms';
-		var title = m.name+' | Semantic Sabotage'
-		var modeHTML = '<li><span class="modeName proxima-nova-400 '+color+'" href="#" id="mode'+i+'" onclick="linkToMode('+i+');" >'+m.name+'</span></li>'
+		var color = m.template ? 'whiteOnGray' : 'blackOnWhite';
+		var section = m.template ? '#templates' : '#transforms';
+		var title = m.name+' | Semantic Sabotage';
+		var $fill = $('<a class="fill" href="#" onclick="linkToMode('+i+');"></a>');
+		var modeHTML = '<li><span class="modeName proxima-nova-400 '+color+'" id="mode'+i+'">'+m.name+'</span></li>'
+		$fill.html(modeHTML);
+		if (!m.template) {
+			var author = m.author || 'Anonymous';
+			var authorHTML = '<li><span class="modeAuthor meta-serif-book-italic blackOnWhite">by '+author+'</span></li>'
+			$fill.append(authorHTML);
+		}
 		// Append mode menu item to DOM
-		$(section).append(modeHTML);
+		$(section).append($fill[0].outerHTML);
 		// Append hidden mode container to DOM.
-		m.el.hide();				   
-		$('#modes').append(m.el);
+		m.$el.hide();				   
+		$('#modes').append(m.$el);
 		// Initialize the mode.
 		m.init();
 	});
@@ -137,7 +147,11 @@ function goToMode(m, fullSetup, video, time) {
 		curMode = m;
 		
 		document.title = modes[curMode].name + ' | Semantic Sabotage';
-		
+		$('.navTitle').html(modes[curMode].name.toUpperCase());
+		if (modes[curMode].author) {
+			$('.navAuthor').html('by '+modes[curMode].author);
+		}
+
 		// Hide menu and show modes container.
 		$('#menu').hide();
 		turnOffAnimations();
@@ -146,8 +160,8 @@ function goToMode(m, fullSetup, video, time) {
 
 		// Hide all but the current mode's element.
 		for(var i=0; i < modes.length; i++){
-			if(i==curMode) modes[i].el.show();
-			else modes[i].el.hide();
+			if(i==curMode) modes[i].$el.show();
+			else modes[i].$el.hide();
 		}
 
 		// If fullSetup arg is not defined, default to true.
@@ -205,6 +219,14 @@ function goToMode(m, fullSetup, video, time) {
 // it contains the full captions for the current video
 function load(resp) {
 	// console.log('Captions fetched successfully');
+
+	// If ytPlayer isn't loaded yet, try again in 1 second
+	if (!ytPlayerLoaded) {
+		setTimeout(function(){
+			load(resp);
+		}, 1000);
+		return false;
+	}
 
 	// Cancel loading if user has returned to the menu early
 	if ($('#menu').is(":visible")) return false;

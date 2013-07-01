@@ -11,7 +11,7 @@ var template_paragraph = function(id) {
 	
 		name: "Paragraph",
 		defaultURL: "http://www.youtube.com/watch?v=PKffm2uI4dk",
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		template: true,
 		
 		lastLeadPunct: false,
@@ -23,15 +23,15 @@ var template_paragraph = function(id) {
 		// Do anything you want to do to set up your mode the first time here.
 		// This gets called once after the mode is loaded.
 		init: function() {
-			this.el.append("<div id='paragraph_container' class='container bg-white'></div>");
-			$('#paragraph_container').append('<div id="transcript" class="transcript proxima-nova-400 size-48"></div>');
+			this.$el.append("<div class='paragraph_container container bg-white'></div>");
+			this.$el.find('.paragraph_container').append('<div class="transcript proxima-nova-400 size-48"></div>');
 		},
 
 		// ENTER MODE.
 		// This gets called each time you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('#paragraph_container #transcript').empty();
+			this.$el.find('.paragraph_container .transcript').empty();
 		},
 
 		// HANDLE INCOMING word MESSAGE.
@@ -77,7 +77,7 @@ var template_paragraph = function(id) {
 		 	// end punct always followed by space
 		 	if($.inArray('endPunct', msg.cats) >= 0){
 		 		var e = $('<span class="' + c + '">' + msg.word + ' ' + '</span>');
-				$('#paragraph_container #transcript').append(e);
+				this.$el.find('.paragraph_container .transcript').append(e);
 
 				this.lastLeadPunct = false;
 				this.lastEndPunct = true;
@@ -90,7 +90,7 @@ var template_paragraph = function(id) {
 		 		if (this.lastEndPunct) e = $('<span class="' + c + '">' + msg.word + '</span>');
 		 		else e = $('<span class="' + c + '">' + ' ' + msg.word + '</span>');
 
-		 		$('#paragraph_container #transcript').append(e);
+		 		this.$el.find('.paragraph_container .transcript').append(e);
 
 		 		this.lastLeadPunct = true;
 		 		this.lastEndPunct = false;
@@ -99,10 +99,10 @@ var template_paragraph = function(id) {
 		 	else {	
 		 		
 		 		var e;
-		 		if (!this.lastLeadPunct) e = $('#paragraph_container #transcript').append('<span class="space"> </span>');
+		 		if (!this.lastLeadPunct) e = this.$el.find('.paragraph_container .transcript').append('<span class="space"> </span>');
 		 		e = $('<span class="' + c + '">' + msg.word + '</span>');
 
-		 		$('#paragraph_container #transcript').append(e);
+		 		this.$el.find('.paragraph_container .transcript').append(e);
 
 		 		if (c != 'blank') {
 		 			e.addClass('marked');

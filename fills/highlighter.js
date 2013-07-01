@@ -3,8 +3,10 @@ var highlighter = function(id) {
 	return {
 	
 		name: "Highlighter",
+		author: "Sosolimited",
+		
 		defaultURL: "http://www.youtube.com/watch?v=4H5ocEjhkYw&t=0m6s",
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,
 		lastEndPunct: 0,
 		posEvents: [],
@@ -13,14 +15,14 @@ var highlighter = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append("<div id='tagged_container' class='container bg-white'></div>");
-			$('#tagged_container').append('<div id="transcript" class="transcript museo-slab-100 size-32"></div>');
+			this.$el.append("<div class='tagged_container container bg-white'></div>");
+			this.$el.find('.tagged_container').append('<div class="transcript museo-slab-100 size-32"></div>');
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('#tagged_container #transcript').empty();
+			$('.tagged_container .transcript').empty();
 		},
 
 
@@ -67,7 +69,7 @@ var highlighter = function(id) {
 		 	// end punct always followed by space
 		 	if($.inArray('endPunct', msg.cats) >= 0){
 		 		var e = $('<span class="' + c + '">' + msg.word + ' ' + '</span>');
-				$('#tagged_container #transcript').append(e);
+				this.$el.find('.tagged_container .transcript').append(e);
 				e.css("color", black);
 
 				this.lastLeadPunct = 0;
@@ -80,7 +82,7 @@ var highlighter = function(id) {
 		 		if (this.lastEndPunct) e = $('<span class="' + c + '">' + msg.word + '</span>');
 		 		else e = $('<span class="' + c + '">' + ' ' + msg.word + '</span>');
 
-		 		$('#tagged_container #transcript').append(e);
+		 		this.$el.find('.tagged_container .transcript').append(e);
 		 		e.css("color", black);
 
 		 		this.lastLeadPunct = 1;
@@ -90,10 +92,10 @@ var highlighter = function(id) {
 		 	else {	
 
 		 		
-		 		if (!this.lastLeadPunct) e = $('#tagged_container #transcript').append('<span class="space"> </span>');
+		 		if (!this.lastLeadPunct) e = this.$el.find('.tagged_container .transcript').append('<span class="space"> </span>');
 		 		var e = $('<span class="' + c + '">' + msg.word + '</span>');
 
-		 		$('#tagged_container #transcript').append(e);
+		 		this.$el.find('.tagged_container .transcript').append(e);
 
 		 		if (c != 'blank') {
 		 			e.addClass('marked');
@@ -119,7 +121,7 @@ var highlighter = function(id) {
 	
 		 		var delay = 2500;
 
-	 			$('.marked').each(function(i) {
+	 			this.$el.find('.marked').each(function(i) {
 	 				//find all the words of the same class
 	 				if ($(this).hasClass(c)) 
 	 				{

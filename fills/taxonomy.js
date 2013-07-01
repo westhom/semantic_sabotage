@@ -3,8 +3,10 @@ var taxonomy = function(id) {
 	return {
 	
 		name: "Taxonomy",
+		author: "Sosolimited",
+		
 		defaultURL: "http://www.youtube.com/watch?v=w5R8gduPZw4&t=0m03s",
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 
 		index: 0, // defines global variable this.index used to keep track of sentence objects -- see below
 		
@@ -13,7 +15,7 @@ var taxonomy = function(id) {
 		// This gets called once after the mode is loaded.
 		init: function() {
 
-			this.el.empty(); // empties modeContainer div
+			this.$el.empty(); // empties modeContainer div
 
 		},
 
@@ -21,16 +23,16 @@ var taxonomy = function(id) {
 		// This gets called each time you go to the mode.
 		enter: function() {
 
-			this.el.empty(); // re-empties modeContainer div
+			this.$el.empty(); // re-empties modeContainer div
 
 			this.index = 0; // initializes this.index to keep track of sentence objects -- see below
 
-			this.el.append('<div class="container proxima-nova-700"><div>'); // appends container class to modeContainer for Taxonomy
+			this.$el.append('<div class="container proxima-nova-700"><div>'); // appends container class to modeContainer for Taxonomy
 
 			var so = document.createElement('div'); // creates new div for sentence object to be placed in the DOM
 			$(so).addClass('so' + this.index); // creates a dummy class with this.index to keep track of sentence objects
 			$(so).addClass('sentenceObject'); // adds sentenceObject class for css styling
-			this.el.find('.container').append(so); // attaches sentenceObject div to container
+			this.$el.find('.container').append(so); // attaches sentenceObject div to container
 
 		},
 
@@ -57,15 +59,15 @@ var taxonomy = function(id) {
 
 		 	if ($.inArray('endPunct', msg.cats) >= 0) { // checks to see if current message is classified as end punctuation
 
-				this.el.find('.so' + this.index).css('opacity','0'); // finds the current (just end-punctuated) sentence object and sets to fade out
-				setTimeout( function() { this.el.find('.so' + this.index).remove() }, 2000 ); // culls sentence object from DOM after delay
+				this.$el.find('.so' + this.index).css('opacity','0'); // finds the current (just end-punctuated) sentence object and sets to fade out
+				setTimeout( $.proxy(function() { this.$el.find('.so' + this.index).remove() }, this), 2000 ); // culls sentence object from DOM after delay
 
 				this.index++; // increases index for sentence object tracking
 
 				var so = document.createElement('div'); // creates new div for sentence object to be placed in the DOM
 				$(so).addClass('so' + this.index); // creates a dummy class with this.index to keep track of sentence objects
 				$(so).addClass('sentenceObject'); // adds sentenceObject class for css styling
-				this.el.find('.container').append(so); // attaches sentenceObject div to container
+				this.$el.find('.container').append(so); // attaches sentenceObject div to container
 
 			}
 
@@ -89,7 +91,7 @@ var taxonomy = function(id) {
 				$(wc).append(msg.word); // appends word to word continer for display
 				$(wc).append(cc); // appends categoryContainer to wordContainer
 
-				this.el.find('.so' + this.index).append(wc); // finds the current sentenceObject and appends current wordContainer
+				this.$el.find('.so' + this.index).append(wc); // finds the current sentenceObject and appends current wordContainer
 
 				var wd = document.createElement('div'); //creates an additional wordContainer div to contain spacer object
 				$(wd).addClass('wordContainer');
@@ -98,9 +100,9 @@ var taxonomy = function(id) {
 				$(wd).append('&#8211; '); // en dash
 //				$(wd).append('&#8212; '); // em dash
 
-				this.el.find('.so' + this.index).append(wd); // appends spacer wordObject to current sentenceObject
+				this.$el.find('.so' + this.index).append(wd); // appends spacer wordObject to current sentenceObject
 
-				this.el.find('.so' + this.index).css('top', this.el.find('.container').height()-this.el.find('.so' + this.index).height() +'px'); // repositions sentence object when words begin to accumulate and word-wrap
+				this.$el.find('.so' + this.index).css('top', this.$el.find('.container').height()-this.$el.find('.so' + this.index).height() +'px'); // repositions sentence object when words begin to accumulate and word-wrap
 
 		 		setTimeout( function() { $(cc).css('opacity','1') }, 250 ); // sets categoryObject to fade in over the word after a short delay
 

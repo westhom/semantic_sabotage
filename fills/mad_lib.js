@@ -3,10 +3,11 @@ var mad_lib = function(id) {
 	return {
 	
 		name: "Mad Lib",
-		defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE", //kennedy
-
-		//el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		author: "Sosolimited",
+		
+		defaultURL: "http://www.youtube.com/watch?v=u02nZW0QiSE",
+		//$el: $('<div class="modeContainer" id="'+this.name+'"></div>'),
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		lastLeadPunct: 0,
 		lastEndPunct: 0,
 		timeoutEvents: [],
@@ -19,7 +20,7 @@ var mad_lib = function(id) {
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append('<div id="madlib" class="container bg-white"></div>');
+			this.$el.append('<div class="madlib container bg-white"></div>');
 
 		},
 
@@ -27,11 +28,11 @@ var mad_lib = function(id) {
 		enter: function() {
 			console.log(this.name+" enter()");
 			
-			$('#madlib').empty();
+			this.$el.find('.madlib').empty();
 			this.buildSentence = true;
 
 			var holder = $('<div class="sentence franklin-gothic-condensed"></div>');
-			$('#madlib').append(holder);
+			this.$el.find('.madlib').append(holder);
 			
 		},
 
@@ -94,7 +95,7 @@ var mad_lib = function(id) {
     },
 
     exitWords: function(words) {
-    	var y = this.el.height();
+    	var y = this.$el.height();
     	//console.log('Exit Words to ' + y);
     	words.each(function(i) {
     		$(this).css('top', y+'px');
@@ -139,7 +140,7 @@ var mad_lib = function(id) {
 						//console.log('building :' + msg.word);
 					}
 
-					el.css('left', $('#madlib').width());
+					el.css('left', this.$el.find('.madlib').width());
 					el.css('top', '200px');
 
 					$('.sentence').append(el);
@@ -215,27 +216,27 @@ var mad_lib = function(id) {
 						this.buildSentence = true;
 						this.sentenceWordCount = 0;
 						
-						$('.landing-word').each(function(i) {
+						this.$el.find('.landing-word').each(function(i) {
 							$(this).removeClass();
 							$(this).addClass('delete-word');
 						});
 
 						//move them
-						setTimeout(function(context){
-						 	context.exitWords($('.delete-word'));
-						}, 25, this);
+						setTimeout($.proxy(function(context){
+						 	context.exitWords(this.$el.find('.delete-word'));
+						}, this), 25, this);
 
 						//delete those fuckers				
-						setTimeout(function(){
-						 	$('.delete-word').remove();
-						}, 1000);
+						setTimeout($.proxy(function(){
+						 	this.$el.find('.delete-word').remove();
+						}, this), 1000);
 
 					}
 				}
 			}
 
 			//SET WORD POSITIONS
-			this.setWordPositions($('.landing-word, .space-word'));
+			this.setWordPositions(this.$el.find('.landing-word, .space-word'));
 		 	
 		}
 	}

@@ -3,9 +3,10 @@ var scrabble = function(id) {
 	return {
 	
 		name: "Scrabble",
+		author: "Sosolimited",
 
 		defaultURL: "http://www.youtube.com/watch?v=CrB2lxnpDJU",
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		// Sets size of words.
 		fontSize: 200,
 		// Since we're using a monospace font, this sets the space between the letters
@@ -22,7 +23,7 @@ var scrabble = function(id) {
 		// This gets called once after the mode is created.
 		init: function() {
 			// Insert container.
-			this.el.append('<div class="topContainer"><div class="centerContainer motor"></div></div>');
+			this.$el.append('<div class="topContainer"><div class="centerContainer motor"></div></div>');
 			// Initialize all flags to false.
 			for(var i=0; i < 128; i++){
 				this.foundFlags.push(false);
@@ -33,7 +34,7 @@ var scrabble = function(id) {
 		enter: function() {
 			//console.log(this.name+" enter()");
 			// Clear out any old elements on enter.
-			this.el.find('.centerContainer').empty();
+			this.$el.find('.centerContainer').empty();
 		},
 
 		// Handle incoming word message.
@@ -67,7 +68,7 @@ var scrabble = function(id) {
 					//console.log(word);
 				 	
 				 	// For all the letters current in the DOM.
-				 	this.el.find('.centerContainer').children().each(function(i){
+				 	this.$el.find('.centerContainer').children().each(function(i){
 				 		// Set their "used" attribute to false and their color to black.
 				 		// Note: "used" is a custom attribute we added to the element.
 				 		$(this).attr("used", "false");
@@ -88,7 +89,7 @@ var scrabble = function(id) {
 				 		// If it hasn't been found yet.
 				 		if(!flags[i]){
 				 			// For each letter in the current word on screen.
-				 			this.el.find('.centerContainer').children().each(function(){
+				 			this.$el.find('.centerContainer').children().each(function(){
 				 				// If the letter has not already been used.
 				 				if($(this).attr("used") == "false"){
 				 					// If the letter matches the letter in the incoming word.
@@ -107,7 +108,7 @@ var scrabble = function(id) {
 				 	
 				 // Get rid of the unused letters.
 				 // For all letters currently on screen.
-			 		this.el.find('.centerContainer').children().each(function(i){			 			
+			 		this.$el.find('.centerContainer').children().each(function(i){			 			
 			 			// If the letter hasn't been used.
 			 			if($(this).attr("used")=="false"){
 			 					$(this).remove();
@@ -121,7 +122,7 @@ var scrabble = function(id) {
 			 				// Create element and position it appropriately. 	 				
 				 			var newLetter = $('<span class="letter" style="left:'+ j*this.letterSpacing +'px; top:200px; opacity:0; color:white;">'+word[j]+'</span>');
 							// Append it to the DOM.				 			
-				 			this.el.find('.centerContainer').append(newLetter);
+				 			this.$el.find('.centerContainer').append(newLetter);
 				 			
 				 			// Wait a bit, then animate the opacity and top position of the new letter.
 				 			setTimeout(function(el){

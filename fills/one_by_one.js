@@ -3,23 +3,24 @@ var one_by_one = function(id) {
 	return {
 	
 		name: "One x One",
+		author: "Sosolimited",
 
 		defaultURL: "http://www.youtube.com/watch?v=gdtQrSnEPCM&t=0m3s",
 		//usfRtJpyJDk = how to behave in court
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		fontSize: 200,
 				 
 
 		// Anything you want to do to initialize your mode. 
 		// This gets called once after the mode is created.
 		init: function() {
-			this.el.append('<div class="topContainer"><div id="word" class="centerContainer museo-slab-1000-italic">Hello</div></div>');
+			this.$el.append('<div class="topContainer"><div class="word centerContainer museo-slab-1000-italic">Hello</div></div>');
 		},
 
 		// Gets called evertime you go to the mode.
 		enter: function() {
 			console.log(this.name+" enter()");
-			$('#word').empty();
+			this.$el.find('.word').empty();
 		},
 
 		// Handle incoming word message.
@@ -62,10 +63,10 @@ var one_by_one = function(id) {
 			 	else c = 'rgb(33,31,24)';
 
 
-			 	$('#word').html(msg.word);
+			 	this.$el.find('.word').html(msg.word);
  	
-			 	$('#word').css('font-size', this.fontSize + 'px');
-			 	$('#word').css('color', c);
+			 	this.$el.find('.word').css('font-size', this.fontSize + 'px');
+			 	this.$el.find('.word').css('color', c);
 
 			 	//scaling down if word is too big
 			 	
@@ -78,7 +79,7 @@ var one_by_one = function(id) {
 			 		curWordWidth = size * msg.word.length * ratio; 		
 			 	}
 
-			 	$('#word').css('font-size', size + 'px');
+			 	this.$el.find('.word').css('font-size', size + 'px');
 				
 		 	}
 		 	

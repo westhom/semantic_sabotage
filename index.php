@@ -57,6 +57,10 @@
 					<button id="muteButton" class="navButton" style="" onclick="muteVideo();"><img class="icon" src="img/icons/mute.png" data-icon="mute"></button>
 					<button id="unmuteButton" class="navButton" style="display:none" onclick="unMuteVideo();"><img class="icon" src="img/icons/sound.png" data-icon="sound"></button>
 					<button id="fullscreenButton" class="navButton" style="" onclick="toggleFullscreen();"><img class="icon" src="img/icons/fullscreen.png" data-icon="fullscreen"></button>
+					<div class="navMeta">
+						<span class="navTitle proxima-nova-700"></span>
+						<span class="navAuthor meta-serif-book-italic"></span>
+					</div>
 				</form>
 			</div>
 			<a id="logo_link" href="http://sosolimited.com" target="_blank"><img id="logo" src="img/sosoLogoSmall.png"/></a>
@@ -75,10 +79,8 @@
 		<div id="menu">
 				
 			<div id="columnLeft" class="column animated delay fadeIn">
-				<div class="menuHeading meta-serif-book-italic">Transforms</div>
+				<div class="menuHeading meta-serif-book-italic">Gallery</div>
 				<ul id="transforms"></ul>
-				<div id="templateHeading" class="menuHeading meta-serif-book-italic">Templates</div>
-				<ul id="templates"></ul>
 			</div>
 
 			<div id="columnRight" class="column animated delay fadeIn">
@@ -102,6 +104,8 @@
 				<a href="https://github.com/sosolimited/semantic_sabotage" target="_blank">
 					<span class="modeName proxima-nova-400 whiteOnGray">Source code</span>
 				</a>
+				<div id="templateHeading" class="menuHeading meta-serif-book-italic">Templates</div>
+				<ul id="templates"></ul>
 			</div>
 		</div>		
 
