@@ -15,9 +15,8 @@ var qwerty = function(id) {
   }
   return {
 		name: "Qwerty",
-		author: "Amit",
+		author: "Amit Sch",
 		defaultURL: "http://www.youtube.com/watch?v=YLO7tCdBVrA", //Bob Ross, Amit's 1st choice
-		//defaultURL: "http://www.youtube.com/watch?v=o1qsr76E5ww&t=0m1s", //something else that works
 		$el: $('<div class="modeContainer ' + fontClass + '" id="'+id+'"></div>'),		
 
 		init: function() {
