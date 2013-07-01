@@ -5,7 +5,8 @@ var one_by_one = function(id) {
 		name: "One x One",
 		author: "Sosolimited",
 
-		defaultURL: "http://www.youtube.com/watch?v=gdtQrSnEPCM&t=0m3s",
+		//defaultURL: "http://www.youtube.com/watch?v=gdtQrSnEPCM&t=0m3s", //pacino, broken
+		defaultURL: "http://www.youtube.com/watch?v=6ucfgdFrlho&t=0m5s", //arnie
 		//usfRtJpyJDk = how to behave in court
 		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		fontSize: 200,

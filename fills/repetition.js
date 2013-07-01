@@ -10,7 +10,7 @@ var repetition = function(id) {
 	
 		name: "Repetition",
 		defaultURL: "http://www.youtube.com/watch?v=PKffm2uI4dk",
-		el: $('<div class="modeContainer" id="'+id+'"></div>'),
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 		
 		
 		lastLeadPunct: false,
@@ -22,7 +22,7 @@ var repetition = function(id) {
 		// Do anything you want to do to set up your mode the first time here.
 		// This gets called once after the mode is loaded.
 		init: function() {
-			this.el.append("<div id='repetition_container' class='container bg-white'></div>");
+			this.$el.append("<div id='repetition_container' class='container bg-white'></div>");
 			$('#repetition_container').append('<div id="transcript" class="transcript proxima-nova-400 size-48"></div>');
 		},
 
