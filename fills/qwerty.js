@@ -15,6 +15,7 @@ var qwerty = function(id) {
   }
   return {
 		name: "Qwerty",
+		author: "Amit",
 		defaultURL: "http://www.youtube.com/watch?v=YLO7tCdBVrA",
 		
 		el: $('<div class="modeContainer ' + fontClass + '" id="'+id+'"></div>'),		
