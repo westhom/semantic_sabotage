@@ -145,9 +145,6 @@ var radar = function(id) {
 					$(p).append(w);
 
 					// attaches particle object to particleCenter and sets timeout function to cull objects following animation
-					var test1 = 					$('#radar .particleCenter');
-					console.log(test1);
-
 					$('#radar .particleCenter').append(p);
 					setTimeout( function() { $(p).remove() }, this.period*1000 );
 
