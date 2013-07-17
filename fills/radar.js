@@ -5,7 +5,9 @@ var radar = function(id) {
 		name: "Radar",
 		author: "Sosolimited",
 		
-		defaultURL: "http://www.youtube.com/watch?v=WjuCI2yAVD8",
+		defaultURL: "http://www.youtube.com/watch?v=WjuCI2yAVD8", //air traffic conversation. doesn't work?
+		//defaultURL: "http://www.youtube.com/watch?v=o1qsr76E5ww&t=0m1s", //testing
+		
 		$el: $('<div class="modeContainer" id="'+id+'"></div>'),	
 
 		storeID: 'empty', // creates this.storeID to keep track of speaker IDs in the trasncript
@@ -73,6 +75,8 @@ var radar = function(id) {
 		
 		appendWordInContext: function(msg) {
 
+
+
 			if (this.storeID[0] == '[') { // speaker IDs are notated within brackets. this checks to see if a bracket has been opened for tracking.
 				this.storeID = this.storeID + msg.word; // collects words to this.storeID when brackets are open.
 			}
@@ -107,7 +111,7 @@ var radar = function(id) {
 					this.$el.find('#radar .marqueeCenter').append(m);
 					setTimeout( function() { $(m).remove() }, this.period*1000 );
 
-					var angle = -this.$el.find('#radar .timer').width()/10 * Math.PI/180; // calculates radar angle by referencing the animated timer object (to sync particle placement with animated radar position)
+					var angle = -$('#radar .timer').width()/10 * Math.PI/180; // calculates radar angle by referencing the animated timer object (to sync particle placement with animated radar position)
 
 					var rMin = this.radius*this.ringRatio[this.ringCount-1]; // sets minimum radius for particle placement
 					var rMax = this.radius*this.ringRatio[1]; // sets maximium radius for particle placement
@@ -141,7 +145,7 @@ var radar = function(id) {
 					$(p).append(w);
 
 					// attaches particle object to particleCenter and sets timeout function to cull objects following animation
-					this.$el.find('#radar .particleCenter').append(p);
+					$('#radar .particleCenter').append(p);
 					setTimeout( function() { $(p).remove() }, this.period*1000 );
 
 					window.getComputedStyle(p).WebkitTransform; // forces DOM to calculate position of particle object to ensure initial position before css -webkit-transition activity (particle drift)
