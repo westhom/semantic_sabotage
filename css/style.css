@@ -156,12 +156,6 @@ legend{
 	/*text-decoration:none;*/
 }
 
-#columnRight a:hover {
-	color: rgb(255,255,255);
-	background-color: rgb(0,174,242);
-	text-decoration:none;
-}
-
 #templates .modeName {
 	margin-bottom: -4px;
 }
