@@ -6,7 +6,8 @@ var tabloid = function(id) {
 		author: "Sosolimited",
 		
 		defaultURL: "http://www.youtube.com/watch?v=EOCcFcgRcTg&t", //America by Allen Ginsberg
-		$el: $('<div class="modeContainer" style="background-color:white" id="'+id+'"></div>'),
+		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
+
 		curDiv: 1,
 
 		// Anything you want to do to initialize your mode. 
@@ -15,7 +16,7 @@ var tabloid = function(id) {
 
 			this.$el.empty();
 			
-			var b = this.el;
+			var b = this.$el;
 			//create and add the 8 containers
 			for (var i=0; i<8; i++) {
 				var c = document.createElement('div');
@@ -57,6 +58,8 @@ var tabloid = function(id) {
 		 	// ignore punctuation messages. just want words
 		 	if($.inArray('punct', msg.cats) < 0){
 
+				console.log('word '+msg.word+' '+this.curDiv);
+
 		 		var s = document.createElement('div');
 		 		$(s).addClass('word');
 		 		$(s).append(msg.word);
@@ -86,6 +89,7 @@ var tabloid = function(id) {
 		 				setTimeout(function(){$(s).remove()},death);
 		 			});
 
+				
 				//increment which div you're filling next 
 			 	this.curDiv++;
 
