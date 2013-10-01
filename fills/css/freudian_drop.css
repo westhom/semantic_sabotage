@@ -1,0 +1,63 @@
+/*
+September 2013.
+*/
+
+#freudian_drop .container {
+	position: absolute;
+	width:100%;
+	height:100%;
+	background-color: rgb(50,50,50);
+	color: rgb(240, 240, 240);
+	top: 0;
+	left: 0;
+	padding-top: 50px;
+	font-size: 80px;
+	overflow:hidden;
+}
+
+#freudian_drop .transcript 
+{
+	padding: 24px;
+}
+
+#freudian_drop .freudian_drop {
+}
+
+#freudian_drop .left_word {
+	position: absolute;
+	margin: -10px;
+	padding: -10px;
+	display: block;
+	height: 70px;
+	top: 0;
+	left: 20%;
+	color: #fffef7;
+}
+
+#freudian_drop .center_word {
+	position: absolute;
+	margin: -10px;
+	padding: -10px;
+	display: block;
+	height: 70px;
+	top: 0;
+	left: 47%;
+	color: #e24d4d;
+}
+
+#freudian_drop .right_word {
+	position: absolute;
+	margin: -10px;
+	padding: -10px;
+	display: block;
+	height: 70px;
+	top: 0;
+	left: 73%;
+	color: #f3ed48;
+}
+
+#freudian_drop .connector  {
+	stroke: #FFFFFF;
+	stroke-width: 1;
+	fill: none;
+}

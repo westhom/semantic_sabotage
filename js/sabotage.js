@@ -328,8 +328,13 @@ function showMenu() {
 	
 	$('#menu').show();
 	$('#menu').scrollTop('0px');
-	$('#modes').hide();	
+	$('#modes').hide();
 
+	// For Freudian Drop's Box-2D physics engine.
+	if ( modes[curMode].name === "Freudian Drop" ) {
+		modes[curMode].exit();
+	}
+	
 	// Reset progress bar
 	$('#progressBar').width("0%");
 	Piecon.reset();
