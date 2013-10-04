@@ -54,12 +54,12 @@ var one_by_one = function(id) {
 			 	var c;
 			 	var uprword = msg.word.toUpperCase();
 			 	
-			 	if($.inArray('swear', msg.cats) >= 0) c = 'rgb(250,16,48)'; //bright red
+			 	if($.inArray('negemo', msg.cats) >= 0) c = 'rgb(250,16,48)'; //bright red
 			 	//else if($.inArray('negemo', msg.cats) >= 0) c = 'rgb(107,0,56)'; //purple
-			 	else if((uprword.indexOf('LIVE') >= 0) || (uprword.indexOf('LIFE') >= 0) || ($.inArray('health', msg.cats) >= 0)) c = 'rgb(49,211,255)'; //cyan
-			 	else if((uprword.indexOf('GAME') >= 0) || ($.inArray('leisure', msg.cats) >= 0)) c = 'rgb(0,229,120)'; //mint green
-			 	else if($.inArray('time', msg.cats) >= 0) c = 'rgb(255,208,75)'; //mustard
-			 	else if(uprword.indexOf('INCH') >= 0) c = 'rgb(255,240,195)'; //white
+			 	else if((uprword.indexOf('TUMOR') >= 0) || (uprword.indexOf('LUNCHES') >= 0) || ($.inArray('posemo', msg.cats) >= 0)) c = 'rgb(49,211,255)'; //cyan
+			 	else if((uprword.indexOf('WRESTLER') >= 0) || ($.inArray('leisure', msg.cats) >= 0)) c = 'rgb(0,229,120)'; //mint green
+			 	else if($.inArray('ingest', msg.cats) >= 0) c = 'rgb(255,208,75)'; //mustard
+			 	else if(uprword.indexOf('DADDY') >= 0) c = 'rgb(255,240,195)'; //white
 			 	
 			 	//else if (msg.cats.length == 0) c = 
 			 	else c = 'rgb(33,31,24)';

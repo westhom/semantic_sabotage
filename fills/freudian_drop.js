@@ -18,7 +18,7 @@ var freudian_drop = function(id) {
 			this.$el.append('<div class="container"></div>');
 			this.$el.find('.container').append('<div class="transcript proxima-nova-400 size-48"></div>');
 			// attach physics lib for this transform
-			$.getScript('./libs/box2d-jquery-master/js/lib/jquery.box2d.min.js', function() { /*console.log('SCRIPT LOADED: box-2D');*/ });
+			$.getScript('./js/libs/jquery.box2d.min.js', function() { /*console.log('SCRIPT LOADED: box-2D');*/ });
 		},
 
 		// ENTER MODE.
@@ -31,7 +31,7 @@ var freudian_drop = function(id) {
 			// the elements using Box-2D are cloned at the top HTML level, so we must delete them also.
 			// this code is currently in sabotage.js, the only place where this works. But it is a big hack. Must be changed.
 			// DOESNT ALWAYS WORK: because it doesnt have enough time to load the script beofre words start falling.
-			$.getScript('./libs/box2d-jquery-master/js/lib/jquery.box2d.min.js', function() { /*console.log('SCRIPT LOADED: box-2D');*/ });
+			$.getScript('./js/libs/jquery.box2d.min.js', function() { /*console.log('SCRIPT LOADED: box-2D');*/ });
 		},
 
 		// HANDLE INCOMING word MESSAGE.

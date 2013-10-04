@@ -58,8 +58,6 @@ var tabloid = function(id) {
 		 	// ignore punctuation messages. just want words
 		 	if($.inArray('punct', msg.cats) < 0){
 
-				console.log('word '+msg.word+' '+this.curDiv);
-
 		 		var s = document.createElement('div');
 		 		$(s).addClass('word');
 		 		$(s).append(msg.word);
