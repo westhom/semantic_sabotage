@@ -32,6 +32,7 @@ September 2013.
 	top: 0;
 	left: 20%;
 	color: #fffef7;
+	cursor:pointer;
 }
 
 #freudian_drop .center_word {
@@ -43,6 +44,8 @@ September 2013.
 	top: 0;
 	left: 47%;
 	color: #e24d4d;
+	cursor:pointer;
+
 }
 
 #freudian_drop .right_word {
@@ -54,6 +57,7 @@ September 2013.
 	top: 0;
 	left: 73%;
 	color: #f3ed48;
+	cursor:pointer;
 }
 
 #freudian_drop .connector  {
