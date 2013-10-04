@@ -6,6 +6,7 @@ var taxonomy = function(id) {
 		author: "Sosolimited",
 		
 		defaultURL: "http://www.youtube.com/watch?v=w5R8gduPZw4&t=0m03s",
+		
 		$el: $('<div class="modeContainer" id="'+id+'"></div>'),
 
 		index: 0, // defines global variable this.index used to keep track of sentence objects -- see below
@@ -15,43 +16,43 @@ var taxonomy = function(id) {
 		// This gets called once after the mode is loaded.
 		init: function() {
 
-			this.$el.empty(); // empties modeContainer div
+			this.$el.empty(); // empty modeContainer div for setup
 
-		},
+		}, // end init
 
 		// ENTER MODE.
 		// This gets called each time you go to the mode.
 		enter: function() {
 
-			this.$el.empty(); // re-empties modeContainer div
+			this.$el.empty(); // empty modeContainer div for setup
 
 			this.index = 0; // initializes this.index to keep track of sentence objects -- see below
 
-			this.$el.append('<div class="container proxima-nova-700"><div>'); // appends container class to modeContainer for Taxonomy
+			this.$el.append('<div class="container proxima-nova-700"></div>'); // appends container class to modeContainer for Taxonomy
 
 			var so = document.createElement('div'); // creates new div for sentence object to be placed in the DOM
 			$(so).addClass('so' + this.index); // creates a dummy class with this.index to keep track of sentence objects
 			$(so).addClass('sentenceObject'); // adds sentenceObject class for css styling
 			this.$el.find('.container').append(so); // attaches sentenceObject div to container
 
-		},
+		}, // end enter
 
 		// HANDLE INCOMING word MESSAGE.
 		// Called each time a new word is ready. 
 		handleWord: function(msg) {						
 			this.appendWordInContext(msg);
-		},
+		}, // end handleWord
 		
 		// HANDLE INCOMING sentenceEnd MESSAGE.
 		// Called each time a new sentence is complete.
 		handleSentenceEnd: function(msg) {
-		},
+		}, // end handleSentenceEnd
 		
 		// HANDLE INCOMING stats MESSAGE.
 		// Called with each sentence.
 		// Passes a collection of interesting language statistics.
 		handleStats: function(msg) {
-		},
+		}, // end handleStats
 		
 		// APPEND WORD TO DOM.
 		// This is where you insert your words into the DOM.
@@ -60,7 +61,7 @@ var taxonomy = function(id) {
 		 	if ($.inArray('endPunct', msg.cats) >= 0) { // checks to see if current message is classified as end punctuation
 
 				this.$el.find('.so' + this.index).css('opacity','0'); // finds the current (just end-punctuated) sentence object and sets to fade out
-				setTimeout( $.proxy(function() { this.$el.find('.so' + this.index).remove() }, this), 2000 ); // culls sentence object from DOM after delay
+				setTimeout( function() { this.$el.find('.so' + this.index).remove() }, 2000 ); // culls sentence object from DOM after delay
 
 				this.index++; // increases index for sentence object tracking
 
@@ -108,6 +109,6 @@ var taxonomy = function(id) {
 
 			}
 
-		}
-	}
-};
+		} // end appendWordInContext
+	} // end return
+}; // end var
