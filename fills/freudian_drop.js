@@ -57,6 +57,7 @@ var freudian_drop = function(id) {
 		// APPEND WORD TO DOM.
 		// This is where you insert your words into the DOM.
 		appendWordInContext: function(msg) {
+			
 			// We drop word in 3 places, from left, center, and right sides.
 			var word_class = undefined;
 			if(msg.cats.length === 0) word_class = 'left_word freudian_drop';  			//green
@@ -85,11 +86,23 @@ var freudian_drop = function(id) {
 					'friction': 0.5 /* think: slideiness, from 0 to 1, default 0.3 */
 				});
 			}
+
+			// Box-2D messes with click events and renders the youtube URL text input unclickable. The fix we found is to force focus on it this way.
+			$("#ytURL").click(function(){
+				this.focus();
+			});
+			
+		},
+		// For when we submit a new youtube URL, we must clear old Box-2D words from the screen.
+		refresh: function() {
+			$('.freudian_drop').remove();
+
 		},
 		// For Freudian Drop's Box-2D physics engine : delete the box-2d world on exit. Should find the proper way to reset the world rather than deleting it entirely.
 		exit: function() {
 			delete Box2D;
 			$('.freudian_drop').remove();
+
 		}
 	}
 };

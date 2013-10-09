@@ -268,6 +268,11 @@ function submitURL() {
 		return false;
 	}
 
+	// For Freudian Drop's Box-2D physics engine.
+	if ( modes[curMode].name === "Freudian Drop" ) {
+		modes[curMode].refresh();
+	}
+
 	var time = getStartTimeFromURL(url);
 
 	// console.log('URL submitted: ', url);

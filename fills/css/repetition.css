@@ -10,7 +10,7 @@ This is how we avoid CSS naming collisions.
 	position: absolute;
 	top: 0;
 	left: 0;
-	width:50000px;
+	width:100%;
 	min-height: 100%;
 	overflow: scroll;
 	background-color: rgb(50, 50, 50);

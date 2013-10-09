@@ -76,8 +76,8 @@ var repetition = function(id) {
 				$('#repetition_container #transcript').last().append(e);
 
 				if($.inArray(msg.word , [".", "!", "?"]) >= 0){
-					$("span").css("background-color", "transparent");
-		 			$("span").css("color", "white");
+					$("#repetition_container span").css("background-color", "transparent");
+		 			$("#repetition_container span").css("color", "white");
 					$('#repetition_container').append('<div id="transcript" class="transcript proxima-nova-400 size-48"></div>');
 				}
 
@@ -101,16 +101,16 @@ var repetition = function(id) {
 		 	else {	
 		 		
 		 		var e;
-		 		var hitNum = $("span."+msg.word).length;
+		 		var hitNum = $("span."+ msg.word.toLowerCase() ).length;
 		 		console.log("Hits :" + hitNum);
-		 		c = msg.word;
+		 		c = msg.word.toLowerCase();
 		 		if (!this.lastLeadPunct) e = $('#repetition_container #transcript').append('<span class="space"> </span>');
 		 		e = $('<span class="' + c + '">' + msg.word + '</span>');
 
-		 		$("span."+msg.word).css("background-color", "red");
+		 		$("span."+ c).css("background-color", "red");
 		 		$('#repetition_container #transcript').last().append(e);
 
-		 		if (hitNum > 0 ) $("span."+msg.word).last().css("background-color", "white");
+		 		if (hitNum > 0 ) $("span."+ c).last().css("background-color", "white");
 
 		 		this.lastLeadPunct = false;
 		 		this.lastEndPunct = false;
