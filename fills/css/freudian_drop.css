@@ -20,15 +20,17 @@ September 2013.
 	padding: 24px;
 }
 
-#freudian_drop .freudian_drop {
+span .freudian_drop {
+	/*background-color: #FF0000;*/
 }
 
 #freudian_drop .left_word {
 	position: absolute;
-	margin: -10px;
-	padding: -10px;
+	margin: 0;
+	padding: 0;
+	line-height: 2ex;				/*FIX: until we found how to modifiy the Box-2D code to prevent words from going-off screen at the bottom, we tweaked this exclusively to fix it. Now we add a small amount to fine-tune positioning.*/
 	display: block;
-	height: 70px;
+	height: 80px;
 	top: 0;
 	left: 20%;
 	color: #fffef7;
@@ -37,10 +39,11 @@ September 2013.
 
 #freudian_drop .center_word {
 	position: absolute;
-	margin: -10px;
-	padding: -10px;
+	margin: 0;
+	padding: 0;
+	line-height: 2ex;
 	display: block;
-	height: 70px;
+	height: 80px;
 	top: 0;
 	left: 47%;
 	color: #e24d4d;
@@ -50,18 +53,12 @@ September 2013.
 
 #freudian_drop .right_word {
 	position: absolute;
-	margin: -10px;
-	padding: -10px;
-	display: block;
-	height: 70px;
+	margin: 0;
+	padding: 0;
+	line-height: 2ex;
+	height: 80px;
 	top: 0;
 	left: 73%;
 	color: #f3ed48;
 	cursor:pointer;
-}
-
-#freudian_drop .connector  {
-	stroke: #FFFFFF;
-	stroke-width: 1;
-	fill: none;
 }

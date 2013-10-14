@@ -17,8 +17,9 @@ var freudian_drop = function(id) {
 		init: function() {
 			this.$el.append('<div class="container"></div>');
 			this.$el.find('.container').append('<div class="transcript proxima-nova-400 size-48"></div>');
+			this.$el.append('<div id="ground"></div>');
 			// attach physics lib for this transform
-			$.getScript('./js/libs/jquery.box2d.min.js', function() { /*console.log('SCRIPT LOADED: box-2D');*/ });
+			$.getScript('./js/libs/jquery.box2d.js', function() { /*console.log('SCRIPT LOADED: box-2D');*/ });
 		},
 
 		// ENTER MODE.
@@ -31,7 +32,7 @@ var freudian_drop = function(id) {
 			// the elements using Box-2D are cloned at the top HTML level, so we must delete them also.
 			// this code is currently in sabotage.js, the only place where this works. But it is a big hack. Must be changed.
 			// DOESNT ALWAYS WORK: because it doesnt have enough time to load the script beofre words start falling.
-			$.getScript('./js/libs/jquery.box2d.min.js', function() { /*console.log('SCRIPT LOADED: box-2D');*/ });
+			$.getScript('./js/libs/jquery.box2d.js', function() { /*console.log('SCRIPT LOADED: box-2D');*/ });
 		},
 
 		// HANDLE INCOMING word MESSAGE.
@@ -83,7 +84,8 @@ var freudian_drop = function(id) {
 					// 'x-velocity': x_vel,
 					'density': (msg.word.length * 2), /* think weight (relational to its size) between 0 and n, default 1.5 */
 					'restitution': 0.2, /* think: bounciness, from 0 to 1, default 0.4 */
-					'friction': 0.5 /* think: slideiness, from 0 to 1, default 0.3 */
+					'friction': 0.5, /* think: slideiness, from 0 to 1, default 0.3 */
+					// 'debug': true
 				});
 			}
 
