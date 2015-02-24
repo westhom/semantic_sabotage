@@ -2,12 +2,20 @@
 	
 	// use curl if available, but fallback to fopen
 	function get_data($url) {
+		// use https as http urls redirect now
+		if(substr($url, 0, 7) == "http://"){
+			$url = "https://" . substr($url, 7);
+		}
+		
+		// make
 		if  (in_array  ('curl', get_loaded_extensions())) {
 			$ch = curl_init();
 			$timeout = 30;
 			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+			curl_setopt($ch, CURLOPT_ENCODING , "gzip");
+			
 			$data = curl_exec($ch);
 			curl_close($ch);
 			return $data;
@@ -26,19 +34,22 @@
 
 	// parse url arguments into $url_fragments
 	parse_str( parse_url( $_POST["url"], PHP_URL_QUERY ), $url_fragments);
-
-	$urlData = get_data($_POST["url"]);
-
-	$startInd = strpos($urlData, "ttsurl") + 10;
 	
-	$endInd = strpos($urlData, '"', $startInd);
-	$ccUrl = substr($urlData, $startInd, $endInd-$startInd);
+	$urlData = get_data($_POST["url"]);
+	
+	// find ttsurl var using regex
+	$tts_re = "/ttsurl\" ?: ?\"([^\"]+)\"/";
+	$matches = array();
+	preg_match($tts_re, $urlData, $matches);
+	
+	$ccUrl = $matches[1];
 	$ccUrl = str_replace("\u0026", "&", $ccUrl);
-
+	$ccUrl = str_replace("\/", "/", $ccUrl);
+	
 	$error = "";
 
 	// Get the list of available caption tracks
-	$captions_list_url = str_replace("\/", "/", $ccUrl)."&type=list&asrs=1";	// Will include automatic subs (asr)
+	$captions_list_url = $ccUrl . "&type=list&asrs=1";	// Will include automatic subs (asr)
 	$captions_list_xml = @simplexml_load_file($captions_list_url);
 
 	if($captions_list_xml) {
